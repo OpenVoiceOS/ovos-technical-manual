@@ -4,6 +4,8 @@ Pre-built images are available at the [OpenVoiceOS Downloads Site](https://downl
 
 OVOS on top of [RaspberryPiOS Lite](https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2023-02-22/2023-02-21-raspios-bullseye-arm64-lite.img.xz)
 
+[Build your own image](#Build_your_own_image)
+
 ## Purpose of this guide
 
 This guide will provide you with a minimal HEADLESS ovos system sutable for running on a Raspberry Pi 3.
@@ -116,3 +118,55 @@ A generic install of ovos-core does not have any default skills shipped with it.
 Check [this page](https://openvoiceos.github.io/community-docs/skills/) for more information on skills.
 
 Audio is also not covered here.  Pulseaudio should be running, check with `systemctl --user status pulseaudio`, but each piece of hardware is different to setup.  I am sure there is a guide somewhere for your hardware.  One thing to mention, this is a full raspbian install, so installing drivers should work also.
+
+## Build your own image
+
+This image is built using [pi-gen](https://github.com/RPi-Distro/pi-gen) which is a tool to build official RaspberryPiOS images.
+
+From here on we will assume you are working from your home directory
+
+Return home and clone the [raspbian-ovos](https://github.com/OpenVoiceOS/raspbian-ovos) repository
+
+```
+cd ~
+git clone https://github.com/OpenVoiceOS/raspbian-ovos.git
+```
+
+Clone [pi-gen](https://github.com/RPi-Distro/pi-gen) from git
+
+`git clone https://github.com/RPi-Distro/pi-gen.git`
+
+Change to the arm64 branch
+
+```
+cd pi-gen
+git checkout arm64
+```
+
+Edit the file `~/raspbian-ovos/raspbian-ovos-config`
+
+`nano ~/raspbian-ovos/raspbian-ovos-config`
+
+Find the line `STAGE_LIST="stage0 stage1 stage2 /<path/to/git/clone>/raspbian-ovos/stage-ovos"` and edit `<path/to/git/clone>` to where you cloned this repository
+
+You can also edit any other variables in this file to your liking also. [See here](https://github.com/RPi-Distro/pi-gen/blob/master/README.md) for what variables are available and thier meaning.
+
+Save your changes
+
+`Ctl-o`
+
+And exit nano
+
+`Ctl-x`
+
+Use pi-gen's `build.sh` script to build an image with the configuration file provided by the raspbian-ovos repository.  This script must be run using `sudo` or it will complain and make you try again.
+
+`sudo ./build.sh -c /<path/to/git/clone>/raspbian-ovos/raspbian-ovos-config` replace `<path/to/git/clone>`
+
+There is great documentation on all of the configuration options of pi-gen in the [README.md](https://github.com/RPi-Distro/pi-gen/blob/arm64/README.md) on the github page.
+
+This build will take some time, mine took 1 1/2 hours with 32 core hyperthreaded 164G ram Ubuntu 22.04 LTS server.
+
+When complete, you will have a completed image in `~/pi-gen/deploy/` directory.
+
+[Flash this image](https://openvoiceos.github.io/community-docs/gs_installing_image/) just like any other, and enjoy your new OVOS device
