@@ -8,20 +8,6 @@ nav:
         - License: license.md
         - Friends: friends.md
         - F.A.Q.: faq.md
-    - Getting Started Guide:
-        - Downloading an image: getting_image.md
-        - First boot: first_boot.md
-        - Network setup: setup_network.md
-        - Configuration: setup_ovos.md
-    - Features and skills:
-        - Standard skills: standard_skills.md
-        - Playing music: playing_music.md
-        - Playing video: playing_video.md
-    - Smartspeaker functionality:
-        - Airplay: airplay.md
-        - Spotify connect: spotifyd.md
-        - Bluetooth speaker: btspeaker.md
-        - KDE Connect: kdeconnect.md
     - OVOS-core:
         - Introduction: core.md
         - Bus: bus_service.md
@@ -83,6 +69,7 @@ nav:
         - Compatibility: compat.md
         - OVOS vs MyCroft: mycroft.md
     - Images:
+        - Compared: comparison.md
         - Buildroot: buildroot.md
         - Manjaro: manjaro.md
         - Raspbian: raspbian_ovos.md
