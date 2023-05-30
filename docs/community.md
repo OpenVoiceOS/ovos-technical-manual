@@ -9,6 +9,7 @@ Thank you guys!
 
 - https://github.com/OpenVoiceOS/ovos-docker
 - https://github.com/OpenVoiceOS/raspbian-ovos
+- https://github.com/OpenVoiceOS/status
 
 ## Skills
 
