@@ -73,7 +73,6 @@ nav:
     - Images:
         - Compared: comparison.md
         - Buildroot: buildroot.md
-        - Manjaro: manjaro.md
         - Raspbian: raspbian_ovos.md
 
 theme: readthedocs
