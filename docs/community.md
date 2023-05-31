@@ -7,16 +7,17 @@ Thank you guys!
 
 ## Projects
 
-- https://github.com/OpenVoiceOS/ovos-docker
-- https://github.com/OpenVoiceOS/raspbian-ovos
-- https://github.com/OpenVoiceOS/status
+- [ovos-docker](https://github.com/OpenVoiceOS/ovos-docker)
+- [raspbian-ovos](https://github.com/OpenVoiceOS/raspbian-ovos)
+- [uptime monitor](https://github.com/OpenVoiceOS/status)
 
 ## Skills
 
-- https://github.com/OpenVoiceOS/ovos-skill-easter-eggs
+- [ovos-skill-easter-eggs](https://github.com/OpenVoiceOS/ovos-skill-easter-eggs)
 
 ## Plugins
 
-- https://github.com/OpenVoiceOS/ovos-ww-plugin-openWakeWord
-- https://github.com/OpenVoiceOS/ovos-microphone-plugin-sounddevice
-- https://github.com/OpenVoiceOS/ovos-PHAL-plugin-homeassistant
+- [ovos-ww-plugin-openWakeWord](https://github.com/OpenVoiceOS/ovos-ww-plugin-openWakeWord)
+- [ovos-microphone-plugin-sounddevice](https://github.com/OpenVoiceOS/ovos-microphone-plugin-sounddevice)
+- [ovos-PHAL-plugin-homeassistant](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-homeassistant)
+- [ovos-translate-plugin-deepl](https://github.com/OpenVoiceOS/ovos-translate-plugin-deepl)
