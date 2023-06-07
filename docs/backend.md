@@ -5,9 +5,9 @@
 ovos-core supports multiple backends under a single unified interface
 
 - Personal backend - [self hosted](https://github.com/OpenVoiceOS/OVOS-local-backend)
-- Selene - https://api.mycroft.ai
-- OpenVoiceOS API Service - https://api.openvoiceos.com
 - Offline - support for setting your own api keys and query services directly
+- Selene - https://api.mycroft.ai , will go down any day now and is in the process of being deprecated
+- Neon - NeonMQ backend native integration is [coming soon!](https://github.com/OpenVoiceOS/ovos-backend-client/pull/11)
 
 Developers do not need to worry about backend details in their applications and skills
 
@@ -22,6 +22,8 @@ This file uniquely identifies your device and should be kept safe
 ## STT Plugin
 
 a companion stt plugin is available to use a backend as remote STT provider
+
+It is recommended you use [ovos-stt-server](https://openvoiceos.github.io/ovos-technical-manual/stt_server) instead, this plugin is being deprecated together with selene
 
 edit your configuration to use ovos-stt-plugin-selene
 
@@ -51,31 +53,6 @@ edit your configuration to use the offline backend
 }
 ```
 
-## Selene
-
-The official mycroft home backend is called selene, users need to create an account and pair devices with the mycroft
-servers.
-
-This backend is not considered optional by MycroftAI but is not used by OVOS unless explicitly enabled
-
-Selene is AGPL licensed:
-- [backend source code](https://github.com/MycroftAI/selene-backend)
-- [frontend source code](https://github.com/MycroftAI/selene-ui)
-
-edit your configuration to use the selene backend
-
-```json
-{
-  "server": {
-    "backend_type": "selene",
-    "url": "https://api.mycroft.ai",
-    "version": "v1",
-    "update": true,
-    "metrics": true,
-    "sync_skill_settings": true
-  }
-}
-```
 
 ## Personal Backend
 
@@ -105,23 +82,32 @@ edit your configuration to use your own personal backend instance
 [source code](https://github.com/OpenVoiceOS/ovos-personal-backend)
 
 
+## Selene
 
-## OVOS API Service
+The official mycroft home backend is called selene, users need to create an account and pair devices with the mycroft
+servers.
 
-OVOS Api Service is not a full backend, it is a set of free proxy services hosted by the OVOS Team for usage in default
-skills
+With Mycroft's demise this backend may go down any day now, the last effort from mycroft developers was to prepare dinkum for this event.
 
-device management functionality and user accounts do not exist, offline mode will be used for these apis
+Support is in the process of being fully removed for ovos-core 0.0.8
 
-edit your configuration to use the OVOS backend
+Selene is AGPL licensed:
+- [backend source code](https://github.com/MycroftAI/selene-backend)
+- [frontend source code](https://github.com/MycroftAI/selene-ui)
+
+edit your configuration to use the selene backend
 
 ```json
 {
   "server": {
-    "backend_type": "ovos",
-    "url": "https://api.openvoiceos.com"
+    "backend_type": "selene",
+    "url": "https://api.mycroft.ai",
+    "version": "v1",
+    "update": true,
+    "metrics": true,
+    "sync_skill_settings": true
   }
 }
 ```
 
-[source code](https://github.com/OpenVoiceOS/ovos_api_service)
+
