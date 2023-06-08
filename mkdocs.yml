@@ -66,10 +66,11 @@ nav:
         - STT Server: stt_server.md
         - TTS Server: tts_server.md
         - Translate Server: translate_server.md
+        - Jurebes: jurebes.md
     - Mycroft:
         - Dinkum: dinkum.md
         - Compatibility: compat.md
-        - OVOS vs MyCroft: mycroft.md
+        - OVOS vs Mycroft: mycroft.md
     - Images:
         - Compared: comparison.md
         - Buildroot: buildroot.md
