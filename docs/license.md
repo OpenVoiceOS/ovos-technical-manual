@@ -31,3 +31,5 @@ The following repositories do not respect our universal donor policy, please ens
 | [ovos-intent-plugin-padatious](https://github.com/OpenVoiceOS/ovos-intent-plugin-padatious) | Apache2.0 | [padatious](https://github.com/MycroftAI/padatious) license might not be valid, depends on libfann2 (LGPL) |
 | [ovos-tts-plugin-mimic3](https://github.com/OpenVoiceOS/ovos-tts-plugin-mimic3)             | AGPL      | depends on mimic3 (AGPL)                                                                                   |
 | [ovos-tts-plugin-SAM](https://github.com/OpenVoiceOS/ovos-tts-plugin-SAM)                   | ?         | reverse engineered abandonware                                                                             |
+| [ovos-tts-plugin-espeakng](https://github.com/OpenVoiceOS/ovos-tts-plugin-espeakng)                   | GPL         | espeak is GPL                                                                          |
+| [ovos-g2p-plugin-espeak](https://github.com/OpenVoiceOS/ovos-g2p-plugin-espeak)                   | GPL         | espeak is GPL                                                                          |
