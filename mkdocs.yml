@@ -66,6 +66,7 @@ nav:
         - STT Server: stt_server.md
         - TTS Server: tts_server.md
         - Translate Server: translate_server.md
+        - Padacioso: padacioso.md
         - Jurebes: jurebes.md
     - Mycroft:
         - Dinkum: dinkum.md
