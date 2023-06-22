@@ -98,6 +98,7 @@
 - March 2023 - Funraiser to form OpenVoiceOS V.z.w. (Dutch: "Vereninging zonder winstoogmerk") completed in a couple days
 - March 2023 - raspbian-ovos images start being released, maintained by community member @builderjer
 - March 2023 - community doc webpage start being maintained by community members
+- April 2023 - [ovos-dinkum-listener](https://github.com/OpenVoiceOS/ovos-dinkum-listener) released
 - May 2023 - [ovos-docker](https://github.com/openvoiceos/ovos-docker) released, maintained by community member @goldyfruit
 - May 2023 - First successful run of OpenVoiceOS on Mac OS using containers with [ovos-docker](https://github.com/openvoiceos/ovos-docker)
 - Jun 2023 - Home Assistant plugin starts being maintained by community member @mikejgray
