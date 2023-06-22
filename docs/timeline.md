@@ -95,11 +95,12 @@
 - Dec 2022 - Home Assistant PHAL plugin initial release by @AIX
 - Jan 2023 - negative user feedback from the community for Mark 2, lots of bugs and missing features
 - Feb 2023 - MycroftAI partners up with NeonAI to maintain mycroft-core(?)
-- March 2023 - Funraiser to form OpenVoiceOS V.z.w. (Dutch: "Vereninging zonder winstoogmerk") completed in a couple days
-- March 2023 - raspbian-ovos images start being released, maintained by community member @builderjer
-- March 2023 - community doc webpage start being maintained by community members
-- March 2023 - [ovos-ww-plugin-openWakeWord](https://github.com/OpenVoiceOS/ovos-ww-plugin-openWakeWord) released, maintained by author @dscripka
-- April 2023 - [ovos-dinkum-listener](https://github.com/OpenVoiceOS/ovos-dinkum-listener) released
+- Mar 2023 - Funraiser to form OpenVoiceOS V.z.w. (Dutch: "Vereninging zonder winstoogmerk") completed in a couple days
+- Mar 2023 - raspbian-ovos images start being released, maintained by community member @builderjer
+- Mar 2023 - community doc webpage start being maintained by community members
+- Mar 2023 - [ovos-ww-plugin-openWakeWord](https://github.com/OpenVoiceOS/ovos-ww-plugin-openWakeWord) released, maintained by author @dscripka
+- Apr 2020 - [precise-lite-trainer](https://github.com/OpenVoiceOS/precise-lite-trainer) released
+- Apr 2023 - [ovos-dinkum-listener](https://github.com/OpenVoiceOS/ovos-dinkum-listener) released
 - May 2023 - [ovos-docker](https://github.com/openvoiceos/ovos-docker) released, maintained by community member @goldyfruit
 - May 2023 - First successful run of OpenVoiceOS on Mac OS using containers with [ovos-docker](https://github.com/openvoiceos/ovos-docker)
 - Jun 2023 - Home Assistant plugin starts being maintained by community member @mikejgray
