@@ -97,3 +97,5 @@
 - March 2023 - Funraiser to form OpenVoiceOS V.z.w. (Dutch: "Vereninging zonder winstoogmerk") completed in a couple days
 - March 2023 - raspbian-ovos images start being released, maintained by community member @builderjer
 - March 2023 - community doc webpage start being maintained by community members
+- May 2023 - First successful run of OpenVoiceOS on Mac OS using containers with [ovos-docker](https://github.com/openvoiceos/ovos-docker)
+- June 2023 - First (and second!) successful run of OpenVoiceOS on Windows, using WSL2 and [ovos-docker](https://github.com/openvoiceos/ovos-docker)
