@@ -100,7 +100,8 @@
 - Mar 2023 - raspbian-ovos images start being released, maintained by community member @builderjer
 - Mar 2023 - community doc webpage start being maintained by community members
 - Mar 2023 - [ovos-ww-plugin-openWakeWord](https://github.com/OpenVoiceOS/ovos-ww-plugin-openWakeWord) released, maintained by author @dscripka
-- Apr 2020 - [precise-lite-trainer](https://github.com/OpenVoiceOS/precise-lite-trainer) released
+- Apr 2023 - [@Aix leaves](https://community.mycroft.ai/t/aix-signing-off/13583) OpenVoiceOS
+- Apr 2023 - [precise-lite-trainer](https://github.com/OpenVoiceOS/precise-lite-trainer) released
 - Apr 2023 - [ovos-dinkum-listener](https://github.com/OpenVoiceOS/ovos-dinkum-listener) released
 - May 2023 - [ovos-docker](https://github.com/openvoiceos/ovos-docker) released, maintained by community member @goldyfruit
 - May 2023 - First successful run of OpenVoiceOS on Mac OS using containers with [ovos-docker](https://github.com/openvoiceos/ovos-docker)
