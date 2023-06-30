@@ -104,7 +104,10 @@
 - Apr 2023 - [precise-lite-trainer](https://github.com/OpenVoiceOS/precise-lite-trainer) released
 - Apr 2023 - [ovos-dinkum-listener](https://github.com/OpenVoiceOS/ovos-dinkum-listener) released
 - May 2023 - [ovos-docker](https://github.com/openvoiceos/ovos-docker) released, maintained by community member @goldyfruit
+- May 2023 - Open Voice OS TTS/STT [status page](http://openvoiceos.github.io/status/) released, maintained by community member @goldyfruit
 - May 2023 - First successful run of OpenVoiceOS on Mac OS using containers with [ovos-docker](https://github.com/openvoiceos/ovos-docker)
+- May 2023 - [ovos-docker-stt](https://github.com/openvoiceos/ovos-docker-stt) released, maintained by community member @goldyfruit
+- May 2023 - [ovos-microphone-plugin-sounddevice](https://github.com/openvoiceos/ovos-microphone-plugin-sounddevice) released, which provides native Mac OS suuport, maintained by community member @goldyfruit
 - Jun 2023 - Home Assistant plugin starts being maintained by community member @mikejgray
 - Jun 2023 - [Home Assistant Notify](https://blog.graywind.org/posts/ovos-homeassistant-notify-integration/) integration released by community member @mikejgray
 - Jun 2023 - First (and second!) successful run of OpenVoiceOS on Windows, using WSL2 and [ovos-docker](https://github.com/openvoiceos/ovos-docker)
