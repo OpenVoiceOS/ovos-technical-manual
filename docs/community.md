@@ -10,6 +10,7 @@ Thank you guys!
 - [ovos-docker](https://github.com/OpenVoiceOS/ovos-docker)
 - [raspbian-ovos](https://github.com/OpenVoiceOS/raspbian-ovos)
 - [uptime monitor](https://github.com/OpenVoiceOS/status)
+- [projen skill generator/retrofitter](https://github.com/mikejgray/ovos-skill-projen)
 
 ## Skills
 
