@@ -209,3 +209,45 @@ For compatibility and historical reasons OCP reads its configuration from the `"
     }
 }
 ```
+
+## Troubleshooting
+
+Having trouble getting OCP to run properly and be exposed as an MPRIS media player? Check the following:
+
+- The `DBUS_SESSION_BUS_ADDRESS` environment variable is what OCP uses to try to connect to [`dbus`](https://www.freedesktop.org/wiki/Software/dbus/). On an OVOS system it will look something like `unix:path=/run/user/1000/bus`. To get the right user ID, run `id -u`.
+  - If `DBUS_SESSION_BUS_ADDRESS` is not set, the next place OCP checks is the `DISPLAY` environment variable. If this is set and looks similar to the value above, then you can probably exclude `DBUS_SESSION_BUS_ADDRESS`, but if neither are set then use `DBUS_SESSION_BUS_ADDRESS`.
+- Make sure your OCP settings in your config file like something like the following, taking note of the `dbus_type` value:
+```json
+{
+   "Audio": {
+      "backends": {
+         "OCP": {
+            "type": "ovos_common_play",
+            "active": true,
+            "dbus_type": "session"
+         }
+      }
+   }
+}
+```
+  - If your `dbus_type` is set to `system` then OCP will still work, but since it requires root privileges to read from the system dbus, external systems or programs without root privileges cannot read the MPRIS data there.
+
+You can confirm if the OCP player is registered with dbus using the following command: `dbus-send --session --dest=org.freedesktop.DBus --type=method_call --print-reply /org/freedesktop/DBus org.freedesktop.DBus.ListNames`
+
+The output should look something like the following, if it is working:
+
+```bash
+method return time=1691467760.293397 sender=org.freedesktop.DBus -> destination=:1.10 serial=3 reply_serial=2
+   array [
+      string "org.freedesktop.DBus"
+      string "org.freedesktop.systemd1"
+      string ":1.10"
+      string "org.mpris.MediaPlayer2.OCP"
+      string ":1.9"
+      string ":1.1"
+   ]
+```
+
+The important part is the `org.mpris.MediaPlayer2.OCP` value.
+
+If the above steps do not work, please reach out to the OVOS team on Matrix for assistance.
