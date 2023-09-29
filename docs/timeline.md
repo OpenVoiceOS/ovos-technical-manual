@@ -96,7 +96,7 @@
 - Jan 2023 - negative user feedback from the community for Mark 2, lots of bugs and missing features
 - Feb 2023 - MycroftAI partners up with NeonAI to maintain mycroft-core(?)
 - Mar 2023 - Funraiser to form OpenVoiceOS V.z.w. (Dutch: "Vereninging zonder winstoogmerk") completed in a couple days
-- Mar 2023 - first stretch goal of fundraiser reached and second stretch goal announced
+- Mar 2023 - First stretch goal of fundraiser reached and second stretch goal announced
 - Mar 2023 - raspbian-ovos images start being released, maintained by community member @builderjer
 - Mar 2023 - community doc webpage start being maintained by community members
 - Mar 2023 - [ovos-ww-plugin-openWakeWord](https://github.com/OpenVoiceOS/ovos-ww-plugin-openWakeWord) released, maintained by author @dscripka
@@ -111,3 +111,4 @@
 - Jun 2023 - Home Assistant plugin starts being maintained by community member @mikejgray
 - Jun 2023 - [Home Assistant Notify](https://blog.graywind.org/posts/ovos-homeassistant-notify-integration/) integration released by community member @mikejgray
 - Jun 2023 - First (and second!) successful run of OpenVoiceOS on Windows, using WSL2 and [ovos-docker](https://github.com/openvoiceos/ovos-docker)
+- Sep 2023 - GUI fully functional with [ovos-docker](https://github.com/openvoiceos/ovos-docker) containers
