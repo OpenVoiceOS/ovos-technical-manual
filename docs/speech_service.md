@@ -1,17 +1,21 @@
 # Listener Service
 
-The listener service is responsible for handling audio input, it understands speech and converts it into `utterances` to be handled by `ovos-core`
+The listener service is responsible for handling audio input, it understands speech and converts it into `utterances` to
+be handled by `ovos-core`
 
 Different implementations of the listener service have been available during the years
 
-- [mycroft-classic-listener](https://github.com/OpenVoiceOS/mycroft-classic-listener) the original listener from mycroft mark1 extracted into a standalone component - **archived**
-- [ovos-listener](https://github.com/OpenVoiceOS/ovos-listener) - an updated version of the mycroft listener with VAD plugins and multiple hotwords support - **deprecated** in `ovos-core` version **0.0.8**
-- [ovos-dinkum-listener](https://github.com/OpenVoiceOS/ovos-dinkum-listener) - a listener rewrite based on [mycroft-dinkum](https://github.com/MycroftAI/mycroft-dinkum) - **new** in `ovos-core `version **0.0.8**
-
+- [mycroft-classic-listener](https://github.com/OpenVoiceOS/mycroft-classic-listener) the original listener from mycroft
+  mark1 extracted into a standalone component - **archived**
+- [ovos-listener](https://github.com/OpenVoiceOS/ovos-listener) - an updated version of the mycroft listener with VAD
+  plugins and multiple hotwords support - **deprecated** in `ovos-core` version **0.0.8**
+- [ovos-dinkum-listener](https://github.com/OpenVoiceOS/ovos-dinkum-listener) - a listener rewrite based
+  on [mycroft-dinkum](https://github.com/MycroftAI/mycroft-dinkum) - **NEW** in `ovos-core `version **0.0.8**
 
 ## Listener
 
-You can modify microphone settings and enable additional features under the listener section such as wake word / utterance recording / uploading
+You can modify microphone settings and enable additional features under the listener section such as wake word /
+utterance recording / uploading
 
 ```javascript
 {
@@ -22,11 +26,9 @@ You can modify microphone settings and enable additional features under the list
     "wake_word": "hey_mycroft",
     "stand_up_word": "wake_up",
     
-    "microphone": {
-      "module": "ovos-microphone-plugin-alsa"
-    },
+    "microphone": {...},
     
-    VAD": {...},
+    "VAD": {...},
     
     // Seconds of speech before voice command has begun
     "speech_begin": 0.1,
@@ -53,11 +55,40 @@ You can modify microphone settings and enable additional features under the list
 }
 ```
 
+## Microphone
+
+**NEW** in `ovos-core` version **0.0.8**
+
+Microphone plugins are responsible for feeding audio to the listener, different Operating Systems may require different
+plugins or otherwise have performance benefits
+
+```javascript
+{
+  "listener": {
+    "microphone": {
+      "module": "ovos-microphone-plugin-alsa"
+    }
+  }
+}
+```
+
+Reference non-exhaustive list of microphone plugins
+
+| plugin                                                                                                  | notes                                                                              | operating systems           |
+|---------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|-----------------------------|
+| [ovos-microphone-plugin-alsa](https://github.com/OpenVoiceOS/ovos-microphone-plugin-alsa)               | based on [pyalsaaudio](http://larsimmisch.github.io/pyalsaaudio), best performance | linux                       |
+| [ovos-microphone-plugin-pyaudio](https://github.com/OpenVoiceOS/ovos-microphone-plugin-pyaudio)         | based on [PyAudio](https://people.csail.mit.edu/hubert/pyaudio/)                   | linux                       |
+| [ovos-microphone-plugin-sounddevice](https://github.com/OpenVoiceOS/ovos-microphone-plugin-sounddevice) | based on [python-sounddevice](https://github.com/spatialaudio/python-sounddevice)  | linux <br> mac <br> windows |
+| [ovos-microphone-plugin-files](https://github.com/OpenVoiceOS/ovos-microphone-plugin-files)             | audio files as input                                                               | linux <br> mac <br> windows |
+| [ovos-microphone-plugin-arecord](https://github.com/OVOSHatchery/ovos-microphone-plugin-arecord)        | uses `arecord` via subprocess                                                      | linux                       |
+| [ovos-microphone-plugin-socket](https://github.com/OVOSHatchery/ovos-microphone-plugin-socket)          | demo plugin for remote microphone                                                  | linux <br> mac <br> windows |
+
 ## Hotwords
 
 By default the listener is waiting for a hotword to do something in response
 
-the most common usage of a hotword is as the assistant's name, instead of continuously transcribing audio the listener waits for a wake word, and then listens to the user speaking
+the most common usage of a hotword is as the assistant's name, instead of continuously transcribing audio the listener
+waits for a wake word, and then listens to the user speaking
 
 OVOS allows you to load any number of hot words in parallel and trigger different actions when they are detected
 
@@ -71,11 +102,16 @@ each hotword can do one or more of the following:
 
 To add a new hotword add its configuration under "hotwords" section.
 
-By default, all hotwords are disabled unless you set `"active": true`. 
+By default, all hotwords are disabled unless you set `"active": true`.
 
-Under the `"listener"` setting a main wake word and stand up word are defined, those will be automatically enabled unless you set `"active": false`. 
+Under the `"listener"` setting a main wake word and stand up word are defined, those will be automatically enabled
+unless you set `"active": false`.
 
-Users are expected to **only change** `listener.wake_word` if using a single wake word, setting `"active": true` is only intended for **extra** hotwords
+Users are expected to **only change** `listener.wake_word` if using a single wake word, setting `"active": true` is only
+intended for **extra** hotwords
+
+hotword definitions can also include a `"fallback_ww"`, this indicates an alternative hotword config to load in case the
+original failed to load for any reason
 
 ```javascript
 "listener": {
@@ -85,36 +121,73 @@ Users are expected to **only change** `listener.wake_word` if using a single wak
     "stand_up_word": "wake up"
 },
 
-"hotwords": {
-    "hey mycroft": {
+  // Hotword configurations
+  "hotwords": {
+    "hey_mycroft": {
+        "module": "ovos-ww-plugin-precise-lite",
+        "model": "https://github.com/OpenVoiceOS/precise-lite-models/raw/master/wakewords/en/hey_mycroft.tflite",
+        "expected_duration": 3,
+        "trigger_level": 3,
+        "sensitivity": 0.5,
+        "listen": true,
+        "fallback_ww": "hey_mycroft_precise"
+    },
+    // in case precise-lite is not installed, attempt to use classic precise
+    "hey_mycroft_precise": {
         "module": "ovos-ww-plugin-precise",
         "version": "0.3",
         "model": "https://github.com/MycroftAI/precise-data/raw/models-dev/hey-mycroft.tar.gz",
+        "expected_duration": 3,
+        "trigger_level": 3,
+        "sensitivity": 0.5,
+        "listen": true,
+        "fallback_ww": "hey_mycroft_vosk"
+    },
+    // in case classic precise is not installed, attempt to use vosk
+    "hey_mycroft_vosk": {
+        "module": "ovos-ww-plugin-vosk",
+        "samples": ["hey mycroft", "hey microsoft", "hey mike roft", "hey minecraft"],
+        "rule": "fuzzy",
+        "listen": true,
+        "fallback_ww": "hey_mycroft_pocketsphinx"
+    },
+    // in case vosk is not installed, attempt to use pocketsphinx
+    "hey_mycroft_pocketsphinx": {
+        "module": "ovos-ww-plugin-pocketsphinx",
         "phonemes": "HH EY . M AY K R AO F T",
         "threshold": 1e-90,
         "lang": "en-us",
-        "listen": true,
-        "sound": "snd/start_listening.wav"
+        "listen": true
     },
-    "wake up": {
+    // default wakeup word to take ovos out of SLEEPING mode,
+    "wake_up": {
         "module": "ovos-ww-plugin-pocketsphinx",
         "phonemes": "W EY K . AH P",
         "threshold": 1e-20,
         "lang": "en-us",
+        "wakeup": true,
+        "fallback_ww": "wake_up_vosk"
+    },
+    // in case pocketsphinx plugin is not installed, attempt to use vosk
+    "wake_up_vosk": {
+        "module": "ovos-ww-plugin-vosk",
+        "rule": "fuzzy",
+        "samples": ["wake up"],
+        "lang": "en-us",
+        // makes this a wakeup word for usage in SLEEPING mode
         "wakeup": true
     }
-},
+  },
+}
 ```
-
 
 ## VAD
 
 Voice Activity Detection plugins have several functions under the listener service
 
-- detect when user finished speaking  
+- detect when user finished speaking
 - remove silence before sending audio to `STT`
 - detect when user is speaking during `continuous mode` (read below)
-
 
 ```javascript
 {
@@ -135,10 +208,10 @@ Voice Activity Detection plugins have several functions under the listener servi
 
 ## STT
 
-Two STT plugins may be loaded at once, if the primary plugin fails for some reason the second plugin will be used. 
+Two STT plugins may be loaded at once, if the primary plugin fails for some reason the second plugin will be used.
 
-This allows you to have a lower accuracy offline model as fallback to account for internet outages, this ensures your device never becomes fully unusable
-
+This allows you to have a lower accuracy offline model as fallback to account for internet outages, this ensures your
+device never becomes fully unusable
 
 ```javascript
 "stt": {
@@ -147,8 +220,6 @@ This allows you to have a lower accuracy offline model as fallback to account fo
     "ovos-stt-plugin-server": {"url": "https://stt.openvoiceos.com/stt"}
 },
 ```
-
-
 
 ## Modes of Operation
 
@@ -159,43 +230,6 @@ Additionally, there are 2 temporary modes that can be triggered via bus events /
 ### Wake Word mode
 
 ![imagem](https://github.com/OpenVoiceOS/ovos-dinkum-listener/assets/33701864/c55388dc-a7fb-4857-9c35-f4a4223c4145)
-
-### Continuous mode
-
-**new** in `ovos-core` version **0.0.8**
-
-![imagem](https://github.com/OpenVoiceOS/ovos-dinkum-listener/assets/33701864/c8820161-9cb8-433f-9380-6d07965c7fa5)
-
-```javascript
-{
-  "listener": {
-    // continuous listen is an experimental setting, it removes the need for
-    // wake words and uses VAD only, a streaming STT is strongly recommended
-    // NOTE: depending on hardware this may cause mycroft to hear its own TTS responses as questions
-    "continuous_listen": false
-  }
-}
-```
-
-
-### Hybrid mode
-
-**new** in `ovos-core` version **0.0.8**
-
-![imagem](https://github.com/OpenVoiceOS/ovos-dinkum-listener/assets/33701864/b9012663-4f00-47a9-bac4-8b08392da12c)
-
-```javascript
-{
-  "listener": {
-    // hybrid listen is an experimental setting,
-    // it will not require a wake word for X seconds after a user interaction
-    // this means you dont need to say "hey mycroft" for follow up questions
-    "hybrid_listen": false,
-    // number of seconds to wait for an interaction before requiring wake word again
-    "listen_timeout": 45
-  }
-}
-```
 
 ### Sleep mode
 
@@ -221,7 +255,45 @@ Be sure to enable a wakeup word to get out of sleep!
 },
 ```
 
+### Continuous mode
+
+**EXPERIMENTAL** - **NEW** in `ovos-core` version **0.0.8**
+
+![imagem](https://github.com/OpenVoiceOS/ovos-dinkum-listener/assets/33701864/c8820161-9cb8-433f-9380-6d07965c7fa5)
+
+```javascript
+{
+  "listener": {
+    // continuous listen is an experimental setting, it removes the need for
+    // wake words and uses VAD only, a streaming STT is strongly recommended
+    // NOTE: depending on hardware this may cause mycroft to hear its own TTS responses as questions
+    "continuous_listen": false
+  }
+}
+```
+
+### Hybrid mode
+
+**EXPERIMENTAL** - **NEW** in `ovos-core` version **0.0.8**
+
+![imagem](https://github.com/OpenVoiceOS/ovos-dinkum-listener/assets/33701864/b9012663-4f00-47a9-bac4-8b08392da12c)
+
+```javascript
+{
+  "listener": {
+    // hybrid listen is an experimental setting,
+    // it will not require a wake word for X seconds after a user interaction
+    // this means you dont need to say "hey mycroft" for follow up questions
+    "hybrid_listen": false,
+    // number of seconds to wait for an interaction before requiring wake word again
+    "listen_timeout": 45
+  }
+}
+```
+
 ### Recording mode
+
+**EXPERIMENTAL** - **NEW** in `ovos-core` version **0.0.8**
 
 Can be used via [Recording skill](https://github.com/OpenVoiceOS/skill-ovos-audio-recording)
 
