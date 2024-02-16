@@ -29,7 +29,6 @@ nav:
         - Skill Tests: skill_tests.md
         - F.A.Q.: dev.md
     - GUI:
-        - Introduction: gui_intro.md
         - QML Design Guidelines: qml_guidelines.md
         - Shell: shell.md
         - Protocol: gui_protocol.md
