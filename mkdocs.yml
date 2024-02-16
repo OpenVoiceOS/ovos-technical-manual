@@ -14,8 +14,6 @@ nav:
         - GUI: gui_service.md
         - Configuration: config.md
     - Skills:
-        - Introduction: skills.md
-        - Installing new skills: skill_install.md
         - Design Guidelines: guidelines.md
         - Anatomy: skill_structure.md
         - Dialog: statements.md
