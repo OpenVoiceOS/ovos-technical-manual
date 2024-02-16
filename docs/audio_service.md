@@ -43,7 +43,7 @@ device can always give you feedback
 }
 ```
 
-## Dialog Transformers
+## TTS Transformers
 
 **NEW** in `ovos-core` version **0.0.8**
 
