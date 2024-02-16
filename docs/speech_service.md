@@ -186,7 +186,7 @@ original failed to load for any reason
 Voice Activity Detection plugins have several functions under the listener service
 
 - detect when user finished speaking
-- remove silence before sending audio to `STT`
+- remove silence before sending audio to `STT` - **NEW** in `ovos-core` version **0.0.8**
 - detect when user is speaking during `continuous mode` (read below)
 
 ```javascript
@@ -205,6 +205,25 @@ Voice Activity Detection plugins have several functions under the listener servi
   }
 }
 ```
+
+## Audio Transformers
+
+**NEW** in `ovos-core` version **0.0.8**, originally developed for [Neon](https://github.com/NeonGeckoCom/neon-transformers)
+
+Similarly to utterance transformers in `ovos-core`, the listener exposes audio and message.`context` to a set of plugins
+that can transform it before STT stage
+
+Audio transformer plugins can either transform the audio binary data itself (eg, denoise) or the `context` (eg, speaker
+recognition)
+
+The audio is sent sequentially to all transformer plugins, ordered by priority (developer defined), until finally it is
+sent to the STT stage
+
+| plugin                                               | description                                                                                     | source                                                                                                                                                  |
+|------------------------------------------------------|-------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ovos-audio-transformer-plugin-fasterwhisper          | detect language from audio to inform STT                                                        | [OpenVoiceOS/ovos-stt-plugin-fasterwhisper](https://github.com/OpenVoiceOS/ovos-stt-plugin-fasterwhisper)                                               |
+| ovos-audio-transformer-plugin-speechbrain-langdetect | detect language from audio to inform STT                                                        | [OpenVoiceOS/ovos-audio-transformer-plugin-speechbrain-langdetect](https://github.com/OpenVoiceOS/ovos-audio-transformer-plugin-speechbrain-langdetect) |
+| ovos-audio-transformer-plugin-ggwave                 | decodes [data over audio](https://github.com/ggerganov/ggwave) and emits bus events in response | [OpenVoiceOS/ovos-audio-transformer-plugin-ggwave](https://github.com/OpenVoiceOS/ovos-audio-transformer-plugin-ggwave)                                 |
 
 ## STT
 

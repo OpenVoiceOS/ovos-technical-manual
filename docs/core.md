@@ -47,12 +47,12 @@ ovos-skill-launcher {skill_id} [path/to/my/skill_id]
 
 ## Utterance Transformers
 
+**NEW** in `ovos-core` version **0.0.8**, originally developed for [Neon](https://github.com/NeonGeckoCom/neon-transformers)
+
 when `ovos-core` receives a natural language query/ `utterance` from a user it is sent to a "preprocessing stage"
 
-The `utterance` transformers framework consists of any number of plugins ordered by priority, the `utterance` and
-message.`context` can the be mutated by any of those plugins
-
-utterance transformers have been introduced in `ovos-core` **0.0.8**, originally developed for [Neon](https://github.com/NeonGeckoCom/neon-transformers)
+The `utterance` transformers framework consists of any number of plugins ordered by priority (developer defined), the `utterance` and
+message.`context` are sent sequentially to all transformer plugins, and can be mutated by any of those plugins
 
 
 | plugin                            | description                           | source                                                                                                                          |
