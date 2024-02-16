@@ -33,7 +33,6 @@ nav:
         - QML Design Guidelines: qml_guidelines.md
         - Shell: shell.md
         - Protocol: gui_protocol.md
-        - Extensions: gui_extensions.md
     - Backend:
         - Available Backends: backend.md
         - Backend Client: backend_client.md
