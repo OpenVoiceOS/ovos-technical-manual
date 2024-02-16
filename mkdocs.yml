@@ -9,7 +9,7 @@ nav:
     - Architecture:
         - Core: core.md
         - Bus: bus_service.md
-        - Speech: speech_service.md
+        - Listener: speech_service.md
         - Audio: audio_service.md
         - GUI: gui_service.md
         - Configuration: config.md

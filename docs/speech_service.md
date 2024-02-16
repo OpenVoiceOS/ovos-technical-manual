@@ -1,13 +1,65 @@
-# Speech Client
+# Listener Service
 
-The speech client is responsible for loading STT, VAD and Wake Word plugins
+The listener service is responsible for handling audio input, it understands speech and converts it into `utterances` to be handled by `ovos-core`
 
-Speech is transcribed into text and forwarded to the skills service
+Different implementations of the listener service have been available during the years
+
+- [mycroft-classic-listener](https://github.com/OpenVoiceOS/mycroft-classic-listener) the original listener from mycroft mark1 extracted into a standalone component - **archived**
+- [ovos-listener](https://github.com/OpenVoiceOS/ovos-listener) - an updated version of the mycroft listener with VAD plugins and multiple hotwords support - **deprecated** in `ovos-core` version **0.0.8**
+- [ovos-dinkum-listener](https://github.com/OpenVoiceOS/ovos-dinkum-listener) - a listener rewrite based on [mycroft-dinkum](https://github.com/MycroftAI/mycroft-dinkum) - **new** in `ovos-core `version **0.0.8**
+
+
+## Listener
+
+You can modify microphone settings and enable additional features under the listener section such as wake word / utterance recording / uploading
+
+```javascript
+{
+  "listener": {
+    // NOTE, multiple hotwords are supported, these fields define the main wake_word,
+    // this is equivalent to setting "active": true in the "hotwords" section
+    // see "hotwords" section at https://github.com/OpenVoiceOS/ovos-config/blob/dev/ovos_config/mycroft.conf
+    "wake_word": "hey_mycroft",
+    "stand_up_word": "wake_up",
+    
+    "microphone": {
+      "module": "ovos-microphone-plugin-alsa"
+    },
+    
+    VAD": {...},
+    
+    // Seconds of speech before voice command has begun
+    "speech_begin": 0.1,
+    // Seconds of silence before a voice command has finished
+    "silence_end": 0.5,
+    // Settings used by microphone to set recording timeout with and without speech detected
+    "recording_timeout": 10.0,
+    // Settings used by microphone to set recording timeout without speech detected.
+    "recording_timeout_with_silence": 3.0,
+    // Setting to remove all silence/noise from start and end of recorded speech (only non-streaming)
+    "remove_silence": true,
+    // continuous listen is an experimental setting, it removes the need for
+    // wake words and uses VAD only, a streaming STT is strongly recommended
+    // NOTE: depending on hardware this may cause mycroft to hear its own TTS responses as questions
+    "continuous_listen": false,
+
+    // hybrid listen is an experimental setting,
+    // it will not require a wake word for X seconds after a user interaction
+    // this means you dont need to say "hey mycroft" for follow up questions
+    "hybrid_listen": false,
+    // number of seconds to wait for an interaction before requiring wake word again
+    "listen_timeout": 45
+  }
+}
+```
 
 ## Hotwords
 
-OVOS allows you to load any number of hot words in parallel and trigger different actions when they are
-detected
+By default the listener is waiting for a hotword to do something in response
+
+the most common usage of a hotword is as the assistant's name, instead of continuously transcribing audio the listener waits for a wake word, and then listens to the user speaking
+
+OVOS allows you to load any number of hot words in parallel and trigger different actions when they are detected
 
 each hotword can do one or more of the following:
 
@@ -20,8 +72,10 @@ each hotword can do one or more of the following:
 To add a new hotword add its configuration under "hotwords" section.
 
 By default, all hotwords are disabled unless you set `"active": true`. 
+
 Under the `"listener"` setting a main wake word and stand up word are defined, those will be automatically enabled unless you set `"active": false`. 
-This is usually not desired unless you are looking to completely disabled wake word usage
+
+Users are expected to **only change** `listener.wake_word` if using a single wake word, setting `"active": true` is only intended for **extra** hotwords
 
 ```javascript
 "listener": {
@@ -53,6 +107,32 @@ This is usually not desired unless you are looking to completely disabled wake w
 ```
 
 
+## VAD
+
+Voice Activity Detection plugins have several functions under the listener service
+
+- detect when user finished speaking  
+- remove silence before sending audio to `STT`
+- detect when user is speaking during `continuous mode` (read below)
+
+
+```javascript
+{
+  "listener": {  
+  
+    // Setting to remove all silence/noise from start and end of recorded speech (only non-streaming)
+    "remove_silence": true,
+    
+    VAD": {
+         // recommended plugin: "ovos-vad-plugin-silero"
+         "module": "ovos-vad-plugin-silero",
+         "ovos-vad-plugin-silero": {"threshold": 0.2},
+         "ovos-vad-plugin-webrtcvad": {"vad_mode": 3}
+    }
+  }
+}
+```
+
 ## STT
 
 Two STT plugins may be loaded at once, if the primary plugin fails for some reason the second plugin will be used. 
@@ -68,111 +148,82 @@ This allows you to have a lower accuracy offline model as fallback to account fo
 },
 ```
 
-## Listener
 
-You can modify microphone settings and enable additional features under the listener section such as wake word / utterance recording / uploading
+
+## Modes of Operation
+
+There are 3 modes to run dinkum, wakeword, hybrid, or continuous (VAD only)
+
+Additionally, there are 2 temporary modes that can be triggered via bus events / companion skills
+
+### Wake Word mode
+
+![imagem](https://github.com/OpenVoiceOS/ovos-dinkum-listener/assets/33701864/c55388dc-a7fb-4857-9c35-f4a4223c4145)
+
+### Continuous mode
+
+**new** in `ovos-core` version **0.0.8**
+
+![imagem](https://github.com/OpenVoiceOS/ovos-dinkum-listener/assets/33701864/c8820161-9cb8-433f-9380-6d07965c7fa5)
 
 ```javascript
-"listener": {
-    "sample_rate": 16000,
-
-    // if enabled the noise level is saved to a ipc file, useful for
-    // debuging if microphone is working but writes a lot to disk,
-    // recommended that you set "ipc_path" to a tmpfs
-    "mic_meter_ipc": true,
-
-    // Set 'save_path' to configure the location of files stored if
-    // 'record_wake_words' and/or 'save_utterances' are set to 'true'.
-    // WARNING: Make sure that user 'mycroft' has write-access on the
-    // directory!
-    // "save_path": "/tmp",
-    // Set 'record_wake_words' to save a copy of wake word triggers
-    // as .wav files under: /'save_path'/mycroft_wake_words
-    "record_wake_words": false,
-    // Set 'save_utterances' to save each sentence sent to STT -- by default
-    // they are only kept briefly in-memory.  This can be useful for for
-    // debugging or other custom purposes.  Recordings are saved
-    // under: /'save_path'/mycroft_utterances/<TIMESTAMP>.wav
-    "save_utterances": false,
-    "wake_word_upload": {
-      "disable": false,
-      "url": "https://training.mycroft.ai/precise/upload"
-    },
-
-    // Override as SYSTEM or USER to select a specific microphone input instead of
-    // the PortAudio default input.
-    //   "device_name": "somename",  // can be regex pattern or substring
-    //       or
-    //   "device_index": 12,
-
-    // Stop listing to the microphone during playback to prevent accidental triggering
-    // This is enabled by default, but instances with good microphone noise cancellation
-    // can disable this to listen all the time, allowing 'barge in' functionality.
-    "mute_during_output" : true,
-
-    // How much (if at all) to 'duck' the speaker output during listening.  A
-    // setting of 0.0 will not duck at all.  A 1.0 will completely mute output
-    // while in a listening state.  Values in between will lower the volume
-    // partially (this is optional behavior, depending on the enclosure).
-    "duck_while_listening" : 0.3,
-
-    // In milliseconds
-    "phoneme_duration": 120,
-    "multiplier": 1.0,
-    "energy_ratio": 1.5,
-
-    // Settings used by microphone to set recording timeout
-    "recording_timeout": 10.0,
-    "recording_timeout_with_silence": 3.0,
-
-    // instant listen is an experimental setting, it removes the need for
-    // the pause between "hey mycroft" and starting to speak the utterance,
-    //however it might slightly downgrade STT accuracy depending on engine used
-    "instant_listen": false
-},
+{
+  "listener": {
+    // continuous listen is an experimental setting, it removes the need for
+    // wake words and uses VAD only, a streaming STT is strongly recommended
+    // NOTE: depending on hardware this may cause mycroft to hear its own TTS responses as questions
+    "continuous_listen": false
+  }
+}
 ```
 
 
-## VAD
+### Hybrid mode
 
-Voice Activity Detection is used by the speech client to determine when a user stopped speaking, this indicates the voice command is ready to be executed. 
-Several VAD strategies are supported
+**new** in `ovos-core` version **0.0.8**
+
+![imagem](https://github.com/OpenVoiceOS/ovos-dinkum-listener/assets/33701864/b9012663-4f00-47a9-bac4-8b08392da12c)
+
+```javascript
+{
+  "listener": {
+    // hybrid listen is an experimental setting,
+    // it will not require a wake word for X seconds after a user interaction
+    // this means you dont need to say "hey mycroft" for follow up questions
+    "hybrid_listen": false,
+    // number of seconds to wait for an interaction before requiring wake word again
+    "listen_timeout": 45
+  }
+}
+```
+
+### Sleep mode
+
+Can be used via [Naptime skill](https://github.com/OpenVoiceOS/skill-ovos-naptime)
+
+![imagem](https://github.com/OpenVoiceOS/ovos-dinkum-listener/assets/33701864/24835210-2116-4080-8c2b-fc18eecd923a)
+
+Be sure to enable a wakeup word to get out of sleep!
 
 ```javascript
 "listener": {
+    "stand_up_word": "wake up"
+},
 
-    // Voice Activity Detection is used to determine when speech ended
-    "VAD": {
-        // silence method defined the main vad strategy
-        // valid values:
-        //   VAD_ONLY - Only use vad
-        //   RATIO_ONLY - Only use max/current energy ratio threshold
-        //   CURRENT_ONLY - Only use current energy threshold
-        //   VAD_AND_RATIO - Use vad and max/current energy ratio threshold
-        //   VAD_AND_CURRENT - Use vad and current energy threshold
-        //   ALL - Use vad, max/current energy ratio, and current energy threshold
-        // NOTE: if a vad plugin is not available method will fallback to RATIO_ONLY
-        "silence_method": "vad_and_ratio",
-        // Seconds of speech before voice command has begun
-        "speech_seconds": 0.1,
-        // Seconds of silence before a voice command has finished
-        "silence_seconds": 0.5,
-        // Seconds of audio to keep before voice command has begun
-        "before_seconds": 0.5,
-        // Minimum length of voice command (seconds)
-        // NOTE: max_seconds uses recording_timeout listener setting
-        "min_seconds": 1,
-        // Ratio of max/current energy below which audio is considered speech
-        "max_current_ratio_threshold": 2,
-        // Energy threshold above which audio is considered speech
-        // NOTE: this is dynamic, only defining start value
-        "initial_energy_threshold": 1000.0,
-        // vad module can be any plugin, by default it is not used
-        // recommended plugin: "ovos-vad-plugin-silero"
-        "module": "",
-        "ovos-vad-plugin-silero": {"threshold": 0.2},
-        "ovos-vad-plugin-webrtcvad": {"vad_mode": 3}
+"hotwords": {
+    "wake up": {
+        "module": "ovos-ww-plugin-pocketsphinx",
+        "phonemes": "W EY K . AH P",
+        "threshold": 1e-20,
+        "lang": "en-us",
+        "wakeup": true
     }
 },
 ```
+
+### Recording mode
+
+Can be used via [Recording skill](https://github.com/OpenVoiceOS/skill-ovos-audio-recording)
+
+![imagem](https://github.com/OpenVoiceOS/ovos-dinkum-listener/assets/33701864/0337b499-3175-4031-a83f-eda352d2197f)
 
