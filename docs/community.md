@@ -4,10 +4,10 @@ The following projects are fully maintained by our community under the OpenVoice
 
 Thank you guys!
 
-
 ## Projects
 
 - [ovos-docker](https://github.com/OpenVoiceOS/ovos-docker)
+- [ovos-installer](https://github.com/OpenVoiceOS/ovos-installer)
 - [raspbian-ovos](https://github.com/OpenVoiceOS/raspbian-ovos)
 - [uptime monitor](https://github.com/OpenVoiceOS/status)
 - [projen skill generator/retrofitter](https://github.com/mikejgray/ovos-skill-projen)

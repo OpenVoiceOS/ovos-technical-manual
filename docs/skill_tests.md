@@ -7,42 +7,6 @@ Like any other module, testing each method in you skill can help prevent debuggi
 headaches when something goes wrong. These tests are specific to a skill, and it
 is up to the skill author to test that methods act as expected.
 
-## OSM Installation Tests
-This test case may be used to test skill installation via OSM:
-```python
-import unittest
-from os.path import exists
-from shutil import rmtree
-
-from ovos_skills_manager import SkillEntry
-
-branch = "dev"  # TODO: Specify default branch
-repo = "skill-ovos-volume"  # TODO: Specify repository name
-author = "OpenVoiceOS"  # TODO: Specify repository author
-url = f"https://github.com/{author}/{repo}@{branch}"
-
-
-class TestOSM(unittest.TestCase):
-    @classmethod
-    def setUpClass(self):
-        self.skill_id = "{repo.lower()}.{author.lower()}"
-
-    def test_osm_install(self):
-        skill = SkillEntry.from_github_url(url)
-        tmp_skills = "/tmp/osm_installed_skills"
-        skill_folder = f"{tmp_skills}/{skill.uuid}"
-
-        if exists(skill_folder):
-            rmtree(skill_folder)
-
-        updated = skill.install(folder=tmp_skills, default_branch=branch)
-        self.assertEqual(updated, True)
-        self.assertTrue(exists(skill_folder))
-
-        updated = skill.install(folder=tmp_skills, default_branch=branch)
-        self.assertEqual(updated, False)
-```
-
 ## Skill Resource Tests
 This test case may be used to test skill resource files and event registration.
 A [shared GitHub Action](https://github.com/NeonGeckoCom/.github/blob/master/.github/workflows/skill_test_resources.yml)

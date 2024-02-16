@@ -8,6 +8,8 @@ Think of these docs both as your starting point and also forever changing and in
 
 Please [open Issues and Pull Requests](https://github.com/OpenVoiceOS/ovos-technical-manual)!
 
-User oriented docs are automatically published at https://openvoiceos.github.io/community-docs
+User oriented docs are automatically published at [https://openvoiceos.github.io/community-docs](https://openvoiceos.github.io/community-docs)
 
-Dev oriented docs (this repo) are automatically published at https://openvoiceos.github.io/ovos-technical-manual
+Docker specific documentation can be found at [https://openvoiceos.github.io/ovos-docker](https://openvoiceos.github.io/ovos-docker/)
+
+Dev oriented docs (this repo) are automatically published at [https://openvoiceos.github.io/ovos-technical-manual](https://openvoiceos.github.io/ovos-technical-manual)

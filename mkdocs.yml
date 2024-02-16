@@ -1,19 +1,14 @@
-site_name: Documentation
-site_url: https://openvoiceos.github.io/community-docs
+site_name: OVOS Technical Manual
+site_url: https://openvoiceos.github.io/ovos-technical-manual
 nav:
     - Home:
         - Introduction: index.md
-        - About: why.md
-        - Glossary: glossary.md
-        - License: license.md
-        - Friends: friends.md
         - Community: community.md
         - Timeline: timeline.md
-        - F.A.Q.: faq.md
-    - OVOS-core:
-        - Introduction: core.md
+        - License: license.md
+    - Architecture:
+        - Core: core.md
         - Bus: bus_service.md
-        - Skills: skills_service.md
         - Speech: speech_service.md
         - Audio: audio_service.md
         - GUI: gui_service.md
@@ -37,13 +32,10 @@ nav:
         - F.A.Q.: dev.md
     - GUI:
         - Introduction: gui_intro.md
-        - Homescreen: homescreen.md
         - QML Design Guidelines: qml_guidelines.md
-        - Open Linguistika: linguistika.md
         - Shell: shell.md
         - Protocol: gui_protocol.md
         - Extensions: gui_extensions.md
-        - Bigscreen: bigscreen.md
     - Backend:
         - Available Backends: backend.md
         - Backend Client: backend_client.md
@@ -61,21 +53,11 @@ nav:
         - Platform/Hardware Abstraction Layer: PHAL.md
     - Technologies:
         - Common Play: OCP.md
-        - Skills Manager: osm.md
-        - Config Assistant: OCA.md
         - STT Server: stt_server.md
         - TTS Server: tts_server.md
         - Translate Server: translate_server.md
         - Padacioso: padacioso.md
         - Jurebes: jurebes.md
-    - Mycroft:
-        - Dinkum: dinkum.md
-        - Compatibility: compat.md
-        - OVOS vs Mycroft: mycroft.md
-    - Images:
-        - Compared: comparison.md
-        - Buildroot: buildroot.md
-        - Raspbian: raspbian_ovos.md
 
 theme: readthedocs
 extra_css:
