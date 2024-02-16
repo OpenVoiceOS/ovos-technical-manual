@@ -7,8 +7,8 @@ nav:
         - Timeline: timeline.md
         - License: license.md
     - Architecture:
-        - Core: core.md
         - Bus: bus_service.md
+        - Core: core.md
         - Listener: speech_service.md
         - Audio: audio_service.md
         - GUI: gui_service.md
