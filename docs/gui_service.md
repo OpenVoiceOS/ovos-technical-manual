@@ -38,8 +38,6 @@ OpenVoiceOS components interact with the GUI by defining session data and active
 
 The GUI clients may be implemented in any language, page templates are provided to skills via `self.gui.show_XXX` that should be implemented by all clients. 
 
-sending custom pages from skills requires skill to explicitly support a client platform
-
 ## GUI Plugins
 
 The active namespace is tracked by `ovos-gui` and manages the [homescreen skill](https://github.com/OpenVoiceOS/skill-ovos-homescreen), desktop implementations like Plasma Bigscreen do not have a homescreen, instead they manage each skill in their own window
@@ -50,16 +48,130 @@ A single GUI plugin can be loaded in `ovos-gui` to handle bus events and provide
 
 Currently the only existing plugin is for [ovos-shell](https://openvoiceos.github.io/ovos-technical-manual/shell/)
 
-## Introduction to QML
 
-Currently only a [QT5 gui-client](https://github.com/OpenVoiceOS/mycroft-gui-qt5) is available, help wanted to [migrate to QT6](https://github.com/OVOSHatchery/mycroft-gui-qt6)!
+## GUIInterface
 
-The reference GUI client implementation is based on the QML user interface markup language that gives you complete freedom to create in-depth innovative interactions without boundaries or provide you with simple templates within the GUI framework that allow minimalistic display of text and images based on your skill development specifics and preferences.
+Any component wanting to implement a GUI for OpenVoiceOS can do so via the `GUIInterface` class from [ovos-bus-client](https://github.com/OpenVoiceOS/ovos-bus-client/blob/dev/ovos_bus_client/apis/gui.py)
 
-QML user interface markup language is a declarative language built on top of Qt's existing strengths designed to describe the user interface of a program: both what it looks like, and how it behaves. QML provides modules that consist of sophisticated set of graphical and behavioral building elements.
+Sending custom pages from skills requires skill to explicitly support a client platform
 
-A collection of resources to familiarize you with QML and Kirigami Framework.
+```python
+class GUIInterface:
+    """
+    Interface to the Graphical User Interface, allows interaction with
+    the mycroft-gui from anywhere
 
-* [Introduction to QML ](http://doc.qt.io/qt-5/qml-tutorial.html)
-* [Introduction to Kirigami](https://www.kde.org/products/kirigami/)
-* [Original Mycroft GUI Docs](https://mycroft-ai.gitbook.io/docs/skill-development/displaying-information/mycroft-gui)
+    Values set in this class are synced to the GUI, accessible within QML
+    via the built-in sessionData mechanism.  For example, in Python you can
+    write in a skill:
+        self.gui['temp'] = 33
+        self.gui.show_page('Weather')
+        
+    Then in the Weather.qml you'd access the temp via code such as:
+        text: sessionData.time
+    """
+```
+
+### Text
+
+Display simple strings of text.
+
+```python
+self.gui.show_text(self, text, title=None, override_idle=None, override_animations=False)
+```
+
+Arguments:
+
+* text \(str\): Main text content.  It will auto-paginate
+* title \(str\): A title to display above the text content.
+* override\_idle \(boolean, int\):
+  * True: Takes over the resting page indefinitely
+  * \(int\): Delays resting page for the specified number of seconds.
+* override\_animations \(boolean\):
+  * True: Disables showing all platform skill animations.
+  * False: 'Default' always show animations.
+
+### Static Image
+
+Display a static image such as a jpeg or png.
+
+```python
+self.gui.show_image(self, url, caption=None, title=None, fill=None, override_idle=None, override_animations=False)
+```
+
+Arguments:
+
+* url \(str\): Pointer to the image
+* caption \(str\): A caption to show under the image
+* title \(str\): A title to display above the image content
+* fill \(str\): Fill type - supports: 
+  * 'PreserveAspectFit',
+  * 'PreserveAspectCrop', 
+  * 'Stretch'
+* override\_idle \(boolean, int\):
+  * True: Takes over the resting page indefinitely
+  * \(int\): Delays resting page for the specified number of seconds.
+* override\_animations \(boolean\):
+  * True: Disables showing all platform skill animations.
+  * False: 'Default' always show animations.
+
+### Animated Image
+
+Display an animated image such as a gif.
+
+```python
+self.gui.show_animated_image(self, url, caption=None, title=None, fill=None, override_idle=None, override_animations=False)
+```
+
+Arguments:
+
+* url \(str\): Pointer to the .gif image
+* caption \(str\): A caption to show under the image
+* title \(str\): A title to display above the image content
+* fill \(str\): Fill type - supports: 
+  * 'PreserveAspectFit',
+  * 'PreserveAspectCrop', 
+  * 'Stretch'
+* override\_idle \(boolean, int\):
+  * True: Takes over the resting page indefinitely
+  * \(int\): Delays resting page for the specified number of seconds.
+* override\_animations \(boolean\):
+  * True: Disables showing all platform skill animations.
+  * False: 'Default' always show animations.
+
+### HTML Page
+
+Display a local HTML page.
+
+```python
+self.gui.show_html(self, html, resource_url=None, override_idle=None, override_animations=False)
+```
+
+Arguments:
+
+* html \(str\): HTML text to display
+* resource\_url \(str\): Pointer to HTML resources
+* override\_idle \(boolean, int\):
+  * True: Takes over the resting page indefinitely
+  * \(int\): Delays resting page for the specified number of seconds.
+* override\_animations \(boolean\):
+  * True: Disables showing all platform skill animations.
+  * False: 'Default' always show animations.
+
+### Remote URL
+
+Display a webpage.
+
+```python
+self.gui.show_url(self, url, override_idle=None, override_animations=False)
+```
+
+Arguments:
+
+* url \(str\): URL to render
+* override\_idle \(boolean, int\):
+  * True: Takes over the resting page indefinitely
+  * \(int\): Delays resting page for the specified number of seconds.
+* override\_animations \(boolean\):
+  * True: Disables showing all platform skill animations.
+  * False: 'Default' always show animations.

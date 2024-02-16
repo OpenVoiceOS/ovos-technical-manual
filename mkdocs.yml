@@ -29,9 +29,10 @@ nav:
         - Skill Tests: skill_tests.md
         - F.A.Q.: dev.md
     - GUI:
-        - QML Design Guidelines: qml_guidelines.md
-        - Shell: shell.md
         - Protocol: gui_protocol.md
+        - Shell: shell.md
+        - QT5 mycroft-gui: qt5.md
+        - QML Design Guidelines: qml_guidelines.md
     - Backend:
         - Available Backends: backend.md
         - Backend Client: backend_client.md
