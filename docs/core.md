@@ -93,6 +93,8 @@ to enable a utterance transformer simply add it to `mycroft.conf` after installi
 
 ## Metadata Transformers
 
+**NEW** in `ovos-core` version **0.0.8**
+
 Similar to utterance transformers, these plugins only transform the `message.context`
 
 ```javascript
@@ -101,17 +103,15 @@ Similar to utterance transformers, these plugins only transform the `message.con
 "metadata_transformers": {},
 ```
 
-metadata transformers have been introduced in `ovos-core` **0.0.8** 
-
 ## Pipelines
+
+**NEW** in `ovos-core` version **0.0.8**, The concept of configurable pipelines has been introduced in `ovos-core` **0.0.8** and will be fully implemented as
+plugins after version **0.1.0**
 
 after the `utterance` has been transformed it is sent to various OVOS components by priority order until one can handle
 the query
 
 Pipelines include intent parsers, converse framework, common query framework and fallback skill framework
-
-The concept of configurable pipelines has been introduced in `ovos-core` **0.0.8** and will be fully implemented as
-plugins after version **0.1.0**
 
 ```javascript
   // Intent Pipeline / plugins config
