@@ -47,6 +47,7 @@ nav:
         - Audio Playback: audio_plugins.md
         - Language Detection/Translation: lang_plugins.md
         - Platform/Hardware Abstraction Layer: PHAL.md
+        - Question Solvers: solvers.md
     - Technologies:
         - Common Play: OCP.md
         - STT Server: stt_server.md
