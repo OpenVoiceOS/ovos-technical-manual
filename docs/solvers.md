@@ -144,9 +144,9 @@ class MySolver(QuestionSolver):
 ```
 
 
-
-
 ## Multiple Choice Solvers
+
+**NEW** in `ovos-core` version **0.0.8**
 
 given a question and multiple answers, select the best answer
 
@@ -229,6 +229,8 @@ class EvidenceSolver(AbstractSolver):
 ```
 
 ## Entailment Solver
+
+**NEW** in `ovos-core` version **0.0.8**
 
 Given a hypothesis and a premise, return True if the premise entails the hypothesis, False otherwise
 
