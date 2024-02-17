@@ -14,9 +14,10 @@ of plugins that can transform it before TTS stage
 The `utterance` to be spoken is sent sequentially to all transformer plugins, ordered by priority (developer defined),
 until finally it is sent to the TTS stage
 
-| plugin                                | description                                    | source                                                                                                            |
-|---------------------------------------|------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|
-| ovos-dialog-transformer-openai-plugin | rewrite speech with a LLM before executing TTS | [OpenVoiceOS/ovos-solver-plugin-openai-persona](https://github.com/OpenVoiceOS/ovos-solver-plugin-openai-persona) |
+| plugin                                | description                                    | source                                                                                                                    |
+|---------------------------------------|------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
+| ovos-dialog-transformer-openai-plugin | rewrite speech with a LLM before executing TTS | [OpenVoiceOS/ovos-solver-plugin-openai-persona](https://github.com/OpenVoiceOS/ovos-solver-plugin-openai-persona)         |
+| ovos-dialog-translation-plugin        | translate speech back into user language       | [OpenVoiceOS/ovos-bidirectional-translation-plugin](https://github.com/OpenVoiceOS/ovos-bidirectional-translation-plugin) |
 
 ## TTS
 
@@ -59,17 +60,18 @@ NOTE: Does not work with StreamingTTS
 |---------------------------------|-------------------------------|---------------------------------------------------------------------------------------------------------------|
 | ovos-tts-transformer-sox-plugin | apply sound effects via `sox` | [OpenVoiceOS/ovos-tts-transformer-sox-plugin](https://github.com/OpenVoiceOS/ovos-tts-transformer-sox-plugin) |
 
-
 ## Audio
 
 You can enable additional Audio plugins and define the native sources described above under the `"Audio"` section
 of `mycroft.conf`
 
-ovos-core uses OCP natively for media playback, you can learn more about OCP [here](https://openvoiceos.github.io/community-docs/OCP)
+ovos-core uses OCP natively for media playback, you can learn more about
+OCP [here](https://openvoiceos.github.io/community-docs/OCP)
 
 OCP will decide when to call the Audio service and what plugin to use
 
-**DEPRECATION WARNING** -  `ovos-core` version **0.0.8** introduces the option to disable the old audio service, this will be a default in version **0.1.0** when `ovos-media` is introduced
+**DEPRECATION WARNING** -  `ovos-core` version **0.0.8** introduces the option to disable the old audio service, this
+will be a default in version **0.1.0** when `ovos-media` is introduced
 
 ```javascript
 "Audio": {
