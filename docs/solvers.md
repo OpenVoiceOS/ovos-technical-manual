@@ -1,14 +1,13 @@
 # Solver Plugins
 
-
-Solver plugins solve natural language queries, they define a unified api around specific kinds of questions and provide auto translation capabilities for language support
+Solver plugins solve natural language queries, they define a unified api around specific kinds of questions and provide
+auto translation capabilities for language support
 
 A plugin can define the language it works in, eg, wolfram alpha only accepts english input at the time of this writing
 
 Bidirectional translation will be handled behind the scenes for other languages
 
 Solvers are used by individual skills and by the [Persona Framework](https://github.com/OpenVoiceOS/ovos-persona)
-
 
 ## Question Solvers
 
@@ -18,7 +17,20 @@ Given a free form natural language question, return an answer
 
 Originally implemented for [Neon](https://github.com/Neongeckocom/neon_solvers)
 
-**Example Usage  - DuckDuckGo plugin**
+non-exhaustive reference table of question solver plugins
+
+| plugin                                                                                                                | description                                      | native language |
+|-----------------------------------------------------------------------------------------------------------------------|--------------------------------------------------|-----------------|
+| [ovos-solver-plugin-ddg](https://github.com/OpenVoiceOS/skill-ovos-ddg)                                               | extract keywords from query and search duck duck | english         |
+| [ovos-solver-plugin-wikipedia](https://github.com/OpenVoiceOS/skill-ovos-wikipedia)                                   | extract keywords from query and search wikipedia | english         |
+| [ovos-solver-plugin-wolfram-alpha](https://github.com/OpenVoiceOS/skill-ovos-wolfie)                                  | wolfram alpha spoken answers api                 | english         |
+| [ovos-question-solver-wordnet](https://github.com/OpenVoiceOS/ovos-classifiers/blob/dev/ovos_classifiers/opm/nltk.py) | answer "what is" questions via wordnet           | english         |
+| [ovos-solver-plugin-aiml](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml)                                     | AIML chatbot                                     | english         |
+| [ovos-solver-plugin-rivescript](https://github.com/OpenVoiceOS/ovos-solver-plugin-rivescript)                         | rivescript chatbot                               | english         |
+| [ovos-solver-pandorabots-plugin](https://github.com/OVOSHatchery/ovos-solver-pandorabots-plugin)                      | old school chatbots hosted around the web        | english         |
+| [ovos-solver-plugin-openai-persona](https://github.com/OpenVoiceOS/ovos-solver-plugin-openai-persona)                 | OpenAI API compatible LLMs                       | english         |
+
+**Example Usage - DuckDuckGo plugin**
 
 single answer
 
@@ -49,23 +61,23 @@ for sentence in d.long_answer(query):
     print(sentence["title"])
     print(sentence["summary"])
     print(sentence.get("img"))
-    
+
     # who is Isaac Newton
     # Sir Isaac Newton was an English mathematician, physicist, astronomer, alchemist, theologian, and author widely recognised as one of the greatest mathematicians and physicists of all time and among the most influential scientists.
     # https://duckduckgo.com/i/ea7be744.jpg
-    
+
     # who is Isaac Newton
     # He was a key figure in the philosophical revolution known as the Enlightenment.
     # https://duckduckgo.com/i/ea7be744.jpg
-    
+
     # who is Isaac Newton
     # His book Philosophiæ Naturalis Principia Mathematica, first published in 1687, established classical mechanics.
     # https://duckduckgo.com/i/ea7be744.jpg
-    
+
     # who is Isaac Newton
     # Newton also made seminal contributions to optics, and shares credit with German mathematician Gottfried Wilhelm Leibniz for developing infinitesimal calculus.
     # https://duckduckgo.com/i/ea7be744.jpg
-    
+
     # who is Isaac Newton
     # In the Principia, Newton formulated the laws of motion and universal gravitation that formed the dominant scientific viewpoint until it was superseded by the theory of relativity.
     # https://duckduckgo.com/i/ea7be744.jpg
@@ -96,11 +108,11 @@ class MySolver(QuestionSolver):
 
     def __init__(self, config=None):
         config = config or {}
-         # set the "internal" language, defined by dev, not user
-         # this plugin internally only accepts and outputs english
+        # set the "internal" language, defined by dev, not user
+        # this plugin internally only accepts and outputs english
         config["lang"] = "en"
         super().__init__(config)
-        
+
     # expected solver methods to be implemented
     def get_data(self, query, context):
         """
@@ -143,12 +155,19 @@ class MySolver(QuestionSolver):
 
 ```
 
-
 ## Multiple Choice Solvers
 
 **NEW** in `ovos-core` version **0.0.8**
 
 given a question and multiple answers, select the best answer
+
+non-exhaustive reference table of multiple choice solver plugins
+
+| plugin                                                                                                                 | description                                                                                                                                   | native language |
+|------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|-----------------|
+| [ovos-choice-solver-bm25](https://github.com/OpenVoiceOS/ovos-classifiers/blob/dev/ovos_classifiers/opm/heuristics.py) | using [Okapi BM25](https://en.wikipedia.org/wiki/Okapi_BM25)  ranking function to estimate the relevance of documents to a given search query |                 |
+
+Implementation
 
 ```python
 class MultipleChoiceSolver(AbstractSolver):
@@ -156,7 +175,6 @@ class MultipleChoiceSolver(AbstractSolver):
     handling automatic translation back and forth as needed"""
 
     # plugin methods to override
-
     @abc.abstractmethod
     def select_answer(self, query: str, options: List[str],
                       context: Optional[dict] = None) -> str:
@@ -166,24 +184,6 @@ class MultipleChoiceSolver(AbstractSolver):
         """
         raise NotImplementedError
 
-    # user facing methods
-    def solve(self, query: str, options: List[str],
-              context: Optional[dict] = None, lang: Optional[str] = None) -> str:
-        """
-        cache and auto translate query and options if needed
-        returns best answer from provided options
-        """
-        user_lang = self._get_user_lang(context, lang)
-        query, context, lang = self._tx_query(query, context, lang)
-        opts = [self.translator.translate(opt, lang, user_lang)
-                for opt in options]
-
-        # select best answer
-        ans = self.select_answer(query, opts, context)
-
-        idx = opts.index(ans)
-        return options[idx]
-
 ```
 
 ## Evidence Solver
@@ -192,13 +192,20 @@ class MultipleChoiceSolver(AbstractSolver):
 
 given a document and a question about it, select the best passage that answers the question
 
+non-exhaustive reference table of evidence solver plugins
+
+| plugin                                                                                                                   | description                                                                                                                                   | native language |
+|--------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|-----------------|
+| [ovos-evidence-solver-bm25](https://github.com/OpenVoiceOS/ovos-classifiers/blob/dev/ovos_classifiers/opm/heuristics.py) | using [Okapi BM25](https://en.wikipedia.org/wiki/Okapi_BM25)  ranking function to estimate the relevance of documents to a given search query |                 |
+
+Implementation
+
 ```python
 class EvidenceSolver(AbstractSolver):
     """perform NLP reading comprehension task,
     handling automatic translation back and forth as needed"""
 
     # plugin methods to override
-
     @abc.abstractmethod
     def get_best_passage(self, evidence: str, question: str,
                          context: Optional[dict] = None) -> str:
@@ -207,25 +214,6 @@ class EvidenceSolver(AbstractSolver):
          returns summary of provided document
         """
         raise NotImplementedError
-
-    # user facing methods
-    def extract_answer(self, evidence: str, question: str,
-                       context: Optional[dict] = None, lang: Optional[str] = None) -> str:
-        """
-        cache and auto translate evidence and question if needed
-        returns passage from evidence that answers question
-        """
-        user_lang = self._get_user_lang(context, lang)
-        evidence, context, lang = self._tx_query(evidence, context, lang)
-        question, context, lang = self._tx_query(question, context, lang)
-
-        # extract answer from doc
-        ans = self.get_best_passage(evidence, question, context)
-
-        # translate output to user lang
-        if self.enable_tx and user_lang not in self.supported_langs:
-            return self.translator.translate(ans, user_lang, lang)
-        return ans
 ```
 
 ## Entailment Solver
@@ -241,7 +229,6 @@ class EntailmentSolver(AbstractSolver):
     handling automatic translation back and forth as needed"""
 
     # plugin methods to override
-
     @abc.abstractmethod
     def check_entailment(self, premise: str, hypothesis: str,
                          context: Optional[dict] = None) -> bool:
@@ -250,21 +237,7 @@ class EntailmentSolver(AbstractSolver):
         return Bool, True if premise entails the hypothesis False otherwise
         """
         raise NotImplementedError
-
-    # user facing methods
-    def entails(self, premise: str, hypothesis: str,
-                context: Optional[dict] = None, lang: Optional[str] = None) -> bool:
-        """
-        cache and auto translate premise and hypothesis if needed
-        return Bool, True if premise entails the hypothesis False otherwise
-        """
-        user_lang = self._get_user_lang(context, lang)
-        query, context, lang = self._tx_query(query, context, lang)
-
-        # summarize
-        return self.check_entailment(premise, hypothesis)
 ```
-
 
 ## Summarization Solver
 
@@ -272,13 +245,20 @@ class EntailmentSolver(AbstractSolver):
 
 Given a document, return it's summary
 
+non-exhaustive reference table of multiple choice solver plugins
+
+| plugin                                                                                                                         | description                                      | native language |
+|--------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------|-----------------|
+| [ovos-summarizer-solver-wordfreq](https://github.com/OpenVoiceOS/ovos-classifiers/blob/dev/ovos_classifiers/opm/heuristics.py) | using word frequencies select the top utterances |                 |
+
+Implementation
+
 ```python
 class TldrSolver(AbstractSolver):
     """perform NLP summarization task,
     handling automatic translation back and forth as needed"""
 
     # plugin methods to override
-
     @abc.abstractmethod
     def get_tldr(self, document: str,
                  context: Optional[dict] = None) -> str:
@@ -287,23 +267,5 @@ class TldrSolver(AbstractSolver):
          returns summary of provided document
         """
         raise NotImplementedError
-
-    # user facing methods
-    def tldr(self, document: str,
-             context: Optional[dict] = None, lang: Optional[str] = None) -> str:
-        """
-        cache and auto translate query if needed
-        returns summary of provided document
-        """
-        user_lang = self._get_user_lang(context, lang)
-        document, context, lang = self._tx_query(document, context, lang)
-
-        # summarize
-        tldr = self.get_tldr(document, context)
-
-        # translate output to user lang
-        if self.enable_tx and user_lang not in self.supported_langs:
-            return self.translator.translate(tldr, user_lang, lang)
-        return tldr
 ```
 
