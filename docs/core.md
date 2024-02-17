@@ -79,7 +79,15 @@ to enable a utterance transformer simply add it to `mycroft.conf` after installi
   
  // define utterance fixes via fuzzy match ~/.local/share/mycroft/corrections.json
  // define unconditional replacements at word level ~/.local/share/mycroft/word_corrections.json
- "ovos-utterance-corrections-plugin": {}
+ "ovos-utterance-corrections-plugin": {},
+ 
+ // translation plugin
+ "ovos-utterance-translation-plugin": {
+   "bidirectional": true,
+   "verify_lang": false,
+   "ignore_invalid": true,
+   "translate_secondary_langs": false
+ }
 },
 ```
 

@@ -19,6 +19,17 @@ until finally it is sent to the TTS stage
 | ovos-dialog-transformer-openai-plugin | rewrite speech with a LLM before executing TTS | [OpenVoiceOS/ovos-solver-plugin-openai-persona](https://github.com/OpenVoiceOS/ovos-solver-plugin-openai-persona)         |
 | ovos-dialog-translation-plugin        | translate speech back into user language       | [OpenVoiceOS/ovos-bidirectional-translation-plugin](https://github.com/OpenVoiceOS/ovos-bidirectional-translation-plugin) |
 
+To enable a transformer add it to `mycroft.conf`
+
+```javascript
+// To enable a dialog transformer plugin just add it's name with any relevant config
+// these plugins can mutate utterances before TTS
+"dialog_transformers": {
+    "ovos-dialog-translation-plugin": {}
+}
+```
+
+
 ## TTS
 
 Two TTS plugins may be loaded at once, if the primary plugin fails for some reason the second plugin will be used.
@@ -59,6 +70,20 @@ NOTE: Does not work with StreamingTTS
 | plugin                          | description                   | source                                                                                                        |
 |---------------------------------|-------------------------------|---------------------------------------------------------------------------------------------------------------|
 | ovos-tts-transformer-sox-plugin | apply sound effects via `sox` | [OpenVoiceOS/ovos-tts-transformer-sox-plugin](https://github.com/OpenVoiceOS/ovos-tts-transformer-sox-plugin) |
+
+To enable a transformer add it to `mycroft.conf`
+
+```javascript
+// To enable a tts transformer plugin just add it's name with any relevant config
+// these plugins can mutate utterances before TTS
+"tts_transformers": {
+    "ovos-tts-transformer-sox-plugin": {
+        "default_effects": {
+            "speed": {"factor": 1.1}
+        }
+    }
+}
+```
 
 ## Audio
 
