@@ -78,7 +78,7 @@ To enable a transformer add it to `mycroft.conf`
 
 ```javascript
 // To enable a tts transformer plugin just add it's name with any relevant config
-// these plugins can mutate utterances before TTS
+// these plugins can mutate audio after TTS
 "tts_transformers": {
     "ovos-tts-transformer-sox-plugin": {
         "default_effects": {
