@@ -54,7 +54,7 @@ Mycroft GUI frameworks provides a set of high level components and events system
 
 This provides a QML `Item` to render Adobe® After Effects™ animations exported as JSON with Bodymovin using the Lottie Web library. For list of all properties supported refer [Lottie QML](https://github.com/kbroulik/lottie-qml)
 
-#### Using Mycroft-GUI Framework Base Delegates
+### Mycroft-GUI Framework Base Delegates
 
 When you design your skill with QML, Mycroft-GUI frameworks provides you with some base delegates you should use when designing your GUI skill. The base delegates provide you with a basic presentation layer for your skill with some property assignments that can help you setup background images, background dim, timeout and grace time properties to give you the control you need for rendering an experience. In your GUI Skill you can use:
 
@@ -146,7 +146,7 @@ Mycroft.ScrollableDelegate{
 }
 ```
 
-### Advanced skill displays using QML
+## Advanced skill displays using QML
 
 **Display Lottie Animations**:
 
