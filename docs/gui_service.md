@@ -45,6 +45,8 @@ should be implemented by all clients.
 
 ## GUI Plugins
 
+**NEW** in `ovos-core` version **0.0.8**
+
 The active namespace is tracked by `ovos-gui` and manages
 the [homescreen skill](https://github.com/OpenVoiceOS/skill-ovos-homescreen), desktop implementations like Plasma
 Bigscreen do not have a homescreen, instead they manage each skill in their own window
