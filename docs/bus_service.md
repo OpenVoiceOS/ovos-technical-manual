@@ -49,6 +49,8 @@ The `context` is considered to be metadata and might be changed at any time in t
 
 You can think of the message `context` as a sort of session data for a individual interaction, in general messages down the chain keep the `context` from the original message, most listeners (eg, skills) will only care about `type` and `data`. 
 
+An index of all bus messages emitted or listened too by all the OVOS repositories can be found at [https://openvoiceos.github.io/message_spec](https://openvoiceos.github.io/message_spec/)
+
 ## Message Targeting
 
 ovos-core uses the message `context` to add metadata about the messages themselves, where do they come from and what are they intended for.

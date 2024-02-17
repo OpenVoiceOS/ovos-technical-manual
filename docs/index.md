@@ -12,4 +12,6 @@ User oriented docs are automatically published at [https://openvoiceos.github.io
 
 Docker specific documentation can be found at [https://openvoiceos.github.io/ovos-docker](https://openvoiceos.github.io/ovos-docker/)
 
+An index of all bus messages emitted or listened too by all the OVOS repositories can be found at [https://openvoiceos.github.io/message_spec](https://openvoiceos.github.io/message_spec/)
+
 Dev oriented docs (this repo) are automatically published at [https://openvoiceos.github.io/ovos-technical-manual](https://openvoiceos.github.io/ovos-technical-manual)
