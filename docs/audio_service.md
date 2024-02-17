@@ -25,7 +25,10 @@ To enable a transformer add it to `mycroft.conf`
 // To enable a dialog transformer plugin just add it's name with any relevant config
 // these plugins can mutate utterances before TTS
 "dialog_transformers": {
-    "ovos-dialog-translation-plugin": {}
+    "ovos-dialog-translation-plugin": {},
+    "ovos-dialog-transformer-openai-plugin": {
+        "rewrite_prompt": "rewrite the text as if you were explaining it to a 5 year old"
+    }
 }
 ```
 
