@@ -89,6 +89,8 @@ class GUIInterface:
     """
 ```
 
+in OVOS Skills `self.gui` provides a `GUIInterface`  under a `skill_id` namespace
+
 ### Text
 
 Display simple strings of text.
