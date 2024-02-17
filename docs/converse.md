@@ -11,12 +11,12 @@ Converse methods must return a Boolean value. True if an utterance was handled, 
 Let's use a version of the Ice Cream Skill we've been building up and add a converse method to catch any brief statements of thanks that might directly follow an order.
 
 ```python
-from mycroft import MycroftSkill, intent_handler
+from ovos_workshop.skills import OVOSSkill
+from ovos_workshop.decorators import intent_handler
 
 
-class IceCreamSkill(MycroftSkill):
-    def __init__(self):
-        MycroftSkill.__init__(self)
+class IceCreamSkill(OVOSSkill):
+    def initialize(self):
         self.flavors = ['vanilla', 'chocolate', 'mint']
 
     @intent_handler('request.icecream.intent')
@@ -29,10 +29,6 @@ class IceCreamSkill(MycroftSkill):
         if self.voc_match(message.data['utterances'][0], 'Thankyou'):
             self.speak_dialog("you-are-welcome")
             return True
-
-
-def create_skill():
-    return IceCreamSkill()
 ```
 
 In this example:

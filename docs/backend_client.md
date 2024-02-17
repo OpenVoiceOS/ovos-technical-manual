@@ -49,10 +49,6 @@ from ovos_backend_client.settings import RemoteSkillSettings
 
 # in ovos-core skill_id is deterministic and safe
 s = RemoteSkillSettings("skill.author")
-# in mycroft-core please ensure a valid remote_id
-# in MycroftSkill class you can use
-# remote_id = self.settings_meta.skill_gid
-# s = RemoteSkillSettings("skill.author", remote_id="@|whatever_msm_decided")
 s.download()
 
 s.settings["existing_value"] = True

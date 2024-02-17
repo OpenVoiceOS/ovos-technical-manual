@@ -22,9 +22,10 @@ The Skill API works over the Message Bus. This requires that the return values a
 ### Example
 
 ```python
-from mycroft.skills import MycroftSkill, skill_api_method
+from ovos_workshop.skills import OVOSSkill
+from ovos_workshop.decorators import intent_handler, skill_api_method
 
-class RobberSkill(MycroftSkill):
+class RobberSkill(OVOSSkill):
     @skill_api_method
     def robber_lang(self, sentence):
         """Encode a sentence to "Rövarspråket".
@@ -42,10 +43,6 @@ class RobberSkill(MycroftSkill):
             else:
                 tokens.append(char)
         return ' '.join(tokens)
-
-
-def create_skill():
-    return RobberSkill()
 ```
 
 ## Using another Skill's API
@@ -57,14 +54,10 @@ To access the `robber_lang()` method we created above, we could write:
 ```python
 from mycroft.skills.api import SkillApi
 
-class NewRobberSkill(MycroftSkill):
+class NewRobberSkill(OVOSSkill):
     def initialize(self):
         self.robber = SkillApi.get('robber-skill.forslund')
         self.speak(self.robber.robber_lang('hello world'))
-
-
-def create_skill():
-    return NewRobberSkill()
 ```
 
 When the `NewRobberSkill` is initialized, it will assign the API from the Skill `robber-skill.forslund` to `self.robber`. We then run the exported method `robber_lang()` passing the argument `'hello world'`.

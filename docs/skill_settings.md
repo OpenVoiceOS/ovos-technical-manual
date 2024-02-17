@@ -21,7 +21,7 @@ Nowadays, the file is located in the Skill's XDG\_CONFIG\_DIR (usually `~/config
 
 ### Reading settings
 
-Skill settings are available on the MycroftSkill class and inherit from a Python Dict. This means that you can use it just like you would any other Python dictionary.
+Skill settings are available on the OVOSSkill class and inherit from a Python Dict. This means that you can use it just like you would any other Python dictionary.
 
 To access the `show_time` variable from our example above we would use the `Dict.get` method:
 

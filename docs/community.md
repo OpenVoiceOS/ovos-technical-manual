@@ -6,15 +6,16 @@ Thank you guys!
 
 ## Projects
 
+- [OVOS uptime monitor](https://github.com/OpenVoiceOS/status)
 - [ovos-docker](https://github.com/OpenVoiceOS/ovos-docker)
 - [ovos-installer](https://github.com/OpenVoiceOS/ovos-installer)
 - [raspbian-ovos](https://github.com/OpenVoiceOS/raspbian-ovos)
-- [uptime monitor](https://github.com/OpenVoiceOS/status)
 - [projen skill generator/retrofitter](https://github.com/mikejgray/ovos-skill-projen)
 
 ## Skills
 
 - [ovos-skill-easter-eggs](https://github.com/OpenVoiceOS/ovos-skill-easter-eggs)
+- [ovos-skill-randomness](https://github.com/OpenVoiceOS/skill-ovos-randomness)
 
 ## Plugins
 

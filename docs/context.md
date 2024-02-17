@@ -106,7 +106,7 @@ Mycroft: Here you go, here's your Tea with Honey
 ```python
 from mycroft.skills.context import adds_context, removes_context
 
-class TeaSkill(MycroftSkill):
+class TeaSkill(OVOSSkill):
     @intent_handler(IntentBuilder('TeaIntent').require("TeaKeyword"))
     @adds_context('MilkContext')
     def handle_tea_intent(self, message):

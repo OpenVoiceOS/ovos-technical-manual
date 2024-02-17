@@ -6,23 +6,20 @@ Here we look at how to implement the most common types of prompts. For more info
 
 Any Skill can request a response from the user - making a statement or asking a question before the microphone is activated to record the User's response.
 
-The base implementation of this is the [`get_response()` method](https://mycroft-core.readthedocs.io/en/latest/source/mycroft.html#mycroft.MycroftSkill.get\_response).
+The base implementation of this is the `get_response()` method
 
 To see it in action, let's create a simple Skill that asks the User what their favorite flavor of ice cream is.
 
 ```python
-from mycroft import MycroftSkill, intent_handler
+from ovos_workshop.skills import OVOSSkill
+from ovos_workshop.decorators import intent_handler
 
 
-class IceCreamSkill(MycroftSkill):
+class IceCreamSkill(OVOSSkill):
     @intent_handler('set.favorite.intent')
     def handle_set_favorite(self):
         favorite_flavor = self.get_response('what.is.your.favorite.flavor')
         self.speak_dialog('confirm.favorite.flavor', {'flavor': favorite_flavor})
-
-
-def create_skill():
-    return IceCreamSkill()
 ```
 
 In this Skill we have used `get_response()` and passed it the name of our dialog file `'what.is.your.favorite.flavor.dialog'`. This is the simplest form of this method. It will speak dialog from the given file, then activate the microphone for 3-10 seconds allowing the User to respond. The transcript of their response will then be assigned to our variable `favorite_flavor`. To confirm that we have heard the User correctly we then speak a confirmation dialog passing the value of `favorite_flavor` to be spoken as part of that dialog.
@@ -39,7 +36,7 @@ The `get_response()` method also takes the following optional arguments:
 
 ## Yes / No Questions
 
-[`ask_yesno()`](https://mycroft-core.readthedocs.io/en/latest/source/mycroft.html#mycroft.MycroftSkill.ask\_yesno) checks if the response contains "yes" or "no" like phrases.
+`ask_yesno()` checks if the response contains "yes" or "no" like phrases.
 
 The vocab for this check is sourced from the Skills `yes.voc` and `no.voc` files (if they exist), as well as mycroft-cores defaults (contained within `mycroft-core/res/text/en-us/yes.voc`). A longer phrase containing the required vocab is considered successful e.g. both "yes" and "yeah that would be great thanks" would be considered a successful "yes".
 
@@ -48,10 +45,11 @@ If "yes" or "no" responses are detected, then the method will return the string 
 Let's add a new intent to our `IceCreamSkill` to see how this works.
 
 ```python
-from mycroft import MycroftSkill, intent_handler
+from ovos_workshop.skills import OVOSSkill
+from ovos_workshop.decorators import intent_handler
 
 
-class IceCreamSkill(MycroftSkill):
+class IceCreamSkill(OVOSSkill):
     @intent_handler('do.you.like.intent')
     def handle_do_you_like(self):
         likes_ice_cream = self.ask_yesno('do.you.like.ice.cream')
@@ -61,10 +59,6 @@ class IceCreamSkill(MycroftSkill):
             self.speak_dialog('does.not.like')
         else:
             self.speak_dialog('could.not.understand')
-
-
-def create_skill():
-    return IceCreamSkill()
 ```
 
 In this example we have asked the User if they like ice cream. We then speak different dialog whether they respond yes or no. We also speak some error dialog if neither yes nor no are returned.
@@ -72,19 +66,19 @@ In this example we have asked the User if they like ice cream. We then speak dif
 
 ## Providing a list of options
 
-[`ask_selection()`](https://mycroft-core.readthedocs.io/en/latest/source/mycroft.html#mycroft.MycroftSkill.ask\_selection) provides a list of options to the User for them to select from. The User can respond with either the name of one of these options or select with a numbered ordinal eg "the third".
+`ask_selection()` provides a list of options to the User for them to select from. The User can respond with either the name of one of these options or select with a numbered ordinal eg "the third".
 
 This method automatically manages fuzzy matching the users response against the list of options provided.
 
 Let's jump back into our `IceCreamSkill` to give the User a list of options to choose from.
 
 ```python
-from mycroft import MycroftSkill, intent_handler
+from ovos_workshop.skills import OVOSSkill
+from ovos_workshop.decorators import intent_handler
 
 
-class IceCreamSkill(MycroftSkill):
-    def __init__(self):
-        MycroftSkill.__init__(self)
+class IceCreamSkill(OVOSSkill):
+    def initialize(self):
         self.flavors = ['vanilla', 'chocolate', 'mint']
 
     @intent_handler('request.icecream.intent')
@@ -92,10 +86,6 @@ class IceCreamSkill(MycroftSkill):
         self.speak_dialog('welcome')
         selection = self.ask_selection(self.flavors, 'what.flavor')
         self.speak_dialog('coming.right.up', {'flavor': selection})
-
-
-def create_skill():
-    return IceCreamSkill()
 ```
 
 In this example we first speak some `welcome.dialog`. The list of flavors is then spoken, followed by the `what.flavor.dialog`. Finally, we confirm the Users selection by speaking `coming.right.up.dialog`
@@ -114,12 +104,12 @@ So far we have looked at ways to prompt the User, and return their response dire
 To do this, we use the `expect_response` parameter of the `speak_dialog()` method.
 
 ```python
-from mycroft import MycroftSkill, intent_handler
+from ovos_workshop.skills import OVOSSkill
+from ovos_workshop.decorators import intent_handler
 
 
-class IceCreamSkill(MycroftSkill):
-    def __init__(self):
-        MycroftSkill.__init__(self)
+class IceCreamSkill(OVOSSkill):
+    def initialize(self):
         self.flavors = ['vanilla', 'chocolate', 'mint']
 
     @intent_handler('request.icecream.intent')
@@ -128,10 +118,6 @@ class IceCreamSkill(MycroftSkill):
         selection = self.ask_selection(self.flavors, 'what.flavor')
         self.speak_dialog('coming.right.up', {'flavor': selection})
         self.speak_dialog('now.what', expect_response=True)
-
-
-def create_skill():
-    return IceCreamSkill()
 ```
 
 Here we have added a new dialog after confirming the Users selection. We may use it to tell the User other things they can do with their OVOS device while they enjoy their delicious ice cream.

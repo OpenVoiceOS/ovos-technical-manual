@@ -15,7 +15,7 @@ OCP differs from a typical mycroft-core audio service in several aspects:
 - Can run standalone, only needs a bus connection
 - OCP provides its own intents as if it was a skill
 - OCP provides its own GUI as if it was a skill
-- OCP skills have a dedicated MycroftSkill subclass and decorators in ovos-workshop
+- OCP skills have a dedicated OVOSSkill subclass and decorators in ovos-workshop
 - OCP skills act as media providers, they do not (usually) handle playback
 - OCP handles several kinds of playback, including video
 - OCP has a sub-intent parser for matching requested media types

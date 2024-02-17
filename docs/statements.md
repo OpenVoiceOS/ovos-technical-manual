@@ -4,7 +4,7 @@
 
 One of OVOS's most important core capabilities is to convert text to speech, that is, to speak a statement.
 
-Within a Skill's Intent handler, you may pass a string of text to OVOS and OVOS will speak it.  For example: [`self.speak('this is my statement')`](https://mycroft-core.readthedocs.io/en/latest/source/mycroft.html#mycroft.MycroftSkill.speak)   That's cool and fun to experiment with, but passing strings of text to Mycroft doesn't help to make Mycroft a multilingual product. Rather than hard-coded strings of text, OVOS has a design pattern for multilingualism.
+Within a Skill's Intent handler, you may pass a string of text to OVOS and OVOS will speak it.  For example: `self.speak('this is my statement')`.  That's cool and fun to experiment with, but passing strings of text to Mycroft doesn't help to make Mycroft a multilingual product. Rather than hard-coded strings of text, OVOS has a design pattern for multilingualism.
 
 ### Multilingualism
 
@@ -18,7 +18,7 @@ As an example of the concept, the contents of **how.are.you.dialog** in the dire
 
 ### The Tomato Skill Revisited
 
-To demonstrate the multilingualism design pattern, we examine the usage of the [`speak_dialog()`](https://mycroft-core.readthedocs.io/en/latest/source/mycroft.html#mycroft.MycroftSkill.speak\_dialog) method in the [Tomato Skill](intents/padatious-intents.md) . &#x20;
+To demonstrate the multilingualism design pattern, we examine the usage of the `speak_dialog()` method in the [Tomato Skill](intents/padatious-intents.md) . &#x20;
 
 The Tomato Skill has two Intents: one demonstrates simple, straightforward statements, and the other demonstrates the use of variables within a statement.
 
@@ -113,7 +113,7 @@ For multi-line dialog files, be sure to include the **same** variable on **all**
 The Tomato Skill code snippet:
 
 ```python
- @intent_handler('do.you.like.intent')
+    @intent_handler('do.you.like.intent')
     def handle_do_you_like(self, message):
         tomato_type = message.data.get('type')
         if tomato_type is not None:
@@ -174,12 +174,12 @@ Here we have executed one line of code immediately. Our Skill will then wait for
 
 There may be a situation where the dialog file and the `speak_dialog()` method do not give the Skill enough flexibility. For instance, there may be a need to manipulate the statement from the dialog file before having it spoken by OVOS.
 
-The MycroftSkill class provides four multilingual methods to address these needs.  Each method uses a file, and multilingualism is accomplished using the country/language directory system.
+The OVOSSkill class provides four multilingual methods to address these needs.  Each method uses a file, and multilingualism is accomplished using the country/language directory system.
 
-The [`translate()`](https://mycroft-core.readthedocs.io/en/latest/source/mycroft.html#mycroft.MycroftSkill.translate) method returns a random string from a ".dialog" file (modified by a data dictionary). &#x20;
+The `translate() method returns a random string from a ".dialog" file (modified by a data dictionary). &#x20;
 
-The [`translate_list()`](https://mycroft-core.readthedocs.io/en/latest/source/mycroft.html#mycroft.MycroftSkill.translate\_list) method returns a list of strings from a ".list" file (each modified by the data dictionary). Same as translate\_template() just with a different file extension.
+The `translate_list() method returns a list of strings from a ".list" file (each modified by the data dictionary). Same as translate\_template() just with a different file extension.
 
-The [`translate_namedvalue()`](https://mycroft-core.readthedocs.io/en/latest/source/mycroft.html#mycroft.MycroftSkill.translate\_namedvalue) method returns a dictionary formed from CSV entries in a ".value" file.
+The `translate_namedvalue() method returns a dictionary formed from CSV entries in a ".value" file.
 
-The [`translate_template()`](https://mycroft-core.readthedocs.io/en/latest/source/mycroft.html#mycroft.MycroftSkill.translate\_template) method returns a list of strings from a ".template" file (each modified by the data dictionary). Same as translate\_list() just with a different file extension.
+The `translate_template()` method returns a list of strings from a ".template" file (each modified by the data dictionary). Same as translate\_list() just with a different file extension.

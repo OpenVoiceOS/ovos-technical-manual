@@ -54,16 +54,13 @@ Example:
 Example:
 
 ```python
-from mycroft import MycroftSkill
+from ovos_workshop.skills import OVOSSkill
 
-class FileSystemSkill(MycroftSkill):
+class FileSystemSkill(OVOSSkill):
 
     def initialize(self):
         """Log the path of this Skills persistent namespace."""
         self.log.info(self.file_system.path)
-
-def create_skill():
-    return FileSystemSkill()
 ```
 
 ### Create subdirectories
@@ -76,9 +73,9 @@ In this example, we create a subdirectory called "cache", then write to a text f
 from os import mkdir
 from os.path import join
 
-from mycroft import MycroftSkill
+from ovos_workshop.skills import OVOSSkill
 
-class FileSystemSkill(MycroftSkill):
+class FileSystemSkill(OVOSSkill):
 
     def initialize(self):
         """Create a cache subdirectory and write to a file inside it"""
@@ -89,17 +86,15 @@ class FileSystemSkill(MycroftSkill):
         with self.file_system.open(join(cache_dir, file_name), "w") as my_file:
             my_file.write('hello')
 
-
-def create_skill():
-    return FileSystemSkill()
 ```
 
 ### Example Skill
 
 ```python
-from mycroft import MycroftSkill, intent_handler
+from ovos_workshop.skills import OVOSSkill
+from ovos_workshop.decorators import intent_handler
 
-class FileSystemSkill(MycroftSkill):
+class FileSystemSkill(OVOSSkill):
 
     def initialize(self):
         """Perform initial setup for the Skill.
@@ -125,9 +120,6 @@ class FileSystemSkill(MycroftSkill):
         """Read the contents of a file in the Skills persistent filesystem."""
         with self.file_system.open(file_name, "r") as my_file:
             return my_file.read()
-
-def create_skill():
-    return FileSystemSkill()
 ```
 
 ## Temporary Cache
@@ -140,10 +132,12 @@ This directory will likely be part of a small RAM disk and may be cleared at any
 
 ```python
 from os.path import join
-from mycroft import MycroftSkill, intent_handler
-from mycroft.util import get_cache_directory
+from ovos_workshop.skills import OVOSSkill
+from ovos_workshop.decorators import intent_handler
+from ovos_utils.file_utils import get_cache_directory
 
-class CachingSkill(MycroftSkill):
+
+class CachingSkill(OVOSSkill):
 
     def initialize(self):
         """Perform initial setup for the Skill.
@@ -168,9 +162,6 @@ class CachingSkill(MycroftSkill):
     def read_cached_data(self):
         with open(self.cache_file, "r") as cache_file: 
             return cache_file.read()
-
-def create_skill():
-    return CachingSkill()
 ```
 
 ## Skill Root Directory

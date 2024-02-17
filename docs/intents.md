@@ -187,10 +187,12 @@ _Neither the `You` nor `I` keyword is found._
 Now we can create our Potato Skill:
 
 ```python
-from adapt.intent import IntentBuilder
-from mycroft import intent_handler
+from ovos_workshop.intents import IntentBuilder
+from ovos_workshop.skills import OVOSSkill
+from ovos_workshop.decorators import intent_handler
 
-class PotatoSkill(MycroftSkill):
+
+class PotatoSkill(OVOSSkill):
 
     @intent_handler(IntentBuilder('WhatIsPotato').require('What')
                     .require('Potato'))
@@ -206,9 +208,6 @@ class PotatoSkill(MycroftSkill):
                               {'type': potato_type})
         else:
             self.speak_dialog('like.potato.generic')
-
-def create_skill():
-    return PotatoSkill()
 ```
 
 You can [download this entire Potato Skill from Github](https://github.com/krisgesling/dev-ex-adapt-intents-skill/blob/master/\_\_init\_\_.py), or see another Keyword Intent handler example in the [Hello World Skill](https://github.com/MycroftAI/skill-hello-world/blob/f3eb89be6d80e1834637a64566c707d05fb8e3fa/\_\_init\_\_.py#L37)
@@ -311,9 +310,10 @@ pale
 This must be registered in the Skill before use - most commonly in the `initialize()` method:
 
 ```python
-from mycroft import MycroftSkill, intent_handler
+from ovos_workshop.skills import OVOSSkill
+from ovos_workshop.decorators import intent_handler
 
-class TomatoSkill(MycroftSkill):
+class TomatoSkill(OVOSSkill):
     def initialize(self):
         self.register_entity_file('type.entity')
 ```
@@ -438,9 +438,10 @@ from mycroft import intent_handler
 Now we can create our Tomato Skill:
 
 ```python
-from mycroft import MycroftSkill, intent_handler
+from ovos_workshop.skills import OVOSSkill
+from ovos_workshop.decorators import intent_handler
 
-class TomatoSkill(MycroftSkill):
+class TomatoSkill(OVOSSkill):
 
     def initialize(self):
         self.register_entity_file('type.entity')

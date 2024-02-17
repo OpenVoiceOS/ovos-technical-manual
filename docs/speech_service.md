@@ -190,12 +190,12 @@ Voice Activity Detection plugins have several functions under the listener servi
 - detect when user is speaking during `continuous mode` (read below)
 
 
-| plugin                                                                            | description                    | 
-|-----------------------------------------------------------------------------------|--------------------------------| 
-| [ovos-vad-plugin-silero](https://github.com/OpenVoiceOS/ovos-vad-plugin-silero)   | silero VAD, **recommended**    |  
-| [ovos-vad-plugin-webrtcvad](https://github.com/OpenVoiceOS/ovos-vad-plugin-webrtcvad)      | webrtcvad plugin               |  
-| [ovos-vad-plugin-noise](https://github.com/OpenVoiceOS/ovos-vad-plugin-noise)     | noise threshold based VAD      |  
-| [ovos-vad-plugin-precise](https://github.com/OpenVoiceOS/ovos-vad-plugin-precise) | VAD model trained with precise |  
+| plugin                                                                                | description                    | 
+|---------------------------------------------------------------------------------------|--------------------------------| 
+| [ovos-vad-plugin-silero](https://github.com/OpenVoiceOS/ovos-vad-plugin-silero)       | silero VAD, **recommended**    |  
+| [ovos-vad-plugin-webrtcvad](https://github.com/OpenVoiceOS/ovos-vad-plugin-webrtcvad) | webrtcvad plugin               |  
+| [ovos-vad-plugin-noise](https://github.com/OpenVoiceOS/ovos-vad-plugin-noise)         | noise threshold based VAD      |  
+| [ovos-vad-plugin-precise](https://github.com/OpenVoiceOS/ovos-vad-plugin-precise)     | VAD model trained with precise |  
 
 
 ```javascript
