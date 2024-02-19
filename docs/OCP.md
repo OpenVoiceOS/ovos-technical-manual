@@ -13,6 +13,27 @@ disabling old audio service
   "enable_old_audioservice": false
 }
 ```
+Enabling OCP pipeline
+
+```javascript
+{
+  // Intent Pipeline / plugins config
+  "intents" : {
+    // the pipeline is a ordered set of frameworks to send an utterance too
+    // if one of the frameworks fails the next one is used, until an answer is found
+    "pipeline": [
+        "converse",
+        "ocp_high",
+        "...",
+        "common_qa",
+        "ocp_medium",
+        "...",
+        "ocp_fallback",
+        "fallback_low"
+    ]
+  }
+}
+```
 
 
 ## OCP
@@ -33,6 +54,19 @@ The pipeline classifies the media type (movie, music, podcast...) and queries OC
 ## Architecture
 
 ![imagem](https://github.com/NeonJarbas/ovos-media/assets/59943014/7dc1d635-4340-43db-a38d-294cfedab70f)
+
+
+## Media Intents
+
+Before regular intent stage, taking into account current OCP state  (media ready to play / playing)
+
+- `"play {query}"`
+- `"previous"`  (media needs to be loaded)
+- `"next"`  (media needs to be loaded)
+- `"pause"`  (media needs to be loaded)
+- `"play"` / `"resume"` (media needs to be loaded)
+- `"stop"` (media needs to be loaded)
+- `"I like that song"`  (music needs to be playing)
 
 ## Plugins
 
@@ -133,117 +167,6 @@ Liked songs can be played via intent "play my favorite songs" or GUI
 
 ![favs](https://github.com/OpenVoiceOS/ovos-media/assets/33701864/cdf7a682-c417-43f7-a4ae-589b07de55cf)
 
-
-## Pipeline
-
-Enabling OCP pipeline
-
-```javascript
-{
-  // Intent Pipeline / plugins config
-  "intents" : {
-    // the pipeline is a ordered set of frameworks to send an utterance too
-    // if one of the frameworks fails the next one is used, until an answer is found
-    "pipeline": [
-        "converse",
-        "ocp_high",
-        "...",
-        "common_qa",
-        "ocp_medium",
-        "...",
-        "ocp_fallback",
-        "fallback_low"
-    ]
-  }
-}
-```
-
-
-The dataset used to train the classifiers can be found [here](https://github.com/NeonJarbas/OCP-dataset)
-
-Training code for classifiers used in the OCP pipeline can be found [here](https://github.com/OpenVoiceOS/ovos-classifiers/tree/dev/scripts/training/ocp)
-
-Details on the classifiers can be found [here](https://github.com/OpenVoiceOS/ovos-core/tree/dev/ovos_core/intent_services/models)
-
-### ocp high
-
-Before regular intent stage, taking into account current OCP state  (media ready to play / playing)
-
-Only matches if user unambiguously wants to trigger OCP
-
-uses padacioso for exact matches
-
-- play {query}
-- previous  (media needs to be loaded)
-- next  (media needs to be loaded)
-- pause  (media needs to be loaded)
-- play / resume (media needs to be loaded)
-- stop (media needs to be loaded)
-
-```python
-from ocp_nlp.intents import OCPPipelineMatcher
-
-ocp = OCPPipelineMatcher()
-print(ocp.match_high("play metallica", "en-us"))
-# IntentMatch(intent_service='OCP_intents',
-#   intent_type='ocp:play',
-#   intent_data={'media_type': <MediaType.MUSIC: 2>, 'query': 'metallica',
-#                'entities': {'album_name': 'Metallica', 'artist_name': 'Metallica'},
-#                'conf': 0.96, 'lang': 'en-us'},
-#   skill_id='ovos.common_play', utterance='play metallica')
-
-```
-
-### ocp medium
-
-uses a binary classifier to detect if a query is about media playback
-
-```python
-from ocp_nlp.intents import OCPPipelineMatcher
-
-ocp = OCPPipelineMatcher()
-
-print(ocp.match_high("put on some metallica", "en-us"))
-# None
-
-print(ocp.match_medium("put on some metallica", "en-us"))
-# IntentMatch(intent_service='OCP_media',
-#   intent_type='ocp:play',
-#   intent_data={'media_type': <MediaType.MUSIC: 2>,
-#                'entities': {'album_name': 'Metallica', 'artist_name': 'Metallica', 'movie_name': 'Some'},
-#                'query': 'put on some metallica',
-#                'conf': 0.9578441098114333},
-#   skill_id='ovos.common_play', utterance='put on some metallica')
-```
-
-### ocp fallback
-
-Uses [keyword matching](https://en.wikipedia.org/wiki/Aho%E2%80%93Corasick_algorithm) and requires at least 1 keyword
-
-OCP skills can provide these keywords at runtime, additional keywords for things such as media_genre were collected via SPARQL queries to wikidata
-
-The list of bundled keywords can be found [here](https://github.com/OpenVoiceOS/ovos-core/blob/dev/ovos_core/intent_services/models/ocp_entities_v0.csv)
-
-Skill names are automatically added as keywords, this ensures that if the skill name is present in an utterance the ocp_fallback pipeline will catch it
-
-```python
-from ocp_nlp.intents import OCPPipelineMatcher
-
-ocp = OCPPipelineMatcher()
-
-print(ocp.match_medium("i wanna hear metallica", "en-us"))
-# None
-
-print(ocp.match_fallback("i wanna hear metallica", "en-us"))
-#  IntentMatch(intent_service='OCP_fallback',
-#    intent_type='ocp:play',
-#    intent_data={'media_type': <MediaType.MUSIC: 2>,
-#                 'entities': {'album_name': 'Metallica', 'artist_name': 'Metallica'},
-#                 'query': 'i wanna hear metallica',
-#                 'conf': 0.5027561091821287},
-#    skill_id='ovos.common_play', utterance='i wanna hear metallica')
-
-```
 
 ## Configuration
 
