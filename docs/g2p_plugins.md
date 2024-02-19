@@ -2,16 +2,35 @@
 
 Grapheme to Phoneme is the process of converting text into a set of "sound units" called phonemes
 
-These plugins are used to auto generate mouth movements / visemes in the TTS stage, they can also be used to help
-configuring wake words or to facilitate training of TTS systems
+In `ovos-audio` these plugins are used to auto generate mouth movements / visemes in the TTS stage.
+
+They can also be used to help configuring wake words or to facilitate training of TTS systems
 
 These plugins can provide phonemes either in ARPA or IPA alphabets, an automatic conversion will happen behind the scenes when needed
 
-Mouth movements are generated via a mapping of ARPA to VISEMES, 
+## Visemes
 
-Visemes are predefined mouth positions, timing per phonemes will default to 0.4 seconds if the plugin does not report a duration
+Visemes are representations of the shape of a human mouth when speaking.
 
 ![visemes](http://www.web3.lu/wp-content/uploads/2014/09/visemes.jpg)
+
+Mouth movements are generated via a mapping of ARPA to VISEMES, TTS plugins may provide this natively, or a G2P plugin may be used to estimate it directly from text
+
+Visemes are predefined mouth positions, timing per phonemes is crucial for a natural mouth movement
+
+The Mycroft Mark 1 uses this to make his "lips" match his speech. 
+
+OpenVoiceOS uses six basic visemes.
+
+| viseme | mouth position   |
+|--------|------------------|
+| 0      | wide open        |
+| 1      | pursed           |
+| 2      | open             |
+| 3      | narrow lips      |
+| 4      | closed lips      |
+| 5      | parted lips      |
+| 6      | barely open lips |
 
 Mapping based on [Jeffers phoneme to viseme map, seen in table 1](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.221.6377&rep=rep1&type=pdf), partially based on the "12 mouth shapes visuals seen [here](https://wolfpaulus.com/journal/software/lipsynchronization/)
 
