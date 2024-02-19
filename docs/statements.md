@@ -151,35 +151,16 @@ def handle_what_is(self, message):
     self.log.info("I waited for you")
 ```
 
-### wait\_while\_speaking
-
-The [`mycroft.audio.wait_while_speaking()`](https://mycroft-core.readthedocs.io/en/latest/source/mycroft.audio.html#mycroft.audio.wait\_while\_speaking) method allows us to execute some code, then wait for OVOS to finish speaking.
-
-```python
-@intent_handler('what.is.a.tomato.intent')
-def handle_what_is(self, message):
-    """Speaks a statement from the dialog file.
-       Returns from speak_dialog() before the
-       speaking has completed, and logs some info.
-       Then it, waits for the speech to complete. """
-    self.speak_dialog('tomato.description')
-    self.log.info("I am executed immediately")
-    wait_while_speaking()
-    self.log.info("But I waited for you") 
-```
-
-Here we have executed one line of code immediately. Our Skill will then wait for the statement from `i.do.like.dialog` to be spoken before executing the final line of code.
-
 ## Using translatable resources
 
 There may be a situation where the dialog file and the `speak_dialog()` method do not give the Skill enough flexibility. For instance, there may be a need to manipulate the statement from the dialog file before having it spoken by OVOS.
 
 The OVOSSkill class provides four multilingual methods to address these needs.  Each method uses a file, and multilingualism is accomplished using the country/language directory system.
 
-The `translate() method returns a random string from a ".dialog" file (modified by a data dictionary). &#x20;
+The `translate()` method returns a random string from a ".dialog" file (modified by a data dictionary). &#x20;
 
-The `translate_list() method returns a list of strings from a ".list" file (each modified by the data dictionary). Same as translate\_template() just with a different file extension.
+The `translate_list()` method returns a list of strings from a ".list" file (each modified by the data dictionary). Same as translate\_template() just with a different file extension.
 
-The `translate_namedvalue() method returns a dictionary formed from CSV entries in a ".value" file.
+The `translate_namedvalue()` method returns a dictionary formed from CSV entries in a ".value" file.
 
 The `translate_template()` method returns a list of strings from a ".template" file (each modified by the data dictionary). Same as translate\_list() just with a different file extension.

@@ -7,7 +7,7 @@ The subdirectories are named using the [IETF language tag](https://en.wikipedia.
 language.
 For example, Brazilian Portuguese is 'pt-br', German is 'de-de', and Australian English is 'en-au'.
 
-`dialog` and `vocab` have been deprecated, they are still supported, but we strongly recommend you use `locale` for new
+`dialog` and `vocab` have been **deprecated**, they are still supported, but we strongly recommend you use `locale` for new
 skills
 
 inside the `locale` folder you will find subfolders for each language (e.g. `en-us`), often all you need to do in order
@@ -55,8 +55,9 @@ Inside the class, methods are then defined.
 #### __init__()
 
 This method is the _constructor_. It is called when the Skill is first constructed. It is often used to declare state
-variables or perform setup actions, however it cannot utilise OVOSSkill methods as the class does not yet exist. 
-You usually don't have to include the constructor.
+variables or perform setup actions, however it cannot fully utilise OVOSSkill methods as the skill is not fully initialized yet at this point. 
+
+**You usually don't have to include the constructor.**
 
 An example `__init__` method might be:
 
@@ -65,9 +66,14 @@ def __init__(self, *args, **kwargs):
     super().__init__(*args, **kwargs)
     self.already_said_hello = False
     self.be_friendly = True
+
+
 ```
 
-**NOTE**: `self.skill_id`, `self.filesystem`, `self.settings`, `self.bus` are only available after the call to `super()`, consider using `initialize` instead
+`__init__` method must accept at least `skill_id` and `bus` kwargs and pass them to `super()`, we recommend passing `*args, **kwargs` like in example above instead
+
+**NOTE**: `self.skill_id`, `self.filesystem`, `self.settings`, `self.bus` are only available after the call to `super()`, if you need them consider using `initialize` instead
+
 
 #### initialize()
 
@@ -121,12 +127,19 @@ The `stop` method is called anytime a User says "Stop" or a similar command. It 
 
 In the following example, we call a method `stop_beeping` to end a notification that our Skill has created.
 
+If the skill "consumed" the stop signal it should return True, else return False. 
+
 ```python
     def stop(self):
-        self.stop_beeping()
+        if self.beeping:
+            self.stop_beeping()
+            return True
+        return False
 ```
 
 If a Skill has any active functionality, the stop() method should terminate the functionality, leaving the Skill in a known good state.
+
+When the skill returns True no other skill will be stopped, when it returns False the next active skill will attempt to stop and so on until something consumes the stop signal
 
 #### shutdown()
 
