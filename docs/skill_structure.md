@@ -30,8 +30,8 @@ The `__init__.py` file is where most of the Skill is defined using Python code.
 #### Importing libraries
 
 ```python
-from adapt.intent import IntentBuilder
-from mycroft import intent_handler
+from ovos_workshop.intents import IntentBuilder
+from ovos_workshop.decorators import intent_handler
 from ovos_workshop.skills import OVOSSkill
 ```
 
@@ -61,13 +61,17 @@ You usually don't have to include the constructor.
 An example `__init__` method might be:
 
 ```python
-def __init__(self):
-    super().__init__()
+def __init__(self, *args, **kwargs):
+    super().__init__(*args, **kwargs)
     self.already_said_hello = False
     self.be_friendly = True
 ```
 
+**NOTE**: `self.skill_id`, `self.filesystem`, `self.settings`, `self.bus` are only available after the call to `super()`, consider using `initialize` instead
+
 #### initialize()
+
+This method is called during `__init__`, if you implemented `__init__` in your skill it will be called during `super()`
 
 Perform any final setup needed for the skill here. This function is invoked after the skill is fully constructed and
 registered with the system. Intents will be registered and Skill settings will be available.
@@ -83,9 +87,6 @@ def initialize(self):
 
 We can use the `initialize` function to manually register intents, however the `@intent_handler` decorator is a
 cleaner way to achieve this. We will learn all about the different [Intents](../intents.md) shortly. 
-
-You may also see the `@intent_file_handler` decorator used in Skills. This has been deprecated, and you can now
-replace any instance of this with the simpler `@intent_handler` decorator.
 
 In skills we can see two different intent styles.
 
@@ -140,22 +141,6 @@ In the following example we cancel a scheduled event and call a method in our Sk
         self.cancel_scheduled_event('my_event')
         self.stop_my_subprocess()
 ```
-
-
-#### create_skill()
-
-The final code block in our Skill is the `create_skill` function that returns our new Skill:
-
-```python
-def create_skill():
-    return HelloWorldSkill()
-```
-
-This is required by OVOS and is responsible for actually creating an instance of your Skill that OVOS can load.
-
-_Please note that this function is not scoped within your Skills class. It should not be indented to the same level as
-the methods discussed above._
-
 
 ### settingsmeta.yaml
 
