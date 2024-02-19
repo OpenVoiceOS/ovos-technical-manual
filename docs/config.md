@@ -10,20 +10,17 @@
 
 ## Reading Configuration
 
-`ovos_config.config.Configuration` is a singleton that loads a single config
-object. The configuration files loaded are determined by `ovos.conf` as described below and can be in either json or
+The configuration files loaded are determined by `ovos.conf` as described in the next section and can be in either json or
 yaml format.
 
-if `Configuration()` is called the following configs would be loaded in this
-order:
+if `Configuration()` is called the following configs would be loaded in this order:
 
-- `{core-path}`/configuration/mycroft.conf
-- `os.environ.get('MYCROFT_SYSTEM_CONFIG')` or /etc/mycroft/mycroft.conf
-- `os.environ.get('MYCROFT_WEB_CACHE')` or `XDG_CONFIG_PATH`/neon/web_cache.json
-- ~/.mycroft/mycroft.conf (Deprecated)
-- `XDG_CONFIG_DIRS` + /mycroft/mycroft.conf
-- /etc/xdg/mycroft/mycroft.conf
-- `XDG_CONFIG_HOME` (default ~/.config) + /mycroft/mycroft.conf
+- `{ovos-config-package}/mycroft.conf`
+- `os.environ.get('MYCROFT_SYSTEM_CONFIG')` or `/etc/mycroft/mycroft.conf`
+- `os.environ.get('MYCROFT_WEB_CACHE')` or `$XDG_CONFIG_PATH/mycroft/web_cache.json`
+- `$XDG_CONFIG_DIRS/mycroft/mycroft.conf`
+- `/etc/xdg/mycroft/mycroft.conf`
+- `$XDG_CONFIG_HOME/mycroft/mycroft.conf` (default `~/.config/mycroft/mycroft.conf`)
 
 When the configuration loader starts, it looks in these locations in this order, and loads ALL configurations. Keys that
 exist in multiple configuration files will be overridden by the last file to contain the value. This process results in
@@ -34,7 +31,7 @@ a minimal amount being written for a specific device and user, without modifying
 There are a couple of special configuration keys that change the way the configuration stack loads.
 
 * `Default` config refers to the config specified at `default_config_path` in
-  `ovos.conf` (#1 `{core-path}/configuration/mycroft.conf` in the stack above).
+  `ovos.conf` (#1 `{ovos-config-package}/mycroft.conf` in the stack above).
 * `System` config refers to the config at `/etc/{base_folder}/{config_filename}` (#2 `/etc/mycroft/mycroft.conf` in the stack
   above).
 
@@ -77,38 +74,23 @@ the remote configuration (`web_cache.json`) will not be loaded.
 
 ## Meta Configuration
 
+The `ovos_config` package determines which config files to load based on `ovos.conf`. This file is optional and does **NOT** need to exist
+
 while `mycroft.conf` configures the voice assistant, `ovos.conf` configures the library
 
 what this means is that `ovos.conf` decides what files are loaded by the `Configuration` class described above, as an end user or skill developer you should never have to worry about this
 
 all XDG paths across OpenVoiceOS packages build their paths taking `ovos.conf` into consideration
 
-this feature is what allows downstream voice assistants such as neon-core to change their config files to `neon.yaml`
-
-Using the above example, if `Configuration()` is called from `neon-core`, the following configs would be loaded in this
-order:
-
-- `{core-path}`/configuration/neon.yaml
-- `os.environ.get('MYCROFT_SYSTEM_CONFIG')` or /etc/neon/neon.yaml
-- `os.environ.get('MYCROFT_WEB_CACHE')` or `XDG_CONFIG_PATH`/neon/web_cache.json
-- ~/.neon/neon.yaml (Deprecated)
-- `XDG_CONFIG_DIRS` + /neon/neon.yaml
-- /etc/xdg/neon/neon.yaml
-- `XDG_CONFIG_HOME` (default ~/.config) + /neon/neon.yaml
-
-
-### ovos.conf
-
-The `ovos_config` package determines which config files to load based on `ovos.conf`.
-`get_ovos_config` will return default values that load `mycroft.conf` unless otherwise configured.
-
 `ovos.conf` files are loaded in the following order, with later files taking priority over earlier ones in the list:
 
-- /etc/OpenVoiceOS/ovos.conf
-- /etc/mycroft/ovos.conf (Deprecated)
-- `XDG_CONFIG_DIRS` + /OpenVoiceOS/ovos.conf
-- /etc/xdg/OpenVoiceOS/ovos.conf
-- `XDG_CONFIG_HOME` (default ~/.config) + /OpenVoiceOS/ovos.conf
+- `/etc/OpenVoiceOS/ovos.conf`
+- `$XDG_CONFIG_DIRS/OpenVoiceOS/ovos.conf`
+- `/etc/xdg/OpenVoiceOS/ovos.conf`
+- `$XDG_CONFIG_HOME/OpenVoiceOS/ovos.conf`  (default `~/.config/OpenVoiceOS/ovos.conf`)
+
+`get_ovos_config` will return default values that load `mycroft.conf` unless otherwise configured.
+
 
 A simple `ovos_config` should have a structure like:
 
@@ -116,17 +98,53 @@ A simple `ovos_config` should have a structure like:
 {
   "base_folder": "mycroft",
   "config_filename": "mycroft.conf",
-  "default_config_path": "<Absolute Path to Installed Core>/configuration/mycroft.conf",
+  "default_config_path": "<Absolute Path to ovos-config>/mycroft.conf",
   "module_overrides": {},
   "submodule_mappings": {}
 }
 ```
 
-> *Note*: `default_config_path` should always be an absolute path. This is generally
-> detected automatically, but any manual override must specify an absolute path to a json or yaml config file.
+### Config in downstream packages
 
-Non-Mycroft modules may specify alternate config paths. A call to `get_ovos_config` from
-`neon_core` or `neon_messagebus` will return a configuration like:
+`ovos.conf` allows downstream voice assistants such as neon-core to change their config files to `neon.yaml`
+
+```json
+{
+  "base_folder": "mycroft",
+  "config_filename": "mycroft.conf",
+  "default_config_path": "<Absolute Path to ovos-config>/mycroft.conf",
+  
+  "module_overrides": {
+    "neon_core": {
+      "base_folder": "neon",
+      "config_filename": "neon.yaml",
+      "default_config_path": "/etc/example/config/neon.yaml"
+    }
+  },
+  
+  "submodule_mappings": {
+    "neon_messagebus": "neon_core",
+    "neon_speech": "neon_core",
+    "neon_audio": "neon_core",
+    "neon_gui": "neon_core"
+  }
+}
+```
+
+> *Note*: `default_config_path` should always be an absolute path. any manual override must specify an absolute path to a json or yaml config file.
+
+
+Using the above example, if `Configuration()` is called from `neon-core`, the following configs would be loaded in this
+order:
+
+- `/etc/example/config/neon.yaml`
+- `os.environ.get('MYCROFT_SYSTEM_CONFIG')` or `/etc/neon/neon.yaml`
+- `os.environ.get('MYCROFT_WEB_CACHE')` or `$XDG_CONFIG_PATH/neon/web_cache.json`
+- `$XDG_CONFIG_DIRS/neon/neon.yaml`
+- `/etc/xdg/neon/neon.yaml`
+- `$XDG_CONFIG_HOME/neon/neon.yaml` (default `~/.config/neon/neon.yaml`)
+
+A call to `get_ovos_config` from `neon_core` or `neon_messagebus` will return a configuration like:
 
 ```json
 {
@@ -149,14 +167,14 @@ Non-Mycroft modules may specify alternate config paths. A call to `get_ovos_conf
 }
 ```
 
-If `get_ovos_config` was called from `mycroft` with the same configuration file as the last example,
+If `get_ovos_config` was called from `ovos_core` with the same configuration file as the last example,
 the returned configuration would be:
 
 ```json
 {
   "base_folder": "mycroft",
   "config_filename": "mycroft.conf",
-  "default_config_path": "<Path to Installed Core>/configuration/mycroft.conf",
+  "default_config_path": "<Path to ovos-config>/mycroft.conf",
   "module_overrides": {
     "neon_core": {
       "base_folder": "neon",
@@ -172,3 +190,5 @@ the returned configuration would be:
   }
 }
 ```
+
+Both projects could be installed side by side and each would load their corresponding config files
