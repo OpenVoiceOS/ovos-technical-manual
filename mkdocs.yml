@@ -13,6 +13,7 @@ nav:
         - Audio: audio_service.md
         - GUI: gui_service.md
         - Configuration: config.md
+        - Backend: backend.md
     - Plugins:
         - Plugin Manager: OPM.md
         - Speech To Text: stt_plugins.md
@@ -28,6 +29,7 @@ nav:
         - STT Server: stt_server.md
         - TTS Server: tts_server.md
         - Translate Server: translate_server.md
+        - Personal Backend: personal_backend.md
     - Skills:
         - Design Guidelines: guidelines.md
         - Anatomy: skill_structure.md
@@ -47,13 +49,9 @@ nav:
         - Protocol: gui_protocol.md
         - Shell: shell.md
         - QT5 mycroft-gui: qt5.md
-    - Backend:
-        - Available Backends: backend.md
-        - Backend Client: backend_client.md
-        - Personal Backend: personal_backend.md
-        - Backend Manager: backend_manager.md
     - Technologies:
         - Common Play: OCP.md
+        - Backend Client: backend_client.md
         - Padacioso: padacioso.md
         - Jurebes: jurebes.md
 

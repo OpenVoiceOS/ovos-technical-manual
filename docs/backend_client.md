@@ -2,30 +2,6 @@
 
 Python client library for interaction with several supported backends under a single unified interface
 
-- Personal backend - [self hosted](https://github.com/OpenVoiceOS/OVOS-local-backend)
-- Selene - https://api.mycroft.ai (deprecated)
-- Offline - support for setting your own api keys and query services directly
-
-## Backend Overview
-
-| API       | Offline | Personal | Selene |
-|-----------|---------|----------|--------|
-| Admin     | yes [1] | yes      | no     |
-| Device    | yes [2] | yes      | yes    |
-| Metrics   | yes [2] | yes      | yes    |
-| Dataset   | yes [2] | yes      | yes    |
-| OAuth     | yes [2] | yes      | yes    |
-| Wolfram   | yes [3] | yes      | yes    |
-| Geolocate | yes     | yes      | yes    |
-| STT       | yes [3] | yes      | yes    |
-| Weather   | yes [3] | yes      | yes    |
-| Email     | yes [3] | yes      | yes    |
-
-    [1] will update user level mycroft.conf
-    [2] shared json database with personal backend for UI compat
-    [3] needs additional configuration (eg. credentials)
-    [4] uses offline_backend functionality
-
 ## Geolocation
 
 ```python
