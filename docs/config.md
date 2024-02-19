@@ -78,9 +78,12 @@ The `ovos_config` package determines which config files to load based on `ovos.c
 
 while `mycroft.conf` configures the voice assistant, `ovos.conf` configures the library
 
-what this means is that `ovos.conf` decides what files are loaded by the `Configuration` class described above, as an end user or skill developer you should never have to worry about this
+all XDG paths across OpenVoiceOS packages build their paths taking `"base_folder"` from `ovos.conf` into consideration
 
-all XDG paths across OpenVoiceOS packages build their paths taking `ovos.conf` into consideration
+`ovos.conf` decides what files are loaded by the `Configuration` class described above, as an end user or skill developer you should never have to worry about this
+
+`get_ovos_config` will return default values that load `mycroft.conf` unless otherwise configured.
+
 
 `ovos.conf` files are loaded in the following order, with later files taking priority over earlier ones in the list:
 
@@ -88,8 +91,6 @@ all XDG paths across OpenVoiceOS packages build their paths taking `ovos.conf` i
 - `$XDG_CONFIG_DIRS/OpenVoiceOS/ovos.conf`
 - `/etc/xdg/OpenVoiceOS/ovos.conf`
 - `$XDG_CONFIG_HOME/OpenVoiceOS/ovos.conf`  (default `~/.config/OpenVoiceOS/ovos.conf`)
-
-`get_ovos_config` will return default values that load `mycroft.conf` unless otherwise configured.
 
 
 A simple `ovos_config` should have a structure like:
