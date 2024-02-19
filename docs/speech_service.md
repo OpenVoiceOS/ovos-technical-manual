@@ -110,6 +110,87 @@ unless you set `"active": false`.
 Users are expected to **only change** `listener.wake_word` if using a single wake word, setting `"active": true` is only
 intended for **extra** hotwords
 
+```javascript
+"listener": {
+    // Default wake_word and stand_up_word will be automatically set to active
+    // unless explicitly disabled under "hotwords" section
+    "wake_word": "hey mycroft",
+    "stand_up_word": "wake up"
+},
+// Hotword configurations
+"hotwords": {
+    "hey_mycroft": {
+        "module": "ovos-ww-plugin-precise-lite",
+        "model": "https://github.com/OpenVoiceOS/precise-lite-models/raw/master/wakewords/en/hey_mycroft.tflite",
+        "expected_duration": 3,
+        "trigger_level": 3,
+        "sensitivity": 0.5,
+        "listen": true
+    },
+    // default wakeup word to take ovos out of SLEEPING mode,
+    "wake_up": {
+        "module": "ovos-ww-plugin-pocketsphinx",
+        "phonemes": "W EY K . AH P",
+        "threshold": 1e-20,
+        "lang": "en-us",
+        "wakeup": true,
+        "fallback_ww": "wake_up_vosk"
+    }
+  }
+}
+```
+
+### Sound Classifiers
+
+hotwords can be used as generic sound classifiers that emit bus events for other systems to detect
+
+Let's consider a model trained to recognize coughing, and a companion plugin to track how often it happens, this can be used as an indicator of disease
+
+```javascript
+  "hotwords": {
+    "cough": {
+        "module": "ovos-ww-plugin-precise",
+        "version": "0.3",
+        "model": "https://github.com/MycroftAI/precise-data/blob/models-dev/cough.tar.gz",
+        "expected_duration": 3,
+        "trigger_level": 3,
+        "sensitivity": 0.5,
+        "listen": false,
+        "active": true,
+        // on detection emit this msg_type
+        "bus_event": "cough.detected"
+    }
+  }
+}
+```
+
+### Multilingualism
+
+In multilingual homes a wake word can be configured for each language, by giving the assistant a different name in each we can assign a language to be used by STT
+
+```javascript
+"listener": {
+    "wake_word": "hey mycroft"
+},
+"hotwords": {
+    // default wake word, in global language
+    "hey_mycroft": {...},   
+    // extra wake word with lang assigned
+    "android": {
+        "module": "...",
+        "model": "...",
+        // set to active as extra wake word
+        "active": true,
+        "listen": true,
+        // assign a language
+        "stt_lang": "pt-pt"
+    }
+  },
+}
+```
+
+### Fallback Wake Words
+
 hotword definitions can also include a `"fallback_ww"`, this indicates an alternative hotword config to load in case the
 original failed to load for any reason
 
@@ -120,9 +201,8 @@ original failed to load for any reason
     "wake_word": "hey mycroft",
     "stand_up_word": "wake up"
 },
-
-  // Hotword configurations
-  "hotwords": {
+// Hotword configurations
+"hotwords": {
     "hey_mycroft": {
         "module": "ovos-ww-plugin-precise-lite",
         "model": "https://github.com/OpenVoiceOS/precise-lite-models/raw/master/wakewords/en/hey_mycroft.tflite",
@@ -177,9 +257,10 @@ original failed to load for any reason
         // makes this a wakeup word for usage in SLEEPING mode
         "wakeup": true
     }
-  },
+  }
 }
 ```
+
 
 ## VAD
 
