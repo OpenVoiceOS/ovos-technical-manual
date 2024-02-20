@@ -42,6 +42,8 @@ Another utils provided by `ovos-workshop` is `IntentLayers`, to manage groups of
 
 In this example we implement the [Konami Code](https://en.wikipedia.org/wiki/Konami_Code), doing everything the manual way instead of using decorators
 
+![imagem](https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/13b9de20-1f8d-44b3-9b65-c13a79a41b1e)
+
 ```python
 class KonamiCodeSkill(OVOSSkill):
     def initialize(self):
