@@ -1,66 +1,117 @@
-# OCP
+# ovos-media  
+
+
+> **EXPERIMENTAL** - **NEW** `ovos-core` version **0.0.8**
+
+ovos-media is a work in progress, it does not yet ship with OVOS by default, but it can be manually enabled
+
+In order to use ovos-media you need to enable the OCP pipeline in ovos-core and to disable the old audio service 
+
+disabling old audio service
+```json
+{
+  "enable_old_audioservice": false
+}
+```
+Enabling OCP pipeline
+
+```javascript
+{
+  // Intent Pipeline / plugins config
+  "intents" : {
+    // the pipeline is a ordered set of frameworks to send an utterance too
+    // if one of the frameworks fails the next one is used, until an answer is found
+    "pipeline": [
+        "converse",
+        "ocp_high",
+        "...",
+        "common_qa",
+        "ocp_medium",
+        "...",
+        "ocp_fallback",
+        "fallback_low"
+    ]
+  }
+}
+```
+
+
+## OCP
 
 ![](https://github.com/OpenVoiceOS/ovos_assets/blob/master/Logo/ocp.png?raw=true)
 
 [OCP](https://github.com/OpenVoiceOS/ovos-ocp-audio-plugin) stands for OpenVoiceOS Common Play, it is a full-fledged
-media player
+media player service that can handle audio and video
 
-## Introduction 
+> **DEPRECATION WARNING** OCP is in the process of migrating from a audio plugin to ovos-media service, 
+this documentation is not valid for `ovos-core` version **0.0.7**
 
-OCP is a [OVOSAbstractApplication](https://github.com/OpenVoiceOS/OVOS-workshop/blob/dev/ovos_workshop/app.py#L47), this
-means it is a standalone but native OVOS application with full voice integration
+OCP provides a pipeline component specialized in matching media queries.
 
-OCP differs from a typical mycroft-core audio service in several aspects:
+The pipeline classifies the media type (movie, music, podcast...) and queries OCP skills for results, you can read more about the [OCP Pipeline docs]()
 
-- Can run standalone, only needs a bus connection
-- OCP provides its own intents as if it was a skill
-- OCP provides its own GUI as if it was a skill
-- OCP skills have a dedicated OVOSSkill subclass and decorators in ovos-workshop
-- OCP skills act as media providers, they do not (usually) handle playback
-- OCP handles several kinds of playback, including video
-- OCP has a sub-intent parser for matching requested media types
-- AudioService becomes a subsystem for OCP
-- OCP also has AudioService plugin component introducing a compatibility layer for skills using "old style audioservice
-  api"
-- OCP integrates with MPRIS, it can be controlled from external apps, e.g. KdeConnect in your phone
-- OCP manages external MPRIS enabled players, you can voice control 3rd party apps without writing a skill for it via
-  OCP
-- mycroft-core CommonPlay skill framework is disabled when OCP loads 
-  - **WARNING**: this will be removed in ovos-core `0.1.0` or earlier
-- mycroft-core CommonPlay skills have an imperfect compatibility layer and are given lower priority over OCP skills 
-  - **WARNING**: this will be removed in ovos-core `0.1.0` or earlier
-  
 
-## OCP Skills
+## Architecture
+
+![imagem](https://github.com/NeonJarbas/ovos-media/assets/59943014/7dc1d635-4340-43db-a38d-294cfedab70f)
+
+
+## Media Intents
+
+Before regular intent stage, taking into account current OCP state  (media ready to play / playing)
+
+- `"play {query}"`
+- `"previous"`  (media needs to be loaded)
+- `"next"`  (media needs to be loaded)
+- `"pause"`  (media needs to be loaded)
+- `"play"` / `"resume"` (media needs to be loaded)
+- `"stop"` (media needs to be loaded)
+- `"I like that song"`  (music needs to be playing)
+
+## Plugins
+
+### OCP Skills
 
 Skills provide search results, think about them as media providers/catalogs for OCP
 
 You can find OCP skills in the [awesome-ocp-skills](https://github.com/OpenVoiceOS/awesome-ocp-skills) list 
 
-### Skills Menu
+### Media Plugins
 
-Some skills provide featured_media, you can access these from the OCP menu
+these plugins handle the actual track playback. OCP virtual player delegates media playback to these plugins
 
-![](https://github.com/OpenVoiceOS/ovos_assets/raw/master/Images/ocp/ocp_skills.gif)
+| plugin  | audio | video | web | remote | notes |
+|---------------------------------------------------------------------------------------------|----|----|---|----|-------------------------------------------|
+| [ovos-media-plugin-simple](https://github.com/OpenVoiceOS/ovos-media-plugin-simple)         | ✔️ | ❌ | ❌ | ❌ | default for audio                         |
+| [ovos-media-plugin-qt5](https://github.com/OpenVoiceOS/ovos-media-plugin-qt5)               | ✔️ | ✔️ | ✔️ | ❌ | WIP - recommended for embedded ovos-shell |
+| [ovos-media-plugin-mplayer](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer)       | ✔️ | ✔️ | ❌ | ❌ | recommended for video                     |
+| [ovos-media-plugin-vlc](https://github.com/OpenVoiceOS/ovos-media-plugin-vlc)               | ✔️ | ✔️ | ❌ | ❌ |                                           |
+| [ovos-media-plugin-chromecast](https://github.com/OpenVoiceOS/ovos-media-plugin-chromecast) | ✔️ | ✔️ | ❌ | ✔️ | extra: [cast_control](https://github.com/alexdelorenzo/cast_control) for MPRIS interface   |
+| [ovos-media-plugin-spotify](https://github.com/OpenVoiceOS/ovos-media-plugin-spotify) | ✔️ | ❌ | ❌ | ✔️ | needs premium account<br>extra: [spotifyd](https://github.com/Spotifyd/spotifyd) for native spotify player  |
+| ![imagem](https://github.com/OpenVoiceOS/ovos-media/assets/33701864/90f31b0a-dd56-457d-a3cf-7fc08b460038) [ovos-media-plugin-xdg](https://github.com/NeonGeckoCom/ovos-media-plugin-xdg) | ✔️ | ✔️ | ✔️ | ❌ | [xdg-open](https://man.archlinux.org/man/xdg-open.1) is for use inside a desktop session only |
+| ![imagem](https://github.com/OpenVoiceOS/ovos-media/assets/33701864/90f31b0a-dd56-457d-a3cf-7fc08b460038) [ovos-media-plugin-webbrowser](https://github.com/NeonGeckoCom/ovos-media-plugin-webbrowser) | ❌ | ❌ | ✔️ | ❌ | [webbrowser](https://docs.python.org/3/library/webbrowser.html) is for use inside a desktop session only |
 
-## Homescreen widget
 
-The homescreen skill that comes pre-installed with OpenVoiceOS also comes with a widget for the OCP framework.
+### OCP Plugins
 
-![](https://raw.githubusercontent.com/OpenVoiceOS/ovos_assets/master/Images/homescreen-mediawidget.gif)
+handle extracting playable streams and metadata, skills might require specific plugins and will be ignored if plugins are missing
 
-## File Browser integration
+these plugins are used when a `sei//` is requested explicitly by a skill, or when a url pattern matches
 
-selected files will be played in OCP
-
-![](https://github.com/OpenVoiceOS/ovos_assets/raw/master/Images/ocp/ocp_file_browser.gif)
-
-folders are considered playlists
-
-![](https://github.com/OpenVoiceOS/ovos_assets/raw/master/Images/ocp/folder_playlist.gif)
+| plugin  | descripton | Stream Extractor Ids | url pattern | 
+|-------------------------------------------------------------------------------------|--------------------------|-------------------------------------------------|-----------------------------------------------------|
+| [ovos-ocp-rss-plugin](https://github.com/OpenVoiceOS/ovos-ocp-rss-plugin)           | rss feeds                | `rss//`                                         |                                                     | 
+| [ovos-ocp-bandcamp-plugin](https://github.com/OpenVoiceOS/ovos-ocp-bandcamp-plugin) | bandcamp urls            | `bandcamp//`                                    | `"bandcamp." in url`                                |
+| [ovos-ocp-youtube-plugin](https://github.com/OpenVoiceOS/ovos-ocp-youtube-plugin)   | youtube urls             | `youtube//` , `ydl//`, `youtube.channel.live//` | `"youtube.com/" in url or "youtu.be/" in url`       |
+| [ovos-ocp-m3u-plugin](https://github.com/OpenVoiceOS/ovos-ocp-m3u-plugin)           | .pls and .m3u formats    |`m3u//` , `pls//`                                | `".pls" in uri or ".m3u" in uri`                    |
+| [ovos-ocp-news-plugin](https://github.com/OpenVoiceOS/ovos-ocp-news-plugin)         |  dedicated news websites |  `news//`                                       | `any([uri.startswith(url) for url in URL_MAPPINGS])`|
 
 
 ## MPRIS integration
+
+OCP Integrates with MPRIS allows OCP to control external players
+
+![imagem](https://github.com/NeonJarbas/ovos-media/assets/33701864/856c0228-8fc5-4ee6-a19d-4290f2e07258)
 
 ### Sync with external players
 
@@ -83,130 +134,167 @@ See a demo here (**warning**: contains black metal)
 [![demo video](https://img.youtube.com/vi/YzC7oFYCcRE/default.jpg)](https://www.youtube.com/watch?v=YzC7oFYCcRE)
 
 
+## Skills Menu
+
+Some skills provide featured_media, you can access these from the OCP menu
+
+![](https://github.com/OpenVoiceOS/ovos_assets/raw/master/Images/ocp/ocp_skills.gif)
+
+## Homescreen widget
+
+The homescreen skill that comes pre-installed with OpenVoiceOS also comes with a widget for the OCP framework.
+
+![](https://raw.githubusercontent.com/OpenVoiceOS/ovos_assets/master/Images/homescreen-mediawidget.gif)
+
+## File Browser integration
+
+selected files will be played in OCP
+
+![](https://github.com/OpenVoiceOS/ovos_assets/raw/master/Images/ocp/ocp_file_browser.gif)
+
+folders are considered playlists
+
+![](https://github.com/OpenVoiceOS/ovos_assets/raw/master/Images/ocp/folder_playlist.gif)
+
+
+## Favorite Songs
+
+You can like a song that is currently playing via GUI and intent "I like that song"
+
+![like](https://github.com/OpenVoiceOS/ovos-media/assets/33701864/27aee29a-ca3b-4c73-992e-9fd5ef513f4d)
+
+Liked songs can be played via intent "play my favorite songs" or GUI
+
+![favs](https://github.com/OpenVoiceOS/ovos-media/assets/33701864/cdf7a682-c417-43f7-a4ae-589b07de55cf)
+
+
 ## Configuration
 
-### GUI
-
-Some OCP settings are exposed via the GUI
-
-Visualization can be either a wave or bars, just tap on it to change
-
-![](https://github.com/OpenVoiceOS/ovos_assets/raw/master/Images/ocp/ocp_wav_viz.gif)
-
-Timeout settings, return to homescreen widget after 30 seconds
-
-![](https://github.com/OpenVoiceOS/ovos_assets/raw/master/Images/ocp/ocp_timeout.gif)
-
-### Advanced
-
-OCP contains an audio service plugin component that acts as a compatibility layer with MycroftAI CommonPlay skills framework. 
-
-in mycroft-core you can set OCP as `default-backend`, ovos-core is not required for OCP
-
-For compatibility and historical reasons OCP reads its configuration from the `"Audio"` section
+under mycroft.conf
 
 ```javascript
-"Audio": {
-    "backends": {
-      "OCP": {
-        "type": "ovos_common_play",
-        "active": true
-        // all values below are optional
+{
+  // Configure ovos-media service
+  // similarly to wakewords, configure any number of playback handlers
+  // playback handlers might be local applications or even remote devices
+  "media": {
 
-        // plugin config
-        // operational mode refers to the OCP integration
-        // "external" - OCP is already running elsewhere, connect by bus only
-        // "native" - launch OCP service from the plugin
-        // "auto" - if OCP is already running connect to it, else launch it
-        // you should only change this if you want to run OCP as a standalone system service
-        "mode": "auto",
+    // order of preference to try playback handlers
+    // if unavailable or unable to handle a uri, the next in list is used
+    // NB: users may request specific handlers in the utterance
 
-        // MPRIS integrations
-        // integration is enabled by default, but can be disabled
-        "disable_mpris": False,
-        // dbus type for MPRIS, "session" or "system"
-        "dbus_type": "session",
-        // allow OCP to control MPRIS enabled 3rd party applications
-        // voice enable them (next/prev/stop/resume..)
-        // and stop them when OCP starts it's own playback
-        // NOTE: OCP can be controlled itself via MPRIS independentely of this setting
-        "manage_external_players": False,
+    // keys are the strings defined in "audio_players"
+    "preferred_audio_services": ["gui", "vlc", "mplayer", "cli"],
 
-        // Playback settings
-        // AUTO = 0 - play each entry as considered appropriate,
-        //            ie, make it happen the best way possible
-        // AUDIO_ONLY = 10  - only consider audio entries
-        // VIDEO_ONLY = 20  - only consider video entries
-        // FORCE_AUDIO = 30 - cast video to audio unconditionally
-        //                   (audio can still play in mycroft-gui)
-        // FORCE_AUDIOSERVICE = 40 - cast everything to audio service backend,
-        //                           mycroft-gui will not be used
-        // EVENTS_ONLY = 50 - only emit ocp events,
-        //                    do not display or play anything.
-        //                    allows integration with external interfaces
-        "playback_mode": 0,
+    // keys are the strings defined in "web_players"
+    "preferred_web_services": ["gui", "browser"],
 
-        // ordered list of audio backend preferences,
-        // when OCP selects a audio service for playback
-        // this list is checked in order until a available backend is found
-        "preferred_audio_services": ["vlc", "mplayer", "simple"],
+    // keys are the strings defined in "video_players"
+    "preferred_video_services": ["gui", "vlc"],
 
-        // when media playback ends "click next"
-        "autoplay": True,
-        // if True behaves as if the search results are part of the playlist
-        //  eg:
-        //   - click next in last track -> play next search result
-        //   - end of playlist + autoplay -> play next search result
-        "merge_search": True,
+    // PlaybackType.AUDIO handlers
+    "audio_players": {
+        // vlc player uses a headless vlc instance to handle uris
+        "vlc": {
+            // the plugin name
+            "module": "ovos-media-audio-plugin-vlc",
 
-        // search params
-        // minimum time to wait for skill replies,
-        // after this time, if at least 1 result was
-        // found, selection is triggered
-        "min_timeout": 5,
-        // maximum time to wait for skill replies,
-        // after this time, regardless of number of
-        // results, selection is triggered
-        "max_timeout": 15,
-        // ignore results below min_Score
-        "min_score": 50,
-        // stop collecting results if we get a
-        // match with confidence >= early_stop_thresh
-        "early_stop_thresh": 85,
-        // sleep this amount before early stop,
-        // allows skills that "just miss" to also be taken into account
-        "early_stop_grace_period": 0.5,
-        // if True emits the regular mycroft-core
-        // bus messages to get results from "old style" skills
-        "backwards_compatibility": True,
-        // allow skills to request more time,
-        // extends min_timeout for individual queries (up to max_timeout)
-        "allow_extensions": True,
-        // if no results for a MediaType, perform a second query with MediaType.GENERIC
-        "search_fallback": True,
+            // friendly names a user may use to refer to this playback handler
+            // those will be parsed by OCP and used to initiate
+            // playback in the request playback handler
+            "aliases": ["VLC"],
 
-        // stream extractor settings
-        // how to handle bandcamp streams
-        // "pybandcamp", "youtube-dl"
-        "bandcamp_backend": "pybandcamp",
-        // how to handle youtube streams
-        // "youtube-dl", "pytube", "pafy", "invidious"
-        "youtube_backend": "invidious",
-        // the url to the invidious instance to be used"
-        // by default uses a random instance
-        "invidious_host": None,
-        // get final stream locally or from where invidious is hosted
-        // This partially allows bypassing geoblocked content,
-        // but it is a global flag, not per entry.
-        "invidious_proxy": False,
-        // different forks of youtube-dl are supported
-        // "yt-dlp", "youtube-dl", "youtube-dlc"
-        "ydl_backend": "yt-dlp",
-        // how to extract live streams from a youtube channel
-        // "pytube", "youtube_searcher", "redirect", "youtube-dl"
-        // uses youtube auto redirect https://www.youtube.com/{channel_name}/live
-        "youtube_live_backend": "redirect"
+            // deactivate a plugin by setting to false
+            "active": true
+        },
+        // command line player uses configurable shell commands with file uris as arguments
+        "cli": {
+            // the plugin name
+            "module": "ovos-media-audio-plugin-cli",
+
+            // friendly names a user may use to refer to this playback handler
+            // those will be parsed by OCP and used to initiate
+            // playback in the request playback handler
+            "aliases": ["Command Line"],
+
+            // deactivate a plugin by setting to false
+            "active": true
+        },
+        // gui uses mycroft-gui natively to handle uris
+        "gui": {
+            // the plugin name
+            "module": "ovos-media-audio-plugin-gui",
+
+            // friendly names a user may use to refer to this playback handler
+            // those will be parsed by OCP and used to initiate
+            // playback in the request playback handler
+            "aliases": ["GUI", "Graphical User Interface"],
+
+            // deactivate a plugin by setting to false
+            "active": true
+        }
+    },
+
+    // PlaybackType.VIDEO handlers
+    "video_players": {
+        // vlc player uses a headless vlc instance to handle uris
+        "vlc": {
+            // the plugin name
+            "module": "ovos-media-video-plugin-vlc",
+
+            // friendly names a user may use to refer to this playback handler
+            // those will be parsed by OCP and used to initiate
+            // playback in the request playback handler
+            "aliases": ["VLC"],
+
+            // deactivate a plugin by setting to false
+            "active": true
+        },
+        // gui uses mycroft-gui natively to handle uris
+        "gui": {
+            // the plugin name
+            "module": "ovos-media-video-plugin-gui",
+
+            // friendly names a user may use to refer to this playback handler
+            // those will be parsed by OCP and used to initiate
+            // playback in the request playback handler
+            "aliases": ["GUI", "Graphical User Interface"],
+
+            // deactivate a plugin by setting to false
+            "active": true
+        }
+    },
+
+    // PlaybackType.WEBVIEW handlers
+    "web_players": {
+        // open url in the native browser
+        "browser": {
+            // the plugin name
+            "module": "ovos-media-web-plugin-browser",
+
+            // friendly names a user may use to refer to this playback handler
+            // those will be parsed by OCP and used to initiate
+            // playback in the request playback handler
+            "aliases": ["Browser", "Local Browser", "Default Browser"],
+
+            // deactivate a plugin by setting to false
+            "active": true
+        },
+        // gui uses mycroft-gui natively to handle uris
+        "gui": {
+            // the plugin name
+            "module": "ovos-media-web-plugin-gui",
+
+            // friendly names a user may use to refer to this playback handler
+            // those will be parsed by OCP and used to initiate
+            // playback in the request playback handler
+            "aliases": ["GUI", "Graphical User Interface"],
+
+            // deactivate a plugin by setting to false
+            "active": true
+        }
     }
+  }
 }
 ```
 
@@ -218,16 +306,8 @@ Having trouble getting OCP to run properly and be exposed as an MPRIS media play
   - If `DBUS_SESSION_BUS_ADDRESS` is not set, the next place OCP checks is the `DISPLAY` environment variable. If this is set and looks similar to the value above, then you can probably exclude `DBUS_SESSION_BUS_ADDRESS`, but if neither are set then use `DBUS_SESSION_BUS_ADDRESS`.
 - Make sure your OCP settings in your config file like something like the following, taking note of the `dbus_type` value:
 ```json
-{
-   "Audio": {
-      "backends": {
-         "OCP": {
-            "type": "ovos_common_play",
-            "active": true,
-            "dbus_type": "session"
-         }
-      }
-   }
+"media": {
+  "dbus_type": "session"
 }
 ```
   - If your `dbus_type` is set to `system` then OCP will still work, but since it requires root privileges to read from the system dbus, external systems or programs without root privileges cannot read the MPRIS data there.

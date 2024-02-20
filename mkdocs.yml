@@ -12,6 +12,7 @@ nav:
         - Listener: speech_service.md
         - Audio: audio_service.md
         - GUI: gui_service.md
+        - Media: OCP.md
         - Configuration: config.md
         - Backend: backend.md
     - Plugins:
@@ -45,12 +46,14 @@ nav:
         - Skill Json: skill_json.md
         - Skill Tests: skill_tests.md
         - F.A.Q.: dev.md
+    - Media:
+        - Media Skills: OCP_skills.md
+        - OCP Pipeline: OCP_pipeline.md
     - GUI:
         - Protocol: gui_protocol.md
         - Shell: shell.md
         - QT5 mycroft-gui: qt5.md
     - Technologies:
-        - Common Play: OCP.md
         - Backend Client: backend_client.md
         - Padacioso: padacioso.md
         - Jurebes: jurebes.md
