@@ -13,6 +13,7 @@ It also helps getting a lot of the boilerplate done for you when getting started
 Example files written in eggscript
 
 
+
 hello.eggscript
 
         // this is a comment
@@ -44,13 +45,12 @@ hello.eggscript
         + hello world
         - hello world
         
-        // you can define python code
+        // you can define python code, executed after TTS
         ```
         hello = "world"
         if hello == "world":
         print("python code!")
         ```
-
 
 dialogs.eggscript
 
