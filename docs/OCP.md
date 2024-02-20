@@ -68,45 +68,6 @@ Before regular intent stage, taking into account current OCP state  (media ready
 - `"stop"` (media needs to be loaded)
 - `"I like that song"`  (music needs to be playing)
 
-## Plugins
-
-### OCP Skills
-
-Skills provide search results, think about them as media providers/catalogs for OCP
-
-You can find OCP skills in the [awesome-ocp-skills](https://github.com/OpenVoiceOS/awesome-ocp-skills) list 
-
-### Media Plugins
-
-these plugins handle the actual track playback. OCP virtual player delegates media playback to these plugins
-
-| plugin  | audio | video | web | remote | notes |
-|---------------------------------------------------------------------------------------------|----|----|---|----|-------------------------------------------|
-| [ovos-media-plugin-simple](https://github.com/OpenVoiceOS/ovos-media-plugin-simple)         | ✔️ | ❌ | ❌ | ❌ | default for audio                         |
-| [ovos-media-plugin-qt5](https://github.com/OpenVoiceOS/ovos-media-plugin-qt5)               | ✔️ | ✔️ | ✔️ | ❌ | WIP - recommended for embedded ovos-shell |
-| [ovos-media-plugin-mplayer](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer)       | ✔️ | ✔️ | ❌ | ❌ | recommended for video                     |
-| [ovos-media-plugin-vlc](https://github.com/OpenVoiceOS/ovos-media-plugin-vlc)               | ✔️ | ✔️ | ❌ | ❌ |                                           |
-| [ovos-media-plugin-chromecast](https://github.com/OpenVoiceOS/ovos-media-plugin-chromecast) | ✔️ | ✔️ | ❌ | ✔️ | extra: [cast_control](https://github.com/alexdelorenzo/cast_control) for MPRIS interface   |
-| [ovos-media-plugin-spotify](https://github.com/OpenVoiceOS/ovos-media-plugin-spotify) | ✔️ | ❌ | ❌ | ✔️ | needs premium account<br>extra: [spotifyd](https://github.com/Spotifyd/spotifyd) for native spotify player  |
-| ![imagem](https://github.com/OpenVoiceOS/ovos-media/assets/33701864/90f31b0a-dd56-457d-a3cf-7fc08b460038) [ovos-media-plugin-xdg](https://github.com/NeonGeckoCom/ovos-media-plugin-xdg) | ✔️ | ✔️ | ✔️ | ❌ | [xdg-open](https://man.archlinux.org/man/xdg-open.1) is for use inside a desktop session only |
-| ![imagem](https://github.com/OpenVoiceOS/ovos-media/assets/33701864/90f31b0a-dd56-457d-a3cf-7fc08b460038) [ovos-media-plugin-webbrowser](https://github.com/NeonGeckoCom/ovos-media-plugin-webbrowser) | ❌ | ❌ | ✔️ | ❌ | [webbrowser](https://docs.python.org/3/library/webbrowser.html) is for use inside a desktop session only |
-
-
-### OCP Plugins
-
-handle extracting playable streams and metadata, skills might require specific plugins and will be ignored if plugins are missing
-
-these plugins are used when a `sei//` is requested explicitly by a skill, or when a url pattern matches
-
-| plugin  | descripton | Stream Extractor Ids | url pattern | 
-|-------------------------------------------------------------------------------------|--------------------------|-------------------------------------------------|-----------------------------------------------------|
-| [ovos-ocp-rss-plugin](https://github.com/OpenVoiceOS/ovos-ocp-rss-plugin)           | rss feeds                | `rss//`                                         |                                                     | 
-| [ovos-ocp-bandcamp-plugin](https://github.com/OpenVoiceOS/ovos-ocp-bandcamp-plugin) | bandcamp urls            | `bandcamp//`                                    | `"bandcamp." in url`                                |
-| [ovos-ocp-youtube-plugin](https://github.com/OpenVoiceOS/ovos-ocp-youtube-plugin)   | youtube urls             | `youtube//` , `ydl//`, `youtube.channel.live//` | `"youtube.com/" in url or "youtu.be/" in url`       |
-| [ovos-ocp-m3u-plugin](https://github.com/OpenVoiceOS/ovos-ocp-m3u-plugin)           | .pls and .m3u formats    |`m3u//` , `pls//`                                | `".pls" in uri or ".m3u" in uri`                    |
-| [ovos-ocp-news-plugin](https://github.com/OpenVoiceOS/ovos-ocp-news-plugin)         |  dedicated news websites |  `news//`                                       | `any([uri.startswith(url) for url in URL_MAPPINGS])`|
-
-
 ## MPRIS integration
 
 OCP Integrates with MPRIS allows OCP to control external players
