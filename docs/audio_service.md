@@ -1,8 +1,21 @@
 # Audio Service
 
-The audio service is responsible for loading TTS and Audio plugins
+The audio service is responsible for handling TTS and simple sounds playback
 
-All audio playback is handled by this service
+## Native playback
+
+Usually playback is triggered by some originating bus message, eg `"recognizer_loop:utterance"`, this message contains
+metadata that is used to determine if playback should happen.
+
+`message.context` may contain a source and destination, playback is only triggered if a message destination is a
+native_source or if missing (considered a broadcast).
+
+This separation of native sources allows remote clients such as an android app to interact with OVOS without the actual
+device where ovos-core is running repeating all TTS and music playback out loud
+
+You can learn more about message targeting [here](https://openvoiceos.github.io/ovos-technical-manual/bus_service/#message-targeting)
+
+By default, only utterances originating from the speech client are considered native
 
 ## Dialog Transformers
 
@@ -68,7 +81,7 @@ of plugins that can transform it before playback
 The audio to be spoken is sent sequentially to all transformer plugins, ordered by priority (developer defined),
 until finally it played back to the user
 
-NOTE: Does not work with StreamingTTS
+> **NOTE**: Does not work with StreamingTTS
 
 | plugin                          | description                   | source                                                                                                        |
 |---------------------------------|-------------------------------|---------------------------------------------------------------------------------------------------------------|
@@ -88,18 +101,28 @@ To enable a transformer add it to `mycroft.conf`
 }
 ```
 
-## Audio
+## Classic Audio Service
+
+**DEPRECATION WARNING** - `ovos-core` version `0.0.8` is moving long-form media playback to `ovos-media` service, this is a work in progress and
+will be a default in version **0.1.0** when `ovos-media` is introduced
+
+`ovos-media` is a work in progress, it does not yet ship with OVOS by default, but it can be manually enabled
+
+In order to use `ovos-media` you need to enable the OCP pipeline in `ovos-core` and to disable the old audio service 
+
+disabling old audio service
+```json
+{
+  "enable_old_audioservice": false
+}
+```
+
+> **DEPRECATION WARNING** - `"enable_old_audioservice": true` will use the old OCP that shipped as an audio plugin in order to work in classic mycroft
 
 You can enable additional Audio plugins and define the native sources described above under the `"Audio"` section
 of `mycroft.conf`
 
-ovos-core uses OCP natively for media playback, you can learn more about
-OCP [here](https://openvoiceos.github.io/community-docs/OCP)
-
 OCP will decide when to call the Audio service and what plugin to use
-
-**DEPRECATION WARNING** -  `ovos-core` version **0.0.8** introduces the option to disable the old audio service, this
-will be a default in version **0.1.0** when `ovos-media` is introduced
 
 ```javascript
 "Audio": {
@@ -122,19 +145,4 @@ will be a default in version **0.1.0** when `ovos-media` is introduced
 },
 ```
 
-## Native playback
 
-Usually playback is triggered by some originating bus message, eg `"recognizer_loop:utterance"`, this message contains
-metadata that is used to determine if playback should happen.
-
-`message.context` may contain a source and destination, playback is only triggered if a message destination is a
-native_source or if missing (considered a broadcast).
-
-This separation of native sources allows remote clients such as an android app to interact with OVOS without the actual
-device where ovos-core is running repeating all TTS and music playback out loud
-
-You can learn more about message targeting [here](https://jarbashivemind.github.io/HiveMind-community-docs/mycroft/)
-
-By default, only utterances originating from the speech client and ovos cli are considered native
-
-for legacy reasons the names for ovos cli and speech client are `"debug_cli"` and `"audio"` respectively
