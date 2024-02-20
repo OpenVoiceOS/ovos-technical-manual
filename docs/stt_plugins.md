@@ -9,7 +9,7 @@ The base STT, this handles the audio in "batch mode" taking a complete audio fil
 Each STT plugin class needs to define the `execute()` method taking two arguments:
 
 * `audio` \([AudioData](https://github.com/Uberi/speech_recognition/blob/master/reference/library-reference.rst#audiodataframe_data-bytes-sample_rate-int-sample_width-int---audiodata) object\) - the audio data to be transcribed.  
-* `lang` \(str\) - _optional_ - the BCP-47 language code \(currently not used in core\).
+* `lang` \(str\) - _optional_ - the BCP-47 language code
 
 The bare minimum STT class will look something like
 
@@ -27,7 +27,9 @@ class MySTT(STT):
 
 A more advanced STT class for streaming data to the STT. This will receive chunks of audio data as they become available and they are streamed to an STT engine.
 
-The plugin author needs to implement the `create_streaming_thread()` method creating a thread for handling data sent through `self.queue`. The thread this method creates should be based on the [StreamThread class](https://github.com/MycroftAI/mycroft-core/blob/dev/mycroft/stt/__init__.py#L325). `handle_audio_data()` method also needs to be implemented.
+The plugin author needs to implement the `create_streaming_thread()` method creating a thread for handling data sent through `self.queue`. 
+
+The thread this method creates should be based on the [StreamThread class](). `handle_audio_data()` method also needs to be implemented.
 
 ## Entry point
 
