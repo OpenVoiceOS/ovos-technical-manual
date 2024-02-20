@@ -119,7 +119,7 @@ layers.eggscript
         // this intent is in layer 2, enabled by previous intent
         ## tell me more
         + tell me more
-          + continue
+        + continue
           - i do not know more
         
         // N times - will disable layer N
