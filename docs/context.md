@@ -1,6 +1,9 @@
-# Conversational Context
+# Follow up questions
 
 _NOTE: Conversational context is currently only available with the_ [_Adapt_](https://mycroft.ai/documentation/adapt) _Intent Parser, and is not yet available for_ [_Padatious_](https://mycroft.ai/documentation/padatious)
+
+
+## Keyword Contexts
 
 > How tall is John Cleese?
 
@@ -18,12 +21,12 @@ Consider the following intent handlers:
     @intent_handler(IntentBuilder().require('PythonPerson').require('Length'))
     def handle_length(self, message):
         python = message.data.get('PythonPerson')
-        self.speak('{} is {} cm tall'.format(python, length_dict[python]))
+        self.speak(f'{python} is {length_dict[python]} cm tall')
 
     @intent_handler(IntentBuilder().require('PythonPerson').require('WhereFrom'))
     def handle_from(self, message):
         python = message.data.get('PythonPerson')
-        self.speak('{} is from {}'.format(python, from_dict[python]))
+        self.speak(f'{python} is from {from_dict[python]}')
 ```
 
 To interact with the above handlers the user would need to say
@@ -42,14 +45,14 @@ To get a more natural response the functions can be changed to let OVOS know whi
     def handle_length(self, message):
         # PythonPerson can be any of the Monty Python members
         python = message.data.get('PythonPerson')
-        self.speak('{} is {} cm tall'.format(python, length_dict[python]))
+        self.speak(f'{python} is {length_dict[python]} cm tall')
         self.set_context('PythonPerson', python)
 
     @intent_handler(IntentBuilder().require('PythonPerson').require('WhereFrom'))
     def handle_from(self, message):
         # PythonPerson can be any of the Monty Python members
         python = message.data.get('PythonPerson')
-        self.speak('He is from {}'.format(from_dict[python]))
+        self.speak(f'He is from {from_dict[python]}')
         self.set_context('PythonPerson', python)
 ```
 
@@ -69,19 +72,26 @@ OVOS detects the `WhereFrom` keyword but not any `PythonPerson` keyword. The Con
 
 > OVOS: He's from England
 
-The context isn't limited by the keywords provided by the current **Skill**. For example
+
+## Cross Skill Context
+
+The context is limited by the keywords provided by the **current** Skill. 
+
+But we can use context across skills via `self.set_cross_skill_context` to enable conversations with **other** Skills as well. 
 
 ```python
     @intent_handler(IntentBuilder().require(PythonPerson).require(WhereFrom))
     def handle_from(self, message):
         # PythonPerson can be any of the Monty Python members
         python = message.data.get('PythonPerson')
-        self.speak('He is from {}'.format(from_dict[python]))
-        self.set_context('PythonPerson', python)
-        self.set_context('Location', from_dict[python])
+        self.speak(f'He is from {from_dict[python]}')
+        self.set_context('PythonPerson', python) # context for this skill only
+        
+        self.set_cross_skill_context('Location', from_dict[python])  # context for ALL skills
 ```
 
-Enables conversations with other **Skills** as well.
+
+In this example `Location` keyword is shared with the WeatherSkill
 
 ```text
 User: Where is John Cleese from?
@@ -89,6 +99,38 @@ Mycroft: He's from England
 User: What's the weather like over there?
 Mycroft: Raining and 14 degrees...
 ```
+
+## Hint Keyword contexts
+
+Context do not need to have a value, their presence can be used to simply indicate a previous interaction happened
+
+In this case Context can also be implemented by using decorators instead of calling `self.set_context`
+
+```python
+from ovos_workshop.decorators import adds_context, removes_context
+
+
+class TeaSkill(OVOSSkill):
+    @intent_handler(IntentBuilder('TeaIntent').require("TeaKeyword"))
+    @adds_context('MilkContext')
+    def handle_tea_intent(self, message):
+        self.milk = False
+        self.speak('Of course, would you like Milk with that?',
+                   expect_response=True)
+
+    @intent_handler(IntentBuilder('NoMilkIntent').require("NoKeyword").
+                                  require('MilkContext').build())
+    @removes_context('MilkContext')
+    @adds_context('HoneyContext')
+    def handle_no_milk_intent(self, message):
+        self.speak('all right, any Honey?', expect_response=True)
+
+```
+
+
+> **NOTE**: cross skill context is not yet exposed via decorators
+
+
 
 ## Using context to enable **Intents**
 
@@ -104,7 +146,7 @@ Mycroft: Here you go, here's your Tea with Honey
 ```
 
 ```python
-from mycroft.skills.context import adds_context, removes_context
+from ovos_workshop.decorators import adds_context, removes_context
 
 class TeaSkill(OVOSSkill):
     @intent_handler(IntentBuilder('TeaIntent').require("TeaKeyword"))

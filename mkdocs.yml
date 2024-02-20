@@ -39,8 +39,6 @@ nav:
         - Dialog: statements.md
         - Prompts: prompts.md
         - Intents: intents.md
-        - Context: context.md
-        - Converse: converse.md
         - Filesystem: skill_filesystem.md
         - Skill Settings: skill_settings.md
         - Skill GUI: skill_gui.md
@@ -48,6 +46,9 @@ nav:
         - Skill Json: skill_json.md
         - Skill Tests: skill_tests.md
         - F.A.Q.: dev.md
+    - Continuous Conversation:
+        - Follow up Questions: context.md
+        - Converse: converse.md
     - Media:
         - Media Skills: OCP_skills.md
         - OCP Pipeline: OCP_pipeline.md

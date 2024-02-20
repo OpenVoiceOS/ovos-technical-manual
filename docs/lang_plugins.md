@@ -2,12 +2,15 @@
 
 These plugins can be used to detect the language of text and to translate it
 
-They are not used internally by `ovos-core` but are integrated with external tools such as [solvers](https://openvoiceos.github.io/ovos-technical-manual/solvers/)
+They are not used internally by `ovos-core` but are integrated with external tools such
+as [solvers](https://openvoiceos.github.io/ovos-technical-manual/solvers/)
 
 ## List of Language plugins
 
 | Plugin                                                                                                                                                                                                            | Detect | Tx | Offline | Type              |
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|----|---------|-------------------|
+| [ovos-translate-plugin-nllb](https://github.com/OpenVoiceOS/ovos-translate-plugin-nllb)                                                                                                                           | ❌️     | ✔  | ✔️      | FOSS              |
+| [ovos-translate-plugin-server](https://github.com/OpenVoiceOS/ovos-translate-server-plugin)                                                                                                                       | ❌      | ✔  | ❌       | API (self hosted) |
 | [ovos-lang-detector-plugin-lingua-podre](https://github.com/OpenVoiceOS/lingua-podre)                                                                                                                             | ✔️     | ❌  | ✔️      | FOSS              |
 | [ovos-lang-detect-ngram-lm](https://github.com/OpenVoiceOS/ovos-classifiers)                                                                                                                                      | ✔️     | ❌  | ✔️      | FOSS              |
 | ![imagem](https://github.com/OpenVoiceOS/ovos-media/assets/33701864/90f31b0a-dd56-457d-a3cf-7fc08b460038)  [neon-lang-plugin-cld2](https://github.com/NeonGeckoCom/neon-lang-plugin-cld2)                         | ✔️     | ❌  | ✔️      | FOSS              |
@@ -18,7 +21,6 @@ They are not used internally by `ovos-core` but are integrated with external too
 | ![imagem](https://github.com/OpenVoiceOS/ovos-media/assets/33701864/90f31b0a-dd56-457d-a3cf-7fc08b460038)  [neon-lang-plugin-apertium](https://github.com/NeonGeckoCom/neon-lang-plugin-apertium)                 | ❌      | ✔️ | ❌       | API (self hosted) |
 | ![imagem](https://github.com/OpenVoiceOS/ovos-media/assets/33701864/90f31b0a-dd56-457d-a3cf-7fc08b460038)  [neon-lang-plugin-amazon_translate](https://github.com/NeonGeckoCom/neon-lang-plugin-amazon_translate) | ✔️     | ✔️ | ❌       | API (key)         |
 | ![imagem](https://github.com/OpenVoiceOS/ovos-media/assets/33701864/90f31b0a-dd56-457d-a3cf-7fc08b460038)  [neon-lang-plugin-google_translate](https://github.com/NeonGeckoCom/neon-lang-plugin-google_translate) | ✔️     | ✔️ | ❌       | API (key)         |
-
 
 ## Standalone Usage
 
