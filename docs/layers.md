@@ -142,7 +142,9 @@ class KonamiCodeSkill(OVOSSkill):
 
 When you have many complex chained intents `IntentLayers` often makes your life easier, a layer is a named group of intents that you can manage at once.
 
-[skill-moon-game](https://github.com/JarbasSkills/skill-moon-game/) is a example full voice game implemented this way
+Slightly more complex than the previous example, we may want to offer several "forks" on the intent execution, enabling different intent groups depending on previous interactions
+
+[skill-moon-game](https://github.com/JarbasSkills/skill-moon-game/) is an example full voice game implemented this way
 
 An excerpt from the game to illustrate usage of `IntentLayer` decorators
 
