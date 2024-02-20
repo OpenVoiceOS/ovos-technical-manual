@@ -8,10 +8,11 @@ It is intended as an easy way for user to create simple skills, while offering a
 
 It also helps getting a lot of the boilerplate done for you when getting started
 
+You can find a developer preview of eggscript in [github](https://github.com/OpenVoiceOS/eggscript)
+
 ## Crash Course
 
 Example files written in eggscript
-
 
 
 hello.eggscript
@@ -63,30 +64,30 @@ dialogs.eggscript
         // text after + is the user utterance
         + hello world
         // text after - is mycroft's response
-          - hello world
+        - hello world
         
         
         # weather in location
         // you can capture variables and use them using {var} syntax
         + how is the weather in {location}
-          - how am i supposed to know the weather in {location}
+        - how am i supposed to know the weather in {location}
         
         
         # weather
         // this will create a intent file with the 3 + utterances
         + what is the weather like
-          + how is the weather
-          + how does it look outside
-          // this will create a dialog file with the 2 - utterances
-          - i do not know how to check the weather
-          - stick your head ouf of the window and check for yourself
+        + how is the weather
+        + how does it look outside
+        // this will create a dialog file with the 2 - utterances
+        - i do not know how to check the weather
+        - stick your head ouf of the window and check for yourself
         
         
         # count to 10
         + count to 10
         // if ident level matches its an alternate dialog
-          - i will only count to 5
-          - i only know how to count to 5
+        - i will only count to 5
+        - i only know how to count to 5
           // use tab for identation
           // each ident level defines a new utterance to be spoken
               - 1
