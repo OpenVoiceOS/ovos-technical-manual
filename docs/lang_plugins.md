@@ -18,3 +18,12 @@ They are not used internally by `ovos-core` but are integrated with external too
 | ![imagem](https://github.com/OpenVoiceOS/ovos-media/assets/33701864/90f31b0a-dd56-457d-a3cf-7fc08b460038)  [neon-lang-plugin-apertium](https://github.com/NeonGeckoCom/neon-lang-plugin-apertium)                 | ❌      | ✔️ | ❌       | API (self hosted) |
 | ![imagem](https://github.com/OpenVoiceOS/ovos-media/assets/33701864/90f31b0a-dd56-457d-a3cf-7fc08b460038)  [neon-lang-plugin-amazon_translate](https://github.com/NeonGeckoCom/neon-lang-plugin-amazon_translate) | ✔️     | ✔️ | ❌       | API (key)         |
 | ![imagem](https://github.com/OpenVoiceOS/ovos-media/assets/33701864/90f31b0a-dd56-457d-a3cf-7fc08b460038)  [neon-lang-plugin-google_translate](https://github.com/NeonGeckoCom/neon-lang-plugin-google_translate) | ✔️     | ✔️ | ❌       | API (key)         |
+
+
+## Standalone Usage
+
+TODO
+
+## Plugin Template
+
+TODO

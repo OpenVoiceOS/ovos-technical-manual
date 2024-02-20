@@ -29,6 +29,11 @@ TTS plugins are responsible for converting text into audio for playback
 | [ovos-tts-plugin-beepspeak](https://github.com/OpenVoiceOS/ovos-tts-plugin-beepspeak)             | yes     | Fun               |
 
 
+## Standalone Usage
+
+TODO
+
+
 ## Plugin Template
 
 ```python
