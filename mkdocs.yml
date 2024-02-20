@@ -23,10 +23,11 @@ nav:
         - Voice Activity Detection: vad_plugins.md
         - Language Detection/Translation: lang_plugins.md
         - Question Solvers: solvers.md
+        - NLP Plugins: nlp_plugins.md
         - Platform/Hardware Abstraction Layer: PHAL.md
         - Grapheme to Phoneme: g2p_plugins.md
-        - OCP: ocp_plugins.md
-        - Media: media_plugins.md
+        - OCP Stream Extractors: ocp_plugins.md
+        - Media Playback: media_plugins.md
     - Self Hosting:
         - STT Server: stt_server.md
         - TTS Server: tts_server.md
