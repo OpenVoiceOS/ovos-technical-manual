@@ -1,10 +1,18 @@
 # Bus Service
 
-The bus service provides a websocket where all internal events travel
+A Message Bus is mechanism for independent systems to communicate with each other using a set of _messages_ for common commands or notifiers. 
+
+In the OVOS ecosystem, the Messagebus is a websocket and the messages contain a message type with an optional JSON data packet. 
+
+Some messages trigger actions and have side effects; some are simple notifiers of actions that either have occurred or are about to occur. 
+The Messagebus connects the `ovos-core` processes and the **Skills**, and can also be joined by outside systems such as [HiveMind](https://jarbashivemind.github.io/HiveMind-community-docs).
+
+Messages can be sent from the _producers_ and acted upon by [Skills](https://mycroft.ai/documentation/skills) or other _consumers_ within OVOS. 
 
 You can think of the bus service as OVOS's nervous system
 
 The messagebus is considered an internal and private websocket, external clients should not connect directly to it.
+
 ## Configuration
 
 The messagebus has a dedicated section in `mycroft.conf`

@@ -4,7 +4,44 @@ WakeWord plugins classify audio and report if a certain word or sound is present
 
 These plugins usually correspond to the name of the voice assistant, "hey mycroft", but can also be used for other purposes
 
-![ww](https://github.com/secretsauceai/secret_sauce_ai/raw/main/SSAI_wakeword_scene_compressed.png?raw=true)
+All Mycroft Wake Word Plugins need to provide a class derived from the HotWordEngine base class in `ovos-plugin-manager`
+
+When the `__init__()` method of the base class is run the config for that module will be loaded and available through `self.config`. 
+OVOS's selected language will also be available through `self.lang`.
+
+## HotwordPlugin
+
+### found\_wake\_word\(\)
+
+Each Wake Word plugin must define the `found_wake_word()` method taking one argument:
+
+* `frame_data` - this is the audio data that needs to be checked for a wake word. You can process audio here or return a result previously handled in the `update()` method.
+
+### update\(\)
+
+The `update()` method is optional and takes one argument:
+
+* `chunk` - live audio chunks allowing for streaming predictions. Results must be returned in the `found_wake_word()` method.
+
+### stop\(\)
+
+The `stop()` method is optional and takes no arguments. It should be used to perform any actions needed to shut down the hot word engine. This may include things such as unloading data or to shutdown external processes.
+
+## Entry point
+
+To make the class detectable as a Wake Word plugin, the package needs to provide an entry point under the `mycroft.plugin.wake_word` namespace.
+
+```python
+setup([...],
+      entry_points = {'mycroft.plugin.wake_word': 'example_wake_word_plugin = my_example_ww:myWakeWordEngine'}
+      )
+```
+
+Where: 
+
+* `example_wake_word_plugin` is the Wake Word module name for the plugin
+* `my_example_ww` is the Python module; and
+* `myWakeWordEngine` is the class in the module to return
 
 ## List of Wake Word plugins
 

@@ -41,6 +41,7 @@ nav:
         - Anatomy: skill_structure.md
         - Dialog: statements.md
         - Intents: intents.md
+        - Bus Interaction: skills_bus.md
         - Filesystem: skill_filesystem.md
         - Skill Settings: skill_settings.md
         - Skill GUI: skill_gui.md
@@ -64,7 +65,10 @@ nav:
         - Protocol: gui_protocol.md
         - Shell: shell.md
         - QT5 mycroft-gui: qt5.md
+    - MessageBus APIs:
+        - Enclosure Api: mk1_api.md
     - Technologies:
+        - Messagebus Client: bus_client.md
         - Backend Client: backend_client.md
         - Padacioso: padacioso.md
         - Jurebes: jurebes.md
