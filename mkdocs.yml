@@ -70,6 +70,7 @@ nav:
     - Technologies:
         - Messagebus Client: bus_client.md
         - Backend Client: backend_client.md
+        - Eggscript: eggscript.md
         - Padacioso: padacioso.md
         - Jurebes: jurebes.md
 
