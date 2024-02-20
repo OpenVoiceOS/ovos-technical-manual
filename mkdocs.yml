@@ -18,15 +18,17 @@ nav:
         - Backend: backend.md
     - Plugins:
         - Plugin Manager: OPM.md
+        - Microphone: mic_plugins.md
+        - Voice Activity Detection: vad_plugins.md
+        - Wake Word: ww_plugins.md
         - Speech To Text: stt_plugins.md
         - Text To Speech: tts_plugins.md
-        - Wake Word: ww_plugins.md
-        - Voice Activity Detection: vad_plugins.md
+        - Grapheme to Phoneme: g2p_plugins.md
+        - Transformers: transformer_plugins.md
         - Language Detection/Translation: lang_plugins.md
         - Question Solvers: solvers.md
         - NLP Plugins: nlp_plugins.md
         - Platform/Hardware Abstraction Layer: PHAL.md
-        - Grapheme to Phoneme: g2p_plugins.md
         - OCP Stream Extractors: ocp_plugins.md
         - Media Playback: media_plugins.md
     - Self Hosting:

@@ -57,16 +57,6 @@ plugins or otherwise have performance benefits
 }
 ```
 
-Reference non-exhaustive list of microphone plugins
-
-| plugin                                                                                                  | notes                                                                              | operating systems           |
-|---------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|-----------------------------|
-| [ovos-microphone-plugin-alsa](https://github.com/OpenVoiceOS/ovos-microphone-plugin-alsa)               | based on [pyalsaaudio](http://larsimmisch.github.io/pyalsaaudio), best performance | linux                       |
-| [ovos-microphone-plugin-pyaudio](https://github.com/OpenVoiceOS/ovos-microphone-plugin-pyaudio)         | based on [PyAudio](https://people.csail.mit.edu/hubert/pyaudio/)                   | linux                       |
-| [ovos-microphone-plugin-sounddevice](https://github.com/OpenVoiceOS/ovos-microphone-plugin-sounddevice) | based on [python-sounddevice](https://github.com/spatialaudio/python-sounddevice)  | linux <br> mac <br> windows |
-| [ovos-microphone-plugin-files](https://github.com/OpenVoiceOS/ovos-microphone-plugin-files)             | audio files as input                                                               | linux <br> mac <br> windows |
-| [ovos-microphone-plugin-arecord](https://github.com/OVOSHatchery/ovos-microphone-plugin-arecord)        | uses `arecord` via subprocess                                                      | linux                       |
-| [ovos-microphone-plugin-socket](https://github.com/OVOSHatchery/ovos-microphone-plugin-socket)          | demo plugin for remote microphone                                                  | linux <br> mac <br> windows |
 
 ## Hotwords
 
@@ -254,13 +244,6 @@ Voice Activity Detection plugins have several functions under the listener servi
 - detect when user is speaking during `continuous mode` (read below)
 
 
-| plugin                                                                                | description                    | 
-|---------------------------------------------------------------------------------------|--------------------------------| 
-| [ovos-vad-plugin-silero](https://github.com/OpenVoiceOS/ovos-vad-plugin-silero)       | silero VAD, **recommended**    |  
-| [ovos-vad-plugin-webrtcvad](https://github.com/OpenVoiceOS/ovos-vad-plugin-webrtcvad) | webrtcvad plugin               |  
-| [ovos-vad-plugin-noise](https://github.com/OpenVoiceOS/ovos-vad-plugin-noise)         | noise threshold based VAD      |  
-| [ovos-vad-plugin-precise](https://github.com/OpenVoiceOS/ovos-vad-plugin-precise)     | VAD model trained with precise |  
-
 
 ```javascript
 "listener": {  
@@ -288,12 +271,6 @@ recognition)
 
 The audio is sent sequentially to all transformer plugins, ordered by priority (developer defined), until finally it is
 sent to the STT stage
-
-| plugin                                                                                                                                      | description                                                                                     | 
-|---------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------| 
-| [ovos-audio-transformer-plugin-fasterwhisper](https://github.com/OpenVoiceOS/ovos-stt-plugin-fasterwhisper)                                 | detect language from audio to inform STT                                                        | 
-| [ovos-audio-transformer-plugin-speechbrain-langdetect](https://github.com/OpenVoiceOS/ovos-audio-transformer-plugin-speechbrain-langdetect) | detect language from audio to inform STT                                                        |  
-| [ovos-audio-transformer-plugin-ggwave](https://github.com/OpenVoiceOS/ovos-audio-transformer-plugin-ggwave)                                 | decodes [data over audio](https://github.com/ggerganov/ggwave) and emits bus events in response |  
 
 ## STT
 

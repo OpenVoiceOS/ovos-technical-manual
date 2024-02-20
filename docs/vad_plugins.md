@@ -6,12 +6,12 @@ VAD plugins classify audio and report if it contains speech or not.
 
 ## List of VAD plugins
 
-| Plugin                                                                                | Type        |
-|---------------------------------------------------------------------------------------|-------------|
-| [ovos-vad-plugin-silero](https://github.com/OpenVoiceOS/ovos-vad-plugin-silero)       | model       |
-| [ovos-vad-plugin-webrtcvad](https://github.com/OpenVoiceOS/ovos-vad-plugin-webrtcvad) | model       |
-| [ovos-vad-plugin-precise](https://github.com/OpenVoiceOS/ovos-vad-plugin-precise)     | model       |
-| [ovos-vad-plugin-noise](https://github.com/OpenVoiceOS/ovos-vad-plugin-noise)         | noise level |
+| plugin                                                                                | description                    | 
+|---------------------------------------------------------------------------------------|--------------------------------| 
+| [ovos-vad-plugin-silero](https://github.com/OpenVoiceOS/ovos-vad-plugin-silero)       | silero VAD, **recommended**    |  
+| [ovos-vad-plugin-webrtcvad](https://github.com/OpenVoiceOS/ovos-vad-plugin-webrtcvad) | webrtcvad plugin               |  
+| [ovos-vad-plugin-noise](https://github.com/OpenVoiceOS/ovos-vad-plugin-noise)         | noise threshold based VAD      |  
+| [ovos-vad-plugin-precise](https://github.com/OpenVoiceOS/ovos-vad-plugin-precise)     | VAD model trained with precise |  
 
 
 ## Standalone Usage

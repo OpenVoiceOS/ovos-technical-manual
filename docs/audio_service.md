@@ -129,11 +129,6 @@ of plugins that can transform it before TTS stage
 The `utterance` to be spoken is sent sequentially to all transformer plugins, ordered by priority (developer defined),
 until finally it is sent to the TTS stage
 
-| plugin                                | description                                    | source                                                                                                                    |
-|---------------------------------------|------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
-| ovos-dialog-transformer-openai-plugin | rewrite speech with a LLM before executing TTS | [OpenVoiceOS/ovos-solver-plugin-openai-persona](https://github.com/OpenVoiceOS/ovos-solver-plugin-openai-persona)         |
-| ovos-dialog-translation-plugin        | translate speech back into user language       | [OpenVoiceOS/ovos-bidirectional-translation-plugin](https://github.com/OpenVoiceOS/ovos-bidirectional-translation-plugin) |
-
 To enable a transformer add it to `mycroft.conf`
 
 ```javascript
@@ -184,10 +179,6 @@ The audio to be spoken is sent sequentially to all transformer plugins, ordered 
 until finally it played back to the user
 
 > **NOTE**: Does not work with StreamingTTS
-
-| plugin                          | description                   | source                                                                                                        |
-|---------------------------------|-------------------------------|---------------------------------------------------------------------------------------------------------------|
-| ovos-tts-transformer-sox-plugin | apply sound effects via `sox` | [OpenVoiceOS/ovos-tts-transformer-sox-plugin](https://github.com/OpenVoiceOS/ovos-tts-transformer-sox-plugin) |
 
 To enable a transformer add it to `mycroft.conf`
 

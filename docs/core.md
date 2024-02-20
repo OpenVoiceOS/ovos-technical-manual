@@ -54,15 +54,6 @@ when `ovos-core` receives a natural language query/ `utterance` from a user it i
 The `utterance` transformers framework consists of any number of plugins ordered by priority (developer defined), the `utterance` and
 message.`context` are sent sequentially to all transformer plugins, and can be mutated by any of those plugins
 
-
-| plugin                            | description                           | source                                                                                                                          |
-|-----------------------------------|---------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
-| ovos-utterance-normalizer         | normalizes text before pipeline stage | [OpenVoiceOS/ovos-classifiers](https://github.com/OpenVoiceOS/ovos-classifiers/blob/dev/ovos_classifiers/opm/heuristics.py#L41) |
-| ovos-utterance-plugin-cancel      | cancel an utterance mid transcription | [OpenVoiceOS/ovos-utterance-plugin-cancel](https://github.com/OpenVoiceOS/ovos-utterance-plugin-cancel)                         |
-| ovos-utterance-corrections-plugin | manually correct bad transcriptions   | [OpenVoiceOS/ovos-utterance-corrections-plugin](https://github.com/OpenVoiceOS/ovos-utterance-corrections-plugin)               |
-| ovos-utterance-translation-plugin | auto translate unsupported languages  | [OpenVoiceOS/ovos-bidirectional-translation-plugin](https://github.com/OpenVoiceOS/ovos-bidirectional-translation-plugin)       |
-
-
 to enable a utterance transformer simply add it to `mycroft.conf` after installing it
 
 ```javascript
