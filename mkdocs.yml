@@ -37,7 +37,6 @@ nav:
         - Design Guidelines: guidelines.md
         - Anatomy: skill_structure.md
         - Dialog: statements.md
-        - Prompts: prompts.md
         - Intents: intents.md
         - Filesystem: skill_filesystem.md
         - Skill Settings: skill_settings.md
@@ -47,8 +46,14 @@ nav:
         - Skill Tests: skill_tests.md
         - F.A.Q.: dev.md
     - Continuous Conversation:
+        - Prompts: prompts.md
         - Follow up Questions: context.md
         - Converse: converse.md
+        - Intent Layers: layers.md
+    - Fallback:
+        - Fallback Skills: fallbacks.md
+    - Common Query:
+        - Common Query Skills: common_query.md
     - Media:
         - Media Skills: OCP_skills.md
         - OCP Pipeline: OCP_pipeline.md
