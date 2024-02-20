@@ -6,7 +6,7 @@ The converse method expects a single argument which is a standard Mycroft Messag
 
 Converse methods must return a Boolean value. True if an utterance was handled, otherwise False.
 
-### Basic usage
+## Basic usage
 
 Let's use a version of the Ice Cream Skill we've been building up and add a converse method to catch any brief statements of thanks that might directly follow an order.
 
@@ -39,7 +39,7 @@ In this example:
 4. If the User followed up with a pleasantry such as "Hey Mycroft, thanks" - the converse method would match this vocab against the `Thankyou.voc` file in the Skill and speak the contents of the `you-are-welcome.dialog` file. The method would return `True` and the utterance would be consumed meaning the intent parsing service would never be triggered.
 5. Any utterance that did not match would be silently ignored and allowed to continue on to other converse methods and finally to the intent parsing service.
 
-### Active Skill List
+## Active Skill List
 
 A Skill is considered active if it has been called in the last 5 minutes.
 
@@ -57,9 +57,136 @@ As the Weather Skill was called it has now been added to the front of the Active
 2. `TimerSkill.converse()`
 3. Normal intent parsing service
 
-### Making a Skill Active
+## Making a Skill Active
 
 There are occasions where a Skill has not been triggered by the User, but it should still be considered "Active".
 
-In the case of our Ice Cream Skill - we might have a function that will execute when the customers order is ready. At this point, we also want to be responsive to the customers thanks, so we call `self.make_active()` to manually add our Skill to the front of the Active Skills List.
+In the case of our Ice Cream Skill - we might have a function that will execute when the customers order is ready. 
+At this point, we also want to be responsive to the customers thanks, so we call `self.activate()` to manually add our Skill to the front of the Active Skills List.
 
+```python
+from ovos_workshop.skills import OVOSSkill
+from ovos_workshop.decorators import intent_handler
+
+
+class IceCreamSkill(OVOSSkill):
+    def on_order_ready(self, message):
+        self.activate()
+        
+    def handle_activate(self, message: Message):
+        """
+        Called when this skill is considered active by the intent service;
+        converse method will be called with every utterance.
+        Override this method to do any optional preparation.
+        @param message: `{self.skill_id}.activate` Message
+        """
+        LOG.info("Skill has been activated")
+```
+
+## Deactivating a Skill
+
+The active skill list will be pruned by `ovos-core`, any skills that have not been interacted with for longer than 5 minutes will be deactivated
+
+Individual Skills may react to this event, to clean up state or, in some rare cases, to reactivate themselves
+
+```python
+from ovos_workshop.skills import OVOSSkill
+
+
+class AlwaysActiveSkill(OVOSSkill):
+
+    def handle_deactivate(self, message: Message):
+        """
+        Called when this skill is no longer considered active by the intent
+        service; converse method will not be called until skill is active again.
+        Override this method to do any optional cleanup.
+        @param message: `{self.skill_id}.deactivate` Message
+        """
+        self.activate()
+```
+
+A skill can also deactivate itself at any time
+
+```python
+from ovos_workshop.skills import OVOSSkill
+
+
+class LazySkill(OVOSSkill):
+
+    def handle_intent(self, message: Message):
+        self.speak("leave me alone")
+        self.deactivate()
+```
+
+
+## Security
+
+A malicious or badly designed skill using the converse method can potentially hijack the whole conversation loop and render the skills service unusable
+
+Some settings are exposed to add some limitations to which skills can be activated and under what circumstances
+
+The concept of "converse priority" is under active development
+
+```javascript
+"skills": {
+    // converse stage configuration
+    "converse": {
+        // the default number of seconds a skill remains active,
+        // if the user does not interact with the skill in this timespan it
+        // will be deactivated, default 5 minutes (same as mycroft)
+        "timeout": 300,
+        
+        // override of "skill_timeouts" per skill_id
+        // you can configure specific skills to remain active longer
+        "skill_timeouts": {},
+
+        // conversational mode has 3 modes of operations:
+        // - "accept_all"  # default mycroft-core behavior
+        // - "whitelist"  # only call converse for skills in "converse_whitelist"
+        // - "blacklist"  # only call converse for skills NOT in "converse_blacklist"
+        "converse_mode": "accept_all",
+        "converse_whitelist": [],
+        "converse_blacklist": [],
+
+        // converse activation has 4 modes of operations:
+        // - "accept_all"  # default mycroft-core behavior, any skill can
+        //                 # activate itself unconditionally
+        // - "priority"  # skills can only activate themselves if no skill with
+        //               # higher priority is active
+        // - "whitelist"  # only skills in "converse_whitelist" can activate themselves
+        // - "blacklist"  # only skills NOT in converse "converse_blacklist" can activate themselves
+        // NOTE: this does not apply for regular skill activation, only to skill
+        //       initiated activation requests, eg, self.make_active()
+        "converse_activation": "accept_all",
+
+        // number of consecutive times a skill is allowed to activate itself
+        // per minute, -1 for no limit (default), 0 to disable self-activation
+        "max_activations": -1,
+        
+        // override of "max_activations" per skill_id
+        // you can configure specific skills to activate more/less often
+        "skill_activations": {},
+
+        // if false only skills can activate themselves
+        // if true any skill can activate any other skill
+        "cross_activation": true,
+
+        // if false only skills can deactivate themselves
+        // if true any skill can deactivate any other skill
+        // NOTE: skill deactivation is not yet implemented
+        "cross_deactivation": true,
+
+        
+        // you can add skill_id: priority to override the developer defined
+        // priority of those skills, 
+        
+        // converse priority is work in progress and not yet exposed to skills
+        // priority is assumed to be 50
+        // the only current source for converse priorities is this setting
+        "converse_priorities": {
+           // "skill_id": 10
+        }
+    }
+
+},
+```
