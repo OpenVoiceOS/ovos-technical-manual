@@ -106,7 +106,15 @@ OVOS injects the context when it emits an utterance, usually when spoken via STT
 
 STT will identify itself as `audio`
 
-`mycroft.conf` contains a `native_sources` section you can configure to change how the audio service processes external requests
+`mycroft.conf` contains a `native_sources` section you can configure to change how the [audio service](https://openvoiceos.github.io/ovos-technical-manual/audio_service/) processes external requests
+
+
+```javascript
+"Audio": {
+    "native_sources": ["debug_cli", "audio"]
+}
+```
+
 
 ### Destinations
 
