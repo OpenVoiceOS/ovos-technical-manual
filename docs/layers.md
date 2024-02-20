@@ -38,6 +38,8 @@ Another utils provided by `ovos-workshop` is `IntentLayers`, to manage groups of
 
 `IntentLayers` lend themselves well to implement state machines.
 
+### The Manual way
+
 In this example we implement the [Konami Code](https://en.wikipedia.org/wiki/Konami_Code), doing everything the manual way instead of using decorators
 
 ```python
@@ -131,14 +133,23 @@ class KonamiCodeSkill(OVOSSkill):
 
     def converse(self, message):
         if self.active:
-            self.counter += 1
-            if self.counter > self.top_fails:
-                self.speak("Wrong cheat code")
-                self.reset()
+            if not any(self.voc_match(utt, kw) for kw in ["KonamiUpKeyword", 
+                                                          "KonamiDownKeyword", 
+                                                          "KonamiLeftKeyword", 
+                                                          "KonamiRightKeyword", 
+                                                          "KonamiBKeyword", 
+                                                          "KonamiAKeyword"]):
+                self.counter += 1
+                if self.counter > self.top_fails:
+                    self.speak("Wrong cheat code")
+                    self.reset()
+                else:
+                    self.speak("Wrong! Try again")
+                return True
         return False
 ```
 
-## Intent Groups
+### Decorators
 
 When you have many complex chained intents `IntentLayers` often makes your life easier, a layer is a named group of intents that you can manage at once.
 
@@ -200,6 +211,8 @@ class Apollo11GameSkill(OVOSSkill):
         self.speak_dialog("guard_no")
         self.speak_dialog("present_id", expect_response=True)
         
+    # (...) more intent layers
+    
     def converse(self, message):
         if not self.playing:
             return False

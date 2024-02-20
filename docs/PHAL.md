@@ -44,7 +44,7 @@ PHAL plugins do not follow a strict template, they are usually event listeners t
 integrate with other components
 
 ```python
-from mycroft_bus_client import Message
+from ovos_bus_client import Message
 from ovos_plugin_manager.phal import PHALPlugin
 
 

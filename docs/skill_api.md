@@ -52,7 +52,7 @@ If you want to make use of exported functionality from another Skill, you must f
 To access the `robber_lang()` method we created above, we could write:
 
 ```python
-from mycroft.skills.api import SkillApi
+from ovos_workshop.skills.api import SkillApi
 
 class NewRobberSkill(OVOSSkill):
     def initialize(self):

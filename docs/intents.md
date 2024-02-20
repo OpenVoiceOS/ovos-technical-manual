@@ -148,8 +148,8 @@ To construct a Keyword Intent, we use the intent_handler() \_decorator_ and pass
 Both of these must be imported before we can use them:
 
 ```python
-from adapt.intent import IntentBuilder
-from mycroft import intent_handler
+from ovos_workshop.intents import IntentBuilder
+from ovos_workshop.decorators import intent_handler
 ```
 
 The IntentBuilder is then passed the name of the Intent as a string, followed by one or more parameters that correspond with one of our `.voc` or `.rx` files.
@@ -430,7 +430,7 @@ From our first example above, we created a file `vocab/en-us/what.is.a.tomato.in
 This _decorator_ must be imported before it is used:
 
 ```python
-from mycroft import intent_handler
+from ovos_workshop.decorators import intent_handler
 ```
 
 [Learn more about _decorators_ in Python](https://en.wikipedia.org/wiki/Python_syntax_and_semantics#Decorators).

@@ -16,7 +16,7 @@
 ```python
 from ovos_utils.gui import GUITracker
 from ovos_workshop.skills import OVOSSkill
-from mycroft import intent_handler
+from ovos_workshop.decorators import intent_handler
 
 
 class MyGUIEventTracker(GUITracker):
@@ -78,8 +78,7 @@ a common use case is for GUI interfaces where the same action may be done by voi
 
 ```python
 from ovos_workshop.skills import OVOSSkill
-from ovos_workshop.decorators import killable_intent
-from mycroft import intent_handler
+from ovos_workshop.decorators import killable_intent, intent_handler
 from time import sleep
 
 
