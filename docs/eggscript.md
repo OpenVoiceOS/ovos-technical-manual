@@ -109,7 +109,7 @@ layers.eggscript
         // the number of # in intent definition determines an intent layer
         # tell me about
         + tell me about {thing}
-          - {thing} exists
+        - {thing} exists
         
         // N times + will enable layer N
         // to enable layer 2
@@ -121,7 +121,7 @@ layers.eggscript
         ## tell me more
         + tell me more
         + continue
-          - i do not know more
+        - i do not know more
         
         // N times - will disable layer N
         // to disable layer 2
