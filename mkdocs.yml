@@ -25,7 +25,6 @@ nav:
         - Question Solvers: solvers.md
         - Platform/Hardware Abstraction Layer: PHAL.md
         - Grapheme to Phoneme: g2p_plugins.md
-        - Audio Playback: audio_plugins.md
     - Self Hosting:
         - STT Server: stt_server.md
         - TTS Server: tts_server.md
