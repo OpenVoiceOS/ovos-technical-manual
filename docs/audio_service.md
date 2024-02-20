@@ -117,7 +117,7 @@ disabling old audio service
 }
 ```
 
-> **DEPRECATION WARNING** - `"enable_old_audioservice": true` will use the old OCP that shipped as an audio plugin in order to work in classic mycroft
+> **DEPRECATION WARNING** - `"enable_old_audioservice": true` will use the [old OCP](https://github.com/OpenVoiceOS/ovos-ocp-audio-plugin) that shipped as an audio plugin in order to work in classic mycroft
 
 You can enable additional Audio plugins and define the native sources described above under the `"Audio"` section
 of `mycroft.conf`
