@@ -138,7 +138,7 @@ from eggscript import CliInterpreter
 from os.path import dirname
 
 c = CliInterpreter()
-c.load_ns(f"{dirname(__file__)}/dialogs.eggscript")
+c.load_eggscript_file(f"{dirname(__file__)}/dialogs.eggscript")
 c.run()
 
 ```
@@ -150,7 +150,7 @@ from eggscript import OVOSSkillCompiler
 from os.path import dirname
 
 c = OVOSSkillCompiler()
-c.load_ns(f"{dirname(__file__)}/layers.eggscript")
+c.load_eggscript_file(f"{dirname(__file__)}/layers.eggscript")
 c.export("myskill")
 ```
 
