@@ -4,8 +4,9 @@ nav:
     - Home:
         - Introduction: index.md
         - Community: community.md
-        - Timeline: timeline.md
+        - Versioning: versioning.md
         - License: license.md
+        - Timeline: timeline.md
     - Architecture:
         - Bus: bus_service.md
         - Core: core.md
