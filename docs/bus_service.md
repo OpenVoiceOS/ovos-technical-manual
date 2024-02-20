@@ -51,6 +51,36 @@ You can think of the message `context` as a sort of session data for a individua
 
 An index of all bus messages emitted or listened too by all the OVOS repositories can be found at [https://openvoiceos.github.io/message_spec](https://openvoiceos.github.io/message_spec/)
 
+## Session
+
+**NEW** in `ovos-core` version **0.0.8**
+
+The `message.context` may contain anything, but a special key is the `"session"`
+
+A Session contains per-request preferences and state data, external clients such as [voice satellites](https://jarbashivemind.github.io/HiveMind-community-docs/07_voicesat/) have their own session
+
+the Session can be used to select user preferences or resume previous conversations by restoring skill state
+
+`ovos-core` always uses the reserved `"session_id": "default"`, and will fully manage the state of the default Session, individual clients are supposed to manage their own session and might ignore updates coming from `ovos-core`
+
+Things included in a Session
+
+- list of active skills (able to converse)
+- list of intent contexts (follow up questions)
+- utterance state (get_response vs regular utterance)
+- language
+- tts / stt preferences (eg, voice)
+- intent pipeline to be used
+- site_id
+
+By default these values are populated from `mycroft.conf`, skills have some "magic variables" that also reflect the session, such as `self.lang`
+
+It is up to individual skills to manage session, see the [parrot skill](https://github.com/OpenVoiceOS/skill-ovos-parrot/) for an example.
+
+> **WARNING** skills that are not session aware may keep a shared state behave weirdly with voice satellites
+
+[Transformers](https://openvoiceos.github.io/ovos-technical-manual/core/#utterance-transformers) may modify the Session, for example to inject intent context 
+
 ## Message Targeting
 
 ovos-core uses the message `context` to add metadata about the messages themselves, where do they come from and what are they intended for.
@@ -72,19 +102,13 @@ bus.emit(Message('recognizer_loop:utterance', data,
 
 ### Sources
 
-ovos-core injects the context when it emits an utterance, this can be either typed in the `ovos-cli-client` or spoken via STT service
+OVOS injects the context when it emits an utterance, usually when spoken via STT service
 
 STT will identify itself as `audio`
-
-ovos-cli-client will identify itself as `debug_cli`
 
 `mycroft.conf` contains a `native_sources` section you can configure to change how the audio service processes external requests
 
 ### Destinations
-
-Output capable services are the cli and the TTS
-
-The command line is a debug tool, it will ignore the `destination`
 
 TTS checks the message context if it's the intended target for the message and will only speak in the following conditions:
 
@@ -94,7 +118,7 @@ TTS checks the message context if it's the intended target for the message and w
 
 The idea is that for example when the android app is used to access OpenVoiceOS the device at home shouldn't start to speak.
 
-TTS will be executed when `"audio"` or `"debug_cli"` are the `destination`
+TTS will be executed when `"audio"` is the `destination` (configurable in `"native_sources"`)
 
 A missing `destination` or if the `destination` is set to `None` is interpreted as a multicast and should trigger all output capable processes (be it the audio service, a web-interface, the KDE plasmoid or maybe the android app)
 
