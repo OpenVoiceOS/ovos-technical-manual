@@ -36,9 +36,7 @@ The input query is returned to map the query to the answer.
 * `CQSMatchLevel.CATEGORY`: The Skill could determine that the type of question matches a category that the Skill is good at finding.
 * `CQSMatchLevel.GENERAL`: This Skill tries to answer all questions and found an answer.
 
-There is also a directly equivalent `CQSVisualMatchLevel`  that provides a small confidence bonus on platforms that can display visual media. The intention being that if two answers are otherwise equal, if a device can also display an image, then the response with an image is preferred. `CQSVisualMatchLevel` is an exact copy of `CQSMatchLevel` and requires no other changes to use.
-
-To actual show the visuals, see the [`CQS_action()` method](common-query-framework.md#cqs\_action) below.
+To show visuals or take some other action in response to being selected, see the [`CQS_action()` method](common-query-framework.md#cqs\_action) below.
 
 ## An Example
 
