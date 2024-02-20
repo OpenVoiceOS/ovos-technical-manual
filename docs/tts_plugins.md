@@ -22,11 +22,10 @@ TTS plugins are responsible for converting text into audio for playback
 | [ovos-tts-plugin-cotovia](https://github.com/OpenVoiceOS/ovos-tts-plugin-cotovia)                                                                                                                        | ❌         | ✔️      | FOSS              |
 | [ovos-tts-plugin-SAM](https://github.com/OpenVoiceOS/ovos-tts-plugin-SAM)                                                                                                                                | ❌         | ✔️      | Abandonware       |
 | [ovos-tts-plugin-beepspeak](https://github.com/OpenVoiceOS/ovos-tts-plugin-beepspeak)                                                                                                                    | ❌         | ✔️      | Fun               |
-| ![imagem](https://github.com/OpenVoiceOS/ovos-media/assets/33701864/90f31b0a-dd56-457d-a3cf-7fc08b460038) [neon-tts-plugin-glados](https://github.com/NeonGeckoCom/neon-tts-plugin-glados)               | ❌         | ✔️      | FOSS              |
-| ![imagem](https://github.com/OpenVoiceOS/ovos-media/assets/33701864/90f31b0a-dd56-457d-a3cf-7fc08b460038) [neon-tts-plugin-mozilla_local](https://github.com/NeonGeckoCom/neon-tts-plugin-mozilla_local) | ❌         | ✔️      | FOSS              |
 | ![imagem](https://github.com/OpenVoiceOS/ovos-media/assets/33701864/90f31b0a-dd56-457d-a3cf-7fc08b460038) [neon-tts-plugin-larynx_server](https://github.com/NeonGeckoCom/neon-tts-plugin-larynx_server) | ❌         | ❌       | API (self hosted) |
 | ![imagem](https://github.com/OpenVoiceOS/ovos-media/assets/33701864/90f31b0a-dd56-457d-a3cf-7fc08b460038) [neon-tts-plugin-coqui](https://github.com/NeonGeckoCom/neon-tts-plugin-coqui)                 | ❌         | ✔️       | FOSS              |
 | ![imagem](https://github.com/OpenVoiceOS/ovos-media/assets/33701864/90f31b0a-dd56-457d-a3cf-7fc08b460038) [neon-tts-plugin-coqui-remote](https://github.com/NeonGeckoCom/neon-tts-plugin-coqui-remote)   | ❌         | ❌       | API (self hosted) |
+| ![imagem](https://github.com/OpenVoiceOS/ovos-media/assets/33701864/90f31b0a-dd56-457d-a3cf-7fc08b460038) [neon-tts-plugin-glados](https://github.com/NeonGeckoCom/neon-tts-plugin-glados)               | ❌         | ✔️      | FOSS              |
 
 
 
