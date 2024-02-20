@@ -4,19 +4,21 @@ STT plugins are responsible for converting spoken audio into text
 
 ## List of STT plugins
 
-| Plugin                                                                                                             | Offline | Type              | 
-|--------------------------------------------------------------------------------------------------------------------|---------|-------------------|
-| [ovos-stt-plugin-vosk](https://github.com/OpenVoiceOS/ovos-stt-plugin-vosk)                                        | yes     | FOSS              |
-| [ovos-stt-plugin-chromium](https://github.com/OpenVoiceOS/ovos-stt-plugin-chromium)                                | no      | API (free)        |
-| [neon-stt-plugin-google_cloud_streaming](https://github.com/NeonGeckoCom/neon-stt-plugin-google_cloud_streaming)   | no      | API (key)         |
-| [neon-stt-plugin-scribosermo](https://github.com/NeonGeckoCom/neon-stt-plugin-scribosermo)                         | yes     | FOSS              |  
-| [neon-stt-plugin-silero](https://github.com/NeonGeckoCom/neon-stt-plugin-silero)                                   | yes     | FOSS              | 
-| [neon-stt-plugin-polyglot](https://github.com/NeonGeckoCom/neon-stt-plugin-polyglot)                               | yes     | FOSS              | 
-| [neon-stt-plugin-deepspeech_stream_local](https://github.com/NeonGeckoCom/neon-stt-plugin-deepspeech_stream_local) | yes     | FOSS              | 
-| [ovos-stt-plugin-selene](https://github.com/OpenVoiceOS/ovos-stt-plugin-selene)                                    | no      | API (free)        |
-| [ovos-stt-plugin-http-server](https://github.com/OpenVoiceOS/ovos-stt-plugin-http-server)                          | no      | API (self hosted) |
-| [ovos-stt-plugin-pocketsphinx](https://github.com/OpenVoiceOS/ovos-stt-plugin-pocketsphinx)                        | yes     | FOSS              |
-
+| Plugin                                                                                                                                                                                                                       | Offline | Streaming | Type              | 
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|-----------|-------------------|
+| [ovos-stt-plugin-fasterwhisper](https://github.com/OpenVoiceOS/ovos-stt-plugin-fasterwhisper)                                                                                                                                | ✔️      | ❌         | FOSS              |
+| [ovos-stt-plugin-whispercpp](https://github.com/OpenVoiceOS/ovos-stt-plugin-whispercpp)                                                                                                                                      | ✔️      | ❌         | FOSS              |
+| [ovos-stt-plugin-vosk](https://github.com/OpenVoiceOS/ovos-stt-plugin-vosk)                                                                                                                                                  | ✔️      | ❌         | FOSS              |
+| [ovos-stt-plugin-chromium](https://github.com/OpenVoiceOS/ovos-stt-plugin-chromium)                                                                                                                                          | ❌       | ❌         | API (free)        |
+| [ovos-stt-plugin-http-server](https://github.com/OpenVoiceOS/ovos-stt-plugin-http-server)                                                                                                                                    | ❌       | ❌         | API (self hosted) |
+| [ovos-stt-plugin-pocketsphinx](https://github.com/OpenVoiceOS/ovos-stt-plugin-pocketsphinx)                                                                                                                                  | ✔️      | ❌         | FOSS              |
+| [ovos-stt-azure-plugin](https://github.com/OpenVoiceOS/ovos-stt-azure-plugin)                                                                                                                                                | ❌       | ✔         | API (key)         |
+| ![imagem](https://github.com/OpenVoiceOS/ovos-media/assets/33701864/90f31b0a-dd56-457d-a3cf-7fc08b460038) [neon-stt-plugin-google_cloud_streaming](https://github.com/NeonGeckoCom/neon-stt-plugin-google_cloud_streaming)   | ❌       | ✔         | API (key)         |
+| ![imagem](https://github.com/OpenVoiceOS/ovos-media/assets/33701864/90f31b0a-dd56-457d-a3cf-7fc08b460038) [neon-stt-plugin-scribosermo](https://github.com/NeonGeckoCom/neon-stt-plugin-scribosermo)                         | ✔️      | ❌         | FOSS              |  
+| ![imagem](https://github.com/OpenVoiceOS/ovos-media/assets/33701864/90f31b0a-dd56-457d-a3cf-7fc08b460038) [neon-stt-plugin-silero](https://github.com/NeonGeckoCom/neon-stt-plugin-silero)                                   | ✔️      | ❌         | FOSS              | 
+| ![imagem](https://github.com/OpenVoiceOS/ovos-media/assets/33701864/90f31b0a-dd56-457d-a3cf-7fc08b460038) [neon-stt-plugin-polyglot](https://github.com/NeonGeckoCom/neon-stt-plugin-polyglot)                               | ✔️      | ❌         | FOSS              |
+| ![imagem](https://github.com/OpenVoiceOS/ovos-media/assets/33701864/90f31b0a-dd56-457d-a3cf-7fc08b460038) [neon-stt-plugin-nemo](https://github.com/NeonGeckoCom/neon-stt-plugin-nemo)                                       | ✔️      | ✔️        | FOSS              | 
+| ![imagem](https://github.com/OpenVoiceOS/ovos-media/assets/33701864/90f31b0a-dd56-457d-a3cf-7fc08b460038) [neon-stt-plugin-nemo-remote](https://github.com/NeonGeckoCom/neon-stt-plugin-nemo-remote)                         | ❌️      | ❌         | API (self hosted) | 
 
 ## Standalone Usage
 
@@ -39,7 +41,6 @@ with AudioFile("test.wav") as source:
 transcript = plug.execute(audio, lang)
 ```
 
-
 ## Plugin Template
 
 ```python
@@ -58,7 +59,7 @@ class MySTTPlugin(STT):
         # TODO - convert audio into text and return string
         transcript = "You said this"
         return transcript
-    
+
     @property
     def available_languages(self):
         """Return languages supported by this STT implementation in this state

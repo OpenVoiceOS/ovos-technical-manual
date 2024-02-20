@@ -40,10 +40,14 @@ partially based on the "12 mouth shapes visuals seen [here](https://wolfpaulus.c
 
 ## List of G2P plugins
 
-| Plugin                                                                                                                             | Type |
-|------------------------------------------------------------------------------------------------------------------------------------|------|
-| [ovos-g2p-plugin-mimic](https://github.com/OpenVoiceOS/ovos-tts-plugin-mimic/blob/dev/ovos_tts_plugin_mimic/__init__.py#L24)       | ARPA |
-| [ovos-g2p-plugin-heuristic-arpa](https://github.com/OpenVoiceOS/ovos-classifiers/blob/dev/ovos_classifiers/opm/heuristics.py#L164) | ARPA |
+| Plugin                                                                                                                                                                                                  | Type | Duration |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------|----------|
+| [ovos-g2p-plugin-mimic](https://github.com/OpenVoiceOS/ovos-tts-plugin-mimic/blob/dev/ovos_tts_plugin_mimic/__init__.py#L24)                                                                            | ARPA | ✔️       |
+| [ovos-g2p-plugin-heuristic-arpa](https://github.com/OpenVoiceOS/ovos-classifiers/blob/dev/ovos_classifiers/opm/heuristics.py#L164)                                                                      | ARPA | ❌        |
+| [ovos-g2p-plugin-espeak](https://github.com/OVOSHatchery/ovos-g2p-plugin-espeak)                                                                                                                        | IPA  | ❌        |
+| ![imagem](https://github.com/OpenVoiceOS/ovos-media/assets/33701864/90f31b0a-dd56-457d-a3cf-7fc08b460038) [neon-g2p-cmudict-plugin](https://github.com/NeonGeckoCom/g2p-cmudict-plugin)                 | ARPA | ❌        |
+| ![imagem](https://github.com/OpenVoiceOS/ovos-media/assets/33701864/90f31b0a-dd56-457d-a3cf-7fc08b460038) [neon-g2p-phoneme-guesser-plugin](https://github.com/NeonGeckoCom/g2p-phoneme-guesser-plugin) | ARPA | ❌        |
+| ![imagem](https://github.com/OpenVoiceOS/ovos-media/assets/33701864/90f31b0a-dd56-457d-a3cf-7fc08b460038) [neon-g2p-gruut-plugin](https://github.com/NeonGeckoCom/g2p-gruut-plugin)                     | IPA  | ❌        |
 
 ## Standalone Usage
 
