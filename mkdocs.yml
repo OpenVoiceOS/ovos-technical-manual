@@ -16,6 +16,11 @@ nav:
         - Media: OCP.md
         - Configuration: config.md
         - Backend: backend.md
+    - Self Hosting:
+        - STT Server: stt_server.md
+        - TTS Server: tts_server.md
+        - Translate Server: translate_server.md
+        - Personal Backend: personal_backend.md
     - Plugins:
         - Plugin Manager: OPM.md
         - Microphone: mic_plugins.md
@@ -31,11 +36,6 @@ nav:
         - Platform/Hardware Abstraction Layer: PHAL.md
         - OCP Stream Extractors: ocp_plugins.md
         - Media Playback: media_plugins.md
-    - Self Hosting:
-        - STT Server: stt_server.md
-        - TTS Server: tts_server.md
-        - Translate Server: translate_server.md
-        - Personal Backend: personal_backend.md
     - Skills:
         - Design Guidelines: guidelines.md
         - Anatomy: skill_structure.md

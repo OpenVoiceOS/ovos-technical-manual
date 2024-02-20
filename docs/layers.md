@@ -1,5 +1,6 @@
 # Intent Layers
 
+
 ## Managing Intents
 
 Sometimes you might want to manually enable or disable an intent, in OVOSSkills you can do this explicitly to create stateful interactions
@@ -30,6 +31,8 @@ class RotatingIntentsSkill(OVOSSkill):
         self.enable_intent("A.intent")
         self.disable_intent("C.intent")
 ```
+
+> **NOTE**: Intent states are currently shared across Sessions, enabled intents will be shared across all [voice satellites](https://jarbashivemind.github.io/HiveMind-community-docs/07_voicesat/)
 
 
 ## State Machines
@@ -160,6 +163,8 @@ Slightly more complex than the previous example, we may want to offer several "f
 [skill-moon-game](https://github.com/JarbasSkills/skill-moon-game/) is an example full voice game implemented this way
 
 An excerpt from the game to illustrate usage of `IntentLayer` decorators
+
+> **NOTE**: IntentLayers do not yet support Session, in this example all [voice satellites](https://jarbashivemind.github.io/HiveMind-community-docs/07_voicesat/) would join the game
 
 ```python
 from ovos_workshop.skills.decorators import layer_intent, enables_layer, \
