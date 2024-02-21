@@ -45,11 +45,9 @@ class UtteranceRepeaterSkill(OVOSSkill):
         utt = message.data['utterances'][0]
         sess = SessionManager.get(message)
         if sess.session_id not in self.chat_sessions:
-            self.chat_sessions[sess.session_id] = {"current_stt": "",
-                                                     "stt_timestamp": -1}
+            self.chat_sessions[sess.session_id] = {"current_stt": ""}
         self.chat_sessions[sess.session_id]["prev_stt"] = self.chat_sessions[sess.session_id]["current_stt"]
         self.chat_sessions[sess.session_id]["current_stt"] = utt
-        self.chat_sessions[sess.session_id]["stt_timestamp"] = monotonic()
 
     # retrieve previous STT per session
     @intent_handler('repeat.stt.intent')
