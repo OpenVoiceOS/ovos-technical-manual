@@ -25,7 +25,7 @@
 - Aug 2016 - Steve Penrod becomes MycroftAI CTO
 - ??? 2016 - NeonGecko begins working with Mycroft AI
 - Jan 2017 - @Aix release MycrofAI plasmoid for KDE Plasma desktop
-- Mar 2017 - @Aix incubinates Mycroft plasmoid project under KDE
+- Mar 2017 - @Aix incubates Mycroft plasmoid project under KDE
 - Apr 2017 - @JarbasAI forks mycroft-core as jarbas-core
 - May 2017 - @JarbasAI becomes a mycroft-core contributor
 - Sep 2017 - MycroftAI Mark 1 released / mycroft kickstarter campaign fullfilled
@@ -94,6 +94,7 @@
 - Nov 2022 - MycroftAI staff lay off, only a skeleton crew remaining
 - Dec 2022 - Home Assistant PHAL plugin initial release by @AIX
 - Jan 2023 - negative user feedback from the community for Mark 2, lots of bugs and missing features
+- Jan 2023 - [ChatGPT skill](https://github.com/OpenVoiceOS/skill-ovos-fallback-chatgpt/) released
 - Feb 2023 - MycroftAI partners up with NeonAI to maintain mycroft-core(?)
 - Mar 2023 - Funraiser to form OpenVoiceOS V.z.w. (Dutch: "Vereninging zonder winstoogmerk") completed in a couple days
 - Mar 2023 - First stretch goal of fundraiser reached and second stretch goal announced
@@ -112,6 +113,9 @@
 - Jun 2023 - [Home Assistant Notify](https://blog.graywind.org/posts/ovos-homeassistant-notify-integration/) integration released by community member @mikejgray
 - Jun 2023 - First (and second!) successful run of OpenVoiceOS on Windows, using WSL2 and [ovos-docker](https://github.com/openvoiceos/ovos-docker)
 - Sep 2023 - GUI fully functional with [ovos-docker](https://github.com/openvoiceos/ovos-docker) containers
-- Dec 2023 - [ovos-installer](https://github.com/OpenVoiceOS/ovos-installer) first release! codename `Duke Nukem`
+- Sep 2023 - [persona-server](https://github.com/OpenVoiceOS/ovos-persona-server) alpha version released
+- Dec 2023 - [ovos-installer](https://github.com/OpenVoiceOS/ovos-installer) first release! codename `Duke Nukem`, maintained by community member @goldyfruit
 - Jan 2024 - Mycroft forums move to [Open Conversational AI](https://community.openconversational.ai/)
 - Feb 2024 - Selene servers and Mycroft AI website go down
+- Feb 2024 - @Chance leaves OpenVoiceOS
+- Near Future - `ovos-core` version **0.0.8** released
