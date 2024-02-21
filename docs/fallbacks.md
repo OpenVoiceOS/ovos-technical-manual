@@ -9,16 +9,18 @@ After this no other Fallback **Skills** are tried. This means the priority for F
 
 ##  Fallback Handlers
 
-Import the `FallbackSkill` base class:
+Import the `FallbackSkill` base class, create a derived class and register the handler with the fallback system
+
+Implement the fallback handler \(the method that will be called to potentially handle the **Utterance**\). 
+
+The method implements logic to determine if the **Utterance** can be handled and shall output speech if it can handle the query. 
+
+It shall return Boolean `True` if the **Utterance** was handled and Boolean `False` if not.
+
 
 ```python
 from ovos_workshop.skills.fallback import FallbackSkill
-```
 
-Create a derived class and register the handler with the fallback system
-
-
-```python
 class MeaningFallback(FallbackSkill):
     """
         A Fallback skill to answer the question about the
@@ -30,13 +32,7 @@ class MeaningFallback(FallbackSkill):
          """
          self.register_fallback(self.handle_fallback, 10)
          # Any other initialize code you like can be placed here
-```
 
-> **NOTE**: a `FallbackSkill` can register any number of fallback handlers
-
-Implement the fallback handler \(the method that will be called to potentially handle the **Utterance**\). The method implements logic to determine if the **Utterance** can be handled and shall output speech if itcan handle the query. It shall return Boolean `True` if the **Utterance** was handled and Boolean `False` if not.
-
-```python
     def handle_fallback(self, message):
         """
             Answers question about the meaning of life, the universe
@@ -53,9 +49,43 @@ Implement the fallback handler \(the method that will be called to potentially h
         else:
             return False
 ```
+> **NOTE**: a `FallbackSkill` can register any number of fallback handlers
 
 The above example can be found [here](https://github.com/forslund/fallback-meaning).
 
+## Decorators
+
+**NEW** - `ovos-core` version **0.0.8** 
+
+Alternatively, you can use decorators 
+
+```python
+from ovos_workshop.decorators.fallback_handler import fallback_handler
+
+
+class MeaningFallback(FallbackSkill):
+    """
+        A Fallback skill to answer the question about the
+        meaning of life, the universe and everything.
+    """
+    
+    @fallback_handler(priority=10)
+    def handle_fallback(self, message):
+        """
+            Answers question about the meaning of life, the universe
+            and everything.
+        """
+        utterance = message.data.get("utterance")
+        if 'what' in utterance
+            and 'meaning' in utterance
+            and ('life' in utterance
+                or 'universe' in utterance
+                or 'everything' in utterance):
+            self.speak('42')
+            return True
+        else:
+            return False
+```
 
 ## Check utterances
 
