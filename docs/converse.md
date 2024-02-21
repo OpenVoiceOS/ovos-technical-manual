@@ -39,6 +39,10 @@ In this example:
 4. If the User followed up with a pleasantry such as "Hey Mycroft, thanks" - the converse method would match this vocab against the `Thankyou.voc` file in the Skill and speak the contents of the `you-are-welcome.dialog` file. The method would return `True` and the utterance would be consumed meaning the intent parsing service would never be triggered.
 5. Any utterance that did not match would be silently ignored and allowed to continue on to other converse methods and finally to the intent parsing service.
 
+
+> **WARNING** skills that are not [Session](https://openvoiceos.github.io/ovos-technical-manual/bus_service/#session) aware may behave weirdly with voice satellites, see the [parrot skill](https://github.com/OpenVoiceOS/skill-ovos-parrot/) for an example.
+
+
 ## Active Skill List
 
 A Skill is considered active if it has been called in the last 5 minutes.

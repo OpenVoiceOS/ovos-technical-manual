@@ -31,6 +31,8 @@ Docker specific documentation can be found at [https://openvoiceos.github.io/ovo
 
 An index of all bus messages emitted or listened too by all the OVOS repositories can be found at [https://openvoiceos.github.io/message_spec](https://openvoiceos.github.io/message_spec/)
 
+If you need to connect remote clients to OVOS, the HiveMind project has it's own dedicated documentations at [https://jarbashivemind.github.io/HiveMind-community-docs/](https://jarbashivemind.github.io/HiveMind-community-docs/)
+
 ## Contributing to Documentation
 
 The OVOS developer documentation is written and maintained by users just like you! 

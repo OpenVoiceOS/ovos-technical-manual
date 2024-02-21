@@ -83,9 +83,9 @@ Things included in a Session
 
 By default these values are populated from `mycroft.conf`, skills have some "magic variables" that also reflect the session, such as `self.lang`
 
-It is up to individual skills to manage session, see the [parrot skill](https://github.com/OpenVoiceOS/skill-ovos-parrot/) for an example.
+It is up to individual skills to manage session, see the [parrot skill](https://github.com/OpenVoiceOS/skill-ovos-parrot/) for a Session aware example.
 
-> **WARNING** skills that are not session aware may keep a shared state behave weirdly with voice satellites
+> **WARNING** skills that are not session aware may keep a shared state behave weirdly with [voice satellites](https://jarbashivemind.github.io/HiveMind-community-docs/07_voicesat/) 
 
 [Transformers](https://openvoiceos.github.io/ovos-technical-manual/core/#utterance-transformers) may modify the Session, for example to inject intent context 
 
@@ -107,6 +107,8 @@ bus.emit(Message('recognizer_loop:utterance', data,
 				 context={'destination': ['audio', 'kde'],
 						  'source': "remote_service"))
 ```
+
+> **NOTE**: [HiveMind](https://jarbashivemind.github.io/HiveMind-community-docs/) depends on the `source` and `"destination"` keys to route responses back to their respective satellites
 
 ### Sources
 
@@ -142,4 +144,4 @@ A missing `destination` or if the `destination` is set to `None` is interpreted 
 
 - intent service will `.reply` to the original utterance message
 - all skill/intent service messages are `.forward` (from previous intent service `.reply`)
-- skills sending their own messages might not respect this **warning**
+- **WARNING** skills sending their own messages might not respect this

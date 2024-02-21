@@ -1,5 +1,6 @@
 # Intent Layers
 
+> **WARNING**: Skills using these features might not play well with [HiveMind](https://jarbashivemind.github.io/HiveMind-community-docs/) due to shared state across satellites
 
 ## Managing Intents
 
