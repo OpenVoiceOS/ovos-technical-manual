@@ -148,6 +148,7 @@
 - May 2023 - First successful run of OpenVoiceOS on Mac OS using containers with [ovos-docker](https://github.com/openvoiceos/ovos-docker)
 - May 2023 - [ovos-docker-stt](https://github.com/openvoiceos/ovos-docker-stt) released, maintained by community member @goldyfruit
 - May 2023 - [ovos-microphone-plugin-sounddevice](https://github.com/openvoiceos/ovos-microphone-plugin-sounddevice) released, which provides native Mac OS suuport, maintained by community member @goldyfruit
+- May 2023 - [ovos-persona](https://github.com/OpenVoiceOS/ovos-persona) alpha release
 - Jun 2023 - Home Assistant plugin starts being maintained by community member @mikejgray
 - Jun 2023 - [fasterwhisper.ziggyai.online](https://fasterwhisper.ziggyai.online/stt) public STT server added (large, GPU) 
 - Jun 2023 - [Home Assistant Notify](https://blog.graywind.org/posts/ovos-homeassistant-notify-integration/) integration released by community member @mikejgray
@@ -165,6 +166,7 @@
 - Oct 2023 - [ovosnllb.ziggyai.online](https://ovosnllb.ziggyai.online)  public translation server added
 - Oct 2023 - [ovos-tts-plugin-mimic3-server](https://github.com/OpenVoiceOS/ovos-tts-plugin-mimic3-server) deprecated 
 - Oct 2023 - [ovos-PHAL-sensors](https://github.com/OpenVoiceOS/ovos-PHAL-sensors) released, exposing OVOS sensors in Home Assistant
+- Nov 2023 - Plasma Bigscreen [moves to QT6 and explicitly drops support for OVOS](https://invent.kde.org/plasma/plasma-bigscreen/-/commit/05441d4b687950b6235ef466cbb9c777631618d8)
 - Dec 2023 - [ovos-installer](https://github.com/OpenVoiceOS/ovos-installer) first release! codename `Duke Nukem`, maintained by community member @goldyfruit
 - Dec 2023 - `ovos-logs` cli tool by community member @sgee added to `ovos-utils`
 - Dec 2023 - [ovos-docs-viewer](https://github.com/OpenVoiceOS/ovos-docs-viewer) cli tool released
