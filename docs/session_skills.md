@@ -2,7 +2,7 @@
 
 **NEW** `ovos-core` version **0.0.8**
 
-If you want your skills to handle simultaneous users you need to make the [Session](https://openvoiceos.github.io/ovos-technical-manual/bus_service/#session) aware
+If you want your skills to handle simultaneous users you need to make them [Session](https://openvoiceos.github.io/ovos-technical-manual/bus_service/#session) aware
 
 Each remote client, usually a [voice satellite](https://jarbashivemind.github.io/HiveMind-community-docs/07_voicesat/), will send a `Session` with the `Message`
 
