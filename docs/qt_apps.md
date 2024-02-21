@@ -4,10 +4,11 @@
 
 You can build full standalone QT Voice Applications using [QML](https://openvoiceos.github.io/ovos-technical-manual/qt5/) with `ovos-gui` either via skills or [OVOSAbstractApp]()
 
-## Desktop Applications
+## Desktop Files
 
-GUI clients are allowed to filter a `namespace`, essentially simulating a GUI skill in it's own dedicated window. this
-is what powers [Plasma Bigscreen Voice Apps](https://plasma-bigscreen.org/docs/develop/) via .desktop files
+GUI clients are allowed to filter a `namespace`, providing a GUI skill in it's own dedicated window. 
+
+This is what powers [Plasma Bigscreen Voice Apps](https://plasma-bigscreen.org/docs/develop/) via .desktop files
 
 Desktop files are also parsed to populate the skills in the [homescreen](https://github.com/OpenVoiceOS/skill-ovos-homescreen) app drawer
 

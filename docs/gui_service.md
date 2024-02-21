@@ -61,10 +61,6 @@ this is usually done by your OS and specific to a use case.
 | [ovos-gui-plugin-plasmoid](https://github.com/OVOSHatchery/ovos-gui-plugin-plasmoid)              | [Plasma integration of different Mycroft AI services](https://invent.kde.org/utilities/mycroft-plasmoid)                                          | **UNMAINTED** <br> never migrated to OVOS                                                                                                                                                                             |
 
 
-![ovos-bigscreen](https://github.com/OpenVoiceOS/ovos-plasma-bigscreen/assets/33701864/afcc5e15-146b-4f38-be8d-0e5a56acaa55)
-
-> OVOS on Smart TVs, powered by Plasma Bigscreen
-
 ## GUIInterface
 
 Any component wanting to implement a GUI for OpenVoiceOS can do so via the `GUIInterface` class

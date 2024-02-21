@@ -79,6 +79,7 @@ nav:
         - Backend Client: backend_client.md
         - Jurebes: jurebes.md
         - Padacioso: padacioso.md
+        - Plasma Bigscreen: ovos_bigscreen.md
 
 theme: readthedocs
 extra_css:
