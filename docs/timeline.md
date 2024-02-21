@@ -78,44 +78,72 @@
 - Oct 2021 - NeonAI deprecates HolmesIV and adopts ovos-core
 - ??? 2021 - @Chance leaves lingua-franca
 - Nov 2021 - @JarbasAI leaves chatterbox
+- Nov 2021 - `ovos-core` version **0.0.1** released
 - ??? - @NeonDaniel joins OpenVoiceOS
 - ??? 2021 - NeonAI adopts [ovos-shell](https://github.com/OpenVoiceOS/ovos-shell)
 - Jan 2022 - OpenVoiceOS forks [lingua-franca](https://github.com/OpenVoiceOS/ovos-lingua-franca)
 - ??? 2022 - OpenVoiceOS starts development in the open via [matrix chat](https://matrix.to/#/!XFpdtmgyCoPDxOMPpH:matrix.org?via=matrix.org)
 - ??? 2022 - OpenVoiceOS starts releasing buildroot images for rpi4 and Mark 2
 - ??? 2022 - OpenVoiceOS starts releasing manjaro images for rpi4 and Mark 2
+- Mar 2022 - Fallback STT support added 
+- May 2022 - `ovos-core` version **0.0.3** released
 - May 2022 - MycroftAI founders resign
-- Jun 2022 - Plasma Bigscreen [drops mycroft-core in favor of ovos-core](https://gitlab.manjaro.org/packages/kde-unstable/bigscreen/mycroft-bigscreen/-/commit/4fd27e3ea165c2b1d39ee354a9faaa40fad1435d) version **0.0.4**
+- Jun 2022 - Plasma Bigscreen [drops mycroft-core in favor of ovos-core](https://gitlab.manjaro.org/packages/kde-unstable/bigscreen/mycroft-bigscreen/-/commit/4fd27e3ea165c2b1d39ee354a9faaa40fad1435d) version **0.0.4** (alpha)
+- Jul 2022 - [ovos-PHAL](https://github.com/OpenVoiceOS/ovos-PHAL) released (mycroft compatible)
 - Jul 2022 - MycroftAI starts work on [mycroft-dinkum](https://github.com/MycroftAI/mycroft-dinkum) behind the scenes, a replacement/rewrite of mycroft-core
+- Aug 2022 - `ovos-core` version **0.0.4** released
 - Sep 2022 - MycroftAI [Mimic3](https://github.com/MycroftAI/mimic3) TTS released, AGPL licensed
 - Sep 2022 . MycroftAI Mark 2 starts shipping
+- Oct 2022 - [mycroft.blue-systems.com](http://mycroft.blue-systems.com) mimic 3 public server added
+- Oct 2022 - [mimic3.ziggyai.online](https://mimic3.ziggyai.online) mimic 3 public server added
 - ??? 2022 - [mycroft-dinkum](https://github.com/MycroftAI/mycroft-dinkum) source code made public, Apache2 licensed
 - ??? 2022 - Extremely negative feedback from developer community, several key members annouce no intention to support mycroft-dinkum
 - ??? 2022 - NeonAI starts release NeonOS images for the Mark 2
+- Nov 2022 - `ovos-core` version **0.0.5** released
 - Nov 2022 - MycroftAI staff lay off, only a skeleton crew remaining
+- Nov 2022 - [tts.smartgic.io/mimic3](https://tts.smartgic.io/mimic3) public Mimic3 server added
 - Dec 2022 - [Home Assistant PHAL](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-homeassistant) plugin initial release by @AIX , exposes HA devices to the messagebus
+- Jan 2023 - `ovos-core` version **0.0.6** released
 - Jan 2023 - @aix talks about [OVOS in KDE Akademy](https://www.youtube.com/watch?v=hCwdtZu7WqA)
 - Jan 2023 - negative user feedback from the community for Mark 2, lots of bugs and missing features
 - Jan 2023 - [ChatGPT skill](https://github.com/OpenVoiceOS/skill-ovos-fallback-chatgpt/) released
 - Feb 2023 - MycroftAI partners up with NeonAI to maintain mycroft-core(?)
+- Mar 2023 - Mimic3 TTS public servers become default OVOS voice (alan pope)
+- Mar 2023 - `ovos-core` version **0.0.7** released
 - Mar 2023 - [Fundraiser to form OpenVoiceOS](https://www.gofundme.com/f/openvoiceos) V.z.w. (Dutch: "Vereninging zonder winstoogmerk") completed in a couple days
 - Mar 2023 - First stretch goal of [fundraiser](https://www.gofundme.com/f/openvoiceos) reached and second stretch goal announced
 - Mar 2023 - [raspbian-ovos](https://github.com/OpenVoiceOS/raspbian-ovos) images start being released, maintained by community member @builderjer
 - Mar 2023 - [community docs](https://openvoiceos.github.io/community-docs/) start being maintained by community members
 - Mar 2023 - [ovos-ww-plugin-openWakeWord](https://github.com/OpenVoiceOS/ovos-ww-plugin-openWakeWord) released, maintained by author @dscripka
+- Apr 2023 - `ovos-core` splits `ovos-audio`, `ovos-listener`, `ovos-gui` and `ovos-bus` into their own packages
 - Apr 2023 - [@Aix leaves](https://community.mycroft.ai/t/aix-signing-off/13583) OpenVoiceOS
+- Apr 2023 - [ovos-stt-plugin-fasterwhisper](https://github.com/OpenVoiceOS/ovos-stt-plugin-fasterwhisper) released
+- Apr 2023 - [ovos-tts-plugin-piper](https://github.com/OpenVoiceOS/ovos-tts-plugin-piper) released
 - Apr 2023 - [precise-lite-trainer](https://github.com/OpenVoiceOS/precise-lite-trainer) released
 - Apr 2023 - [ovos-dinkum-listener](https://github.com/OpenVoiceOS/ovos-dinkum-listener) released
+- May 2023 - [stt.openvoiceos.org](https://stt.openvoiceos.org) moves to whisper (small, cpu only)
 - May 2023 - [ovos-docker](https://github.com/openvoiceos/ovos-docker) released, maintained by community member @goldyfruit
 - May 2023 - Open Voice OS TTS/STT [status page](http://openvoiceos.github.io/status/) released, maintained by community member @goldyfruit
 - May 2023 - First successful run of OpenVoiceOS on Mac OS using containers with [ovos-docker](https://github.com/openvoiceos/ovos-docker)
 - May 2023 - [ovos-docker-stt](https://github.com/openvoiceos/ovos-docker-stt) released, maintained by community member @goldyfruit
 - May 2023 - [ovos-microphone-plugin-sounddevice](https://github.com/openvoiceos/ovos-microphone-plugin-sounddevice) released, which provides native Mac OS suuport, maintained by community member @goldyfruit
 - Jun 2023 - Home Assistant plugin starts being maintained by community member @mikejgray
+- Jun 2023 - [fasterwhisper.ziggyai.online](https://fasterwhisper.ziggyai.online/stt) public STT server added (large, GPU) 
 - Jun 2023 - [Home Assistant Notify](https://blog.graywind.org/posts/ovos-homeassistant-notify-integration/) integration released by community member @mikejgray
 - Jun 2023 - First (and second!) successful run of OpenVoiceOS on Windows, using WSL2 and [ovos-docker](https://github.com/openvoiceos/ovos-docker)
+- Jul 2023 - [pipertts.ziggyai.online](https://pipertts.ziggyai.online) public TTS server added
+- Jul 2023 - [tts.smartgic.io/piper](https://tts.smartgic.io/piper) public TTS server added
+- Jul 2023 - piper TTS public servers become default OVOS voice (alan pope)
+- Aug 2023 - [nllb.openvoiceos.org](https://nllb.openvoiceos.org) public translation server added
+- Aug 2023 - [translator.smartgic.io/nllb](https://translator.smartgic.io/nllb) public translation server added
+- Aug 2023 - adopt NLLB public servers as default translation plugin
+- Sep 2023 - [stt.smartgic.io/fasterwhisper](https://stt.smartgic.io/fasterwhisper) public STT server (large, GPU)
 - Sep 2023 - GUI fully functional with [ovos-docker](https://github.com/openvoiceos/ovos-docker) containers
 - Sep 2023 - [persona-server](https://github.com/OpenVoiceOS/ovos-persona-server) alpha version released
+- Sep 2023 - [ovos-audio-transformer-plugin-ggwave](https://github.com/OpenVoiceOS/ovos-audio-transformer-plugin-ggwave) released
+- Oct 2023 - [ovosnllb.ziggyai.online](https://ovosnllb.ziggyai.online)  public translation server added
+- Oct 2023 - [ovos-tts-plugin-mimic3-server](https://github.com/OpenVoiceOS/ovos-tts-plugin-mimic3-server) deprecated 
+- Oct 2023 - [ovos-PHAL-sensors](https://github.com/OpenVoiceOS/ovos-PHAL-sensors) released, exposing OVOS sensors in Home Assistant
 - Dec 2023 - [ovos-installer](https://github.com/OpenVoiceOS/ovos-installer) first release! codename `Duke Nukem`, maintained by community member @goldyfruit
 - Jan 2024 - Mycroft forums move to [Open Conversational AI](https://community.openconversational.ai/)
 - Feb 2024 - Selene servers and Mycroft AI website [go down](https://community.openconversational.ai/t/mycroft-servers-down-any-quick-and-dirty-trick/)
