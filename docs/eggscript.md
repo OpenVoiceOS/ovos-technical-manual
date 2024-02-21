@@ -50,8 +50,9 @@ hello.eggscript
         ```
         hello = "world"
         if hello == "world":
-        print("python code!")
+            print("python code!")
         ```
+
 
 dialogs.eggscript
 
