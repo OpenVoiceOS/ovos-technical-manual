@@ -68,11 +68,12 @@ nav:
     - MessageBus APIs:
         - Enclosure Api: mk1_api.md
     - Technologies:
-        - Messagebus Client: bus_client.md
-        - Backend Client: backend_client.md
         - Eggscript: eggscript.md
-        - Padacioso: padacioso.md
+        - Messagebus Client: bus_client.md
+        - Mark1 Utils: mk1_utils.md
+        - Backend Client: backend_client.md
         - Jurebes: jurebes.md
+        - Padacioso: padacioso.md
 
 theme: readthedocs
 extra_css:
