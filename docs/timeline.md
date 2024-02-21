@@ -17,14 +17,14 @@
 
 ## Events timeline
 
-- Aug 2015 - MycroftAI kickstarter launch
-- Feb 2016 - MycroftAI Mimic TTS released
-- May 2016 - mycroft-core repositories made public under GPL
-- Jun 2016 - @Aix releases MycroftAI gnome shell extension
+- Aug 2015 - [MycroftAI kickstarter](https://www.kickstarter.com/projects/aiforeveryone/mycroft-an-open-source-artificial-intelligence-for) launch
+- Feb 2016 - MycroftAI [Mimic](https://github.com/MycroftAI/mimic1) TTS released
+- May 2016 - [mycroft-core](https://github.com/MycroftAI/mycroft-core) repositories made public under GPL
+- Jun 2016 - @Aix releases [MycroftAI gnome shell](https://extensions.gnome.org/extension/1197/mycroft-assistant/) extension
 - Jun 2016 - @Aix becomes a contributor on the desktop-integration team
 - Aug 2016 - Steve Penrod becomes MycroftAI CTO
 - ??? 2016 - NeonGecko begins working with Mycroft AI
-- Jan 2017 - @Aix release MycrofAI plasmoid for KDE Plasma desktop
+- Jan 2017 - @Aix release [MycrofAI plasmoid](https://invent.kde.org/utilities/mycroft-plasmoid) for KDE Plasma desktop
 - Mar 2017 - @Aix incubates Mycroft plasmoid project under KDE
 - Apr 2017 - @JarbasAI forks mycroft-core as jarbas-core
 - May 2017 - @JarbasAI becomes a mycroft-core contributor
@@ -36,26 +36,26 @@
 - Nov 2017 - @Aix becomes a mycroft-core contributor
 - Dec 2017 - jarbas-core abandoned
 - ??? 2017 - Neon AI forks mycroft-core as neon-core to remove dependency on MycroftAI servers and work on other features
-- Jan 2018 - initial release of personal-backend, reverse engineered MycroftAI backend by @JarbasAI, licensed as Apache 2.0
-- Jan 2018 - MycroftAI mark 2 kickstarter launch
+- Jan 2018 - initial release of [personal-backend](https://github.com/OpenVoiceOS/ovos-personal-backend/tree/a457b03adc771783ec8714dfdabccdacb2482188), reverse engineered MycroftAI backend by @JarbasAI, licensed as Apache 2.0
+- Jan 2018 - MycroftAI [mark 2 kickstarter](https://www.kickstarter.com/projects/aiforeveryone/mycroft-mark-ii-the-open-voice-assistant) launch
 - Jul 2018 - personal-backend added to MycroftAI Roadmap
 - Aug 2018 - MycroftAI Mimic2 TTS based on tacotron released
-- Sep 2018 - Mycroft-GUI was created by collaboration between MycroftAI, Blue Systems based on KDE frameworks, maintained by @Aix
-- Oct 2018 - @j1nx creates "MycroftOS," the first version of what will eventually become the OpenVoiceOS smart speaker
-- Jan 2019 - @JarbasAI personal-backend implementation adopted by MycroftAI
+- Sep 2018 - [Mycroft-GUI](https://github.com/MycroftAI/mycroft-gui) was created by collaboration between MycroftAI, Blue Systems based on KDE frameworks, maintained by @Aix
+- Oct 2018 - @j1nx creates ["MycroftOS"](https://community.openconversational.ai/t/openvoiceos-a-bare-minimal-production-type-of-os-based-on-buildroot/4708), the first version of what will eventually become the OpenVoiceOS smart speaker
+- Jan 2019 - @JarbasAI [personal-backend](https://github.com/MycroftAI/personal-backend/tree/31ee96a8189d96f8102276bf4b9073811ee9a9b2) implementation adopted by MycroftAI
 - Mar 2019 - MycroftAI mark 2 completely redesigned and based on different hardware
-- Apr 2019 - Steve Penrod and @JarbasAI create lingua-franca under MycroftAI with @JarbasAI as maintainer
+- Apr 2019 - Steve Penrod and @JarbasAI create [lingua-franca](https://github.com/MycroftAI/lingua-franca/tree/130c77026e22d9afb1d4d3a383a743483ea007d8) under MycroftAI with @JarbasAI as maintainer
 - ??? 2019 - @JarbasAI partners with NeonAI to maintain neon-core
 - Jul 2019 - steve penrod leaves MycroftAI
-- Jul 2019 - Chatterbox kickstarter launched by @JarbasAI
+- Jul 2019 - [Chatterbox kickstarter](https://www.kickstarter.com/projects/hellochatterbox/chatterbox-the-smart-speaker-that-kids-build-and-p) launched by @JarbasAI
 - Oct 2019 - Official MycroftAI backend open sourced, licensed as AGPL
 - Dec 2019 - @Chance joins lingua-franca as a maintainer
 - Dec 2019 - Chatterbox released (closed source) / kickstarter campaign fullfilled
 - Dec 2019 - MycroftAI starts to work on Kivy based UI
 - ??? 2020 - MycroftAI starts neglecting community contributions
-- Mar 2020 - MycroftAI abandons personal-backend
+- Mar 2020 - MycroftAI abandons [personal-backend](https://github.com/MycroftAI/personal-backend)
 - Mar 2020 - Michael Lewis becomes MycroftAI CEO
-- May 2020 - @JarbasAI and @AIX partner up to create a VOIP skill
+- May 2020 - @JarbasAI and @AIX partner up to create a [VOIP skill](https://github.com/JarbasSkills/skill-voip)
 - Sep 2020 - Community takes stand against reimplementation of GUI using Kivy
 - Oct 2020 - Kivy has been dropped in support for Mycroft-GUI
 - Oct 2020 - @JarbasAI, @AIX and @j1nx form OpenVoiceOS community project around mycroft-core
@@ -63,11 +63,11 @@
 - ??? 2020 - Chatterbox (closed source) recreated on top of mycroft-lib, instead of a mycroft-core fork
 - ??? 2020 - neon-core recreated on top of mycroft-lib, instead of a mycroft-core fork
 - Oct 2020 - MycroftOS renamed to OpenVoiceOS - Mycroft Edition due to trademark issues
-- ??? 2020 - mycroft-lib renamed to HolmesIV to avoid trademark issues
+- ??? 2020 - mycroft-lib renamed to [HolmesIV](https://github.com/HelloChatterbox/HolmesIV) to avoid trademark issues
 - ??? 2020 - @JarbasAI leaves lingua-franca
 - ??? 2020 - @Chance joins OpenVoiceOS
-- Jan 2021 - personal-backend adopted by OpenVoiceOS, original repo unarchived and ownership transferred
-- Jan 2021 - Mycroft embedded shell adopted by OpenVoiceOS and renamed to ovos-shell
+- Jan 2021 - [personal-backend](https://github.com/OpenVoiceOS/ovos-personal-backend) adopted by OpenVoiceOS, original repo unarchived and ownership transferred
+- Jan 2021 - [Mycroft embedded shell](https://github.com/notmart/mycroft-embedded-shell) adopted by OpenVoiceOS and renamed to [ovos-shell](https://github.com/OpenVoiceOS/ovos-shell)
 - Mar 2021 - MycroftAI mark 2 dev kits start shipping
 - Apr 2021 - OpenVoiceOS adopts mycroft-lib instead of mycroft-core
 - May 2021 - chatterbox forks lingua-franca as lingua-nostra
@@ -79,27 +79,29 @@
 - ??? 2021 - @Chance leaves lingua-franca
 - Nov 2021 - @JarbasAI leaves chatterbox
 - ??? - @NeonDaniel joins OpenVoiceOS
-- ??? 2021 - NeonAI adopts ovos-shell
-- Jan 2022 - OpenVoiceOS forks lingua-franca
-- ??? 2022 - OpenVoiceOS starts development in the open via matrix chat
+- ??? 2021 - NeonAI adopts [ovos-shell](https://github.com/OpenVoiceOS/ovos-shell)
+- Jan 2022 - OpenVoiceOS forks [lingua-franca](https://github.com/OpenVoiceOS/ovos-lingua-franca)
+- ??? 2022 - OpenVoiceOS starts development in the open via [matrix chat](https://matrix.to/#/!XFpdtmgyCoPDxOMPpH:matrix.org?via=matrix.org)
 - ??? 2022 - OpenVoiceOS starts releasing buildroot images for rpi4 and Mark 2
 - ??? 2022 - OpenVoiceOS starts releasing manjaro images for rpi4 and Mark 2
 - May 2022 - MycroftAI founders resign
-- Jul 2022 - MycroftAI starts work on mycroft-dinkum behind the scenes, a replacement/rewrite of mycroft-core
-- Sep 2022 - MycroftAI Mimic3 TTS released, AGPL licensed
+- Jun 2022 - Plasma Bigscreen [drops mycroft-core in favor of ovos-core](https://gitlab.manjaro.org/packages/kde-unstable/bigscreen/mycroft-bigscreen/-/commit/4fd27e3ea165c2b1d39ee354a9faaa40fad1435d) version **0.0.4**
+- Jul 2022 - MycroftAI starts work on [mycroft-dinkum](https://github.com/MycroftAI/mycroft-dinkum) behind the scenes, a replacement/rewrite of mycroft-core
+- Sep 2022 - MycroftAI [Mimic3](https://github.com/MycroftAI/mimic3) TTS released, AGPL licensed
 - Sep 2022 . MycroftAI Mark 2 starts shipping
-- ??? 2022 - mycroft-dinkum source code made public, Apache2 licensed
+- ??? 2022 - [mycroft-dinkum](https://github.com/MycroftAI/mycroft-dinkum) source code made public, Apache2 licensed
 - ??? 2022 - Extremely negative feedback from developer community, several key members annouce no intention to support mycroft-dinkum
 - ??? 2022 - NeonAI starts release NeonOS images for the Mark 2
 - Nov 2022 - MycroftAI staff lay off, only a skeleton crew remaining
-- Dec 2022 - Home Assistant PHAL plugin initial release by @AIX
+- Dec 2022 - [Home Assistant PHAL](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-homeassistant) plugin initial release by @AIX , exposes HA devices to the messagebus
+- Jan 2023 - @aix talks about [OVOS in KDE Akademy](https://www.youtube.com/watch?v=hCwdtZu7WqA)
 - Jan 2023 - negative user feedback from the community for Mark 2, lots of bugs and missing features
 - Jan 2023 - [ChatGPT skill](https://github.com/OpenVoiceOS/skill-ovos-fallback-chatgpt/) released
 - Feb 2023 - MycroftAI partners up with NeonAI to maintain mycroft-core(?)
-- Mar 2023 - Funraiser to form OpenVoiceOS V.z.w. (Dutch: "Vereninging zonder winstoogmerk") completed in a couple days
-- Mar 2023 - First stretch goal of fundraiser reached and second stretch goal announced
-- Mar 2023 - raspbian-ovos images start being released, maintained by community member @builderjer
-- Mar 2023 - community doc webpage start being maintained by community members
+- Mar 2023 - [Fundraiser to form OpenVoiceOS](https://www.gofundme.com/f/openvoiceos) V.z.w. (Dutch: "Vereninging zonder winstoogmerk") completed in a couple days
+- Mar 2023 - First stretch goal of [fundraiser](https://www.gofundme.com/f/openvoiceos) reached and second stretch goal announced
+- Mar 2023 - [raspbian-ovos](https://github.com/OpenVoiceOS/raspbian-ovos) images start being released, maintained by community member @builderjer
+- Mar 2023 - [community docs](https://openvoiceos.github.io/community-docs/) start being maintained by community members
 - Mar 2023 - [ovos-ww-plugin-openWakeWord](https://github.com/OpenVoiceOS/ovos-ww-plugin-openWakeWord) released, maintained by author @dscripka
 - Apr 2023 - [@Aix leaves](https://community.mycroft.ai/t/aix-signing-off/13583) OpenVoiceOS
 - Apr 2023 - [precise-lite-trainer](https://github.com/OpenVoiceOS/precise-lite-trainer) released
@@ -116,6 +118,6 @@
 - Sep 2023 - [persona-server](https://github.com/OpenVoiceOS/ovos-persona-server) alpha version released
 - Dec 2023 - [ovos-installer](https://github.com/OpenVoiceOS/ovos-installer) first release! codename `Duke Nukem`, maintained by community member @goldyfruit
 - Jan 2024 - Mycroft forums move to [Open Conversational AI](https://community.openconversational.ai/)
-- Feb 2024 - Selene servers and Mycroft AI website go down
+- Feb 2024 - Selene servers and Mycroft AI website [go down](https://community.openconversational.ai/t/mycroft-servers-down-any-quick-and-dirty-trick/)
 - Feb 2024 - @Chance leaves OpenVoiceOS
 - Near Future - `ovos-core` version **0.0.8** released
