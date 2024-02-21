@@ -8,7 +8,7 @@ Each remote client, usually a [voice satellite](https://jarbashivemind.github.io
 
 Your skill should keep track of any Session specific state separately, eg, a chat history
 
-> **WARNING**: Skills need to be Session Aware to play well with [HiveMind](https://jarbashivemind.github.io/HiveMind-community-docs/)
+> **WARNING**: Stateful Skills need to be Session Aware to play well with [HiveMind](https://jarbashivemind.github.io/HiveMind-community-docs/)
 
 ## SessionManager
 
@@ -25,6 +25,28 @@ class MySkill(OVOSSkill):
 ```
 
 If the message originated in the device itself, the `session_id` is always equal to `"default"`, if it comes from an external client then it will be a unique uuid
+
+## Magic Properties
+
+Skills have some "magic properties", these will always reflect the value in the current `Session`
+
+```python
+    # magic properties -> depend on message.context / Session
+    @property
+    def lang(self) -> str:
+        """
+        Get the current language as a BCP-47 language code. This will consider
+        current session data if available, else Configuration.
+        """
+        
+    @property
+    def dialog_renderer(self) -> Optional[MustacheDialogRenderer]:
+        """
+        Get a dialog renderer for this skill. Language will be determined by
+        message history to match the language associated with the current
+        session or else from Configuration.
+        """
+```
 
 ## Per User Interactions
 
