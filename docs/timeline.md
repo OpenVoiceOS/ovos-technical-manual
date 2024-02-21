@@ -60,12 +60,13 @@
 - Oct 2020 - Kivy has been dropped in support for Mycroft-GUI
 - Oct 2020 - @JarbasAI, @AIX and @j1nx form OpenVoiceOS community project around mycroft-core
 - ??? 2020 - Chatterbox forks mycroft-core as mycroft-lib (open source)
+- ??? 2020 - mycroft-lib reorganizes `mycroft` imports cleanly separating each service
 - ??? 2020 - Chatterbox (closed source) recreated on top of mycroft-lib, instead of a mycroft-core fork
 - ??? 2020 - neon-core recreated on top of mycroft-lib, instead of a mycroft-core fork
 - Oct 2020 - MycroftOS renamed to OpenVoiceOS - Mycroft Edition due to trademark issues
-- ??? 2020 - mycroft-lib renamed to [HolmesIV](https://github.com/HelloChatterbox/HolmesIV) to avoid trademark issues
 - ??? 2020 - @JarbasAI leaves lingua-franca
 - ??? 2020 - @Chance joins OpenVoiceOS
+- ??? 2020 - mycroft-lib renamed to [HolmesIV](https://github.com/HelloChatterbox/HolmesIV) to avoid trademark issues
 - Jan 2021 - [personal-backend](https://github.com/OpenVoiceOS/ovos-personal-backend) adopted by OpenVoiceOS, original repo unarchived and ownership transferred
 - Jan 2021 - [Mycroft embedded shell](https://github.com/notmart/mycroft-embedded-shell) adopted by OpenVoiceOS and renamed to [ovos-shell](https://github.com/OpenVoiceOS/ovos-shell)
 - Mar 2021 - MycroftAI mark 2 dev kits start shipping
