@@ -112,3 +112,6 @@
 - Jun 2023 - [Home Assistant Notify](https://blog.graywind.org/posts/ovos-homeassistant-notify-integration/) integration released by community member @mikejgray
 - Jun 2023 - First (and second!) successful run of OpenVoiceOS on Windows, using WSL2 and [ovos-docker](https://github.com/openvoiceos/ovos-docker)
 - Sep 2023 - GUI fully functional with [ovos-docker](https://github.com/openvoiceos/ovos-docker) containers
+- Dec 2023 - [ovos-installer](https://github.com/OpenVoiceOS/ovos-installer) first release! codename `Duke Nukem`
+- Jan 2024 - Mycroft forums move to [Open Conversational AI](https://community.openconversational.ai/)
+- Feb 2024 - Selene servers and Mycroft AI website go down
