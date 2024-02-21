@@ -122,19 +122,21 @@ To make this more exact we can add support for checking for the words "monty pyt
 
 The method for parsing the example is quite simplistic but there are many different toolkits out there for doing the question parsing. [Adapt](https://pypi.org/project/adapt-parser/), [little questions](https://pypi.org/project/little-questions/), [padaos](https://pypi.org/project/padaos/) and many more!
 
-## Better matching
+## Match Confidence
 
 If we want to make sure this Skill is used when the user explicitly states it's the age of a Monty Python member, a slight modification to the Skill can be made:
 
 We'll change the end of the `CQS_match_query_phrase()` method to
 
 ```python
-            if 'monty python' in utt.lower():
-                confidence = CQSMatchLevel.EXACT
-            else:
-                confidence = CQSMatchLevel.CATEGORY
-            # return high confidence
-            return (utt, confidence, self.format_answer(python))
+    def CQS_match_query_phrase(self, utt):
+        # (...)
+        if 'monty python' in utt.lower():
+            confidence = CQSMatchLevel.EXACT
+        else:
+            confidence = CQSMatchLevel.CATEGORY            
+        # return high confidence
+        return (utt, confidence, self.format_answer(python))
 ```
 
 So if the utterance contains the phrase "monty python" the confidence will be set to `CQSMatchLevel.EXACT` making the Skill very very likely to be chosen to answer the query.
@@ -143,17 +145,9 @@ So if the utterance contains the phrase "monty python" the confidence will be se
 
 In some cases the Skill should do additional operations when selected as the best match. It could be prepared for follow-up questions or show an image on the screen. The `CQS_action()` method allows for this, when a Skill is selected this method will be called.
 
-The full signature is
-
-```python
-    def CQS_action(self, utt, data):
-```
+Let's make our Python Age Skill gloat that it was selected by adding a `CQS_action()` method like this:
 
 where `phrase` is the same phrase that were sent to `CQS_match_query_phrase()` and `data` is optional additional data from the query matching method.
-
-### Example
-
-Let's make our Python Age Skill gloat that it was selected by adding a `CQS_action()` method like this:
 
 ```python
     def CQS_action(self, utt, data):
@@ -162,14 +156,17 @@ Let's make our Python Age Skill gloat that it was selected by adding a `CQS_acti
 
 Now each time the Skill is called the above message will be added to the log! Not very useful you say? Hmm, yes... let's add something useful, like show the age on the Mark-1 display.
 
-To accomplish this we need to get the age into the `CQS_action()` method in some way. we could store last age in as an internal variable but the more elegant way is to send data as part of the match tuple. To do this we must extend the returned match tuple from `CQS_match_query_phrase()` with a data entry. So the return statement becomes
+To accomplish this we need to get the age into the `CQS_action()` method in some way. we could store last age in as an internal variable but the more elegant way is to send data as part of the match tuple. 
+To do this we must extend the returned match tuple from `CQS_match_query_phrase()` with a data entry. So the return statement becomes
 
 ```python
-            data = {'age': PYTHONS[python], 'python': python}
-            return (utt, confidence, self.format_answer(python), data)
+    def CQS_match_query_phrase(self, utt):
+        # (...)
+        data = {'age': PYTHONS[python], 'python': python}
+        return (utt, confidence, self.format_answer(python), data)
 ```
 
-The data structure declared here will be sent to the `CQS_Action()`method and we can update the method to
+The data structure declared here will be sent to `CQS_Action()` and we can update the method to
 
 ```python
     def CQS_action(self, utt, data):
