@@ -46,6 +46,14 @@ Skills have some "magic properties", these will always reflect the value in the 
         message history to match the language associated with the current
         session or else from Configuration.
         """
+
+    @property
+    def resources(self) -> SkillResources:
+        """
+        Get a SkillResources object for the current language. Objects are
+        initialized for the current Session language as needed.
+        """
+
 ```
 
 ## Per User Interactions
