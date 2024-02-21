@@ -7,7 +7,7 @@ If a Fallback **Skill** can handle the **Utterance** it will create a response a
 
 After this no other Fallback **Skills** are tried. This means the priority for Fallbacks that can handle a _broad_ range of queries should be _high_ \(80-100\) and Fallbacks that only responds to a very specific range of queries should be higher \(20-80\). The more specific, the lower the priority value.
 
-## Creating a Fallback **Skill**
+##  Fallback Handlers
 
 Import the `FallbackSkill` base class:
 
@@ -15,7 +15,8 @@ Import the `FallbackSkill` base class:
 from ovos_workshop.skills.fallback import FallbackSkill
 ```
 
-Create a derived class:
+Create a derived class and register the handler with the fallback system
+
 
 ```python
 class MeaningFallback(FallbackSkill):
@@ -23,13 +24,6 @@ class MeaningFallback(FallbackSkill):
         A Fallback skill to answer the question about the
         meaning of life, the universe and everything.
     """
-```
-
-Register the handler with the fallback system
-
-_Note: a `FallbackSkill` can register any number of fallback handlers_
-
-```python
     def initialize(self):
          """
              Registers the fallback handler
@@ -37,6 +31,8 @@ _Note: a `FallbackSkill` can register any number of fallback handlers_
          self.register_fallback(self.handle_fallback, 10)
          # Any other initialize code you like can be placed here
 ```
+
+> **NOTE**: a `FallbackSkill` can register any number of fallback handlers
 
 Implement the fallback handler \(the method that will be called to potentially handle the **Utterance**\). The method implements logic to determine if the **Utterance** can be handled and shall output speech if itcan handle the query. It shall return Boolean `True` if the **Utterance** was handled and Boolean `False` if not.
 
@@ -59,6 +55,28 @@ Implement the fallback handler \(the method that will be called to potentially h
 ```
 
 The above example can be found [here](https://github.com/forslund/fallback-meaning).
+
+
+## Check utterances
+
+**NEW** - `ovos-core` version **0.0.8** 
+
+Fallback skills should report if they are able to answer a question, without actually executing any action.
+
+Besides providing performance improvements this allows other OVOS components to check how a utterance will be handled without side effects
+
+```python
+    def can_answer(self, utterances: List[str], lang: str) -> bool:
+        """
+        Check if the skill can answer the particular question. Override this
+        method to validate whether a query can possibly be handled. By default,
+        assumes a skill can answer if it has any registered handlers
+        @param utterances: list of possible transcriptions to parse
+        @param lang: BCP-47 language code associated with utterances
+        @return: True if skill can handle the query
+        """
+        return len(self._fallback_handlers) > 0
+```
 
 ## Security
 
