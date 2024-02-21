@@ -56,6 +56,9 @@ nav:
         - Converse: converse.md
         - Intent Layers: layers.md
         - Session Aware Skills: session_skills.md
+    - Voice Apps:
+        - Standalone Apps: voice_apps.md
+        - QT Voice Apps: qt_apps.md
     - Fallback:
         - Fallback Skills: fallbacks.md
     - Common Query:
