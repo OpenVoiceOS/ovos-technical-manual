@@ -55,6 +55,7 @@ nav:
         - Follow up Questions: context.md
         - Converse: converse.md
         - Intent Layers: layers.md
+        - Session Aware Skills: session_skills.md
     - Fallback:
         - Fallback Skills: fallbacks.md
     - Common Query:

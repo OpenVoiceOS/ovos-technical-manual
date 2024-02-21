@@ -33,7 +33,7 @@ class RotatingIntentsSkill(OVOSSkill):
         self.disable_intent("C.intent")
 ```
 
-> **NOTE**: Intent states are currently shared across Sessions, enabled intents will be shared across all [voice satellites](https://jarbashivemind.github.io/HiveMind-community-docs/07_voicesat/)
+> **NOTE**: Intent states are currently shared across Sessions
 
 
 ## State Machines

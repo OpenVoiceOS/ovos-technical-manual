@@ -83,7 +83,7 @@ Things included in a Session
 
 By default these values are populated from `mycroft.conf`, skills have some "magic variables" that also reflect the session, such as `self.lang`
 
-It is up to individual skills to manage session, see the [parrot skill](https://github.com/OpenVoiceOS/skill-ovos-parrot/) for a Session aware example.
+It is up to individual skills to manage session, see the [Session Aware Skills](https://openvoiceos.github.io/ovos-technical-manual/session_skills/) docs for details
 
 > **WARNING** skills that are not session aware may keep a shared state behave weirdly with [voice satellites](https://jarbashivemind.github.io/HiveMind-community-docs/07_voicesat/) 
 
