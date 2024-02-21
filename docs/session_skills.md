@@ -40,10 +40,31 @@ Skills have some "magic properties", these will always reflect the value in the 
         """
         
     @property
+    def location(self) -> dict:
+        """
+        Get the JSON data struction holding location information.
+        This info can come from Session
+        """
+
+    @property
+    def location_pretty(self) -> Optional[str]:
+        """
+        Get a speakable city from the location config if available
+        This info can come from Session
+        """
+
+    @property
+    def location_timezone(self) -> Optional[str]:
+        """
+        Get the timezone code, such as 'America/Los_Angeles'
+        This info can come from Session
+        """
+        
+    @property
     def dialog_renderer(self) -> Optional[MustacheDialogRenderer]:
         """
         Get a dialog renderer for this skill. Language will be determined by
-        message history to match the language associated with the current
+        message context to match the language associated with the current
         session or else from Configuration.
         """
 
