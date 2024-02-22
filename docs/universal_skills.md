@@ -55,19 +55,17 @@ class MyMultilingualSkill(UniversalSkill):
     NOTE: `self.lang` reflects the original query language, but received utterances
           are always in `self.internal_language`.
     """
-    def __init__(self, translate_tags=True, autodetect=False, 
-                 translate_keys=None, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize the UniversalSkill.
 
-        Parameters:
+        Parameters for super():
         - internal_language (str): The language in which the skill internally operates.
         - translate_tags (bool): Whether to translate the private __tags__ value (adapt entities).
         - autodetect (bool): If True, the skill will detect the language of the utterance
                             and ignore self.lang / Session.lang.
         - translate_keys (list): default ["utterance", "utterances"] 
                                  Keys added here will have values translated in message.data.
-        - *args, **kwargs: Additional arguments passed to the parent class constructor.
         """
         # skill hardcoded in portuguese
         super().__init__(internal_language="pt-pt", translate_tags=translate_tags,
@@ -112,14 +110,13 @@ We'll use the `UniversalSkill` class to support translations for other languages
 ```python
 from ovos_workshop.skills.auto_translatable import UniversalSkill
 
+
 class EnglishCatFactsSkill(UniversalSkill):
-    def __init__(self, translate_tags=True, autodetect=False, 
-                 translate_keys=None, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         This skill is hardcoded in english, indicated by internal_language
         """
-        super().__init__(internal_language="en-us", translate_tags=translate_tags,
-                         autodetect=autodetect, translate_keys=translate_keys, *args, **kwargs)
+        super().__init__(internal_language="en-us", *args, **kwargs)
         
     def fetch_cat_fact(self):
         # Your logic to fetch a cat fact from an API
@@ -135,3 +132,38 @@ class EnglishCatFactsSkill(UniversalSkill):
 ```
 
 In this example, the `CatFactsSkill` class extends `UniversalSkill`, allowing it to seamlessly translate cat facts into the user's preferred language.
+
+
+
+## SpanishDatabase Skill Example
+
+A more advanced example, let's consider a skill that listens to bus messages.
+
+Our skill listens for messages containing a `"phrase"` payload in message.data that can be in any language, and it saves this phrase *in spanish* to a database. 
+Then it speaks a hardcoded spanish utterance, and it gets translated into the language of the bus message Session
+
+```python
+from ovos_workshop.skills.auto_translatable import UniversalSkill
+
+class SpanishDatabaseSkill(UniversalSkill):
+    def __init__(self, *args, **kwargs):
+        """
+        This skill is hardcoded in spanish, indicated by internal_language
+        """
+        translate_keys=["phrase"] # translate "phrase" in message.data
+        super().__init__(internal_language="es-es",
+                         translate_keys=translate_keys,
+                         *args, **kwargs)
+    
+    def initialize(self):
+        # wrap the event into a auto translation layer
+        handler = self.create_universal_handler(self.handle_entry)
+        self.add_event("skill.database.add", handler)
+        
+    def handle_entry(self, message: Message):
+        phrase = message.data["phrase"]  # assured to be in self.internal_language
+        
+        # Your logic to save phrase to a database
+        
+        self.speak("agregado a la base de datos") # will be spoken in self.lang
+```
