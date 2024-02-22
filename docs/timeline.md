@@ -171,6 +171,7 @@
 - Oct 2022 - [ovos-tts-plugin-mimic3-server](https://github.com/OpenVoiceOS/ovos-tts-plugin-mimic3-server) released
 - Oct 2022 - [mycroft.blue-systems.com](http://mycroft.blue-systems.com) mimic 3 public server added
 - Oct 2022 - [mimic3.ziggyai.online](https://mimic3.ziggyai.online) mimic 3 public server added
+- Oct 2022 - @aix talks about [OVOS in KDE Akademy](https://www.youtube.com/watch?v=hCwdtZu7WqA)
 - Oct 2022 - [skill-ovos-soundcloud](https://github.com/OpenVoiceOS/skill-ovos-soundcloud) transferred from @JarbasAl to OVOS
 - Oct 2022 - [skill-ovos-youtube](https://github.com/OpenVoiceOS/skill-ovos-youtube) transferred from @JarbasAl to OVOS
 - ??? 2022 - [mycroft-dinkum](https://github.com/MycroftAI/mycroft-dinkum) source code made public, Apache2 licensed
@@ -184,7 +185,6 @@
 - Dec 2022 - [skill-ovos-youtube-music](https://github.com/OpenVoiceOS/skill-ovos-youtube-music) transferred from @JarbasAl to OVOS
 - Dec 2022 - [skill-ovos-bandcamp](https://github.com/OpenVoiceOS/skill-ovos-bandcamp) transferred from @JarbasAl to OVOS
 - Jan 2023 - `ovos-core` version **0.0.6** released
-- Jan 2023 - @aix talks about [OVOS in KDE Akademy](https://www.youtube.com/watch?v=hCwdtZu7WqA)
 - Jan 2023 - negative user feedback from the community for Mark 2, lots of bugs and missing features
 - Jan 2023 - "fallback" wake word support added to `ovos-plugin-manager`
 - Jan 2023 - [skill-ovos-local-media](https://github.com/OpenVoiceOS/skill-ovos-local-media) released
@@ -204,12 +204,12 @@
 - Mar 2023 - [skill-ovos-icanhazdadjokes](https://github.com/OpenVoiceOS/skill-ovos-icanhazdadjokes) transferred from @JarbasAl to OVOS
 - Mar 2023 - [ovos-skill-alerts](https://github.com/OpenVoiceOS/ovos-skill-alerts) forked from Neon, maintained by community member @sgee
 - Apr 2023 - `ovos-core` splits `ovos-audio`, `ovos-listener`, `ovos-gui` and `ovos-bus` into their own packages
-- Apr 2023 - [ovos-vad-plugin-precise](https://github.com/OpenVoiceOS/ovos-vad-plugin-precise) released
 - Apr 2023 - [@Aix leaves](https://community.mycroft.ai/t/aix-signing-off/13583) OpenVoiceOS
 - Apr 2023 - OpenVoiceOS stops releasing manjaro based images
 - Apr 2023 - [ovos-stt-plugin-fasterwhisper](https://github.com/OpenVoiceOS/ovos-stt-plugin-fasterwhisper) released
 - Apr 2023 - [ovos-tts-plugin-piper](https://github.com/OpenVoiceOS/ovos-tts-plugin-piper) released
 - Apr 2023 - [precise-lite-trainer](https://github.com/OpenVoiceOS/precise-lite-trainer) released
+- Apr 2023 - [ovos-vad-plugin-precise](https://github.com/OpenVoiceOS/ovos-vad-plugin-precise) released
 - Apr 2023 - [ovos-dinkum-listener](https://github.com/OpenVoiceOS/ovos-dinkum-listener) released
 - Apr 2023 - [ovos-translate-plugin-deepl](https://github.com/OpenVoiceOS/ovos-translate-plugin-deepl) released, maintained by community member @sgee
 - Apr 2023 - [mycroft-classic-listener](https://github.com/OpenVoiceOS/mycroft-classic-listener) released, to preserve original mark 1 listener
