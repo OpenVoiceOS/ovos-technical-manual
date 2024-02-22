@@ -2,7 +2,7 @@
 
 These plugins can be used to detect the language of text and to translate it
 
-They are not used internally by `ovos-core` but are integrated with external tools such
+They are used internally by [Universal Skills](https://openvoiceos.github.io/ovos-technical-manual/universal_skills) and integrated with external tools such
 as [solvers](https://openvoiceos.github.io/ovos-technical-manual/solvers/)
 
 ## List of Language plugins

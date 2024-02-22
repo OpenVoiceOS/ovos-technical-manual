@@ -63,6 +63,8 @@ nav:
         - Fallback Skills: fallbacks.md
     - Common Query:
         - Common Query Skills: common_query.md
+    - Auto Translation:
+        - Universal Skills: universal_skills.md
     - Media:
         - Media Skills: OCP_skills.md
         - OCP Pipeline: OCP_pipeline.md
