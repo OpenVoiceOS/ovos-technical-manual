@@ -142,6 +142,8 @@ A missing `destination` or if the `destination` is set to `None` is interpreted 
 
 ### Internal routing
 
+![imagem](https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/df9aa669-ce7f-430e-b4db-f57200e75332)
+
 - intent service will `.reply` to the original utterance message
 - all skill/intent service messages are `.forward` (from previous intent service `.reply`)
 - **WARNING** skills sending their own messages might not respect this
