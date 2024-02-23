@@ -8,6 +8,18 @@ Use with OpenVoiceOS [companion plugin](https://github.com/OpenVoiceOS/ovos-tran
 
 `pip install ovos-translate-server`
 
+## Companion Plugin
+
+Use with OpenVoiceOS [companion plugin](https://github.com/OpenVoiceOS/ovos-translate-server-plugin)
+
+## Public Servers
+
+| Member | Service | Plugin | URL |
+|---|:---:|:---:|:---:|
+| <div><a href="https://github.com/OpenVoiceOS"><img src="https://avatars.githubusercontent.com/u/72275918?&v=4" alt="OVOS" width="25" height="25"></a></div> | Translate | [ovos-translate-plugin-server](https://github.com/OpenVoiceOS/ovos-translate-server-plugin)| NLLB - [https://nllb.openvoiceos.org](https://nllb.openvoiceos.org/status) |
+| <div><a href="https://github.com/builderjer"><img src="https://avatars.githubusercontent.com/u/34875857?v=4" alt="builderjer" width="25" height="25"></a></div> | Translate | [ovos-translate-plugin-server](https://github.com/OpenVoiceOS/ovos-translate-server-plugin) | NLLB - [https://ovosnllb.ziggyai.online](https://ovosnllb.ziggyai.online/status) |
+| <div><a href="https://github.com/goldyfruit"><img src="https://avatars.githubusercontent.com/u/614115?v=4" alt="goldyfruit" width="25" height="25"></a></div> | Translate | [ovos-translate-plugin-server](https://github.com/OpenVoiceOS/ovos-translate-server-plugin) | NLLB - [https://translator.smartgic.io/nllb](https://translator.smartgic.io/nllb/status) |
+
 ## Usage
 
 ```bash
@@ -34,7 +46,11 @@ then you can do get requests
 - `http://0.0.0.0:9686/translate/pt/en/o meu nome é Casimiro`  (specify source lang)
 - `http://0.0.0.0:9686/detect/o meu nome é Casimiro`
 
-## Docker Template
+## Docker
+
+Pre built containers can be found in the [ovos-docker-tx](https://github.com/OpenVoiceOS/ovos-docker-tx) repository
+
+### Template
 
 you can create easily crete a docker file to serve any plugin
 
