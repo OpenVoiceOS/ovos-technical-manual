@@ -21,13 +21,9 @@ To run `UniversalSkills` you need to configure [Translation plugins](https://ope
 ```javascript
   // Translation plugins
   "language": {
-    // default plugin comes bundled with ovos-classifiers
-    // TODO - better plugin + servers
-    "detection_module": "ovos-lang-detect-ngram-lm",
-    
-    // default uses public servers for nllb
-    // https://github.com/OpenVoiceOS/ovos-translate-server
-    // https://github.com/OpenVoiceOS/ovos-translate-plugin-nllb
+    // by default uses public servers
+    // https://github.com/OpenVoiceOS/ovos-translate-server    
+    "detection_module": "ovos-lang-detector-plugin-server",
     "translation_module": "ovos-translate-plugin-server"
   },
 ```

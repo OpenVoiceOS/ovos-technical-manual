@@ -2,8 +2,6 @@
 
 Turn any OVOS Language plugin into a microservice!
 
-Use with OpenVoiceOS [companion plugin](https://github.com/OpenVoiceOS/ovos-translate-server-plugin)
-
 ## Install
 
 `pip install ovos-translate-server`
@@ -14,11 +12,14 @@ Use with OpenVoiceOS [companion plugin](https://github.com/OpenVoiceOS/ovos-tran
 
 ## Public Servers
 
-| Member | Service | Plugin | URL |
-|---|:---:|:---:|:---:|
-| <div><a href="https://github.com/OpenVoiceOS"><img src="https://avatars.githubusercontent.com/u/72275918?&v=4" alt="OVOS" width="25" height="25"></a></div> | Translate | [ovos-translate-plugin-server](https://github.com/OpenVoiceOS/ovos-translate-server-plugin)| NLLB - [https://nllb.openvoiceos.org](https://nllb.openvoiceos.org/status) |
-| <div><a href="https://github.com/builderjer"><img src="https://avatars.githubusercontent.com/u/34875857?v=4" alt="builderjer" width="25" height="25"></a></div> | Translate | [ovos-translate-plugin-server](https://github.com/OpenVoiceOS/ovos-translate-server-plugin) | NLLB - [https://ovosnllb.ziggyai.online](https://ovosnllb.ziggyai.online/status) |
-| <div><a href="https://github.com/goldyfruit"><img src="https://avatars.githubusercontent.com/u/614115?v=4" alt="goldyfruit" width="25" height="25"></a></div> | Translate | [ovos-translate-plugin-server](https://github.com/OpenVoiceOS/ovos-translate-server-plugin) | NLLB - [https://translator.smartgic.io/nllb](https://translator.smartgic.io/nllb/status) |
+| Member                                                                                                                                                          |  Service  |                                           Plugin                                            |                                                                          URL                                                                           |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------:|:-------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| <div><a href="https://github.com/OpenVoiceOS"><img src="https://avatars.githubusercontent.com/u/72275918?&v=4" alt="OVOS" width="25" height="25"></a></div>     | Translate | [ovos-translate-plugin-server](https://github.com/OpenVoiceOS/ovos-translate-server-plugin) |        [NLLB](https://github.com/OpenVoiceOS/ovos-translate-plugin-nllb) - [https://nllb.openvoiceos.org](https://nllb.openvoiceos.org/status)         |
+| <div><a href="https://github.com/builderjer"><img src="https://avatars.githubusercontent.com/u/34875857?v=4" alt="builderjer" width="25" height="25"></a></div> | Translate | [ovos-translate-plugin-server](https://github.com/OpenVoiceOS/ovos-translate-server-plugin) |     [NLLB](https://github.com/OpenVoiceOS/ovos-translate-plugin-nllb) - [https://ovosnllb.ziggyai.online](https://ovosnllb.ziggyai.online/status)      |
+| <div><a href="https://github.com/goldyfruit"><img src="https://avatars.githubusercontent.com/u/614115?v=4" alt="goldyfruit" width="25" height="25"></a></div>   | Translate | [ovos-translate-plugin-server](https://github.com/OpenVoiceOS/ovos-translate-server-plugin) | [NLLB](https://github.com/OpenVoiceOS/ovos-translate-plugin-nllb) - [https://translator.smartgic.io/nllb](https://translator.smartgic.io/nllb/status)  |
+| <div><a href="https://github.com/OpenVoiceOS"><img src="https://avatars.githubusercontent.com/u/72275918?&v=4" alt="OVOS" width="25" height="25"></a></div>     |  Detect   | [ovos-translate-plugin-server](https://github.com/OpenVoiceOS/ovos-translate-server-plugin) |        [lingua-podre](https://github.com/OpenVoiceOS/lingua-podre) - [https://nllb.openvoiceos.org/detect](https://nllb.openvoiceos.org/status)        |
+| <div><a href="https://github.com/builderjer"><img src="https://avatars.githubusercontent.com/u/34875857?v=4" alt="builderjer" width="25" height="25"></a></div> |  Detect   | [ovos-translate-plugin-server](https://github.com/OpenVoiceOS/ovos-translate-server-plugin) |     [lingua-podre](https://github.com/OpenVoiceOS/lingua-podre) - [https://ovosnllb.ziggyai.online/detect](https://ovosnllb.ziggyai.online/status)     |
+| <div><a href="https://github.com/goldyfruit"><img src="https://avatars.githubusercontent.com/u/614115?v=4" alt="goldyfruit" width="25" height="25"></a></div>   |  Detect   | [ovos-translate-plugin-server](https://github.com/OpenVoiceOS/ovos-translate-server-plugin) | [lingua-podre](https://github.com/OpenVoiceOS/lingua-podre) - [https://translator.smartgic.io/nllb/detect](https://translator.smartgic.io/nllb/status) |
 
 ## Usage
 
@@ -38,7 +39,10 @@ optional arguments:
 
 ```
 
-eg, to use the [Google Translate plugin](https://github.com/NeonGeckoCom/neon-lang-plugin-google_translate) `ovos-translate-server --tx-engine googletranslate_plug --detect-engine googletranslate_detection_plug`
+eg, to use the [NLLB plugin](https://github.com/OpenVoiceOS/ovos-translate-plugin-nllb) for translation,
+and [Lang Classifier Classics](https://github.com/OpenVoiceOS/ovos-lang-detector-classics-plugin) for detection
+
+`ovos-translate-server --tx-engine ovos-translate-plugin-nllb --detect-engine ovos-lang-detector-classics-plugin`
 
 then you can do get requests
 
@@ -67,11 +71,13 @@ ENTRYPOINT ovos-translate-server --tx-engine {PLUGIN_HERE} --detect-engine {PLUG
 ```
 
 build it
+
 ```bash
 docker build . -t my_ovos_translate_plugin
 ```
 
 run it
+
 ```bash
 docker run -p 8080:9686 my_ovos_translate_plugin
 ```

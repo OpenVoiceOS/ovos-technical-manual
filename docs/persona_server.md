@@ -12,9 +12,9 @@ Persona server follows the standard OpenAI API, also allowing you to connect per
 
 ## Public Servers
 
-| Member                                                                                                                                                        |                                     Solvers / LLM model                                     | Persona |                                URL                                |
-|---------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------:|:-------:|:-----------------------------------------------------------------:|
-| <div><a href="https://github.com/goldyfruit"><img src="https://avatars.githubusercontent.com/u/614115?v=4" alt="goldyfruit" width="25" height="25"></a></div> | [mistral-7b-openorca.Q4_K_M.gguf](https://huggingface.co/TheBloke/Mistral-7B-OpenOrca-GGUF) |         | <div>[https://llama.smartgic.io](https://llama.smartgic.io)</div> |
+| Member                                                                                                                                                        |                                     Solvers / LLM model                                     | Native Language |                                URL                                |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------:|:---------------:|:-----------------------------------------------------------------:|
+| <div><a href="https://github.com/goldyfruit"><img src="https://avatars.githubusercontent.com/u/614115?v=4" alt="goldyfruit" width="25" height="25"></a></div> | [mistral-7b-openorca.Q4_K_M.gguf](https://huggingface.co/TheBloke/Mistral-7B-OpenOrca-GGUF) |     english     | <div>[https://llama.smartgic.io](https://llama.smartgic.io)</div> |
 
 
 ## Companion plugin
@@ -26,22 +26,6 @@ Use with [ovos-solver-plugin-openai-persona](https://github.com/OpenVoiceOS/ovos
 A Persona is defined by a combination
 of [question solver plugins](https://openvoiceos.github.io/ovos-technical-manual/solvers/), the solvers are tried
 sequentially until one succeeds in answering the question similarly to fallback skills
-
-A basic example connecting to ChatGPT or compatible LLM (or a remote persona!)
-
-```
-"name": "ChatGPT",
-"solvers": [
-    "ovos-solver-openai-persona-plugin"
-],
-"ovos-solver-openai-persona-plugin": {
-    "api_url": "<OpenAI_or_compatible_server_url>",
-    "key": "<your_OpenAI_key>",
-    "persona": "helpful, creative, clever, and very friendly."
-}
-```
-
-But personas don't need to use LLMs, you don't need a beefy GPU to use ovos-persona!
 
 some repos and skills also provide solvers, such as ovos-classifiers (wordnet), skill-ddg, skill-wikipedia and
 skill-wolfie
@@ -71,7 +55,29 @@ wolfram alpha illustrates how to pass solver configs, it has a requirement for a
 search/knowledge base solvers can be used together with chatbot solvers to ensure factual answers and act as a tool/internet
 access layer, for classic chatbots the example above serves as a rudimentary implementation of tool use
 
-tool use for LLMs is better implemented as part of a dedicated solver plugin, some solvers may also use other solvers internally as a tool implementation for LLMs, 
+Chatbots are a nice toy and for chit-chat work well as a fallback if internet is not available, but you most likely want to connect a LLM to persona, be it remote or local
+
+## LLMs
+
+A basic example connecting to ChatGPT or compatible LLM (or a remote persona!)
+
+```
+"name": "ChatGPT",
+"solvers": [
+    "ovos-solver-openai-persona-plugin"
+],
+"ovos-solver-openai-persona-plugin": {
+    "api_url": "<OpenAI_or_compatible_server_url>",
+    "key": "<your_OpenAI_key>",
+    "persona": "helpful, creative, clever, and very friendly."
+}
+```
+
+> **NOTE**: In the config above "persona" sets the system prompt, this is specific to the solver plugin
+
+Wrapping your LLM in a solver plugin provides you [Bidirectional translation](https://openvoiceos.github.io/ovos-technical-manual/lang_plugins), even if your LLM is language specific you are able to use it in any language
+
+RAG and tool use for LLMs is better implemented as part of a dedicated solver plugin, LLM solvers may also use other solvers internally as agents/tools for LLMs, 
 
 ## Running
 

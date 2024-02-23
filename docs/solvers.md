@@ -5,7 +5,7 @@ auto translation capabilities for language support
 
 A plugin can define the language it works in, eg, wolfram alpha only accepts english input at the time of this writing
 
-Bidirectional translation will be handled behind the scenes for other languages
+Bidirectional [translation](https://openvoiceos.github.io/ovos-technical-manual/lang_plugins) will be handled behind the scenes for other languages
 
 Solvers are used by individual skills and by the [Persona Framework](https://github.com/OpenVoiceOS/ovos-persona)
 
@@ -42,7 +42,7 @@ d = DuckDuckGoSolver()
 query = "who is Isaac Newton"
 
 # full answer
-ans = d.get_spoken_answer(query)
+ans = d.spoken_answer(query)
 print(ans)
 # Sir Isaac Newton was an English mathematician, physicist, astronomer, alchemist, theologian, and author widely recognised as one of the greatest mathematicians and physicists of all time and among the most influential scientists. He was a key figure in the philosophical revolution known as the Enlightenment. His book Philosophiæ Naturalis Principia Mathematica, first published in 1687, established classical mechanics. Newton also made seminal contributions to optics, and shares credit with German mathematician Gottfried Wilhelm Leibniz for developing infinitesimal calculus. In the Principia, Newton formulated the laws of motion and universal gravitation that formed the dominant scientific viewpoint until it was superseded by the theory of relativity.
 ```
