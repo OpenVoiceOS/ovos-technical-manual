@@ -54,6 +54,8 @@ when `ovos-core` receives a natural language query/ `utterance` from a user it i
 The `utterance` transformers framework consists of any number of plugins ordered by priority (developer defined), the `utterance` and
 message.`context` are sent sequentially to all transformer plugins, and can be mutated by any of those plugins
 
+![imagem](https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/75b67a91-dd8d-48cd-a146-91988bbbf374)
+
 to enable a utterance transformer simply add it to `mycroft.conf` after installing it
 
 ```javascript
