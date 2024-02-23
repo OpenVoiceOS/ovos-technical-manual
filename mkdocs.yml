@@ -69,6 +69,7 @@ nav:
         - Media Skills: OCP_skills.md
         - OCP Pipeline: OCP_pipeline.md
     - GUI:
+        - Homescreen: homescreen.md
         - Protocol: gui_protocol.md
         - Shell: shell.md
         - QT5 mycroft-gui: qt5.md

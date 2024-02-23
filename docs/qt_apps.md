@@ -12,6 +12,8 @@ This is what powers [Plasma Bigscreen Voice Apps](https://plasma-bigscreen.org/d
 
 Desktop files are also parsed to populate the skills in the [homescreen](https://github.com/OpenVoiceOS/skill-ovos-homescreen) app drawer
 
+![](https://github.com/OpenVoiceOS/ovos_assets/raw/master/Images/homescreen-app-drawer.png)
+
 > **NOTE**: be sure to have [mycroft-gui-qt5](https://github.com/OpenVoiceOS/mycroft-gui-qt5) installed
 
 ```
