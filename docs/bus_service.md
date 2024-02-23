@@ -111,7 +111,16 @@ bus.emit(Message('recognizer_loop:utterance', data,
 						  'source': "remote_service"))
 ```
 
-> **NOTE**: [HiveMind](https://jarbashivemind.github.io/HiveMind-community-docs/) depends on the `source` and `"destination"` keys to route responses back to their respective satellites
+### Internal routing
+
+![imagem](https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/df9aa669-ce7f-430e-b4db-f57200e75332)
+
+- intent service will `.reply` to the original utterance message
+- all skill/intent service messages are `.forward` (from previous intent service `.reply`)
+- **WARNING** skills sending their own messages might not respect this
+
+
+> **NOTE**: [HiveMind](https://jarbashivemind.github.io/HiveMind-community-docs/) depends on the `"source"` and `"destination"` keys to route responses back to their respective satellites
 
 ### Sources
 
@@ -142,11 +151,3 @@ The idea is that for example when the android app is used to access OpenVoiceOS 
 TTS will be executed when `"audio"` is the `destination` (configurable in `"native_sources"`)
 
 A missing `destination` or if the `destination` is set to `None` is interpreted as a multicast and should trigger all output capable processes (be it the audio service, a web-interface, the KDE plasmoid or maybe the android app)
-
-### Internal routing
-
-![imagem](https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/df9aa669-ce7f-430e-b4db-f57200e75332)
-
-- intent service will `.reply` to the original utterance message
-- all skill/intent service messages are `.forward` (from previous intent service `.reply`)
-- **WARNING** skills sending their own messages might not respect this
