@@ -71,23 +71,26 @@ the Session can be used to select user preferences or resume previous conversati
 
 `ovos-core` always uses the reserved `"session_id": "default"`, and will fully manage the state of the default Session, individual clients are supposed to manage their own session and might ignore updates coming from `ovos-core`
 
-Things included in a Session
+Things included in a Session:
 
 - list of active skills (able to converse)
 - list of intent contexts (follow up questions)
 - utterance state (get_response vs regular utterance)
 - language
+- location
 - tts / stt preferences (eg, voice)
 - intent pipeline to be used
 - site_id
 
-By default these values are populated from `mycroft.conf`, skills have some "magic variables" that also reflect the session, such as `self.lang`
+By default these values are populated from `mycroft.conf`, skills have some "magic variables" that also reflect the session, such as `self.lang` and `self.location`. 
+
+> **NOTE** [Voice satellites](https://jarbashivemind.github.io/HiveMind-community-docs/07_voicesat/)  will send a subset of their own `mycroft.conf` via their Session
+
+[Transformers](https://openvoiceos.github.io/ovos-technical-manual/core/#utterance-transformers) may modify the Session, for example to inject [intent context](https://openvoiceos.github.io/ovos-technical-manual/context/)
 
 It is up to individual skills to manage session, see the [Session Aware Skills](https://openvoiceos.github.io/ovos-technical-manual/session_skills/) docs for details
 
-> **WARNING** skills that are not session aware may keep a shared state behave weirdly with [voice satellites](https://jarbashivemind.github.io/HiveMind-community-docs/07_voicesat/) 
-
-[Transformers](https://openvoiceos.github.io/ovos-technical-manual/core/#utterance-transformers) may modify the Session, for example to inject intent context 
+> **WARNING** skills that are not session aware may keep a shared state may behave weirdly with [voice satellites](https://jarbashivemind.github.io/HiveMind-community-docs/07_voicesat/) 
 
 ## Message Targeting
 
