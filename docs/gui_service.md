@@ -40,8 +40,9 @@ of `pages`. `pages` are ordered, but only 1 page is rendered at a time.
 OpenVoiceOS components interact with the GUI by defining session data and active pages, gui-clients may also send
 back `events` to indicate interactions
 
-The GUI clients may be implemented in any language, page templates are provided to skills via `self.gui.show_XXX` that
-should be implemented by all clients.
+The GUI clients may be implemented in any programming language, the page templates provided to skills via `self.gui.show_XXX` should be implemented and provided by all alternative clients.
+
+![imagem](https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/69c653dc-9bad-4a3a-bd43-efefb938f650)
 
 ## GUI Plugins
 
