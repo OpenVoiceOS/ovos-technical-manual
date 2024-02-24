@@ -30,16 +30,19 @@ OpenVoiceOS images ship with [ovos-homescreen](https://github.com/OpenVoiceOS/sk
 The GUI state is defined by `namespaces`, usually corresponding to a `skill_id`, each with any number
 of `pages`. 
 
-`pages` are ordered, but only 1 page is rendered at a time. users are expected to be able to "swipe left" and "swipe right" to switch between pages
+users are expected to be able to "swipe left" and "swipe right" to switch between `pages` within a `namespace`
 
-OpenVoiceOS components interact with the GUI by defining session data and active pages, gui-clients may also send
-back `events` to indicate interactions.
+OpenVoiceOS components interact with the GUI by defining session data and active pages, gui-clients may also send back `events` to indicate interactions.
 
 ![imagem](https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/69c653dc-9bad-4a3a-bd43-efefb938f650)
 
-> **NOTE**: GUI does not yet support Session, in the future namespaces will be tracked per Session allowing remote clients to each have their own GUI state
+`pages` are ordered and, usually, only 1 `page` is rendered at a time. 
 
-The GUI clients may be implemented in any programming language, the page templates provided to skills via `self.gui.show_XXX` should be implemented and provided by all alternative clients.
+If the screen size allows it platform specific gui client applications are free to render all `pages` into view.
+
+The GUI clients may be implemented in any programming language, the default page templates provided to skills via [GUIInterface](https://openvoiceos.github.io/ovos-technical-manual/skill_gui) should be implemented and provided by all alternative clients.
+
+> **QML tip**: - set `fillWidth: true` under `Mycroft.Delegate` to have a page always using the full screen
 
 ## Active Namespaces
 
@@ -47,11 +50,13 @@ In the context of a smartspeaker, when the GUI is idle a `homescreen` may be dis
 
 ![imagem](https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/25a2725a-271b-469d-822a-148b4fdfa30e)
 
-Whenever a `page` is displayed, `ovos-gui` tracks it and sets it's `namespace` to active, then tells the gui clients to render it.
+Whenever a `page` is displayed by a skill, `ovos-gui` tracks it and sets it's `namespace` to active, then tells the gui clients to render it.
 
 The active `namespace` and how long a page stays up are managed by `ovos-gui`, usually via platform specific plugins. 
 
 `ovos-gui` will decide when a `namespace` is no longer active, and then the next `namespace` will be rendered, 
+
+Skills using the [GUIInterface](https://openvoiceos.github.io/ovos-technical-manual/skill_gui/) can indicate how long they want a page to remain active
 
 Example: 
 
@@ -64,6 +69,8 @@ Example:
 - wolfram alpha times out - music player page is the active `namespace`
 
 - music ends and page times out - homescreen is the active `namespace`
+
+> **NOTE**: GUI does not yet support Session, in the future namespaces will be tracked per Session allowing remote clients to each have their own GUI state
 
 ## GUI Plugins
 
