@@ -1,39 +1,24 @@
 # Configuration
 
-- [Reading Configuration](#reading-configuration)
-- [Configuring Configuration](#configuring-configuration)
-    * [protected_keys](#protected-keys)
-    * [disable_user_config](#disable-user-config)
-    * [disable_remote_config](#disable-remote-config)
-- [Meta Configuration](#meta-configuration)
-    * [ovos.conf](#ovosconf)
+## Config Files
 
-## Reading Configuration
+When the configuration loader starts, it looks in several locations byorder, and loads ALL configurations. 
 
-The configuration files loaded are determined by `ovos.conf` as described in the next section and can be in either json or
-yaml format.
-
-if `Configuration()` is called the following configs would be loaded in this order:
-
-- `{ovos-config-package}/mycroft.conf`
-- `os.environ.get('MYCROFT_SYSTEM_CONFIG')` or `/etc/mycroft/mycroft.conf`
-- `os.environ.get('MYCROFT_WEB_CACHE')` or `$XDG_CONFIG_PATH/mycroft/web_cache.json`
-- `$XDG_CONFIG_DIRS/mycroft/mycroft.conf`
-- `/etc/xdg/mycroft/mycroft.conf`
-- `$XDG_CONFIG_HOME/mycroft/mycroft.conf` (default `~/.config/mycroft/mycroft.conf`)
-
-When the configuration loader starts, it looks in these locations in this order, and loads ALL configurations. Keys that
-exist in multiple configuration files will be overridden by the last file to contain the value. This process results in
+Keys that exist in multiple configuration files will be overridden by the last file to contain the value. This process results in
 a minimal amount being written for a specific device and user, without modifying default distribution files.
+
+The main configuration files are commonly referred too as:
+
+- **default** - the file shipped by the `ovos-config` package, containing default values
+- **system** - located at `/etc/mycroft/mycroft.conf`, intended to be shipped by specific platforms such as pre built raspberry pi images for dedicated hardware or by your OS package manager
+- **remote** - locate at `~/.config/mycroft/web_cache.json`, if using a backend to manage multiple devices this is where any downloaded config would be stored
+- **user** - located at `~/.config/mycroft/mycroft.conf`, intended for users to modify, usually does not exist until created by a user
+
 
 ## Configuring Configuration
 
 There are a couple of special configuration keys that change the way the configuration stack loads.
 
-* `Default` config refers to the config specified at `default_config_path` in
-  `ovos.conf` (#1 `{ovos-config-package}/mycroft.conf` in the stack above).
-* `System` config refers to the config at `/etc/{base_folder}/{config_filename}` (#2 `/etc/mycroft/mycroft.conf` in the stack
-  above).
 
 ### protected_keys
 
@@ -74,7 +59,28 @@ the remote configuration (`web_cache.json`) will not be loaded.
 
 ## Meta Configuration
 
-The `ovos_config` package determines which config files to load based on `ovos.conf`. This file is optional and does **NOT** need to exist
+
+### OS ENV vars
+
+The configuration files loaded can be modified by environment variables, or alternatively by `ovos.conf` (described in the next section)
+
+if `Configuration()` is called the following configs would be loaded in this order:
+
+- `{ovos-config-package}/mycroft.conf`
+- `os.environ.get('MYCROFT_SYSTEM_CONFIG')` or `/etc/mycroft/mycroft.conf`
+- `os.environ.get('MYCROFT_WEB_CACHE')` or `$XDG_CONFIG_PATH/mycroft/web_cache.json`
+- `$XDG_CONFIG_DIRS/mycroft/mycroft.conf`
+- `/etc/xdg/mycroft/mycroft.conf`
+- `$XDG_CONFIG_HOME/mycroft/mycroft.conf` (default `~/.config/mycroft/mycroft.conf`)
+
+
+Configuration files can be in either json or yaml format. json files must have `.json` or `.conf` file extensions, yaml files must have `.yml` or `.yaml` file extensions
+
+### ovos.conf
+
+The `ovos_config` package determines which config files to load based on `ovos.conf`. This file is optional and does **NOT** need to exist.
+
+> **NOTE**: You should not need to use or worry about this file except in extreme situations
 
 while `mycroft.conf` configures the voice assistant, `ovos.conf` configures the library
 
