@@ -9,7 +9,7 @@ rendering itself
 The GUI service provides a websocket for gui clients to connect to, it is responsible for implementing the gui protocol
 under `ovos-core`.
 
-You can find indepth documentation in the dedicated GUI section of these docs
+You can find indepth documentation of [the GUI protocol](https://openvoiceos.github.io/ovos-technical-manual/gui_protocol) in the dedicated GUI section of these docs
 
 ## Design Principles
 
