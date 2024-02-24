@@ -44,6 +44,9 @@ The GUI clients may be implemented in any programming language, the page templat
 
 ![imagem](https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/69c653dc-9bad-4a3a-bd43-efefb938f650)
 
+> **NOTE**: GUI does not yet support Session, in the future namespaces will be tracked per Session allowing remote clients to each have their own GUI state
+
+
 ## GUI Plugins
 
 **NEW** in `ovos-core` version **0.0.8**
