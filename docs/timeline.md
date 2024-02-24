@@ -48,6 +48,7 @@
 - ??? 2019 - @JarbasAI partners with NeonAI to maintain `neon-core`
 - Jul 2019 - steve penrod leaves MycroftAI
 - Jul 2019 - [Chatterbox kickstarter](https://www.kickstarter.com/projects/hellochatterbox/chatterbox-the-smart-speaker-that-kids-build-and-p) launched by @JarbasAI
+- Sep 2019 - [Mycroft on Plasma Automobile Demo](https://conf.kde.org/en/akademy2019/public/events/141.html) at Akademy 2019 by @aix
 - Oct 2019 - Official MycroftAI backend open sourced, licensed as AGPL
 - Dec 2019 - @Chance joins `lingua-franca` as a maintainer
 - Dec 2019 - Chatterbox released (closed source) / kickstarter campaign fullfilled
@@ -108,10 +109,10 @@
 - Oct 2021 - `neon-core` deprecates `HolmesIV` and adopts `ovos-core`
 - Oct 2021 - [skill-ovos-common-play](https://github.com/OpenVoiceOS/skill-ovos-common-play) deprecated in favor of [OCP](https://github.com/OpenVoiceOS/ovos-ocp-audio-plugin)
 - ??? 2021 - @Chance leaves `lingua-franca`
-- Nov 2021 - @JarbasAI leaves chatterbox
 - Nov 2021 - [ovos-plugin-manager](https://github.com/OpenVoiceOS/ovos-plugin-manager) released
 - Nov 2021 - [skill-ovos-timer](https://github.com/OpenVoiceOS/skill-ovos-timer) forked from Mycroft
 - Nov 2021 - [skill-ovos-homescreen](https://github.com/OpenVoiceOS/skill-ovos-homescreen) forked from Mycroft
+- Nov 2021 - @JarbasAI leaves chatterbox
 - Nov 2021 - `ovos-core` version **0.0.1** released
 - Nov 2021 - [ovos-utils](https://github.com/OpenVoiceOS/ovos-utils) adopted in `ovos-core`
 - Nov 2021 - [ovos-plugin-manager](https://github.com/OpenVoiceOS/ovos-plugin-manager) adopted in `ovos-core`
