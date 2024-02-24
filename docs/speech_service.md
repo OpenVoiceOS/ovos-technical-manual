@@ -259,19 +259,6 @@ Voice Activity Detection plugins have several functions under the listener servi
 }
 ```
 
-## Audio Transformers
-
-**NEW** in `ovos-core` version **0.0.8**, originally developed for [Neon](https://github.com/NeonGeckoCom/neon-transformers)
-
-Similarly to utterance transformers in `ovos-core`, the listener exposes audio and message.`context` to a set of plugins
-that can transform it before STT stage
-
-Audio transformer plugins can either transform the audio binary data itself (eg, denoise) or the `context` (eg, speaker
-recognition)
-
-The audio is sent sequentially to all transformer plugins, ordered by priority (developer defined), until finally it is
-sent to the STT stage
-
 ## STT
 
 Two STT plugins may be loaded at once, if the primary plugin fails for some reason the second plugin will be used.
@@ -286,6 +273,22 @@ device never becomes fully unusable
     "ovos-stt-plugin-server": {"url": "https://stt.openvoiceos.com/stt"}
 },
 ```
+
+## Audio Transformers
+
+**NEW** in `ovos-core` version **0.0.8**, originally developed for [Neon](https://github.com/NeonGeckoCom/neon-transformers)
+
+Similarly to utterance transformers in `ovos-core`, the listener exposes audio and message.`context` to a set of plugins
+that can transform it before STT stage
+
+Audio transformer plugins can either transform the audio binary data itself (eg, denoise) or the `context` (eg, speaker
+recognition)
+
+The audio is sent sequentially to all transformer plugins, ordered by priority (developer defined), until finally it is
+sent to the STT stage
+
+![imagem](https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/ae428a90-fc7e-4ca7-81d5-fa1d9bbfb885)
+
 
 ## Modes of Operation
 
