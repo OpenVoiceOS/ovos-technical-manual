@@ -7,8 +7,7 @@ The transport protocol works between gui service and the gui clients, OpenVoiceO
 
 The QT library which implements the protocol lives in the [mycroft-gui-qt5](https://github.com/OpenVoiceOS/mycroft-gui-qt5) repository. 
 
-OVOS images are powered by [ovos-shell](https://openvoiceos.github.io/community-docs/shell/),built on top of [mycroft-gui-qt5](https://github.com/OpenVoiceOS/mycroft-gui-qt5)
-
+![imagem](https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/92e73af7-f7d2-4aa3-a294-77f87aa22390)
 
 ## Specification
 
