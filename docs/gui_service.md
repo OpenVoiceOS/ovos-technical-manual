@@ -23,7 +23,7 @@ Our goal is to make all interactions Voice First, meaning that the user could ac
 
 However, many important controls need to be implemented as multimodal such as the ability to return to the home screen, change the volume, change the brightness of the screen, control media playback, and other system settings.
 
-OpenVoiceOS images ship with the [ovos-homescreen](https://openvoiceos.github.io/ovos-technical-manual/homescreen) and [ovos-shell](https://openvoiceos.github.io/ovos-technical-manual/shell), built on top of QT5, these components ensure the viability of the GUI in embedded devices running `ovos-shell` via EGLFS, without requiring a traditional desktop environment
+OpenVoiceOS images ship with [ovos-homescreen](https://github.com/OpenVoiceOS/skill-ovos-homescreen) and [ovos-shell](https://openvoiceos.github.io/ovos-technical-manual/shell), built on top of QT5, these components ensure the viability of the GUI in embedded devices running `ovos-shell` via EGLFS, without requiring a traditional desktop environment
 
 ## Architecture
 

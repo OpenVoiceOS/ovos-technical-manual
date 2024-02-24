@@ -5,7 +5,7 @@ skills. These tools will help define and validate the features of the skill befo
 
 This guide will cover some methods to use that can help plan, prototype and test your skill during the early design stages.
 
-> **CREDITS** - Skill [Voice User Interface Design Guidelines](https://derickschweppe.com/mycroft-ai-user-experience) based on the original work of Derick Schweppe
+> **CREDITS** - Voice User Interface Design Guidelines based on the [original work of Derick Schweppe](https://derickschweppe.com/mycroft-ai-user-experience)
 
 ## Interactions
 
