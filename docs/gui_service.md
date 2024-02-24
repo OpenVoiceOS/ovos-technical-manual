@@ -35,17 +35,40 @@ The gui service has a few sections in `mycroft.conf`
 ## Architecture
 
 The GUI state is defined by `namespaces`, usually corresponding to a `skill_id`, each with any number
-of `pages`. `pages` are ordered, but only 1 page is rendered at a time.
+of `pages`. 
+
+`pages` are ordered, but only 1 page is rendered at a time. users are expected to be able to "swipe left" and "swipe right" to switch between pages
 
 OpenVoiceOS components interact with the GUI by defining session data and active pages, gui-clients may also send
-back `events` to indicate interactions
-
-The GUI clients may be implemented in any programming language, the page templates provided to skills via `self.gui.show_XXX` should be implemented and provided by all alternative clients.
+back `events` to indicate interactions.
 
 ![imagem](https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/69c653dc-9bad-4a3a-bd43-efefb938f650)
 
 > **NOTE**: GUI does not yet support Session, in the future namespaces will be tracked per Session allowing remote clients to each have their own GUI state
 
+The GUI clients may be implemented in any programming language, the page templates provided to skills via `self.gui.show_XXX` should be implemented and provided by all alternative clients.
+
+## Active Namespaces
+
+In the context of a smartspeaker, when the GUI is idle a `homescreen` may be displayed, eg. an animated face or clock
+
+Whenever a `page` is displayed, `ovos-gui` tracks it and sets it's `namespace` to active, then tells the gui clients to render it.
+
+The active `namespace` and how long a page stays up are managed by `ovos-gui`, usually via platform specific plugins. 
+
+`ovos-gui` will decide when a `namespace` is no longer active, and then the next `namespace` will be rendered, 
+
+Example: 
+
+- OVOS is idle - homescreen is the active `namespace`
+
+- you ask OVOS to play music and the music page shows up - music player page is the active `namespace`
+
+- you ask OVOS a question and wolfram alpha page shows up - wolfram page is the active `namespace`
+
+- wolfram alpha times out - music player page is the active `namespace`
+
+- music ends and page times out - homescreen is the active `namespace`
 
 ## GUI Plugins
 
