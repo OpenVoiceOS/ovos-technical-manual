@@ -61,29 +61,3 @@ this is usually done by your OS and specific to a use case.
 | [ovos-gui-plugin-bigscreen](https://github.com/OVOSHatchery/ovos-gui-plugin-bigscreen)            | window management for [Plasma Bigscreen](https://invent.kde.org/plasma/plasma-bigscreen) [Voice Apps](https://plasma-bigscreen.org/docs/develop/) | **UNMAINTED** <br> [message specs](https://openvoiceos.github.io/message_spec/gui_bigscreen/) <br> backup fork in life support [ovos-plasma-bigscreen-qt5](https://github.com/OVOSHatchery/ovos-plasma-bigscreen-qt5) |
 | [ovos-gui-plugin-plasmoid](https://github.com/OVOSHatchery/ovos-gui-plugin-plasmoid)              | [Plasma integration of different Mycroft AI services](https://invent.kde.org/utilities/mycroft-plasmoid)                                          | **UNMAINTED** <br> never migrated to OVOS                                                                                                                                                                             |
 
-
-## GUIInterface
-
-Any component wanting to implement a GUI for OpenVoiceOS can do so via the `GUIInterface` class
-from [ovos-bus-client](https://github.com/OpenVoiceOS/ovos-bus-client/blob/dev/ovos_bus_client/apis/gui.py)
-
-Sending custom pages from skills requires skill to explicitly support a client platform
-
-```python
-class GUIInterface:
-    """
-    Interface to the Graphical User Interface, allows interaction with
-    the mycroft-gui from anywhere
-
-    Values set in this class are synced to the GUI, accessible within QML
-    via the built-in sessionData mechanism.  For example, in Python you can
-    write in a skill:
-        self.gui['temp'] = 33
-        self.gui.show_page('Weather')
-        
-    Then in the Weather.qml you'd access the temp via code such as:
-        text: sessionData.time
-    """
-```
-
-in OVOS Skills `self.gui` provides a `GUIInterface`  under `self.skill_id` namespace

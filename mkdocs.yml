@@ -45,7 +45,6 @@ nav:
         - Bus Interaction: skills_bus.md
         - Filesystem: skill_filesystem.md
         - Skill Settings: skill_settings.md
-        - Skill GUI: skill_gui.md
         - Skill API: skill_api.md
         - Skill Json: skill_json.md
         - Skill Tests: skill_tests.md
@@ -74,6 +73,7 @@ nav:
         - Shell: shell.md
         - QT5 mycroft-gui: qt5.md
     - MessageBus APIs:
+        - GUI Interface: skill_gui.md
         - Enclosure Api: mk1_api.md
     - Technologies:
         - Eggscript: eggscript.md

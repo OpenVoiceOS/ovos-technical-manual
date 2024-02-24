@@ -1,14 +1,39 @@
-# GUI Framework
+# GUIInterface
 
-Mycroft-GUI is an open source visual and display framework for Mycroft running on top of KDE Plasma Technology and built using Kirigami a lightweight user interface framework for convergent applications which are empowered by Qt.
+Any component wanting to implement a GUI for OpenVoiceOS can do so via the `GUIInterface` class
+from [ovos-bus-client](https://github.com/OpenVoiceOS/ovos-bus-client/blob/dev/ovos_bus_client/apis/gui.py)
 
-OVOS uses the standard mycroft-gui framework, you can find the official documentation [here](https://mycroft-ai.gitbook.io/docs/skill-development/displaying-information/mycroft-gui)
+Sending custom pages from skills requires skill to explicitly support a client platform
 
-## Show Simple Content
+```python
+class GUIInterface:
+    """
+    Interface to the Graphical User Interface, allows interaction with
+    the mycroft-gui from anywhere
 
-Skills can use `self.gui`  to interact with the GUI service, any ovos component may provide a similar interface via `GUIInterface` class provided by `ovos_utils`
+    Values set in this class are synced to the GUI, accessible within QML
+    via the built-in sessionData mechanism.  For example, in Python you can
+    write in a skill:
+        self.gui['temp'] = 33
+        self.gui.show_page('Weather')
+        
+    Then in the Weather.qml you'd access the temp via code such as:
+        text: sessionData.time
+    """
+```
 
-### Text
+in OVOS Skills `self.gui` provides a `GUIInterface`  under `self.skill_id` namespace
+
+## Page Templates
+
+To have a unified look and feel, and to allow simple UIs to be integrated into skills without UI framework knowledge, the GUIInterface provides page templates
+
+A page template is a ui file, like QML or html, that is used by gui clients to render the info provided by `ovos-gui`.
+
+Skills may provide their own pages, for example for [QT Voice Apps](https://openvoiceos.github.io/ovos-technical-manual/qt_apps/), but is their responsibility to explicitly support individual gui client apps if not using a provided template
+
+
+#### Text
 
 Display simple strings of text.
 
@@ -27,7 +52,7 @@ Arguments:
   * True: Disables showing all platform skill animations.
   * False: 'Default' always show animations.
 
-### Static Image
+#### Static Image
 
 Display a static image such as a jpeg or png.
 
@@ -51,7 +76,7 @@ Arguments:
   * True: Disables showing all platform skill animations.
   * False: 'Default' always show animations.
 
-### Animated Image
+#### Animated Image
 
 Display an animated image such as a gif.
 
@@ -75,7 +100,7 @@ Arguments:
   * True: Disables showing all platform skill animations.
   * False: 'Default' always show animations.
 
-### HTML Page
+#### HTML Page
 
 Display a local HTML page.
 
@@ -94,7 +119,7 @@ Arguments:
   * True: Disables showing all platform skill animations.
   * False: 'Default' always show animations.
 
-### Remote URL
+#### Remote URL
 
 Display a webpage.
 
@@ -111,11 +136,4 @@ Arguments:
 * override\_animations \(boolean\):
   * True: Disables showing all platform skill animations.
   * False: 'Default' always show animations.
-
-
-## Advanced QML
-
-You can take full advantage of QML directly, you can find mycroft official docs [here](https://mycroft-ai.gitbook.io/docs/skill-development/displaying-information/mycroft-gui#in-depth-qml-based-audio-and-visual-interaction-skills)
-
-We have [additional design guidelines](./qml_guidelines.md) under our dedicated GUI documentation
 
