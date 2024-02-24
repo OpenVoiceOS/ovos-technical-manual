@@ -11,26 +11,19 @@ under `ovos-core`.
 
 You can find indepth documentation in the dedicated GUI section of these docs
 
-## Configuration
+## Design Principles
 
-The gui service has a few sections in `mycroft.conf`
+The OpenVoiceOS GUI was designed with some simple principles in mind.
 
-```javascript
-"gui": {
-    "idle_display_skill": "skill-ovos-homescreen.openvoiceos",
-    "extension": "generic",
-    "generic": {
-        "homescreen_supported": false
-    }
-},
-  
-"gui_websocket": {
-    "host": "0.0.0.0",
-    "base_port": 18181,
-    "route": "/gui",
-    "ssl": false
-},
-```
+> **The visual interface is always secondary to the voice interface.**
+
+Our goal is to make all interactions Voice First, meaning that the user could accomplish their tasks with just voice interaction.
+
+> **Touchscreen menus should be kept to a minimum, this reinforces using the primary mode of interaction, voice.**
+
+However, many important controls need to be implemented as multimodal such as the ability to return to the home screen, change the volume, change the brightness of the screen, control media playback, and other system settings.
+
+OpenVoiceOS images ship with the [ovos-homescreen](https://openvoiceos.github.io/ovos-technical-manual/homescreen) and [ovos-shell](https://openvoiceos.github.io/ovos-technical-manual/shell), built on top of QT5, these components ensure the viability of the GUI in embedded devices running `ovos-shell` via EGLFS, without requiring a traditional desktop environment
 
 ## Architecture
 
@@ -89,3 +82,24 @@ this is usually done by your OS and specific to a use case.
 | [ovos-gui-plugin-bigscreen](https://github.com/OVOSHatchery/ovos-gui-plugin-bigscreen)            | window management for [Plasma Bigscreen](https://invent.kde.org/plasma/plasma-bigscreen) [Voice Apps](https://plasma-bigscreen.org/docs/develop/) | **UNMAINTED** <br> [message specs](https://openvoiceos.github.io/message_spec/gui_bigscreen/) <br> backup fork in life support [ovos-plasma-bigscreen-qt5](https://github.com/OVOSHatchery/ovos-plasma-bigscreen-qt5) |
 | [ovos-gui-plugin-plasmoid](https://github.com/OVOSHatchery/ovos-gui-plugin-plasmoid)              | [Plasma integration of different Mycroft AI services](https://invent.kde.org/utilities/mycroft-plasmoid)                                          | **UNMAINTED** <br> never migrated to OVOS                                                                                                                                                                             |
 
+
+## Configuration
+
+The gui service has a few sections in `mycroft.conf`
+
+```javascript
+"gui": {
+    "idle_display_skill": "skill-ovos-homescreen.openvoiceos",
+    "extension": "generic",
+    "generic": {
+        "homescreen_supported": false
+    }
+},
+  
+"gui_websocket": {
+    "host": "0.0.0.0",
+    "base_port": 18181,
+    "route": "/gui",
+    "ssl": false
+},
+```
