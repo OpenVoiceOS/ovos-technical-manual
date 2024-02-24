@@ -52,6 +52,8 @@ The GUI clients may be implemented in any programming language, the page templat
 
 In the context of a smartspeaker, when the GUI is idle a `homescreen` may be displayed, eg. an animated face or clock
 
+![imagem](https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/25a2725a-271b-469d-822a-148b4fdfa30e)
+
 Whenever a `page` is displayed, `ovos-gui` tracks it and sets it's `namespace` to active, then tells the gui clients to render it.
 
 The active `namespace` and how long a page stays up are managed by `ovos-gui`, usually via platform specific plugins. 
