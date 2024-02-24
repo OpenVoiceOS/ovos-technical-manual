@@ -9,8 +9,8 @@ nav:
         - Timeline: timeline.md
     - Architecture:
         - Bus: bus_service.md
-        - Core: core.md
         - Listener: speech_service.md
+        - Core: core.md
         - Audio: audio_service.md
         - GUI: gui_service.md
         - Media: OCP.md
