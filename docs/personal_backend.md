@@ -9,7 +9,15 @@ This repo is an alternative to the backend meant for personal usage, this allows
 This is NOT meant to provision third party devices, but rather to run on the mycroft devices directly or on a private
 network
 
-NOTE: There is no pairing, devices will just activate themselves and work
+NOTE: There is no website for pairing, devices will just activate themselves and work
+
+## Public Servers
+
+| Member | Service | Needs Auth | URL |
+|---|:---:|:---:|:---:|
+| <div><a href="https://github.com/builderjer"><img src="https://avatars.githubusercontent.com/u/34875857?v=4" alt="builderjer" width="25" height="25"></a></div> | Personal Backend | No | <div>[https://ovospublicbackend.ziggyai.online](https://ovospublicbackend.ziggyai.online)</div> |
+
+> **WARNING**: public servers are meant for demo purposes, you are strongly encouraged to self host a backend instead!
 
 ## Usage
 
@@ -113,10 +121,8 @@ with selinux)
 
 ### Configuration
 
-configure backend by editing/creating ```~/.config/json_database/ovos_backend.json```
+configure backend by editing/creating ```~/.config/ovos_local_backend/ovos_backend.json```
 
-see default
-values [here](https://github.com/OpenVoiceOS/ovos-personal-backend/blob/dev/ovos_local_backend/configuration.py)
 
 ```json
 {
