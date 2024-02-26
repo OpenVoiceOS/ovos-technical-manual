@@ -2,6 +2,20 @@
 
 [OVOS-shell](https://github.com/OpenVoiceOS/ovos-shell) is the OpenVoiceOS client implementation of the [mycroft-gui-qt5](https://github.com/OpenVoiceOS/mycroft-gui-qt5) library used in our embedded device images
 
+## Design Principles
+
+The OpenVoiceOS Shell was designed with some simple principles in mind.
+
+> **The visual interface is always secondary to the voice interface.**
+
+Our goal is to make all interactions Voice First, meaning that the user could accomplish their tasks with just voice interaction.
+
+> **Touchscreen menus should be kept to a minimum, this reinforces using the primary mode of interaction, voice.**
+
+However, many important controls need to be implemented as multimodal such as the ability to return to the home screen, change the volume, change the brightness of the screen, control media playback, and other system settings.
+
+OpenVoiceOS images ship with [ovos-homescreen](https://github.com/OpenVoiceOS/skill-ovos-homescreen) and `ovos-shell`, built on top of QT5, these components ensure the viability of the GUI in embedded devices running `ovos-shell` via EGLFS, without requiring a traditional desktop environment
+
 ## Companion Plugins
 
 To unlock full functionality you also need to configure [ovos-gui-plugin-shell-companion](https://github.com/OpenVoiceOS/ovos-gui-plugin-shell-companion) in mycroft.conf
