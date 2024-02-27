@@ -1,11 +1,13 @@
-## Fork timeline
+## Family Tree
+
+![imagem](https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/f744a5f1-f01a-442e-ad8c-27cf6cab847c)
 
 - mycroft-core created
 - neon-core forked from mycroft-core
-- chatterbox forked from mycroft-core
+- chatterbox forked from mycroft-core  (closed source)
 - mycroft-lib forked from mycroft-core to become a library, it is only a properly packaged mycroft-core
-- chatterbox rewritten to use mycroft-lib internally, no longer a fork
-- neon-core rewritten to use mycroft-lib internally, no longer a fork
+- chatterbox rewritten to use mycroft-lib internally, no longer a hard fork
+- neon-core rewritten to use mycroft-lib internally, no longer a hard fork
 - mycroft-lib renamed to HolmesIV to avoid trademark issues
 - HolmesV created to use HolmesIV internally, HolmesV gets features and HolmesIV bug fixes only
 - chatterbox updated to HolmesV
