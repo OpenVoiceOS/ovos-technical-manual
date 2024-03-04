@@ -8,22 +8,22 @@ The `ready_settings` configuration is part of the `SkillManager` and determines 
 emitted, indicating that OVOS is ready to operate.
 
 - **'skills':**
-    - Loads all offline skills at the start.
+    - Waits for the all offline skills to be loaded
 
 - **'network_skills':**
-    - Waits for the `'mycroft.network.connected'` message before setting the `'mycroft.ready'` state.
+    - Waits for the `'mycroft.network.connected'` message  
 
 - **'internet_skills':**
-    - Waits for the `'mycroft.internet.connected'` message before setting the `'mycroft.ready'` state.
+    - Waits for the `'mycroft.internet.connected'` message  
 
 - **'setup':**
     - Waits for an external setup skill to handle actions such as pairing and configuration. 
 
 - **'audio':**
-    - Waits for the audio stack to be initialized before setting the `'mycroft.ready'` state.
+    - Waits for the audio stack to be initialized 
 
 - **'speech':**
-    - Waits for the speech engine to be initialized before setting the `'mycroft.ready'` state.
+    - Waits for the speech engine (STT) to be initialized  
 
 ```json
 {
@@ -37,7 +37,7 @@ emitted, indicating that OVOS is ready to operate.
 }
 ```
 
-> **WARNING** The default behavior is to wait only for offline skills at the start. This is a departure from mycroft-core, which did not have dynamic skills. It may impact skills listening for the `mycroft.ready` event. Skills should consider this when relying on the `'mycroft.ready'` state and ensure they are configured accordingly to handle dynamic skill loading.
+> **WARNING** The default behavior is to wait only for offline skills at the start. This is a departure from mycroft-core, which did not have dynamic skills. It may impact skills listening for the `mycroft.ready` event. 
 
 In this example, the `ready_settings` are configured to wait for network and internet connectivity before emitting
 the `'mycroft.ready'` message. Each setup can costumize these settings based on their needs, a offline install won't
@@ -59,24 +59,24 @@ Dynamic unloading of skills based on specific conditions significantly reduces t
 
 This approach aligns with resource-conscious design, providing a more responsive and reliable voice assistant environment. Developers can focus on skill functionality, knowing that OVOS efficiently manages skill loading and unloading based on runtime requirements.
 
-> Conditions set in `RuntimeRequirements` can influence when the 'mycroft.ready' message is emitted based on the `ready_settings` configuration.
-
 ## The RuntimeRequirements @classproperty
 
 **NEW** in `ovos-core` version **0.0.8**
+
+> **WARNING** this functionality deprecates `"priority_skills"` config option
 
 The `RuntimeRequirements` property is a class property that skill developers can utilize to define the conditions and
 resource requirements of their skill during initialization and runtime. This property is a part of the `OVOSSkill` class
 and is used to guide the loading and unloading of skills based on specified criteria.
 
-> **NOTE:** The `@classproperty` decorator allows `SkillManager` to read this without instantiating the skill.
-
 To use `RuntimeRequirements`, skill developers need to override the property within their skill class.
+
+It's important to note that `RuntimeRequirements` is optional. If not defined, OVOS will assume internet is required but GUI is optional. This default behavior reflects the original behavior of `mycroft-core` and **might change in the future**.
+
+> **NOTE:** The `@classproperty` decorator allows `SkillManager` to read this without instantiating the skill.
 
 These examples showcase how `RuntimeRequirements` can be used to tailor the loading and runtime conditions of a skill
 based on specific requirements and dependencies.
-
-It's important to note that `RuntimeRequirements` is optional. If not defined, OVOS will assume internet is required but GUI is optional. This default behavior reflects the original behavior of `mycroft-core` and **might change in the future**.
 
 ### Fully Offline Skill
 
