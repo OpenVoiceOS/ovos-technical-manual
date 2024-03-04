@@ -46,6 +46,7 @@ nav:
         - Filesystem: skill_filesystem.md
         - Skill Settings: skill_settings.md
         - Skill API: skill_api.md
+        - Runtime Requirements: runtime.md
         - Skill Json: skill_json.md
         - Skill Tests: skill_tests.md
         - F.A.Q.: dev.md
