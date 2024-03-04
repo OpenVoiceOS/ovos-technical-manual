@@ -45,6 +45,8 @@ want internet skills, a server wont want a audio stack etc.
 
 ## Dynamic Loading and Unloading
 
+**NEW** in `ovos-core` version **0.0.8**
+
 **Optimizing Resource Usage**
 
 OVOS introduces dynamic loading and unloading of skills, streamlining resource management. Skill developers no longer need to perform connectivity checks during the skill loading process.
@@ -60,6 +62,8 @@ This approach aligns with resource-conscious design, providing a more responsive
 > Conditions set in `RuntimeRequirements` can influence when the 'mycroft.ready' message is emitted based on the `ready_settings` configuration.
 
 ## The RuntimeRequirements @classproperty
+
+**NEW** in `ovos-core` version **0.0.8**
 
 The `RuntimeRequirements` property is a class property that skill developers can utilize to define the conditions and
 resource requirements of their skill during initialization and runtime. This property is a part of the `OVOSSkill` class
