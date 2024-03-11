@@ -219,3 +219,51 @@ entities = s.ocp_voc_match("play HorrorBabble")
 # {'audiobook_streaming_provider': 'HorrorBabble'}
 print(entities)
 ```
+
+
+## Playlist Results
+
+Results can also be playlists, not only single tracks, for instance full albums or a full season for a series
+
+When a playlist is selected from Search Results, it will replace the Now Playing list
+
+Playlist results look exactly the same as regular results, but instead of a `uri` they provide a `playlist`
+
+```python
+playlist: list  # list of dicts, each dict is a regular search result
+title: str
+media_type: MediaType
+playback: PlaybackType
+match_confidence: int  # 0-100
+```
+
+> NOTE: nested playlists are a work in progress and not guaranteed to be functional, ie, the `"playlist"` dict key should not include other playlists
+
+### Playlist Skill
+
+```python
+class MyJamsSkill(OVOSCommonPlaybackSkill):
+
+    def __init__(self, *args, **kwargs):
+        self.supported_media = [MediaType.MUSIC]
+        self.skill_icon = join(dirname(__file__), "ui", "myjams.png")
+        super().__init__(*args, **kwargs)
+
+    @ocp_search()
+    def search_my_jams(self, phrase, media_type):
+        if self.voc_match(...):
+            results = [...]  # regular result dicts, as in examples above
+            score = 70  # TODO
+
+            yield {
+                "match_confidence": min(100, score),
+                "media_type": MediaType.MUSIC,
+                "playlist": results, # replaces "uri"
+                "playback": PlaybackType.AUDIO,
+                "image": self.image,
+                "bg_image": self.image,
+                "skill_icon": self.skill_icon,
+                "title": "MyJams",
+                "length": sum([r["length"] for r in results])  # total playlist duration
+            }
+```
