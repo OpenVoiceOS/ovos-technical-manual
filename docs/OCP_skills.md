@@ -11,7 +11,7 @@ The actual voice interaction is handled by OCP, skills only implement the return
 Search results are returned as a list of dicts, skills can also use iterators to yield results 1 at a time as they become available
 
 Mandatory fields are
-```
+```python
 uri: str  # URL/URI of media, OCP will handle formatting and file handling
 title: str
 media_type: MediaType
@@ -20,13 +20,13 @@ match_confidence: int  # 0-100
 ```
 
 Other optional metadata includes artists, album, length and images for the GUI
-```
+```python
 artist: str
 album: str
 image: str # uri/file path
 bg_image: str # uri/file path
 skill_icon: str # uri/file path
-duration: int # seconds, -1 for live streams
+length: int # seconds, -1 for live streams
 ```
 
 ![imagem](https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/08e31d2d-90e8-45ea-ab2f-dbd235892cb3)
@@ -118,7 +118,7 @@ class SomaFMSkill(OVOSCommonPlaybackSkill):
                 "bg_image": ch.image,
                 "skill_icon": self.skill_icon,
                 "title": ch.title,
-                "author": "SomaFM",
+                "artistr": "SomaFM",
                 "length": 0
             }
 ```
