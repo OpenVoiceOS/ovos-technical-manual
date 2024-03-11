@@ -18,7 +18,16 @@ media_type: MediaType
 playback: PlaybackType
 match_confidence: int  # 0-100
 ```
+
 Other optional metadata includes artists, album, length and images for the GUI
+```
+artist: str
+album: str
+image: str # uri/file path
+bg_image: str # uri/file path
+skill_icon: str # uri/file path
+duration: int # seconds, -1 for live streams
+```
 
 ![imagem](https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/08e31d2d-90e8-45ea-ab2f-dbd235892cb3)
 
