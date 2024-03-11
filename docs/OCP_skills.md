@@ -6,13 +6,40 @@ These skills work as media providers, they return results for OCP to playback
 
 The actual voice interaction is handled by OCP, skills only implement the returning of results
 
-## OVOSCommonPlaybackSkill
+## Search Results
 
-subclass your skill from `OVOSCommonPlaybackSkill`
+Search results are returned as a list of dicts, skills can also use iterators to yield results 1 at a time as they become available
 
-use `@ocp_search()` decorator in as many handlers as you want to return search results
+Mandatory fields are
+```
+uri: str  # URL/URI of media, OCP will handle formatting and file handling
+title: str
+media_type: MediaType
+playback: PlaybackType
+match_confidence: int  # 0-100
+```
+Other optional metadata includes artists, album, length and images for the GUI
 
-use `@ocp_featured_media()` decorator to populate the [OCP skills menu]()
+![](.ocp_skills_images/ec4c0447.png)
+
+### OCP Skill
+
+General Steps to create a skill
+
+- subclass your skill from `OVOSCommonPlaybackSkill`
+- In the \_\_init\_\_ method indicate [the media types you want to handle](https://github.com/OpenVoiceOS/ovos-ocp-audio-plugin/blob/31701ded43a4f7ff6c02833d6aaf1bc0740257fc/ovos_plugin_common_play/ocp/status.py#L95)
+- `self.voc_match(phrase, "skill_name")` to handle specific requests for your skill
+- `self.remove_voc(phrase, "skill_name")` to remove matched phrases from the search request
+- Implement the `ocp_search` decorator, as many as you want (they run in parallel)
+  - The decorated method can return a list or be an iterator of `result_dict` (track or playlist)
+  - The search function can be entirely inline or call another Python library, like [pandorinha](https://github.com/OpenJarbas/pandorinha) or [plexapi](https://github.com/pkkid/python-plexapi)
+- `self.extend_timeout()` to delay OCP from selecting a result, requesting more time to perform the search
+- Implement a confidence score formula
+  - [Values are between 0 and 100](https://github.com/OpenVoiceOS/ovos-ocp-audio-plugin/blob/31701ded43a4f7ff6c02833d6aaf1bc0740257fc/ovos_plugin_common_play/ocp/status.py#L4)
+  - High confidence scores cancel other OCP skill searches
+- `ocp_featured_media`, return a playlist for the OCP menu if selected from GUI (optional)
+- Create a `requirements.txt` file with third-party package requirements
+
 
 ```python
 from os.path import join, dirname
@@ -90,6 +117,10 @@ class SomaFMSkill(OVOSCommonPlaybackSkill):
 
 ## OCP Keywords
 
+OCP skills often need to match hundreds or thousands of strings against the query string, `self.voc_match` can quickly become impractical to use in this scenario
+
+To help with this the OCP skill class provides efficient keyword matching
+
 ```python
 def register_ocp_keyword(self, label: str, samples: List, langs: List[str] = None):
     """ register strings as native OCP keywords (eg, movie_name, artist_name ...)
@@ -113,7 +144,7 @@ def load_ocp_keyword_from_csv(self, csv_path: str, lang: str):
     """
 ```
 
-## OCP Voc match
+### OCP Voc match
 
 uses [Aho–Corasick algorithm](https://en.wikipedia.org/wiki/Aho%E2%80%93Corasick_algorithm) to match OCP keywords
 
@@ -124,7 +155,8 @@ OCP keywords are registered via `self.register_ocp_keyword`
 wordlists can also be loaded from a .csv file, see [the OCP dataset](https://github.com/OpenVoiceOS/ovos-classifiers/tree/dev/scripts/training/ocp/datasets) for a list of keywords gathered from wikidata with SPARQL queries
 
 
-example usage
+### OCP Database Skill
+
 ```python
 import json
 
