@@ -42,6 +42,7 @@ nav:
         - Anatomy: skill_structure.md
         - Dialog: statements.md
         - Intents: intents.md
+        - Customization: user_res_files.md
         - Bus Interaction: skills_bus.md
         - Filesystem: skill_filesystem.md
         - Skill Settings: skill_settings.md
