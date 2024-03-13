@@ -1,52 +1,51 @@
 # skill.json
 
-Skills can include a skill.json file in the root of the skill directory
+Skills can **optionally** include a `skill.json` file in their `locale` folder
 
-This file contains metadata about the skill and is all you need to submit a skill to some skill marketplaces (eg. Pling)
+> **WARNING** skills in the wild might include an earlier and **deprecated** version of `skill.json` in the root of the skill directory
+
+This file contains metadata about the skill and all info about how to install and display the skill entry
 
 ```javascript
 {
-  "name": "Wolfram Alpha",
-  "description": "Get information from Wolfram Alpha",
-  "skillname": "skill-wolfie",
-  "authorname": "JarbasSkills",
-  "url": "https://github.com/JarbasSkills/skill-wolfie",
-  "branch": "v0.1",
-  "desktopFile": false,
-  "systemDeps": false,
-  "download_url": "https://github.com/JarbasSkills/skill-wolfie/archive/v0.1.tar.gz",
+  "skill_id": "skill-XXX.exampleauthor",
+  "source": "https://github.com/ExampleAuthor/skill-XXX",
+  "package_name": "ovos-skill-XXX",
+  "extra_plugins": {
+    "core": ["ovos-utterance-transformer-XXX"],
+    "PHAL": ["ovos-PHAL-XXX"],
+    "listener": ["ovos-audio-transformer-XXX", "ovos-ww-plugin-XXX", "ovos-vad-plugin-XXX", "ovos-stt-plugin-XXX"],
+    "audio": ["ovos-dialog-transformer-XXX","ovos-tts-transformer-XXX", "ovos-tts-plugin-XXX"],
+    "media": ["ovos-ocp-XXX", "ovos-media-XXX"],
+    "gui": ["ovos-gui-extension-XXX"]
+  },
+  "icon": "http://example_icon.svg",
+  "images": ["http://example_logo.png", "http://example_screenshot.png"],
+  "name": "My Skill",
+  "description": "Does awesome skill stuff!",
   "examples": [
-    "ask the wolf what is the speed of light",
-    "How tall is Mount Everest?",
-    "When was The Rocky Horror Picture Show released?",
-    "What is Madonna's real name?",
-    "What's 18 times 4?",
-    "How many inches in a meter?"
+    "do the thing",
+    "say this to use the skill"
   ],
-  "lang": "en-us",
-  "lang_support": {
-    "pt-pt": {
-      "name": "Wolfram Alpha",
-      "description": "...",
-      "examples": [...]
-    }
-  }
+  "tags": ["productivity", "entertainment", "aliens"]
 }
 ```
+
+> **EXPERIMENTAL** this specification might change, it is still at the proposal stage and open for feedback
 
 # Spec
 
 On the JSON file:
 
+* `skill_id` refers to the unique skill identifier, this is defined in `setup.py` and by convention is usually `repo.author` (lower-cased)
+* `source` git url to download the source code, a skill can be installed from source with `pip install git+{source}`
+* `package_name` the package name of the skill, if the skill is on pypi it can be installed with `pip install {package_name}`
+* `extra_plugins` list of python requirements that are not direct dependencies of the skill but should be installed in a companion OVOS service
 * `name` is a human-readable name for the skill to be used in store listings, UI, etc.
 * `description` is a human-readable short description of the skill. This should be limited to one or two sentences max
-* `branch` refers to the git tag mentioned above, and can be omitted if the tag is in the URL.
-* `desktop_file` should be `true` if your Skill is associated with a FreeDesktop-compliant desktop entry. Most Skills should leave this `false`.
-* `systemDeps` should be `true` if your skill requirements include system packages, or `false` if not.
-* `icon` can be omitted if the Skill's icon can be resolved another way by OSM.
-* `folder` should be omitted unless you know your target device requires it.
-* `categories` can list as many categories as you like, and the Skill will appear under each in the Skills Store.`category` refers to the Skill's *primary* category, which is the one that will appear next to its entry when clicked.
-* `tags` refers to other search terms you'd like to apply to this Skill. You are encouraged to add as many tags as you feel are appropriate. These will be carefully checked as part of the review process.
 * `examples` is a list of example utterances that this skill should handle
-* `lang` is the language the `skill.json` and `README.md` files are written in
-* `lang_support` is a dict of other supported languages to translated skill `name`, `description`, and `examples`. Missing fields will default to top-level fields
+* `tags` is a list of arbitrary labels and categories, helps search results to find this skill
+* `icon` optional skill icon to display
+* `images` optional list of images to showcase the skill
+
+> **LANG SUPPORT**: include `skill.json` in each lang subfolder of your `locale` skill directory, this signals language support and allows translation of `name`, `description`, `examples` and `tags`
