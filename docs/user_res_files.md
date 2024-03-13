@@ -30,7 +30,8 @@ Here's a step-by-step guide on how to replace the dialog of an existing skill:
 **Locate the User-Specific Resource Directory**:
 
    - Use the provided skill ID (`skill-ovos-date-time.openvoiceos`) to locate the user-specific resource directory.
-   - The user-specific resource directory is typically located within the XDG data directory. It follows the path `XDG_DATA_HOME/mycroft/resources/skill-ovos-date-time.openvoiceos` (where `XDG_DATA_HOME` is the user's data directory, usually `~/.local/share` on Linux).
+   - The user-specific resource directory is located within the XDG data directory. It follows the path `XDG_DATA_HOME/mycroft/resources/skill-ovos-date-time.openvoiceos` (where `XDG_DATA_HOME` is the user's data directory, usually `~/.local/share` on Linux).
+   - If it does not exist, create it, This can be done using file manager tools or command-line utilities such as `mkdir` on Unix-like systems.
 
 **Copy the Replacement Dialog File to the User-Specific Directory**:
 
@@ -77,6 +78,8 @@ Users can add language support for a skill by creating a new language folder in 
    - Restart OpenVoiceOS to allow the skill to recognize the newly added language resources.
    - Test the skill using the newly added language to ensure that it functions correctly and uses the appropriate language-specific resources.
 
-By following these steps, users can add support for additional languages to existing skills by creating new language folders and copying the required resource files. 
+By following these steps, users can add support for additional languages to existing skills by creating new language folders and copying the required resource files.
+
+> **NEXT STEPS**: consider sending a Pull Request to the skill to directly add language support!
 
 This allows users to extend the language capabilities of skills beyond the languages provided by default.
