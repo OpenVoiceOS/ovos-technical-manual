@@ -54,7 +54,7 @@ On the JSON file:
 * `icon` optional skill icon to display
 * `images` optional list of images to showcase the skill
 
-> Installation will generally follow the priority of `<pip_spec>` > `<package_name>` > `git+<source>`
+> Installation will generally follow the priority of `<pip_spec>` > `<package_name>` > `git+<source>`. At least one of these *MUST* be a valid installation option
 
 > **LANG SUPPORT**: include `skill.json` in each lang subfolder of your `locale` skill directory, this signals language support and allows translation of `name`, `description`, `examples` and `tags`
 
