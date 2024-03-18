@@ -14,7 +14,7 @@ Persona server follows the standard OpenAI API, also allowing you to connect per
 
 | Member                                                                                                                                                        |                                     Solvers / LLM model                                     | Native Language |                                URL                                |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------:|:---------------:|:-----------------------------------------------------------------:|
-| <div><a href="https://github.com/goldyfruit"><img src="https://avatars.githubusercontent.com/u/614115?v=4" alt="goldyfruit" width="25" height="25"></a></div> | [mistral-7b-openorca.Q4_K_M.gguf](https://huggingface.co/TheBloke/Mistral-7B-OpenOrca-GGUF) |     english     | <div>[https://llama.smartgic.io](https://llama.smartgic.io/v1)</div> |
+| <div><a href="https://github.com/goldyfruit"><img src="https://avatars.githubusercontent.com/u/614115?v=4" alt="goldyfruit" width="25" height="25"></a></div> | [mistral-7b-openorca.Q4_K_M.gguf](https://huggingface.co/TheBloke/Mistral-7B-OpenOrca-GGUF) |     english     | <div>[https://llama.smartgic.io/v1](https://llama.smartgic.io/v1)</div> |
 
 
 ## Companion plugin
