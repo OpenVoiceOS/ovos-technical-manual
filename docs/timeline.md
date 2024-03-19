@@ -70,6 +70,7 @@
 - Oct 2020 - MycroftOS renamed to OpenVoiceOS - Mycroft Edition due to trademark issues
 - ??? 2020 - @JarbasAI leaves `lingua-franca`
 - ??? 2020 - @Chance joins OpenVoiceOS
+- Nov 2020 - @Jarbas gives a talk about [translating mycroft](https://collectivat.cat/blog/2020-11-06-jornades-de-tecnologies-lliures-de-la-parla/) for [collectivat](https://collectivat.cat) Jornades de tecnologies lingüístiques lliures en català
 - Dec 2020 - [ovos-ww-plugin-pocketsphinx](https://github.com/OpenVoiceOS/ovos-ww-plugin-pocketsphinx) released
 - Dec 2020 - [ovos-ww-plugin-snowboy](https://github.com/OpenVoiceOS/ovos-ww-plugin-snowboy) released
 - Dec 2020 - [ovos-ww-plugin-precise](https://github.com/OpenVoiceOS/ovos-ww-plugin-precise) released
@@ -281,9 +282,9 @@
 - Feb 2024 - [ovos-tts-plugin-edge-tts](https://github.com/OpenVoiceOS/ovos-tts-plugin-edge-tts) released
 - Feb 2024 - Selene servers and Mycroft AI website [go down](https://community.openconversational.ai/t/mycroft-servers-down-any-quick-and-dirty-trick/)
 - Feb 2024 - [skill-ovos-randomness](https://github.com/OpenVoiceOS/skill-ovos-randomness) released, maintained by community member @mikejgray
+- Feb 2024 - [OVOSHatchery](https://github.com/OVOSHatchery) created to incubate new projects
 - Feb 2024 - @Chance leaves OpenVoiceOS
 - Feb 2024 - [skill-ovos-wordnet](https://github.com/OpenVoiceOS/skill-ovos-wordnet) released
-- Mar 2024 - [OVOSHatchery](https://github.com/OVOSHatchery) created to incubate new projects
 - Mar 2024 - Community Mycroft [skills updated to OVOS](https://github.com/orgs/OVOSHatchery/repositories?type=fork&q=skill) under OVOSHatchery
 - Mar 2024 - [OVOS Skill Store](https://openvoiceos.github.io/OVOS-skills-store) released!
 - Mar 2024 - [Hatchery Skill Store](https://ovoshatchery.github.io/OVOS-Hatchery-skills) released!
