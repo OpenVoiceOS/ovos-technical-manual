@@ -43,12 +43,12 @@ On the JSON file:
 * `skill_id` Required unique skill identifier, this is defined in `setup.py` and by convention is usually `repo.author` (lower-cased)
 * `source` Optional git url to download the source code, a skill can be installed from source with `pip install git+{source}`
 * `package_name` Required package name of the skill, if the skill is on pypi it can be installed with `pip install {package_name}`
-* `pip_spec` Optional [PEP 508](https://peps.python.org/pep-0508/#specification) install spec to install the skill. `pip install {pip_spec}`
+* `pip_spec` Required [PEP 508](https://peps.python.org/pep-0508/#specification) install spec to install the skill. `pip install {pip_spec}`
+* `description` Required human-readable short description of the skill. This should be limited to one or two sentences max
 * `license` Optional [SPDX License ID](https://spdx.org/licenses/)
 * `author` Optional string author name. Overrides any name extracted from `skill_id` or `source` URL
 * `extra_plugins` Optional list of python requirements that are not direct dependencies of the skill but should be installed in a companion OVOS service
 * `name` Optional human-readable name for the skill to be used in store listings, UI, etc. Overrides any name extracted from `skill_id` or `source` URL
-* `description` Optional human-readable short description of the skill. This should be limited to one or two sentences max
 * `examples` Optional list of example utterances that this skill should handle
 * `tags` Optional list of arbitrary labels and categories, helps search results to find this skill
 * `icon` Optional skill icon to display
