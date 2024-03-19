@@ -174,20 +174,41 @@ import os
 from os import walk, path
 
 
-# update this!
-URL = "https://github.com/OpenVoiceOS/skill-awesome-stuff"
-SKILL_CLAZZ = "AwesomeSkill"  # needs to match __init__.py class name
-PYPI_NAME = "skill-awesome-stuff"  # pip install PYPI_NAME
+# TODO update this info!
+# Define package information
+SKILL_CLAZZ = "MySkill"  # Make sure it matches __init__.py class name
+VERSION = "0.0.1"
+URL = "https://github.com/authorName/ovos-skill-name"
+AUTHOR = "authorName"
+EMAIL = ""
+LICENSE = "Apache2.0"
+DESCRIPTION = "a skill for OVOS"
 
+PYPI_NAME = URL.split("/")[-1]  # pip install PYPI_NAME
 
-# below derived from github url to ensure standard skill_id
-SKILL_AUTHOR, SKILL_NAME = URL.split(".com/")[-1].split("/")
-SKILL_PKG = SKILL_NAME.lower().replace('-', '_')
-PLUGIN_ENTRY_POINT = f'{SKILL_NAME.lower()}.{SKILL_AUTHOR.lower()}={SKILL_PKG}:{SKILL_CLAZZ}'
-# skill_id=package_name:SkillClass
+# Construct entry point for plugin
+SKILL_ID = f"{PYPI_NAME.lower()}.{AUTHOR.lower()}"
+SKILL_PKG = PYPI_NAME.lower().replace('-', '_')
+PLUGIN_ENTRY_POINT = f"{SKILL_ID}={SKILL_PKG}:{SKILL_CLAZZ}"
 
 
 def get_requirements(requirements_filename: str):
+    """
+    Parse requirements from a file.
+
+    Args:
+        requirements_filename (str, optional): The filename of the requirements file.
+            Defaults to "requirements.txt".
+
+    Returns:
+        List[str]: A list of parsed requirements.
+
+    Notes:
+        If the environment variable MYCROFT_LOOSE_REQUIREMENTS is set, this function
+        will modify the parsed requirements to use loose version requirements,
+        replacing '==' with '>=' and '~=' with '>='.
+
+    """
     requirements_file = path.join(path.abspath(path.dirname(__file__)),
                                   requirements_filename)
     with open(requirements_file, 'r', encoding='utf-8') as r:
@@ -201,8 +222,9 @@ def get_requirements(requirements_filename: str):
 
 
 def find_resource_files():
+    """ensure all non-code resource files are included in the package"""
     # add any folder with files your skill uses here! 
-    resource_base_dirs = ("locale", "ui", "vocab", "dialog", "regex", "skill")
+    resource_base_dirs = ("locale", "ui", "vocab", "dialog", "regex")
     base_dir = path.dirname(__file__)
     package_data = ["*.json"]
     for res in resource_base_dirs:
@@ -215,13 +237,15 @@ def find_resource_files():
     return package_data
 
 
-# TODO - add description, author, email, license, etc
+# Setup configuration
 setup(
-    # this is the package name that goes on pip
     name=PYPI_NAME,
-    version="0.0.0",
+    version=VERSION,
+    description=DESCRIPTION,
     url=URL,
-    license='Apache-2.0',
+    author=AUTHOR,
+    author_email=EMAIL,
+    license=LICENSE,
     package_dir={SKILL_PKG: ""},
     package_data={SKILL_PKG: find_resource_files()},
     packages=[SKILL_PKG],
