@@ -283,4 +283,8 @@
 - Feb 2024 - [skill-ovos-randomness](https://github.com/OpenVoiceOS/skill-ovos-randomness) released, maintained by community member @mikejgray
 - Feb 2024 - @Chance leaves OpenVoiceOS
 - Feb 2024 - [skill-ovos-wordnet](https://github.com/OpenVoiceOS/skill-ovos-wordnet) released
+- Mar 2024 - [OVOSHatchery](https://github.com/OVOSHatchery) created to incubate new projects
+- Mar 2024 - Community Mycroft [skills updated to OVOS](https://github.com/orgs/OVOSHatchery/repositories?type=fork&q=skill) under OVOSHatchery
+- Mar 2024 - [OVOS Skill Store](https://openvoiceos.github.io/OVOS-skills-store) released!
+- Mar 2024 - [Hatchery Skill Store](https://ovoshatchery.github.io/OVOS-Hatchery-skills) released!
 - Near Future - `ovos-core` version **0.0.8** released
