@@ -123,6 +123,61 @@ class LazySkill(OVOSSkill):
 ```
 
 
+## Conversational Intents
+
+**NEW** in `ovos-core` version **0.0.8**
+
+Skills can have extra intents valid while they are active, those are internal and not part of the main intent system, instead each skill checks them BEFORE calling `converse`
+
+the `@conversational_intent` decorator can be used to define converse intent handlers
+
+these intents only trigger after an initial interaction, essentially they are only follow up questions
+
+```python
+class DogFactsSkill(OVOSSkill):
+
+    @intent_handler("dog_facts.intent")
+    def handle_intent(self, message):
+        fact = "Dogs sense of smell is estimated to be 100,000 times more sensitive than humans"
+        self.speak(fact)
+
+    @conversational_intent("another_one.intent")
+    def handle_followup_question(self, message):
+        fact2 = "Dogs have a unique nose print,  making each one distinct and identifiable."
+        self.speak(fact2)
+```
+> **NOTE**: Only works with `.intent` files, Adapt/Keyword intents are NOT supported
+
+A more complex example, a game skill that allows saving/exiting the game only during playback
+
+```python
+class MyGameSkill(OVOSSkill):
+
+    @intent_handler("play.intent")
+    def handle_play(self, message):
+        self.start_game(load_save=True)
+
+    @conversational_intent("exit.intent")
+    def handle_exit(self, message):
+        self.exit_game()
+
+    @conversational_intent("save.intent")
+    def handle_save(self, message):
+        self.save_game()
+        
+    def handle_deactivate(self, message):
+        self.game_over() # user abandoned interaction
+        
+    def converse(self, message):
+        if self.playing:
+            # do some game stuff with the utterance
+            return True
+        return False
+```
+
+> **NOTE**:  if these intents trigger, they are called **INSTEAD** of `converse`
+
+
 ## Security
 
 A malicious or badly designed skill using the converse method can potentially hijack the whole conversation loop and render the skills service unusable
