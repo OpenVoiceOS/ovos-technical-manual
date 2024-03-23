@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://openvoiceos.github.io/ovos-technical-manual/qt5/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>QT5 mycroft-gui - OVOS Technical Manual</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "QT5 mycroft-gui";
+        var mkdocs_page_input_path = "qt5.md";
+        var mkdocs_page_url = "/ovos-technical-manual/qt5/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OVOS Technical Manual
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Home</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../community/">Community</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../versioning/">Versioning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../license/">License</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../timeline/">Timeline</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Architecture</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../bus_service/">Bus</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../speech_service/">Listener</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../core/">Core</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../audio_service/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gui_service/">GUI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../OCP/">Media</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../config/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../backend/">Backend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Self Hosting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../stt_server/">STT Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_server/">TTS Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../persona_server/">Persona Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../translate_server/">Translate Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../personal_backend/">Personal Backend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Plugins</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../OPM/">Plugin Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mic_plugins/">Microphone</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../vad_plugins/">Voice Activity Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ww_plugins/">Wake Word</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../stt_plugins/">Speech To Text</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_plugins/">Text To Speech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../g2p_plugins/">Grapheme to Phoneme</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../transformer_plugins/">Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../lang_plugins/">Language Detection/Translation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../solvers/">Question Solvers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../nlp_plugins/">NLP Plugins</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../PHAL/">Platform/Hardware Abstraction Layer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ocp_plugins/">OCP Stream Extractors</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../media_plugins/">Media Playback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Skills</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../guidelines/">Design Guidelines</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_structure/">Anatomy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../statements/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../intents/">Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../user_res_files/">Customization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skills_bus/">Bus Interaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_filesystem/">Filesystem</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_settings/">Skill Settings</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_api/">Skill API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../runtime/">Runtime Requirements</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_json/">Skill Json</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_tests/">Skill Tests</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dev/">F.A.Q.</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Continuous Conversation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../prompts/">Prompts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../context/">Follow up Questions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../converse/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../layers/">Intent Layers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../session_skills/">Session Aware Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Voice Apps</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../voice_apps/">Standalone Apps</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../qt_apps/">QT Voice Apps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Fallback</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../fallbacks/">Fallback Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Common Query</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../common_query/">Common Query Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Auto Translation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../universal_skills/">Universal Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Media</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../OCP_skills/">Media Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../OCP_pipeline/">OCP Pipeline</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">GUI</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../homescreen/">Homescreen</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gui_protocol/">Protocol</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../shell/">Shell</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">QT5 mycroft-gui</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#introduction-to-qml">Introduction to QML</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#before-getting-started">Before Getting Started</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#importing-modules">Importing Modules</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mycroft-gui-framework-base-delegates">Mycroft-GUI Framework Base Delegates</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#qml-design-guidelines">QML Design Guidelines</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#units-theming">Units &amp; Theming</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#units">Units:</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#theming">Theming:</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#qml-delegate-design-best-practise">QML Delegate Design Best Practise</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#qml-delegate-multi-platform-and-screen-guidelines">QML Delegate Multi Platform and Screen Guidelines</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#advanced-skill-displays-using-qml">Advanced skill displays using QML</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#event-handling">Event Handling</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#resting-faces">Resting Faces</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">MessageBus APIs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_gui/">GUI Interface</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mk1_api/">Enclosure Api</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Technologies</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../eggscript/">Eggscript</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bus_client/">Messagebus Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mk1_utils/">Mark1 Utils</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../backend_client/">Backend Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../jurebes/">Jurebes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../padacioso/">Padacioso</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ovos_bigscreen/">Plasma Bigscreen</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OVOS Technical Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">GUI</li>
+      <li class="breadcrumb-item active">QT5 mycroft-gui</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="mycroft-gui-qt5">Mycroft-GUI QT5</h1>
+<blockquote>
+<p><strong>NOTE</strong> - Currently only a <a href="https://github.com/OpenVoiceOS/mycroft-gui-qt5">QT5 gui-client</a> is available, help wanted to <a href="https://github.com/OVOSHatchery/mycroft-gui-qt6">migrate to QT6</a>!</p>
+</blockquote>
+<h2 id="introduction-to-qml">Introduction to QML</h2>
+<p>The reference GUI client implementation is based on the QML user interface markup language that gives you complete freedom to create in-depth innovative interactions without boundaries or provide you with simple templates within the GUI framework that allow minimalistic display of text and images based on your skill development specifics and preferences.</p>
+<p>QML user interface markup language is a declarative language built on top of Qt's existing strengths designed to describe the user interface of a program: both what it looks like, and how it behaves. QML provides modules that consist of sophisticated set of graphical and behavioral building elements.</p>
+<h3 id="before-getting-started">Before Getting Started</h3>
+<p>A collection of resources to familiarize you with QML and Kirigami Framework.</p>
+<ul>
+<li><a href="http://doc.qt.io/qt-5/qml-tutorial.html">Introduction to QML </a></li>
+<li><a href="https://www.kde.org/products/kirigami/">Introduction to Kirigami</a></li>
+</ul>
+<h3 id="importing-modules">Importing Modules</h3>
+<p>A QML module provides versioned types and JavaScript resources in a type namespace which may be used by clients who import the module. Modules make use of the QML versioning system which allows modules to be independently updated. More in-depth information about QML modules can be found here <a href="http://doc.qt.io/qt-5/qtqml-modules-topic.html">Qt QML Modules Documentation</a></p>
+<p>In the code snippet example below we will look at importing some of the common modules that provide the components required to get started with our Visual User Interface.</p>
+<pre><code>import QtQuick 2.4
+import QtQuick.Controls 2.2
+import QtQuick.Layouts 1.4
+import org.kde.kirigami 2.4 as Kirigami
+import Mycroft 1.0 as Mycroft
+import org.kde.lottie 1.0
+</code></pre>
+<p><strong>QTQuick Module:</strong></p>
+<p>Qt Quick module is the standard library for writing QML applications, the module provides a visual canvas and includes types for creating and animating visual components, receiving user input, creating data models and views and delayed object instantiation. In-depth information about QtQuick can be found at <a href="https://doc.qt.io/qt-5.11/qtquick-index.html">Qt Quick Documentation</a></p>
+<p><strong>QTQuick.Controls Module:</strong></p>
+<p>The QtQuick Controls module provides a set of controls that can be used to build complete interfaces in Qt Quick. Some of the controls provided are button controls, container controls, delegate controls, indicator controls, input controls, navigation controls and more, for a complete list of controls and components provided by QtQuick Controls you can refer to <a href="https://doc.qt.io/qt-5.11/qtquickcontrols2-guidelines.html">QtQuick Controls 2 Guidelines</a></p>
+<p><strong>QtQuick.Layouts Module:</strong></p>
+<p>QtQuick Layouts are a set of QML types used to arrange items in a user interface. Some of the layouts provided by QtQuick Layouts are Column Layout, Grid Layout, Row Layout and more, for a complete list of layouts you can refer to <a href="http://doc.qt.io/qt-5/qtquicklayouts-index.html">QtQuick Layouts Documentation</a></p>
+<p><strong>Kirigami Module:</strong></p>
+<p><a href="https://api.kde.org/frameworks/kirigami/html/index.html">Kirigami</a> is a set of QtQuick components for mobile and convergent applications. <a href="https://api.kde.org/frameworks/kirigami/html/index.html">Kirigami</a> is a set of high level components to make the creation of applications that look and feel great on mobile as well as desktop devices and follow the <a href="https://community.kde.org/KDE_Visual_Design_Group/KirigamiHIG">Kirigami Human Interface Guidelines</a></p>
+<p><strong>Mycroft Module:</strong></p>
+<p>Mycroft GUI frameworks provides a set of high level components and events system for aiding in the development of Mycroft visual skills. One of the controls provided by Mycroft GUI frameworks are Mycroft-GUI Framework Base Delegates <a href="mycroft-gui.md">Mycroft-GUI Framework Base Delegates Documentation</a></p>
+<p><strong>QML Lottie Module:</strong></p>
+<p>This provides a QML <code>Item</code> to render Adobe® After Effects™ animations exported as JSON with Bodymovin using the Lottie Web library. For list of all properties supported refer <a href="https://github.com/kbroulik/lottie-qml">Lottie QML</a></p>
+<h3 id="mycroft-gui-framework-base-delegates">Mycroft-GUI Framework Base Delegates</h3>
+<p>When you design your skill with QML, Mycroft-GUI frameworks provides you with some base delegates you should use when designing your GUI skill. The base delegates provide you with a basic presentation layer for your skill with some property assignments that can help you setup background images, background dim, timeout and grace time properties to give you the control you need for rendering an experience. In your GUI Skill you can use:</p>
+<p><strong>Mycroft.Delegate:</strong> A basic and simple page based on Kirigami.Page</p>
+<p>Simple display Image and Text Example using Mycroft.Delegate</p>
+<pre><code>import Mycroft 1.0 as Mycroft
+
+Mycroft.Delegate {
+    skillBackgroundSource: sessionData.exampleImage
+    ColumnLayout {
+        anchors.fill: parent
+        Image {
+            id: imageId
+            Layout.fillWidth: true
+            Layout.preferredHeight: Kirigami.Units.gridUnit * 2
+            source: &quot;https://source.unsplash.com/1920x1080/?+autumn&quot;
+         }
+         Label {
+            id: labelId
+            Layout.fillWidth: true
+            Layout.preferredHeight: Kirigami.Units.gridUnit * 4
+            text: &quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&quot;            
+        }
+    }
+}
+</code></pre>
+<p><strong>Mycroft.ScrollableDelegate:</strong> A delegate that displays skill visuals in a scroll enabled Kirigami Page.</p>
+<p>Example of using Mycroft.ScrollableDelegate</p>
+<pre><code>import QtQuick 2.4
+import QtQuick.Controls 2.2
+import QtQuick.Layouts 1.4
+import org.kde.kirigami 2.4 as Kirigami
+import Mycroft 1.0 as Mycroft
+
+Mycroft.ScrollableDelegate{
+    id: root
+    skillBackgroundSource: sessionData.background
+    property var sampleModel: sessionData.sampleBlob
+
+    Kirigami.CardsListView {
+        id: exampleListView
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+        model: sampleModel.lorem
+        delegate: Kirigami.AbstractCard {
+            id: rootCard
+            implicitHeight: delegateItem.implicitHeight + Kirigami.Units.largeSpacing
+            contentItem: Item {
+                implicitWidth: parent.implicitWidth
+                implicitHeight: parent.implicitHeight
+                ColumnLayout {
+                    id: delegateItem
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    spacing: Kirigami.Units.largeSpacing
+                    Kirigami.Heading {
+                        id: restaurantNameLabel
+                        Layout.fillWidth: true
+                        text: modelData.text
+                        level: 2
+                        wrapMode: Text.WordWrap
+                    }
+                    Kirigami.Separator {
+                        Layout.fillWidth: true
+                    }
+                    Image {
+                        id: placeImage
+                        source: modelData.image
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: Kirigami.Units.gridUnit * 3
+                        fillMode: Image.PreserveAspectCrop
+                    }
+                    Item {
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: Kirigami.Units.gridUnit * 1
+                    }
+                }
+            }
+        }
+    }
+}
+</code></pre>
+<h2 id="qml-design-guidelines">QML Design Guidelines</h2>
+<p>Before we dive deeper into the Design Guidelines, lets look at some concepts that a GUI developer should learn about:</p>
+<h3 id="units-theming">Units &amp; Theming</h3>
+<h4 id="units">Units:</h4>
+<p>Mycroft.Units.GridUnit is the fundamental unit of space that should be used for all sizing inside the QML UI, expressed in pixels. Each GridUnit is predefined as 16 pixels</p>
+<pre><code>// Usage in QML Components example
+width: Mycroft.Units.gridUnit * 2 // 32px Wide
+height: Mycroft.Units.gridUnit // 16px Tall
+</code></pre>
+<h4 id="theming">Theming:</h4>
+<p>OVOS Shell uses a custom Kirigami Platform Theme plugin to provide global theming to all our skills and user interfaces, which also allows our GUI's to be fully compatible with the system themes on platforms that are not running the OVOS Shell.</p>
+<p>Kirigami Theme and Color Scheme guide is extensive and can be found <a href="https://develop.kde.org/docs/use/kirigami/style-colors/">here</a></p>
+<p>OVOS GUI's developed to follow the color scheme depend on only a subset of available colors, mainly:</p>
+<ol>
+<li>
+<p>Kirigami.Theme.backgroundColor = Primary Color (Background Color: This will always be a dark palette or light palette depending on the dark or light chosen color scheme)</p>
+</li>
+<li>
+<p>Kirigami.Theme.highlightColor = Secondary Color (Accent Color: This will always be a standout palette that defines the themes dominating color and can be used for buttons, cards, borders, highlighted text etc.)</p>
+</li>
+<li>
+<p>Kirigami.Theme.textColor = Text Color (This will always be an opposite palette to the selected primary color)</p>
+</li>
+</ol>
+<h3 id="qml-delegate-design-best-practise">QML Delegate Design Best Practise</h3>
+<p><strong>Let's look at this image and qml example below, this is a representation of the Mycroft Delegate:</strong>
+<img alt="" src="https://mycroft.blue-systems.com/display-1.png" /></p>
+<ol>
+<li>
+<p>When designing your first QML file, it is important to note the red triangles in the above image, these triangles represent the margin from the screen edge the GUI needs to be designed within, these margins ensure your GUI content does not overlap with features like edge lighting and menus in the platforms that support it like OVOS-Shell</p>
+</li>
+<li>
+<p>The content items and components all utilize the selected color scheme, where black is the primary background color, red is our accent color and white is our contrasting text color</p>
+</li>
+</ol>
+<p><strong>Let's look at this in QML:</strong></p>
+<pre><code>import ...
+import Mycroft 1.0 as Mycroft
+
+Mycroft.Delegate {
+    skillBackgroundSource: sessionData.exampleImage
+    leftPadding: 0
+    rightPadding: 0
+    topPadding: 0
+    bottomPadding: 0
+
+    Rectangle {
+        anchors.fill: parent
+        // Setting margins that need to be left for the screen edges
+        anchors.margins: Mycroft.Units.gridUnit * 2
+
+        //Setting a background dim using our primary theme / background color on top of our skillBackgroundSource image for better readability and contrast
+        color: Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.3)
+
+        Kirigami.Heading {
+            level: 2
+            text: &quot;An Example Pie Chart&quot;
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: Mycroft.Units.gridUnit * 3
+            // Setting the text color to always follow the color scheme for this item displayed on the screen
+            color: Kirigami.Theme.textColor
+        }
+
+        PieChart {
+            anchors.centerIn: parent
+            pieColorMinor: Kirigami.Theme.backgroundColor // As in the image above the minor area of the pie chart uses our primary color
+            pieColorMid: Kirigami.Theme.highlightColor // As in the image above the middle area is assigned the highlight or our accent color
+            pieColorMajor: Kirigami.Theme.textColor // As in the image above the major area is assigned the text color
+        }
+    }
+}
+</code></pre>
+<h3 id="qml-delegate-multi-platform-and-screen-guidelines">QML Delegate Multi Platform and Screen Guidelines</h3>
+<p>OVOS Skill GUIs are designed to be multi-platform and screen friendly, to support this we always try to support both Horizontal and Vertical display's. Let's look at an example and a general approach to writing multi resolution friendly UI's</p>
+<p><strong>Let's look at these images below that represent a Delegate as seen in a Horizontal screen:</strong>
+<img alt="" src="https://mycroft.blue-systems.com/display-2.png" /></p>
+<p><strong>Let's look at these images below that represent a Delegate as seen in a Vertical screen:</strong>
+<img alt="" src="https://mycroft.blue-systems.com/display-3.png" /></p>
+<ol>
+<li>When designing for different screens it is preferred to utilize Grids, GridLayouts and GridViews this allows easier content placement as one can control the number of columns and rows displayed on the screen</li>
+<li>It is also recommended to use Flickables when you believe your content is going to not fit on the screen, this allows for content to always be scrollable. To make it easier to design scrollable content, Mycroft GUI provides you with a ready to use Mycroft.ScrollableDelegate.</li>
+<li>It is also preferred to use the width vs height comparison on the root delegate item to know when the screen should be using a vertical layout vs horizontal layout</li>
+</ol>
+<p><strong>Let's look at this in QML:</strong></p>
+<pre><code>import ...
+import Mycroft 1.0 as Mycroft
+
+Mycroft.Delegate {
+    id: root
+    skillBackgroundSource: sessionData.exampleImage
+    leftPadding: 0
+    rightPadding: 0
+    topPadding: 0
+    bottomPadding: 0
+    property bool horizontalMode: width &gt;= height  ? 1 : 0 // Using a ternary operator to detect if width of the delegate is greater than the height, which provides if the delegate is in horizontalMode
+
+    Rectangle {
+        anchors.fill: parent
+        // Setting margins that need to be left for the screen edges
+        anchors.margins: Mycroft.Units.gridUnit * 2
+
+        //Setting a background dim using our primary theme / background color on top of our skillBackgroundSource image for better readability and contrast
+        color: Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.3)
+
+        Kirigami.Heading {
+            level: 2
+            text: &quot;An Example Pie Chart&quot;
+            // Setting the text color to always follow the color scheme
+            color: Kirigami.Theme.textColor
+        }
+
+        GridLayout {
+            id: examplesGridView
+            // Checking if we are in horizontal mode, we should display two columns to display the items in the image above, or if we are in vertical mode, we should display a single column only
+            columns: root.horizontalMode ? 2 : 1 
+
+            Repeater {
+                model: examplesModel
+                delegates: ExamplesDelegate {
+                    ...
+                }
+            }
+        }
+    }
+}
+</code></pre>
+<h2 id="advanced-skill-displays-using-qml">Advanced skill displays using QML</h2>
+<p><strong>Display Lottie Animations</strong>:</p>
+<p>You can use the <code>LottieAnimation</code> item just like any other <code>QtQuick</code> element, such as an <code>Image</code> and place it in your scene any way you please.</p>
+<p><strong>QML Example</strong></p>
+<pre><code>import QtQuick 2.4
+import QtQuick.Controls 2.2
+import QtQuick.Layouts 1.4
+import org.kde.kirigami 2.4 as Kirigami
+import Mycroft 1.0 as Mycroft
+import org.kde.lottie 1.0
+
+Mycroft.Delegate {
+    LottieAnimation {     
+        id: fancyAnimation 
+        anchors.fill: parent
+        source: Qt.resolvedUrl(&quot;animations/fancy_animation.json&quot;)
+        loops: Animation.Infinite
+        fillMode: Image.PreserveAspectFit    
+        running: true
+    }    
+}
+</code></pre>
+<p><strong>Display Sliding Images</strong></p>
+<p>Contains an image that will slowly scroll in order to be shown completely</p>
+<p><strong>QML Example</strong></p>
+<pre><code>import QtQuick 2.4
+import QtQuick.Controls 2.2
+import QtQuick.Layouts 1.4
+import org.kde.kirigami 2.4 as Kirigami
+import Mycroft 1.0 as Mycroft
+
+Mycroft.Delegate {
+     background: Mycroft.SlidingImage {
+     source: &quot;foo.jpg&quot; 
+     running: bool    //If true the sliding animation is active
+     speed: 1         //Animation speed in Kirigami.Units.gridUnit / second
+   }
+}
+</code></pre>
+<p><strong>Display Paginated Text</strong></p>
+<p>Takes a long text and breaks it down into pages that can be horizontally swiped</p>
+<p><strong>QML Example</strong></p>
+<pre><code>import QtQuick 2.4
+import QtQuick.Controls 2.2
+import QtQuick.Layouts 1.4
+import org.kde.kirigami 2.4 as Kirigami
+import Mycroft 1.0 as Mycroft
+
+Mycroft.Delegate {
+     Mycroft.PaginatedText {
+         text: string      //The text that should be displayed
+         currentIndex: 0   //The currently visible page number (starting from 0)
+     }
+}
+</code></pre>
+<p><strong>Display A Vertical ListView With Information Cards</strong></p>
+<p>Kirigami CardsListView is a ListView which can have AbstractCard as its delegate: it will automatically assign the proper spacing and margins around the cards adhering to the design guidelines.</p>
+<p><strong>Python Skill Example</strong></p>
+<pre><code class="language-python">...
+def handle_food_places(self, message):
+...
+self.gui[&quot;foodPlacesBlob&quot;] = results.json
+self.gui.show_page(&quot;foodplaces.qml&quot;)
+...
+</code></pre>
+<p><strong>QML Example</strong></p>
+<pre><code>import QtQuick 2.4
+import QtQuick.Controls 2.2
+import QtQuick.Layouts 1.4
+import org.kde.kirigami 2.4 as Kirigami
+import Mycroft 1.0 as Mycroft
+
+Mycroft.Delegate{
+    id: root
+    property var foodPlacesModel: sessionData.foodPlacesBlob
+
+    Kirigami.CardsListView {
+        id: restaurantsListView
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+        model: foodPlacesModel
+        delegate: Kirigami.AbstractCard {
+            id: rootCard
+            implicitHeight: delegateItem.implicitHeight + Kirigami.Units.largeSpacing
+            contentItem: Item {
+                implicitWidth: parent.implicitWidth
+                implicitHeight: parent.implicitHeight
+                ColumnLayout {
+                    id: delegateItem
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    spacing: Kirigami.Units.smallSpacing
+                    Kirigami.Heading {
+                        id: restaurantNameLabel
+                        Layout.fillWidth: true
+                        text: modelData.name
+                        level: 3
+                        wrapMode: Text.WordWrap
+                    }
+                    Kirigami.Separator {
+                        Layout.fillWidth: true
+                    }
+                    RowLayout {
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: form.implicitHeight
+                        Image {
+                            id: placeImage
+                            source: modelData.image
+                            Layout.fillHeight: true
+                            Layout.preferredWidth: placeImage.implicitHeight + Kirigami.Units.gridUnit * 2
+                            fillMode: Image.PreserveAspectFit
+                        }
+                        Kirigami.Separator {
+                            Layout.fillHeight: true
+                        }
+                        Kirigami.FormLayout {
+                            id: form
+                            Layout.fillWidth: true
+                            Layout.minimumWidth: aCard.implicitWidth
+                            Layout.alignment: Qt.AlignLeft | Qt.AlignBottom
+                            Label {
+                                Kirigami.FormData.label: &quot;Description:&quot;
+                                Layout.fillWidth: true
+                                wrapMode: Text.WordWrap
+                                elide: Text.ElideRight
+                                text: modelData.restaurantDescription
+                            }
+                            Label {
+                                Kirigami.FormData.label: &quot;Phone:&quot;
+                                Layout.fillWidth: true
+                                wrapMode: Text.WordWrap
+                                elide: Text.ElideRight
+                                text: modelData.phone
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+</code></pre>
+<p><strong>Using Proportional Delegate For Simple Display Skills &amp; Auto Layout</strong></p>
+<p><strong>ProportionalDelegate</strong> is a delegate which has proportional padding and a columnlayout as mainItem. The delegate supports a proportionalGridUnit which is based upon its size and the contents are supposed to be scaled proportionally to the delegate size either directly or using the proportionalGridUnit.</p>
+<p><strong>AutoFitLabel</strong> is a label that will always scale its text size according to the item size rather than the other way around</p>
+<p><strong>QML Example</strong></p>
+<pre><code>import QtQuick 2.4
+import QtQuick.Controls 2.2
+import QtQuick.Layouts 1.4
+import org.kde.kirigami 2.4 as Kirigami
+import Mycroft 1.0 as Mycroft
+
+Mycroft.ProportionalDelegate {
+    id: root
+
+    Mycroft.AutoFitLabel {
+        id: monthLabel
+        font.weight: Font.Bold
+        Layout.fillWidth: true
+        Layout.preferredHeight: proportionalGridUnit * 40
+        text: sessionData.month
+    }
+
+    Mycroft.AutoFitLabel {
+        id: dayLabel
+        font.weight: Font.Bold
+        Layout.fillWidth: true
+        Layout.preferredHeight: proportionalGridUnit * 40
+        text: sessionData.day
+    }
+}
+</code></pre>
+<p><strong>Using Slideshow Component To Show Cards Slideshow</strong></p>
+<p>Slideshow component lets you insert a slideshow with your custom delegate in any skill display which can be tuned to autoplay and loop and also scrolled or flicked manually by the user.</p>
+<p><strong>QML Example</strong></p>
+<pre><code>import QtQuick 2.4
+import QtQuick.Controls 2.2
+import QtQuick.Layouts 1.4
+import org.kde.kirigami 2.4 as Kirigami
+import Mycroft 1.0 as Mycroft
+
+Mycroft.Delegate {
+    id: root
+
+    Mycroft.SlideShow {
+        id: simpleSlideShow 
+        model: sessionData.exampleModel // model with slideshow data
+        anchors.fill: parent
+        interval: 5000 // time to switch between slides 
+        running: true // can be set to false if one wants to swipe manually
+        loop: true // can be set to play through continously or just once
+        delegate: Kirigami.AbstractCard { 
+            width: rootItem.width
+            height: rootItem.height
+            contentItem: ColumnLayout {
+                anchors.fill: parent
+                Kirigami.Heading {
+                    Layout.fillWidth: true
+                    wrapMode: Text.WordWrap
+                    level: 3
+                    text: modelData.Title
+                }
+                Kirigami.Separator {
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 1
+                }
+                Image {
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: rootItem.height / 4
+                    source: modelData.Image
+                    fillMode: Image.PreserveAspectCrop
+                }
+            }
+        }
+    }
+}
+</code></pre>
+<h4 id="event-handling">Event Handling</h4>
+<p>Mycroft GUI API provides an Event Handling Protocol between the skill and QML display which allow Skill Authors to forward events in either direction to an event consumer. Skill Authors have the ability to create any amount of custom events. Event names that start with "system." are available to all skills, like previous/next/pick.</p>
+<p><strong>Simple Event Trigger Example From QML Display To Skill</strong></p>
+<p><strong>Python Skill Example</strong></p>
+<pre><code class="language-python">    def initialize(self):
+    # Initialize...
+        self.gui.register_handler('skill.foo.event', self.handle_foo_event)
+...
+    def handle_foo_event(self, message):
+        self.speak(message.data[&quot;string&quot;])
+...
+...
+</code></pre>
+<p><strong>QML Example</strong></p>
+<pre><code>import QtQuick 2.4
+import QtQuick.Controls 2.2
+import QtQuick.Layouts 1.4
+import org.kde.kirigami 2.4 as Kirigami
+import Mycroft 1.0 as Mycroft
+
+Mycroft.Delegate {
+    id: root
+
+    Button {
+        anchors.fill: parent
+        text: &quot;Click Me&quot;
+        onClicked: {
+            triggerGuiEvent(&quot;skill.foo.event&quot;, {&quot;string&quot;: &quot;Lorem ipsum dolor sit amet&quot;})
+        }
+    }
+}
+</code></pre>
+<p><strong>Simple Event Trigger Example From Skill To QML Display</strong></p>
+<p><strong>Python Skill Example</strong></p>
+<pre><code class="language-python">...
+    def handle_foo_intent(self, message):
+        self.gui['foobar'] = message.data.get(&quot;utterance&quot;)
+        self.gui['color'] = &quot;blue&quot;
+        self.gui.show_page(&quot;foo&quot;)
+...
+...
+</code></pre>
+<p><strong>QML Example</strong></p>
+<pre><code>import QtQuick 2.4
+import QtQuick.Controls 2.2
+import QtQuick.Layouts 1.4
+import org.kde.kirigami 2.4 as Kirigami
+import Mycroft 1.0 as Mycroft
+
+Mycroft.Delegate {
+    id: root
+    property var fooString: sessionData.foobar
+
+    onFooStringChanged: {
+        fooRect.color = sessionData.color 
+    }
+
+    Rectangle {
+        id: fooRect
+        anchors.fill: parent
+        color: &quot;#fff&quot;
+    }
+}
+</code></pre>
+<h4 id="resting-faces">Resting Faces</h4>
+<p>The resting face API provides skill authors the ability to extend their skills to supply their own customized IDLE screens that will be displayed when there is no activity on the screen.</p>
+<p><strong>Simple Idle Screen Example</strong></p>
+<p><strong>Python Skill Example</strong></p>
+<pre><code>from ovos_workshop.decorators import resting_screen_handler
+...
+@resting_screen_handler('NameOfIdleScreen')
+def handle_idle(self, message):
+    self.gui.clear()
+    self.log.info('Activating foo/bar resting page')
+    self.gui[&quot;exampleText&quot;] = &quot;This Is A Idle Screen&quot;
+    self.gui.show_page('idle.qml')
+</code></pre>
+<p><strong>QML Example</strong></p>
+<pre><code>import QtQuick 2.4
+import QtQuick.Controls 2.2
+import QtQuick.Layouts 1.4
+import org.kde.kirigami 2.4 as Kirigami
+import Mycroft 1.0 as Mycroft
+
+Mycroft.Delegate {
+    id: root
+    property var fooString: sessionData.exampleText
+
+    Kirigami.Heading {
+        id: headerExample
+        anchors.centerIn: parent
+        text: fooString 
+    }
+}
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../shell/" class="btn btn-neutral float-left" title="Shell"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../skill_gui/" class="btn btn-neutral float-right" title="GUI Interface">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../shell/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../skill_gui/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

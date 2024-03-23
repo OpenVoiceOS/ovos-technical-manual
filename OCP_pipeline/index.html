@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://openvoiceos.github.io/ovos-technical-manual/OCP_pipeline/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>OCP Pipeline - OVOS Technical Manual</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "OCP Pipeline";
+        var mkdocs_page_input_path = "OCP_pipeline.md";
+        var mkdocs_page_url = "/ovos-technical-manual/OCP_pipeline/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OVOS Technical Manual
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Home</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../community/">Community</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../versioning/">Versioning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../license/">License</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../timeline/">Timeline</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Architecture</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../bus_service/">Bus</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../speech_service/">Listener</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../core/">Core</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../audio_service/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gui_service/">GUI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../OCP/">Media</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../config/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../backend/">Backend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Self Hosting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../stt_server/">STT Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_server/">TTS Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../persona_server/">Persona Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../translate_server/">Translate Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../personal_backend/">Personal Backend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Plugins</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../OPM/">Plugin Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mic_plugins/">Microphone</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../vad_plugins/">Voice Activity Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ww_plugins/">Wake Word</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../stt_plugins/">Speech To Text</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_plugins/">Text To Speech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../g2p_plugins/">Grapheme to Phoneme</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../transformer_plugins/">Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../lang_plugins/">Language Detection/Translation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../solvers/">Question Solvers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../nlp_plugins/">NLP Plugins</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../PHAL/">Platform/Hardware Abstraction Layer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ocp_plugins/">OCP Stream Extractors</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../media_plugins/">Media Playback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Skills</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../guidelines/">Design Guidelines</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_structure/">Anatomy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../statements/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../intents/">Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../user_res_files/">Customization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skills_bus/">Bus Interaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_filesystem/">Filesystem</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_settings/">Skill Settings</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_api/">Skill API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../runtime/">Runtime Requirements</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_json/">Skill Json</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_tests/">Skill Tests</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dev/">F.A.Q.</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Continuous Conversation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../prompts/">Prompts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../context/">Follow up Questions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../converse/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../layers/">Intent Layers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../session_skills/">Session Aware Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Voice Apps</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../voice_apps/">Standalone Apps</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../qt_apps/">QT Voice Apps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Fallback</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../fallbacks/">Fallback Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Common Query</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../common_query/">Common Query Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Auto Translation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../universal_skills/">Universal Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Media</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../OCP_skills/">Media Skills</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">OCP Pipeline</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#layer-1-unambiguous">Layer 1 - Unambiguous</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#layer-2-semi-ambiguous">Layer 2 - Semi-Ambiguous</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#layer-3-ambiguous">Layer 3 - Ambiguous</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">GUI</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../homescreen/">Homescreen</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gui_protocol/">Protocol</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../shell/">Shell</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../qt5/">QT5 mycroft-gui</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">MessageBus APIs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_gui/">GUI Interface</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mk1_api/">Enclosure Api</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Technologies</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../eggscript/">Eggscript</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bus_client/">Messagebus Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mk1_utils/">Mark1 Utils</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../backend_client/">Backend Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../jurebes/">Jurebes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../padacioso/">Padacioso</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ovos_bigscreen/">Plasma Bigscreen</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OVOS Technical Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Media</li>
+      <li class="breadcrumb-item active">OCP Pipeline</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="ocp-pipeline">OCP Pipeline</h2>
+<h3 id="layer-1-unambiguous">Layer 1 - Unambiguous</h3>
+<p>Before regular intent stage, taking into account current OCP state  (media ready to play / playing)</p>
+<p>Only matches if user unambiguously wants to trigger OCP</p>
+<p>uses padacioso for exact matches</p>
+<ul>
+<li>play {query}</li>
+<li>previous  (media needs to be loaded)</li>
+<li>next  (media needs to be loaded)</li>
+<li>pause  (media needs to be loaded)</li>
+<li>play / resume (media needs to be loaded)</li>
+<li>stop (media needs to be loaded)</li>
+</ul>
+<pre><code class="language-python">from ocp_nlp.intents import OCPPipelineMatcher
+
+ocp = OCPPipelineMatcher()
+print(ocp.match_high(&quot;play metallica&quot;, &quot;en-us&quot;))
+# IntentMatch(intent_service='OCP_intents',
+#   intent_type='ocp:play',
+#   intent_data={'media_type': &lt;MediaType.MUSIC: 2&gt;, 'query': 'metallica',
+#                'entities': {'album_name': 'Metallica', 'artist_name': 'Metallica'},
+#                'conf': 0.96, 'lang': 'en-us'},
+#   skill_id='ovos.common_play', utterance='play metallica')
+
+</code></pre>
+<h3 id="layer-2-semi-ambiguous">Layer 2 - Semi-Ambiguous</h3>
+<p>uses a binary classifier to detect if a query is about media playback</p>
+<pre><code class="language-python">from ocp_nlp.intents import OCPPipelineMatcher
+
+ocp = OCPPipelineMatcher()
+
+print(ocp.match_high(&quot;put on some metallica&quot;, &quot;en-us&quot;))
+# None
+
+print(ocp.match_medium(&quot;put on some metallica&quot;, &quot;en-us&quot;))
+# IntentMatch(intent_service='OCP_media',
+#   intent_type='ocp:play',
+#   intent_data={'media_type': &lt;MediaType.MUSIC: 2&gt;,
+#                'entities': {'album_name': 'Metallica', 'artist_name': 'Metallica', 'movie_name': 'Some'},
+#                'query': 'put on some metallica',
+#                'conf': 0.9578441098114333},
+#   skill_id='ovos.common_play', utterance='put on some metallica')
+</code></pre>
+<h3 id="layer-3-ambiguous">Layer 3 - Ambiguous</h3>
+<p>Uses keyword matching and requires at least 1 keyword</p>
+<p>OCP skills can provide these keywords at runtime, additional keywords for things such as media_genre were collected via SPARQL queries to wikidata</p>
+<pre><code class="language-python">from ocp_nlp.intents import OCPPipelineMatcher
+
+ocp = OCPPipelineMatcher()
+
+print(ocp.match_medium(&quot;i wanna hear metallica&quot;, &quot;en-us&quot;))
+# None
+
+print(ocp.match_fallback(&quot;i wanna hear metallica&quot;, &quot;en-us&quot;))
+#  IntentMatch(intent_service='OCP_fallback',
+#    intent_type='ocp:play',
+#    intent_data={'media_type': &lt;MediaType.MUSIC: 2&gt;,
+#                 'entities': {'album_name': 'Metallica', 'artist_name': 'Metallica'},
+#                 'query': 'i wanna hear metallica',
+#                 'conf': 0.5027561091821287},
+#    skill_id='ovos.common_play', utterance='i wanna hear metallica')
+
+</code></pre>
+<h2 id="classifiers">Classifiers</h2>
+<h3 id="architecture">Architecture</h3>
+<p><img alt="imagem" src="https://github.com/NeonJarbas/ocp-nlp/assets/59943014/8abbd761-221f-4e59-8586-f35db7f48945" /></p>
+<p><img alt="imagem" src="https://github.com/NeonJarbas/ocp-nlp/assets/59943014/a52cab17-60e0-4779-9ae9-73c9b4245392" /></p>
+<p><img alt="imagem" src="https://github.com/NeonJarbas/ocp-nlp/assets/59943014/2144c6a7-d32d-4b3f-89c3-0151f6257f60" /></p>
+<p>Efficient entity matching is done via <a href="https://en.wikipedia.org/wiki/Aho%E2%80%93Corasick_algorithm">Aho–Corasick algorithm</a>, keyword features are essentially a keyword count. </p>
+<p>The way the OCP dataset was collected ensures these features were present during training and interpretable, therefore during runtime any number of entities.csv files can be loaded, OVOS skills can also register their own keywords</p>
+<h3 id="media-type-classifier">Media Type Classifier</h3>
+<p>internally used to tag utterances before OCP search process, this informs the result selection by giving priority to certain skills and helps performance by skipping some skills completely during search</p>
+<p>uses a scikit-learn classifier trained in a large synthetic dataset</p>
+<p><img alt="imagem" src="https://github.com/NeonJarbas/ocp-nlp/assets/59943014/4cdb440d-4673-4972-8691-4c3c489ff4e8" /></p>
+<pre><code class="language-python">class MediaType:
+    GENERIC = 0  # nothing else matches
+    AUDIO = 1  # things like ambient noises
+    MUSIC = 2
+    VIDEO = 3  # eg, youtube videos
+    AUDIOBOOK = 4
+    GAME = 5  # because it shares the verb &quot;play&quot;, mostly for disambguation
+    PODCAST = 6
+    RADIO = 7  # live radio
+    NEWS = 8  # news reports
+    TV = 9  # live tv stream
+    MOVIE = 10
+    TRAILER = 11
+    AUDIO_DESCRIPTION = 12  # narrated movie for the blind
+    VISUAL_STORY = 13  # things like animated comic books
+    BEHIND_THE_SCENES = 14
+    DOCUMENTARY = 15
+    RADIO_THEATRE = 16
+    SHORT_FILM = 17  # typically movies under 45 min
+    SILENT_MOVIE = 18
+    VIDEO_EPISODES = 19  # tv series etc
+    BLACK_WHITE_MOVIE = 20
+    CARTOON = 21
+    ANIME = 22
+
+    ADULT = 69  # for content filtering
+    HENTAI = 70  # for content filtering
+    ADULT_AUDIO = 71  # for content filtering
+</code></pre>
+<p>The features of this classifier have been engineered to allow influencing classifications at runtime based on available skills</p>
+<p>Classifier options:
+- heuristic based on keyword features (baseline - lang agnostic) ~= 20% accuracy
+- trained on text only features (count vectorizer baseline - english) ~= 85% accuracy
+- trained on keyword features (lang agnostic - runtime keywords influence classification) ~= 88% accuracy
+- trained on probabilities of text only classifier + keyword features (english only - runtime keywords influence classification) ~= 95% accuracy</p>
+<p>NOTE: several classification algorithms have been tested, Perceptron and MLP are the most sensitive to the runtime bias properly</p>
+<h3 id="binary-classifier">Binary classifier</h3>
+<p>using the dataset collected for media type + ovos-datasets</p>
+<p><img alt="imagem" src="https://github.com/NeonJarbas/ocp-nlp/assets/59943014/bf9b796e-dc57-4320-a472-5b859b9dfcaf" /></p>
+<p>Classifier options:
+- trained on text only features (count vectorizer baseline - english) ~= 95% accuracy
+- trained on keyword features (lang agnostic - runtime keywords influence classification) ~= 90% accuracy</p>
+<h3 id="usage">Usage</h3>
+<p>check if an utterance is playback related</p>
+<pre><code class="language-python">from ocp_nlp.classify import BinaryPlaybackClassifier
+
+clf = BinaryPlaybackClassifier()
+clf.load()
+preds = clf.predict([&quot;play a song&quot;, &quot;play my morning jams&quot;,
+                   &quot;i want to watch the matrix&quot;,
+                   &quot;tell me a joke&quot;, &quot;who are you&quot;, &quot;you suck&quot;])
+print(preds)  # ['OCP' 'OCP' 'OCP' 'other' 'other' 'other']
+</code></pre>
+<p>get media type of a playback utterance</p>
+<pre><code class="language-python">from ocp_nlp.classify import MediaTypeClassifier, BiasedMediaTypeClassifier
+
+# basic text only classifier
+clf1 = MediaTypeClassifier()
+clf1.load()
+
+label, confidence = clf1.predict_prob([&quot;play metallica&quot;])[0]
+print(label, confidence)  # [('music', 0.3438956411030462)]
+
+# keyword biased classifier, uses the above internally for extra features
+clf = BiasedMediaTypeClassifier(lang=&quot;en&quot;, preload=True)  # load entities database
+clf.load()
+
+# klownevilus is an unknown entity
+label, confidence = clf.predict_prob([&quot;play klownevilus&quot;])[0]
+print(label, confidence)  # music 0.3398020446925623
+
+# probability increases for movie
+clf.register_entity(&quot;movie_name&quot;, [&quot;klownevilus&quot;])  # movie correctly predicted now
+label, confidence = clf.predict_prob([&quot;play klownevilus&quot;])[0]
+print(label, confidence)  # movie 0.540225616798516
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../OCP_skills/" class="btn btn-neutral float-left" title="Media Skills"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../homescreen/" class="btn btn-neutral float-right" title="Homescreen">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../OCP_skills/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../homescreen/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

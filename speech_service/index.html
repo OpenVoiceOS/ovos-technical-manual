@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://openvoiceos.github.io/ovos-technical-manual/speech_service/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Listener - OVOS Technical Manual</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Listener";
+        var mkdocs_page_input_path = "speech_service.md";
+        var mkdocs_page_url = "/ovos-technical-manual/speech_service/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OVOS Technical Manual
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Home</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../community/">Community</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../versioning/">Versioning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../license/">License</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../timeline/">Timeline</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Architecture</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../bus_service/">Bus</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Listener</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#listener">Listener</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#microphone">Microphone</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#hotwords">Hotwords</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#sound-classifiers">Sound Classifiers</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#multilingualism">Multilingualism</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#fallback-wake-words">Fallback Wake Words</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#vad">VAD</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#stt">STT</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#audio-transformers">Audio Transformers</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#modes-of-operation">Modes of Operation</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#wake-word-mode">Wake Word mode</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sleep-mode">Sleep mode</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#continuous-mode">Continuous mode</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#hybrid-mode">Hybrid mode</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#recording-mode">Recording mode</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../core/">Core</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../audio_service/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gui_service/">GUI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../OCP/">Media</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../config/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../backend/">Backend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Self Hosting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../stt_server/">STT Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_server/">TTS Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../persona_server/">Persona Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../translate_server/">Translate Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../personal_backend/">Personal Backend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Plugins</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../OPM/">Plugin Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mic_plugins/">Microphone</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../vad_plugins/">Voice Activity Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ww_plugins/">Wake Word</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../stt_plugins/">Speech To Text</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_plugins/">Text To Speech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../g2p_plugins/">Grapheme to Phoneme</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../transformer_plugins/">Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../lang_plugins/">Language Detection/Translation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../solvers/">Question Solvers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../nlp_plugins/">NLP Plugins</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../PHAL/">Platform/Hardware Abstraction Layer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ocp_plugins/">OCP Stream Extractors</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../media_plugins/">Media Playback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Skills</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../guidelines/">Design Guidelines</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_structure/">Anatomy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../statements/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../intents/">Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../user_res_files/">Customization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skills_bus/">Bus Interaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_filesystem/">Filesystem</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_settings/">Skill Settings</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_api/">Skill API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../runtime/">Runtime Requirements</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_json/">Skill Json</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_tests/">Skill Tests</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dev/">F.A.Q.</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Continuous Conversation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../prompts/">Prompts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../context/">Follow up Questions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../converse/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../layers/">Intent Layers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../session_skills/">Session Aware Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Voice Apps</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../voice_apps/">Standalone Apps</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../qt_apps/">QT Voice Apps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Fallback</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../fallbacks/">Fallback Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Common Query</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../common_query/">Common Query Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Auto Translation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../universal_skills/">Universal Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Media</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../OCP_skills/">Media Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../OCP_pipeline/">OCP Pipeline</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">GUI</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../homescreen/">Homescreen</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gui_protocol/">Protocol</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../shell/">Shell</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../qt5/">QT5 mycroft-gui</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">MessageBus APIs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_gui/">GUI Interface</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mk1_api/">Enclosure Api</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Technologies</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../eggscript/">Eggscript</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bus_client/">Messagebus Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mk1_utils/">Mark1 Utils</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../backend_client/">Backend Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../jurebes/">Jurebes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../padacioso/">Padacioso</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ovos_bigscreen/">Plasma Bigscreen</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OVOS Technical Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Architecture</li>
+      <li class="breadcrumb-item active">Listener</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="listener-service">Listener Service</h1>
+<p>The listener service is responsible for handling audio input, it understands speech and converts it into <code>utterances</code> to
+be handled by <code>ovos-core</code></p>
+<p>Different implementations of the listener service have been available during the years</p>
+<ul>
+<li><a href="https://github.com/OpenVoiceOS/mycroft-classic-listener">mycroft-classic-listener</a> the original listener from mycroft
+  mark1 extracted into a standalone component - <strong>archived</strong></li>
+<li><a href="https://github.com/OpenVoiceOS/ovos-listener">ovos-listener</a> - an updated version of the mycroft listener with VAD
+  plugins and multiple hotwords support - <strong>deprecated</strong> in <code>ovos-core</code> version <strong>0.0.8</strong></li>
+<li><a href="https://github.com/OpenVoiceOS/ovos-dinkum-listener">ovos-dinkum-listener</a> - a listener rewrite based
+  on <a href="https://github.com/MycroftAI/mycroft-dinkum">mycroft-dinkum</a> - <strong>NEW</strong> in <code>ovos-core</code>version <strong>0.0.8</strong></li>
+</ul>
+<h2 id="listener">Listener</h2>
+<p>You can modify microphone settings and enable additional features under the listener section such as wake word /
+utterance recording / uploading</p>
+<pre><code class="language-javascript">&quot;listener&quot;: {
+  // NOTE, multiple hotwords are supported, these fields define the main wake_word,
+  // this is equivalent to setting &quot;active&quot;: true in the &quot;hotwords&quot; section
+  &quot;wake_word&quot;: &quot;hey_mycroft&quot;,
+  &quot;stand_up_word&quot;: &quot;wake_up&quot;,
+
+  &quot;microphone&quot;: {...},
+
+  &quot;VAD&quot;: {...},
+
+  // Seconds of speech before voice command has begun
+  &quot;speech_begin&quot;: 0.1,
+  // Seconds of silence before a voice command has finished
+  &quot;silence_end&quot;: 0.5,
+  // Settings used by microphone to set recording timeout with and without speech detected
+  &quot;recording_timeout&quot;: 10.0,
+  // Settings used by microphone to set recording timeout without speech detected.
+  &quot;recording_timeout_with_silence&quot;: 3.0,
+
+  // Setting to remove all silence/noise from start and end of recorded speech (only non-streaming)
+  &quot;remove_silence&quot;: true
+}
+</code></pre>
+<h2 id="microphone">Microphone</h2>
+<p><strong>NEW</strong> in <code>ovos-core</code> version <strong>0.0.8</strong></p>
+<p>Microphone plugins are responsible for feeding audio to the listener, different Operating Systems may require different
+plugins or otherwise have performance benefits</p>
+<pre><code class="language-javascript">&quot;listener&quot;: {
+  &quot;microphone&quot;: {
+    &quot;module&quot;: &quot;ovos-microphone-plugin-alsa&quot;
+  }
+}
+</code></pre>
+<h2 id="hotwords">Hotwords</h2>
+<p>By default the listener is waiting for a hotword to do something in response</p>
+<p>the most common usage of a hotword is as the assistant's name, instead of continuously transcribing audio the listener
+waits for a wake word, and then listens to the user speaking</p>
+<p>OVOS allows you to load any number of hot words in parallel and trigger different actions when they are detected</p>
+<p>each hotword can do one or more of the following:</p>
+<ul>
+<li>trigger listening, also called a <strong>wake_word</strong></li>
+<li>play a sound</li>
+<li>emit a bus event</li>
+<li>take ovos-core out of sleep mode, also called a <strong>wakeup_word</strong> or <strong>standup_word</strong></li>
+<li>take ovos-core out of recording mode, also called a <strong>stop_word</strong></li>
+</ul>
+<p>To add a new hotword add its configuration under "hotwords" section.</p>
+<p>By default, all hotwords are disabled unless you set <code>"active": true</code>.</p>
+<p>Under the <code>"listener"</code> setting a main wake word and stand up word are defined, those will be automatically enabled
+unless you set <code>"active": false</code>.</p>
+<p>Users are expected to <strong>only change</strong> <code>listener.wake_word</code> if using a single wake word, setting <code>"active": true</code> is only
+intended for <strong>extra</strong> hotwords</p>
+<pre><code class="language-javascript">&quot;listener&quot;: {
+    // Default wake_word and stand_up_word will be automatically set to active
+    // unless explicitly disabled under &quot;hotwords&quot; section
+    &quot;wake_word&quot;: &quot;hey mycroft&quot;,
+    &quot;stand_up_word&quot;: &quot;wake up&quot;
+},
+// Hotword configurations
+&quot;hotwords&quot;: {
+    &quot;hey_mycroft&quot;: {
+        &quot;module&quot;: &quot;ovos-ww-plugin-precise-lite&quot;,
+        &quot;model&quot;: &quot;https://github.com/OpenVoiceOS/precise-lite-models/raw/master/wakewords/en/hey_mycroft.tflite&quot;,
+        &quot;expected_duration&quot;: 3,
+        &quot;trigger_level&quot;: 3,
+        &quot;sensitivity&quot;: 0.5,
+        &quot;listen&quot;: true
+    },
+    // default wakeup word to take ovos out of SLEEPING mode,
+    &quot;wake_up&quot;: {
+        &quot;module&quot;: &quot;ovos-ww-plugin-pocketsphinx&quot;,
+        &quot;phonemes&quot;: &quot;W EY K . AH P&quot;,
+        &quot;threshold&quot;: 1e-20,
+        &quot;lang&quot;: &quot;en-us&quot;,
+        &quot;wakeup&quot;: true,
+        &quot;fallback_ww&quot;: &quot;wake_up_vosk&quot;
+    }
+}
+</code></pre>
+<h3 id="sound-classifiers">Sound Classifiers</h3>
+<p>hotwords can be used as generic sound classifiers that emit bus events for other systems to detect</p>
+<p>Let's consider a model trained to recognize coughing, and a companion plugin to track how often it happens, this can be used as an indicator of disease</p>
+<pre><code class="language-javascript">&quot;hotwords&quot;: {
+    &quot;cough&quot;: {
+        &quot;module&quot;: &quot;ovos-ww-plugin-precise&quot;,
+        &quot;version&quot;: &quot;0.3&quot;,
+        &quot;model&quot;: &quot;https://github.com/MycroftAI/precise-data/blob/models-dev/cough.tar.gz&quot;,
+        &quot;expected_duration&quot;: 3,
+        &quot;trigger_level&quot;: 3,
+        &quot;sensitivity&quot;: 0.5,
+        &quot;listen&quot;: false,
+        &quot;active&quot;: true,
+        // on detection emit this msg_type
+        &quot;bus_event&quot;: &quot;cough.detected&quot;
+    }
+}
+</code></pre>
+<h3 id="multilingualism">Multilingualism</h3>
+<p>In multilingual homes a wake word can be configured for each language, by giving the assistant a different name in each we can assign a language to be used by STT</p>
+<pre><code class="language-javascript">&quot;listener&quot;: {
+    &quot;wake_word&quot;: &quot;hey mycroft&quot;
+},
+&quot;hotwords&quot;: {
+  // default wake word, in global language
+  &quot;hey_mycroft&quot;: {...},   
+  // extra wake word with lang assigned
+  &quot;android&quot;: {
+      &quot;module&quot;: &quot;...&quot;,
+      &quot;model&quot;: &quot;...&quot;,
+      // set to active as extra wake word
+      &quot;active&quot;: true,
+      &quot;listen&quot;: true,
+      // assign a language
+      &quot;stt_lang&quot;: &quot;pt-pt&quot;
+  }
+}
+</code></pre>
+<h3 id="fallback-wake-words">Fallback Wake Words</h3>
+<p><strong>NEW</strong> in <code>ovos-core</code> version <strong>0.0.8</strong></p>
+<p>hotword definitions can also include a <code>"fallback_ww"</code>, this indicates an alternative hotword config to load in case the
+original failed to load for any reason</p>
+<pre><code class="language-javascript">&quot;listener&quot;: {
+    // Default wake_word and stand_up_word will be automatically set to active
+    // unless explicitly disabled under &quot;hotwords&quot; section
+    &quot;wake_word&quot;: &quot;hey mycroft&quot;,
+    &quot;stand_up_word&quot;: &quot;wake up&quot;
+},
+// Hotword configurations
+&quot;hotwords&quot;: {
+    &quot;hey_mycroft&quot;: {
+        &quot;module&quot;: &quot;ovos-ww-plugin-precise-lite&quot;,
+        &quot;model&quot;: &quot;https://github.com/OpenVoiceOS/precise-lite-models/raw/master/wakewords/en/hey_mycroft.tflite&quot;,
+        &quot;expected_duration&quot;: 3,
+        &quot;trigger_level&quot;: 3,
+        &quot;sensitivity&quot;: 0.5,
+        &quot;listen&quot;: true,
+        &quot;fallback_ww&quot;: &quot;hey_mycroft_precise&quot;
+    },
+    // in case precise-lite is not installed, attempt to use classic precise
+    &quot;hey_mycroft_precise&quot;: {
+        &quot;module&quot;: &quot;ovos-ww-plugin-precise&quot;,
+        &quot;version&quot;: &quot;0.3&quot;,
+        &quot;model&quot;: &quot;https://github.com/MycroftAI/precise-data/raw/models-dev/hey-mycroft.tar.gz&quot;,
+        &quot;expected_duration&quot;: 3,
+        &quot;trigger_level&quot;: 3,
+        &quot;sensitivity&quot;: 0.5,
+        &quot;listen&quot;: true,
+        &quot;fallback_ww&quot;: &quot;hey_mycroft_vosk&quot;
+    },
+    // in case classic precise is not installed, attempt to use vosk
+    &quot;hey_mycroft_vosk&quot;: {
+        &quot;module&quot;: &quot;ovos-ww-plugin-vosk&quot;,
+        &quot;samples&quot;: [&quot;hey mycroft&quot;, &quot;hey microsoft&quot;, &quot;hey mike roft&quot;, &quot;hey minecraft&quot;],
+        &quot;rule&quot;: &quot;fuzzy&quot;,
+        &quot;listen&quot;: true,
+        &quot;fallback_ww&quot;: &quot;hey_mycroft_pocketsphinx&quot;
+    },
+    // in case vosk is not installed, attempt to use pocketsphinx
+    &quot;hey_mycroft_pocketsphinx&quot;: {
+        &quot;module&quot;: &quot;ovos-ww-plugin-pocketsphinx&quot;,
+        &quot;phonemes&quot;: &quot;HH EY . M AY K R AO F T&quot;,
+        &quot;threshold&quot;: 1e-90,
+        &quot;lang&quot;: &quot;en-us&quot;,
+        &quot;listen&quot;: true
+    },
+    // default wakeup word to take ovos out of SLEEPING mode,
+    &quot;wake_up&quot;: {
+        &quot;module&quot;: &quot;ovos-ww-plugin-pocketsphinx&quot;,
+        &quot;phonemes&quot;: &quot;W EY K . AH P&quot;,
+        &quot;threshold&quot;: 1e-20,
+        &quot;lang&quot;: &quot;en-us&quot;,
+        &quot;wakeup&quot;: true,
+        &quot;fallback_ww&quot;: &quot;wake_up_vosk&quot;
+    },
+    // in case pocketsphinx plugin is not installed, attempt to use vosk
+    &quot;wake_up_vosk&quot;: {
+        &quot;module&quot;: &quot;ovos-ww-plugin-vosk&quot;,
+        &quot;rule&quot;: &quot;fuzzy&quot;,
+        &quot;samples&quot;: [&quot;wake up&quot;],
+        &quot;lang&quot;: &quot;en-us&quot;,
+        // makes this a wakeup word for usage in SLEEPING mode
+        &quot;wakeup&quot;: true
+    }
+}
+</code></pre>
+<h2 id="vad">VAD</h2>
+<p>Voice Activity Detection plugins have several functions under the listener service</p>
+<ul>
+<li>detect when user finished speaking</li>
+<li>remove silence before sending audio to <code>STT</code> - <strong>NEW</strong> in <code>ovos-core</code> version <strong>0.0.8</strong></li>
+<li>detect when user is speaking during <code>continuous mode</code> (read below)</li>
+</ul>
+<pre><code class="language-javascript">&quot;listener&quot;: {  
+  // Setting to remove all silence/noise from start and end of recorded speech (only non-streaming)
+  &quot;remove_silence&quot;: true,
+
+  &quot;VAD&quot;: {
+     // recommended plugin: &quot;ovos-vad-plugin-silero&quot;
+     &quot;module&quot;: &quot;ovos-vad-plugin-silero&quot;,
+     &quot;ovos-vad-plugin-silero&quot;: {&quot;threshold&quot;: 0.2},
+     &quot;ovos-vad-plugin-webrtcvad&quot;: {&quot;vad_mode&quot;: 3}
+  }
+}
+</code></pre>
+<h2 id="stt">STT</h2>
+<p>Two STT plugins may be loaded at once, if the primary plugin fails for some reason the second plugin will be used.</p>
+<p>This allows you to have a lower accuracy offline model as fallback to account for internet outages, this ensures your
+device never becomes fully unusable</p>
+<pre><code class="language-javascript">&quot;stt&quot;: {
+    &quot;module&quot;: &quot;ovos-stt-plugin-server&quot;,
+    &quot;fallback_module&quot;: &quot;ovos-stt-plugin-vosk&quot;,
+    &quot;ovos-stt-plugin-server&quot;: {&quot;url&quot;: &quot;https://stt.openvoiceos.com/stt&quot;}
+},
+</code></pre>
+<h2 id="audio-transformers">Audio Transformers</h2>
+<p><strong>NEW</strong> in <code>ovos-core</code> version <strong>0.0.8</strong>, originally developed for <a href="https://github.com/NeonGeckoCom/neon-transformers">Neon</a></p>
+<p>Similarly to utterance transformers in <code>ovos-core</code>, the listener exposes audio and message.<code>context</code> to a set of plugins
+that can transform it before STT stage</p>
+<p>Audio transformer plugins can either transform the audio binary data itself (eg, denoise) or the <code>context</code> (eg, speaker
+recognition)</p>
+<p>The audio is sent sequentially to all transformer plugins, ordered by priority (developer defined), until finally it is
+sent to the STT stage</p>
+<p><img alt="imagem" src="https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/ae428a90-fc7e-4ca7-81d5-fa1d9bbfb885" /></p>
+<h2 id="modes-of-operation">Modes of Operation</h2>
+<p>There are 3 modes to run dinkum, wakeword, hybrid, or continuous (VAD only)</p>
+<p>Additionally, there are 2 temporary modes that can be triggered via bus events / companion skills</p>
+<h3 id="wake-word-mode">Wake Word mode</h3>
+<p><img alt="imagem" src="https://github.com/OpenVoiceOS/ovos-dinkum-listener/assets/33701864/c55388dc-a7fb-4857-9c35-f4a4223c4145" /></p>
+<h3 id="sleep-mode">Sleep mode</h3>
+<p>Can be used via <a href="https://github.com/OpenVoiceOS/skill-ovos-naptime">Naptime skill</a></p>
+<p><img alt="imagem" src="https://github.com/OpenVoiceOS/ovos-dinkum-listener/assets/33701864/24835210-2116-4080-8c2b-fc18eecd923a" /></p>
+<p>Be sure to enable a wakeup word to get out of sleep!</p>
+<pre><code class="language-javascript">&quot;listener&quot;: {
+    &quot;stand_up_word&quot;: &quot;wake up&quot;
+},
+&quot;hotwords&quot;: {
+    &quot;wake up&quot;: {
+        &quot;module&quot;: &quot;ovos-ww-plugin-pocketsphinx&quot;,
+        &quot;phonemes&quot;: &quot;W EY K . AH P&quot;,
+        &quot;threshold&quot;: 1e-20,
+        &quot;lang&quot;: &quot;en-us&quot;,
+        &quot;wakeup&quot;: true
+    }
+}
+</code></pre>
+<h3 id="continuous-mode">Continuous mode</h3>
+<p><strong>EXPERIMENTAL</strong> - <strong>NEW</strong> in <code>ovos-core</code> version <strong>0.0.8</strong></p>
+<p><img alt="imagem" src="https://github.com/OpenVoiceOS/ovos-dinkum-listener/assets/33701864/c8820161-9cb8-433f-9380-6d07965c7fa5" /></p>
+<pre><code class="language-javascript">&quot;listener&quot;: {
+  // continuous listen is an experimental setting, it removes the need for
+  // wake words and uses VAD only, a streaming STT is strongly recommended
+  // NOTE: depending on hardware this may cause mycroft to hear its own TTS responses as questions
+  &quot;continuous_listen&quot;: false
+}
+</code></pre>
+<h3 id="hybrid-mode">Hybrid mode</h3>
+<p><strong>EXPERIMENTAL</strong> - <strong>NEW</strong> in <code>ovos-core</code> version <strong>0.0.8</strong></p>
+<p><img alt="imagem" src="https://github.com/OpenVoiceOS/ovos-dinkum-listener/assets/33701864/b9012663-4f00-47a9-bac4-8b08392da12c" /></p>
+<pre><code class="language-javascript">&quot;listener&quot;: {
+  // hybrid listen is an experimental setting,
+  // it will not require a wake word for X seconds after a user interaction
+  // this means you dont need to say &quot;hey mycroft&quot; for follow up questions
+  &quot;hybrid_listen&quot;: false,
+  // number of seconds to wait for an interaction before requiring wake word again
+  &quot;listen_timeout&quot;: 45
+}
+</code></pre>
+<h3 id="recording-mode">Recording mode</h3>
+<p><strong>EXPERIMENTAL</strong> - <strong>NEW</strong> in <code>ovos-core</code> version <strong>0.0.8</strong></p>
+<p>Can be used via <a href="https://github.com/OpenVoiceOS/skill-ovos-audio-recording">Recording skill</a></p>
+<p><img alt="imagem" src="https://github.com/OpenVoiceOS/ovos-dinkum-listener/assets/33701864/0337b499-3175-4031-a83f-eda352d2197f" /></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../bus_service/" class="btn btn-neutral float-left" title="Bus"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../core/" class="btn btn-neutral float-right" title="Core">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../bus_service/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../core/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

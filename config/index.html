@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://openvoiceos.github.io/ovos-technical-manual/config/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Configuration - OVOS Technical Manual</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Configuration";
+        var mkdocs_page_input_path = "config.md";
+        var mkdocs_page_url = "/ovos-technical-manual/config/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OVOS Technical Manual
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Home</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../community/">Community</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../versioning/">Versioning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../license/">License</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../timeline/">Timeline</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Architecture</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../bus_service/">Bus</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../speech_service/">Listener</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../core/">Core</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../audio_service/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gui_service/">GUI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../OCP/">Media</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Configuration</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#config-files">Config Files</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#configuring-configuration">Configuring Configuration</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#protected_keys">protected_keys</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#disable_user_config">disable_user_config</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#disable_remote_config">disable_remote_config</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#meta-configuration">Meta Configuration</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#os-env-vars">OS ENV vars</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ovosconf">ovos.conf</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#config-in-downstream-packages">Config in downstream packages</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../backend/">Backend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Self Hosting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../stt_server/">STT Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_server/">TTS Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../persona_server/">Persona Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../translate_server/">Translate Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../personal_backend/">Personal Backend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Plugins</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../OPM/">Plugin Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mic_plugins/">Microphone</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../vad_plugins/">Voice Activity Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ww_plugins/">Wake Word</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../stt_plugins/">Speech To Text</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_plugins/">Text To Speech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../g2p_plugins/">Grapheme to Phoneme</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../transformer_plugins/">Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../lang_plugins/">Language Detection/Translation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../solvers/">Question Solvers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../nlp_plugins/">NLP Plugins</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../PHAL/">Platform/Hardware Abstraction Layer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ocp_plugins/">OCP Stream Extractors</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../media_plugins/">Media Playback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Skills</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../guidelines/">Design Guidelines</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_structure/">Anatomy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../statements/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../intents/">Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../user_res_files/">Customization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skills_bus/">Bus Interaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_filesystem/">Filesystem</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_settings/">Skill Settings</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_api/">Skill API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../runtime/">Runtime Requirements</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_json/">Skill Json</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_tests/">Skill Tests</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dev/">F.A.Q.</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Continuous Conversation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../prompts/">Prompts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../context/">Follow up Questions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../converse/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../layers/">Intent Layers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../session_skills/">Session Aware Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Voice Apps</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../voice_apps/">Standalone Apps</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../qt_apps/">QT Voice Apps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Fallback</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../fallbacks/">Fallback Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Common Query</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../common_query/">Common Query Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Auto Translation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../universal_skills/">Universal Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Media</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../OCP_skills/">Media Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../OCP_pipeline/">OCP Pipeline</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">GUI</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../homescreen/">Homescreen</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gui_protocol/">Protocol</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../shell/">Shell</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../qt5/">QT5 mycroft-gui</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">MessageBus APIs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_gui/">GUI Interface</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mk1_api/">Enclosure Api</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Technologies</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../eggscript/">Eggscript</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bus_client/">Messagebus Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mk1_utils/">Mark1 Utils</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../backend_client/">Backend Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../jurebes/">Jurebes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../padacioso/">Padacioso</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ovos_bigscreen/">Plasma Bigscreen</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OVOS Technical Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Architecture</li>
+      <li class="breadcrumb-item active">Configuration</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="configuration">Configuration</h1>
+<h2 id="config-files">Config Files</h2>
+<p>When the configuration loader starts, it looks in several locations byorder, and loads ALL configurations. </p>
+<p>Keys that exist in multiple configuration files will be overridden by the last file to contain the value. This process results in
+a minimal amount being written for a specific device and user, without modifying default distribution files.</p>
+<p>The main configuration files are commonly referred too as:</p>
+<ul>
+<li><strong>default</strong> - the file shipped by the <code>ovos-config</code> package, containing default values</li>
+<li><strong>system</strong> - located at <code>/etc/mycroft/mycroft.conf</code>, intended to be shipped by specific platforms such as pre built raspberry pi images for dedicated hardware or by your OS package manager</li>
+<li><strong>remote</strong> - locate at <code>~/.config/mycroft/web_cache.json</code>, if using a backend to manage multiple devices this is where any downloaded config would be stored</li>
+<li><strong>user</strong> - located at <code>~/.config/mycroft/mycroft.conf</code>, intended for users to modify, usually does not exist until created by a user</li>
+</ul>
+<h2 id="configuring-configuration">Configuring Configuration</h2>
+<p>There are a couple of special configuration keys that change the way the configuration stack loads.</p>
+<h3 id="protected_keys">protected_keys</h3>
+<p>A <code>"protected_keys"</code> configuration section may be added to a <code>Default</code> or <code>System</code> Config file
+(default <code>/etc/mycroft/mycroft.conf</code>). This configuration section specifies
+other configuration keys that may not be specified in <code>remote</code> or <code>user</code> configurations.
+Keys may specify nested parameters with <code>.</code> to exclude specific keys within nested dictionaries.
+An example config could be:</p>
+<pre><code class="language-json">{
+  &quot;protected_keys&quot;: {
+    &quot;remote&quot;: [
+      &quot;gui_websocket.host&quot;,
+      &quot;websocket.host&quot;
+    ],
+    &quot;user&quot;: [
+      &quot;gui_websocket.host&quot;
+    ]
+  }
+}
+</code></pre>
+<p>This example specifies that <code>config['gui_websocket']['host']</code> may be specified in user configuration, but not remote.
+<code>config['websocket']['host']</code> may not be specified in user or remote config, so it will only consider default
+and system configurations.</p>
+<h3 id="disable_user_config">disable_user_config</h3>
+<p>If this config parameter is set to True in <code>Default</code> or <code>System</code> configuration,
+no user configurations will be loaded (no XDG configuration paths).</p>
+<h3 id="disable_remote_config">disable_remote_config</h3>
+<p>If this config parameter is set to True in <code>Default</code> or <code>System</code> configuration,
+the remote configuration (<code>web_cache.json</code>) will not be loaded.</p>
+<h2 id="meta-configuration">Meta Configuration</h2>
+<h3 id="os-env-vars">OS ENV vars</h3>
+<p>The configuration files loaded can be modified by environment variables, or alternatively by <code>ovos.conf</code> (described in the next section)</p>
+<p>if <code>Configuration()</code> is called the following configs would be loaded in this order:</p>
+<ul>
+<li><code>{ovos-config-package}/mycroft.conf</code></li>
+<li><code>os.environ.get('MYCROFT_SYSTEM_CONFIG')</code> or <code>/etc/mycroft/mycroft.conf</code></li>
+<li><code>os.environ.get('MYCROFT_WEB_CACHE')</code> or <code>$XDG_CONFIG_PATH/mycroft/web_cache.json</code></li>
+<li><code>$XDG_CONFIG_DIRS/mycroft/mycroft.conf</code></li>
+<li><code>/etc/xdg/mycroft/mycroft.conf</code></li>
+<li><code>$XDG_CONFIG_HOME/mycroft/mycroft.conf</code> (default <code>~/.config/mycroft/mycroft.conf</code>)</li>
+</ul>
+<p>Configuration files can be in either json or yaml format. json files must have <code>.json</code> or <code>.conf</code> file extensions, yaml files must have <code>.yml</code> or <code>.yaml</code> file extensions</p>
+<h3 id="ovosconf">ovos.conf</h3>
+<p>The <code>ovos_config</code> package determines which config files to load based on <code>ovos.conf</code>. This file is optional and does <strong>NOT</strong> need to exist.</p>
+<blockquote>
+<p><strong>NOTE</strong>: You should not need to use or worry about this file except in extreme situations</p>
+</blockquote>
+<p>while <code>mycroft.conf</code> configures the voice assistant, <code>ovos.conf</code> configures the library</p>
+<p>all XDG paths across OpenVoiceOS packages build their paths taking <code>"base_folder"</code> from <code>ovos.conf</code> into consideration</p>
+<p><code>ovos.conf</code> decides what files are loaded by the <code>Configuration</code> class described above, as an end user or skill developer you should never have to worry about this</p>
+<p><code>get_ovos_config</code> will return default values that load <code>mycroft.conf</code> unless otherwise configured.</p>
+<p><code>ovos.conf</code> files are loaded in the following order, with later files taking priority over earlier ones in the list:</p>
+<ul>
+<li><code>/etc/OpenVoiceOS/ovos.conf</code></li>
+<li><code>$XDG_CONFIG_DIRS/OpenVoiceOS/ovos.conf</code></li>
+<li><code>/etc/xdg/OpenVoiceOS/ovos.conf</code></li>
+<li><code>$XDG_CONFIG_HOME/OpenVoiceOS/ovos.conf</code>  (default <code>~/.config/OpenVoiceOS/ovos.conf</code>)</li>
+</ul>
+<p>A simple <code>ovos_config</code> should have a structure like:</p>
+<pre><code class="language-json">{
+  &quot;base_folder&quot;: &quot;mycroft&quot;,
+  &quot;config_filename&quot;: &quot;mycroft.conf&quot;,
+  &quot;default_config_path&quot;: &quot;&lt;Absolute Path to ovos-config&gt;/mycroft.conf&quot;,
+  &quot;module_overrides&quot;: {},
+  &quot;submodule_mappings&quot;: {}
+}
+</code></pre>
+<h3 id="config-in-downstream-packages">Config in downstream packages</h3>
+<p><code>ovos.conf</code> allows downstream voice assistants such as neon-core to change their config files to <code>neon.yaml</code></p>
+<pre><code class="language-json">{
+  &quot;base_folder&quot;: &quot;mycroft&quot;,
+  &quot;config_filename&quot;: &quot;mycroft.conf&quot;,
+  &quot;default_config_path&quot;: &quot;&lt;Absolute Path to ovos-config&gt;/mycroft.conf&quot;,
+
+  &quot;module_overrides&quot;: {
+    &quot;neon_core&quot;: {
+      &quot;base_folder&quot;: &quot;neon&quot;,
+      &quot;config_filename&quot;: &quot;neon.yaml&quot;,
+      &quot;default_config_path&quot;: &quot;/etc/example/config/neon.yaml&quot;
+    }
+  },
+
+  &quot;submodule_mappings&quot;: {
+    &quot;neon_messagebus&quot;: &quot;neon_core&quot;,
+    &quot;neon_speech&quot;: &quot;neon_core&quot;,
+    &quot;neon_audio&quot;: &quot;neon_core&quot;,
+    &quot;neon_gui&quot;: &quot;neon_core&quot;
+  }
+}
+</code></pre>
+<blockquote>
+<p><em>Note</em>: <code>default_config_path</code> should always be an absolute path. any manual override must specify an absolute path to a json or yaml config file.</p>
+</blockquote>
+<p>Using the above example, if <code>Configuration()</code> is called from <code>neon-core</code>, the following configs would be loaded in this
+order:</p>
+<ul>
+<li><code>/etc/example/config/neon.yaml</code></li>
+<li><code>os.environ.get('MYCROFT_SYSTEM_CONFIG')</code> or <code>/etc/neon/neon.yaml</code></li>
+<li><code>os.environ.get('MYCROFT_WEB_CACHE')</code> or <code>$XDG_CONFIG_PATH/neon/web_cache.json</code></li>
+<li><code>$XDG_CONFIG_DIRS/neon/neon.yaml</code></li>
+<li><code>/etc/xdg/neon/neon.yaml</code></li>
+<li><code>$XDG_CONFIG_HOME/neon/neon.yaml</code> (default <code>~/.config/neon/neon.yaml</code>)</li>
+</ul>
+<p>A call to <code>get_ovos_config</code> from <code>neon_core</code> or <code>neon_messagebus</code> will return a configuration like:</p>
+<pre><code class="language-json">{
+  &quot;base_folder&quot;: &quot;neon&quot;,
+  &quot;config_filename&quot;: &quot;neon.yaml&quot;,
+  &quot;default_config_path&quot;: &quot;/etc/example/config/neon.yaml&quot;,
+  &quot;module_overrides&quot;: {
+    &quot;neon_core&quot;: {
+      &quot;base_folder&quot;: &quot;neon&quot;,
+      &quot;config_filename&quot;: &quot;neon.yaml&quot;,
+      &quot;default_config_path&quot;: &quot;/etc/example/config/neon.yaml&quot;
+    }
+  },
+  &quot;submodule_mappings&quot;: {
+    &quot;neon_messagebus&quot;: &quot;neon_core&quot;,
+    &quot;neon_speech&quot;: &quot;neon_core&quot;,
+    &quot;neon_audio&quot;: &quot;neon_core&quot;,
+    &quot;neon_gui&quot;: &quot;neon_core&quot;
+  }
+}
+</code></pre>
+<p>If <code>get_ovos_config</code> was called from <code>ovos_core</code> with the same configuration file as the last example,
+the returned configuration would be:</p>
+<pre><code class="language-json">{
+  &quot;base_folder&quot;: &quot;mycroft&quot;,
+  &quot;config_filename&quot;: &quot;mycroft.conf&quot;,
+  &quot;default_config_path&quot;: &quot;&lt;Path to ovos-config&gt;/mycroft.conf&quot;,
+  &quot;module_overrides&quot;: {
+    &quot;neon_core&quot;: {
+      &quot;base_folder&quot;: &quot;neon&quot;,
+      &quot;config_filename&quot;: &quot;neon.yaml&quot;,
+      &quot;default_config_path&quot;: &quot;/etc/example/config/neon.yaml&quot;
+    }
+  },
+  &quot;submodule_mappings&quot;: {
+    &quot;neon_messagebus&quot;: &quot;neon_core&quot;,
+    &quot;neon_speech&quot;: &quot;neon_core&quot;,
+    &quot;neon_audio&quot;: &quot;neon_core&quot;,
+    &quot;neon_gui&quot;: &quot;neon_core&quot;
+  }
+}
+</code></pre>
+<p>Both projects could be installed side by side and each would load their corresponding config files</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../OCP/" class="btn btn-neutral float-left" title="Media"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../backend/" class="btn btn-neutral float-right" title="Backend">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../OCP/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../backend/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

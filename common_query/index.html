@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://openvoiceos.github.io/ovos-technical-manual/common_query/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Common Query Skills - OVOS Technical Manual</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Common Query Skills";
+        var mkdocs_page_input_path = "common_query.md";
+        var mkdocs_page_url = "/ovos-technical-manual/common_query/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OVOS Technical Manual
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Home</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../community/">Community</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../versioning/">Versioning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../license/">License</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../timeline/">Timeline</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Architecture</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../bus_service/">Bus</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../speech_service/">Listener</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../core/">Core</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../audio_service/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gui_service/">GUI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../OCP/">Media</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../config/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../backend/">Backend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Self Hosting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../stt_server/">STT Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_server/">TTS Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../persona_server/">Persona Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../translate_server/">Translate Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../personal_backend/">Personal Backend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Plugins</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../OPM/">Plugin Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mic_plugins/">Microphone</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../vad_plugins/">Voice Activity Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ww_plugins/">Wake Word</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../stt_plugins/">Speech To Text</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_plugins/">Text To Speech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../g2p_plugins/">Grapheme to Phoneme</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../transformer_plugins/">Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../lang_plugins/">Language Detection/Translation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../solvers/">Question Solvers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../nlp_plugins/">NLP Plugins</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../PHAL/">Platform/Hardware Abstraction Layer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ocp_plugins/">OCP Stream Extractors</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../media_plugins/">Media Playback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Skills</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../guidelines/">Design Guidelines</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_structure/">Anatomy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../statements/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../intents/">Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../user_res_files/">Customization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skills_bus/">Bus Interaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_filesystem/">Filesystem</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_settings/">Skill Settings</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_api/">Skill API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../runtime/">Runtime Requirements</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_json/">Skill Json</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_tests/">Skill Tests</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dev/">F.A.Q.</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Continuous Conversation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../prompts/">Prompts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../context/">Follow up Questions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../converse/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../layers/">Intent Layers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../session_skills/">Session Aware Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Voice Apps</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../voice_apps/">Standalone Apps</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../qt_apps/">QT Voice Apps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Fallback</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../fallbacks/">Fallback Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Common Query</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Common Query Skills</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#commonqueryskill">CommonQuerySkill</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#an-example">An Example</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#match-confidence">Match Confidence</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#cqs_action">CQS_action()</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Auto Translation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../universal_skills/">Universal Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Media</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../OCP_skills/">Media Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../OCP_pipeline/">OCP Pipeline</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">GUI</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../homescreen/">Homescreen</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gui_protocol/">Protocol</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../shell/">Shell</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../qt5/">QT5 mycroft-gui</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">MessageBus APIs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_gui/">GUI Interface</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mk1_api/">Enclosure Api</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Technologies</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../eggscript/">Eggscript</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bus_client/">Messagebus Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mk1_utils/">Mark1 Utils</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../backend_client/">Backend Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../jurebes/">Jurebes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../padacioso/">Padacioso</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ovos_bigscreen/">Plasma Bigscreen</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OVOS Technical Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Common Query</li>
+      <li class="breadcrumb-item active">Common Query Skills</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="common-query-framework">Common Query Framework</h1>
+<p>The Common Query Framework handles the common use case of "general information" or question answering. Many Skills may implement handlers for "what is X" or "when did Y", the Common Query Framework allows all these Skills be queried and a single "best" answer to be selected. This is similar to the Common Play Framework that handles the common use of "playing" music or other media.</p>
+<p>The Common Query Skill System is led by the Common Query Pipeline. The pipeline handles queries matching a question pattern such as "What is the height of the Eiffle Tower" and "When is lunch". </p>
+<p>A matched question will be sent to all Skills based upon the <code>CommonQuerySkill</code> base class. The Skills will return wether they can answer the query along with an answer when applicable. The "best" match will be selected and spoken to the user.</p>
+<h2 id="commonqueryskill">CommonQuerySkill</h2>
+<p>A Skill interfacing with the Common Query Framework inherits from the the <code>CommonQuerySkill</code> and needs to define a method <code>CQS_match_query_phrase()</code> taking an utterance as argument.</p>
+<p>The general structure is:</p>
+<pre><code class="language-python">from ovos_workshop.skills.common_query_skill import CommonQuerySkill, CQSMatchLevel
+
+class MyCommonQuerySkill(CommonQuerySkill):
+    def CQS_match_query_phrase(self, utt):
+       # Parsing implementation
+       # [...]
+       return (utt, CQSMatchLevel.LEVEL, answer_string)
+</code></pre>
+<p>The <code>CQS_match_query_phrase()</code> method will parse the utterance and determine if it can handle the query. if it can't answer it will return <code>None</code> and if it <em>can</em> answer it will return a data tuple with the format</p>
+<pre><code class="language-python">((str)Input Query, CQSMatchLevel, (str)Answer Text)
+</code></pre>
+<p>The input query is returned to map the query to the answer.</p>
+<p><code>CQSMatchLevel</code> is an Enum with the possible values</p>
+<ul>
+<li><code>CQSMatchLevel.EXACT</code>: The Skill is very confident that it has the precise answer the user is looking for. There was a category match and a known entity is referenced.</li>
+<li><code>CQSMatchLevel.CATEGORY</code>: The Skill could determine that the type of question matches a category that the Skill is good at finding.</li>
+<li><code>CQSMatchLevel.GENERAL</code>: This Skill tries to answer all questions and found an answer.</li>
+</ul>
+<p>To show visuals or take some other action in response to being selected, see the <a href="common-query-framework.md#cqs_action"><code>CQS_action()</code> method</a> below.</p>
+<h2 id="an-example">An Example</h2>
+<p>Let's make a simple Skill that tells us the age of the various Monty Python members. A quick draft looks like this. (You can find the complete code <a href="https://github.com/forslund/common-query-tutorial">here</a>)</p>
+<pre><code class="language-python">from ovos_workshop.skills.common_query_skill import CommonQuerySkill, CQSMatchLevel
+
+# Dict mapping python members to their age and whether they're alive or dead     
+PYTHONS = {
+    'eric idle': (77,'alive'),
+    'michael palin': (77, 'alive'),
+    'john cleese': (80, 'alive'),
+    'graham chapman': (48, 'dead'),
+    'terry gilliam': (79, 'alive'),
+    'terry jones': (77, 'dead')
+}
+
+
+def python_in_utt(utterance):
+    &quot;&quot;&quot;Find a monty python member in the utterance.
+    Arguments:
+        utterance (str): Sentence to check for Monty Python members
+    Returns:
+        (str) name of Monty Python member or None
+    &quot;&quot;&quot;
+    for key in PYTHONS:
+        if key in utterance.lower():
+            # Return the found python
+            return key
+
+    # No python found
+    return None
+
+
+class PythonAgeSkill(CommonQuerySkill):
+    &quot;&quot;&quot;A Skill for checking the age of the python crew.&quot;&quot;&quot;
+
+    def format_answer(self, python):
+        &quot;&quot;&quot;Create string with answer for the specified &quot;python&quot; person.&quot;&quot;&quot;
+        age, status = PYTHONS[python]
+        if status == 'alive':
+            return self.dialog_renderer.render('age_alive',
+                                               {'person': python, 'age': age})
+        else:
+            return self.dialog_renderer.render('age_dead',
+                                               {'person': python, 'age': age})
+
+    def CQS_match_query_phrase(self, utt):
+        &quot;&quot;&quot;Check the utterance if it is a question we can answer.
+
+        Arguments:
+            utt: The question
+
+        Returns: tuple (input utterance, match level, response sentence, extra)
+        &quot;&quot;&quot;
+        # Check if this is an age query
+        age_query = self.voc_match(utt, 'age')
+
+        # Check if a monty python member is mentioned
+        python = full_python_in_utt(utt)
+
+        # If this is an age query and a monty python member is mentioned the
+        # skill can answer this
+        if age_query and python:
+            # return high confidence
+            return (utt, CQSMatchLevel.CATEGORY, self.format_answer(python))
+        else:
+            return None
+</code></pre>
+<p>As seen above the <code>CQS_match_query_phrase()</code> checks if this is an age related utterance and if the utterance contains the name of a Monty Python member. If both criteria are met it returns a match with a <code>CQSMatchLevel.CATEGORY</code> confidence together with a rendered dialog containing the answer.</p>
+<p>If both criteria are not fulfilled the method will return <code>None</code> indicating that it can't answer the query.</p>
+<p>This will be able to provide answers to queries such as</p>
+<blockquote>
+<p>"how old is Graham Chapman"</p>
+<p>"what's Eric Idle's age"</p>
+</blockquote>
+<p>To make this more exact we can add support for checking for the words "monty python", and if present return the highest confidence.</p>
+<p>The method for parsing the example is quite simplistic but there are many different toolkits out there for doing the question parsing. <a href="https://pypi.org/project/adapt-parser/">Adapt</a>, <a href="https://pypi.org/project/little-questions/">little questions</a>, <a href="https://pypi.org/project/padaos/">padaos</a> and many more!</p>
+<h2 id="match-confidence">Match Confidence</h2>
+<p>If we want to make sure this Skill is used when the user explicitly states it's the age of a Monty Python member, a slight modification to the Skill can be made:</p>
+<p>We'll change the end of the <code>CQS_match_query_phrase()</code> method to</p>
+<pre><code class="language-python">    def CQS_match_query_phrase(self, utt):
+        # (...)
+        if 'monty python' in utt.lower():
+            confidence = CQSMatchLevel.EXACT
+        else:
+            confidence = CQSMatchLevel.CATEGORY            
+        # return high confidence
+        return (utt, confidence, self.format_answer(python))
+</code></pre>
+<p>So if the utterance contains the phrase "monty python" the confidence will be set to <code>CQSMatchLevel.EXACT</code> making the Skill very very likely to be chosen to answer the query.</p>
+<h2 id="cqs_action">CQS_action()</h2>
+<p>In some cases the Skill should do additional operations when selected as the best match. It could be prepared for follow-up questions or show an image on the screen. The <code>CQS_action()</code> method allows for this, when a Skill is selected this method will be called.</p>
+<p>Let's make our Python Age Skill gloat that it was selected by adding a <code>CQS_action()</code> method like this:</p>
+<p>where <code>phrase</code> is the same phrase that were sent to <code>CQS_match_query_phrase()</code> and <code>data</code> is optional additional data from the query matching method.</p>
+<pre><code class="language-python">    def CQS_action(self, utt, data):
+        self.log.info('I got selected! What you say about that Wolfram Alpha Skill!?!?')
+</code></pre>
+<p>Now each time the Skill is called the above message will be added to the log! Not very useful you say? Hmm, yes... let's add something useful, like show the age on the Mark-1 display.</p>
+<p>To accomplish this we need to get the age into the <code>CQS_action()</code> method in some way. we could store last age in as an internal variable but the more elegant way is to send data as part of the match tuple. 
+To do this we must extend the returned match tuple from <code>CQS_match_query_phrase()</code> with a data entry. So the return statement becomes</p>
+<pre><code class="language-python">    def CQS_match_query_phrase(self, utt):
+        # (...)
+        data = {'age': PYTHONS[python], 'python': python}
+        return (utt, confidence, self.format_answer(python), data)
+</code></pre>
+<p>The data structure declared here will be sent to <code>CQS_Action()</code> and we can update the method to</p>
+<pre><code class="language-python">    def CQS_action(self, utt, data):
+        self.log.info('I got selected! What you say about that Wolfram Alpha Skill!?!?')
+        age = data.get('age')
+        if age:
+            self.log.info(f'Showing the age {age}')
+            self.enclosure.mouth_text(str(age))
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../fallbacks/" class="btn btn-neutral float-left" title="Fallback Skills"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../universal_skills/" class="btn btn-neutral float-right" title="Universal Skills">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../fallbacks/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../universal_skills/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

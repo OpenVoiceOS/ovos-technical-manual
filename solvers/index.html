@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://openvoiceos.github.io/ovos-technical-manual/solvers/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Question Solvers - OVOS Technical Manual</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Question Solvers";
+        var mkdocs_page_input_path = "solvers.md";
+        var mkdocs_page_url = "/ovos-technical-manual/solvers/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OVOS Technical Manual
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Home</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../community/">Community</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../versioning/">Versioning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../license/">License</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../timeline/">Timeline</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Architecture</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../bus_service/">Bus</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../speech_service/">Listener</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../core/">Core</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../audio_service/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gui_service/">GUI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../OCP/">Media</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../config/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../backend/">Backend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Self Hosting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../stt_server/">STT Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_server/">TTS Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../persona_server/">Persona Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../translate_server/">Translate Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../personal_backend/">Personal Backend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Plugins</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../OPM/">Plugin Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mic_plugins/">Microphone</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../vad_plugins/">Voice Activity Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ww_plugins/">Wake Word</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../stt_plugins/">Speech To Text</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_plugins/">Text To Speech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../g2p_plugins/">Grapheme to Phoneme</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../transformer_plugins/">Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../lang_plugins/">Language Detection/Translation</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Question Solvers</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#question-solvers">Question Solvers</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#multiple-choice-solvers">Multiple Choice Solvers</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#evidence-solver">Evidence Solver</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#entailment-solver">Entailment Solver</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#summarization-solver">Summarization Solver</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../nlp_plugins/">NLP Plugins</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../PHAL/">Platform/Hardware Abstraction Layer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ocp_plugins/">OCP Stream Extractors</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../media_plugins/">Media Playback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Skills</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../guidelines/">Design Guidelines</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_structure/">Anatomy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../statements/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../intents/">Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../user_res_files/">Customization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skills_bus/">Bus Interaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_filesystem/">Filesystem</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_settings/">Skill Settings</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_api/">Skill API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../runtime/">Runtime Requirements</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_json/">Skill Json</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_tests/">Skill Tests</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dev/">F.A.Q.</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Continuous Conversation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../prompts/">Prompts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../context/">Follow up Questions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../converse/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../layers/">Intent Layers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../session_skills/">Session Aware Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Voice Apps</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../voice_apps/">Standalone Apps</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../qt_apps/">QT Voice Apps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Fallback</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../fallbacks/">Fallback Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Common Query</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../common_query/">Common Query Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Auto Translation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../universal_skills/">Universal Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Media</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../OCP_skills/">Media Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../OCP_pipeline/">OCP Pipeline</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">GUI</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../homescreen/">Homescreen</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gui_protocol/">Protocol</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../shell/">Shell</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../qt5/">QT5 mycroft-gui</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">MessageBus APIs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_gui/">GUI Interface</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mk1_api/">Enclosure Api</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Technologies</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../eggscript/">Eggscript</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bus_client/">Messagebus Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mk1_utils/">Mark1 Utils</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../backend_client/">Backend Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../jurebes/">Jurebes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../padacioso/">Padacioso</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ovos_bigscreen/">Plasma Bigscreen</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OVOS Technical Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Plugins</li>
+      <li class="breadcrumb-item active">Question Solvers</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="solver-plugins">Solver Plugins</h1>
+<p>Solver plugins solve natural language queries, they define a unified api around specific kinds of questions and provide
+auto translation capabilities for language support</p>
+<p>A plugin can define the language it works in, eg, wolfram alpha only accepts english input at the time of this writing</p>
+<p>Bidirectional <a href="https://openvoiceos.github.io/ovos-technical-manual/lang_plugins">translation</a> will be handled behind the scenes for other languages</p>
+<p>Solvers are used by individual skills and by the <a href="https://github.com/OpenVoiceOS/ovos-persona">Persona Framework</a></p>
+<h2 id="question-solvers">Question Solvers</h2>
+<p><strong>NEW</strong> in <code>ovos-core</code> version <strong>0.0.8</strong></p>
+<p>Given a free form natural language question, return an answer</p>
+<p>Originally implemented for <a href="https://github.com/Neongeckocom/neon_solvers">Neon</a></p>
+<p>non-exhaustive reference table of question solver plugins</p>
+<table>
+<thead>
+<tr>
+<th>plugin</th>
+<th>description</th>
+<th>native language</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/OpenVoiceOS/skill-ovos-ddg">ovos-solver-plugin-ddg</a></td>
+<td>extract keywords from query and search duck duck</td>
+<td>english</td>
+</tr>
+<tr>
+<td><a href="https://github.com/OpenVoiceOS/skill-ovos-wikipedia">ovos-solver-plugin-wikipedia</a></td>
+<td>extract keywords from query and search wikipedia</td>
+<td>english</td>
+</tr>
+<tr>
+<td><a href="https://github.com/OpenVoiceOS/skill-ovos-wolfie">ovos-solver-plugin-wolfram-alpha</a></td>
+<td>wolfram alpha spoken answers api</td>
+<td>english</td>
+</tr>
+<tr>
+<td><a href="https://github.com/OpenVoiceOS/ovos-classifiers/blob/dev/ovos_classifiers/opm/nltk.py">ovos-question-solver-wordnet</a></td>
+<td>answer "what is" questions via wordnet</td>
+<td>english</td>
+</tr>
+<tr>
+<td><a href="https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml">ovos-solver-plugin-aiml</a></td>
+<td>AIML chatbot</td>
+<td>english</td>
+</tr>
+<tr>
+<td><a href="https://github.com/OpenVoiceOS/ovos-solver-plugin-rivescript">ovos-solver-plugin-rivescript</a></td>
+<td>rivescript chatbot</td>
+<td>english</td>
+</tr>
+<tr>
+<td><a href="https://github.com/OVOSHatchery/ovos-solver-pandorabots-plugin">ovos-solver-pandorabots-plugin</a></td>
+<td>old school chatbots hosted around the web</td>
+<td>english</td>
+</tr>
+<tr>
+<td><a href="https://github.com/OpenVoiceOS/ovos-solver-plugin-openai-persona">ovos-solver-plugin-openai-persona</a></td>
+<td>OpenAI API compatible LLMs</td>
+<td>english</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example Usage - DuckDuckGo plugin</strong></p>
+<p>single answer</p>
+<pre><code class="language-python">from skill_ovos_ddg import DuckDuckGoSolver
+
+d = DuckDuckGoSolver()
+
+query = &quot;who is Isaac Newton&quot;
+
+# full answer
+ans = d.spoken_answer(query)
+print(ans)
+# Sir Isaac Newton was an English mathematician, physicist, astronomer, alchemist, theologian, and author widely recognised as one of the greatest mathematicians and physicists of all time and among the most influential scientists. He was a key figure in the philosophical revolution known as the Enlightenment. His book Philosophiæ Naturalis Principia Mathematica, first published in 1687, established classical mechanics. Newton also made seminal contributions to optics, and shares credit with German mathematician Gottfried Wilhelm Leibniz for developing infinitesimal calculus. In the Principia, Newton formulated the laws of motion and universal gravitation that formed the dominant scientific viewpoint until it was superseded by the theory of relativity.
+</code></pre>
+<p>chunked answer, for conversational dialogs, ie "tell me more"</p>
+<pre><code class="language-python">from skill_ovos_ddg import DuckDuckGoSolver
+
+d = DuckDuckGoSolver()
+
+query = &quot;who is Isaac Newton&quot;
+
+# chunked answer
+for sentence in d.long_answer(query):
+    print(sentence[&quot;title&quot;])
+    print(sentence[&quot;summary&quot;])
+    print(sentence.get(&quot;img&quot;))
+
+    # who is Isaac Newton
+    # Sir Isaac Newton was an English mathematician, physicist, astronomer, alchemist, theologian, and author widely recognised as one of the greatest mathematicians and physicists of all time and among the most influential scientists.
+    # https://duckduckgo.com/i/ea7be744.jpg
+
+    # who is Isaac Newton
+    # He was a key figure in the philosophical revolution known as the Enlightenment.
+    # https://duckduckgo.com/i/ea7be744.jpg
+
+    # who is Isaac Newton
+    # His book Philosophiæ Naturalis Principia Mathematica, first published in 1687, established classical mechanics.
+    # https://duckduckgo.com/i/ea7be744.jpg
+
+    # who is Isaac Newton
+    # Newton also made seminal contributions to optics, and shares credit with German mathematician Gottfried Wilhelm Leibniz for developing infinitesimal calculus.
+    # https://duckduckgo.com/i/ea7be744.jpg
+
+    # who is Isaac Newton
+    # In the Principia, Newton formulated the laws of motion and universal gravitation that formed the dominant scientific viewpoint until it was superseded by the theory of relativity.
+    # https://duckduckgo.com/i/ea7be744.jpg
+</code></pre>
+<p>Auto translation, pass user language in context</p>
+<pre><code class="language-python">from skill_ovos_ddg import DuckDuckGoSolver
+
+d = DuckDuckGoSolver()
+
+# bidirectional auto translate by passing lang context
+sentence = d.spoken_answer(&quot;Quem é Isaac Newton&quot;, context={&quot;lang&quot;: &quot;pt&quot;})
+print(sentence)
+# Sir Isaac Newton foi um matemático inglês, físico, astrônomo, alquimista, teólogo e autor amplamente reconhecido como um dos maiores matemáticos e físicos de todos os tempos e entre os cientistas mais influentes. Ele era uma figura chave na revolução filosófica conhecida como o Iluminismo. Seu livro Philosophiæ Naturalis Principia Mathematica, publicado pela primeira vez em 1687, estabeleceu a mecânica clássica. Newton também fez contribuições seminais para a óptica, e compartilha crédito com o matemático alemão Gottfried Wilhelm Leibniz para desenvolver cálculo infinitesimal. No Principia, Newton formulou as leis do movimento e da gravitação universal que formaram o ponto de vista científico dominante até ser superado pela teoria da relatividade
+</code></pre>
+<p>Plugins are expected to implement the <code>get_xxx</code> methods and leave the user facing equivalents alone</p>
+<pre><code class="language-python">from ovos_plugin_manager.templates.solvers import QuestionSolver
+
+
+class MySolver(QuestionSolver):
+    enable_tx = False  # if True enables bidirectional translation
+    priority = 100
+
+    def __init__(self, config=None):
+        config = config or {}
+        # set the &quot;internal&quot; language, defined by dev, not user
+        # this plugin internally only accepts and outputs english
+        config[&quot;lang&quot;] = &quot;en&quot;
+        super().__init__(config)
+
+    # expected solver methods to be implemented
+    def get_data(self, query, context):
+        &quot;&quot;&quot;
+        query assured to be in self.default_lang
+        return a dict response
+        &quot;&quot;&quot;
+        return {&quot;error&quot;: &quot;404 answer not found&quot;}
+
+    def get_image(self, query, context=None):
+        &quot;&quot;&quot;
+        query assured to be in self.default_lang
+        return path/url to a single image to acompany spoken_answer
+        &quot;&quot;&quot;
+        return &quot;http://stock.image.jpg&quot;
+
+    def get_spoken_answer(self, query, context=None):
+        &quot;&quot;&quot;
+        query assured to be in self.default_lang
+        return a single sentence text response
+        &quot;&quot;&quot;
+        return &quot;The full answer is XXX&quot;
+
+    def get_expanded_answer(self, query, context=None):
+        &quot;&quot;&quot;
+        query assured to be in self.default_lang
+        return a list of ordered steps to expand the answer, eg, &quot;tell me more&quot;
+
+        {
+            &quot;title&quot;: &quot;optional&quot;,
+            &quot;summary&quot;: &quot;speak this&quot;,
+            &quot;img&quot;: &quot;optional/path/or/url
+        }
+        :return:
+        &quot;&quot;&quot;
+        steps = [
+            {&quot;title&quot;: &quot;the question&quot;, &quot;summary&quot;: &quot;we forgot the question&quot;, &quot;image&quot;: &quot;404.jpg&quot;},
+            {&quot;title&quot;: &quot;the answer&quot;, &quot;summary&quot;: &quot;but the answer is 42&quot;, &quot;image&quot;: &quot;42.jpg&quot;}
+        ]
+        return steps
+
+</code></pre>
+<h2 id="multiple-choice-solvers">Multiple Choice Solvers</h2>
+<p><strong>NEW</strong> in <code>ovos-core</code> version <strong>0.0.8</strong></p>
+<p>given a question and multiple answers, select the best answer</p>
+<p>non-exhaustive reference table of multiple choice solver plugins</p>
+<table>
+<thead>
+<tr>
+<th>plugin</th>
+<th>description</th>
+<th>native language</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/OpenVoiceOS/ovos-classifiers/blob/dev/ovos_classifiers/opm/heuristics.py">ovos-choice-solver-bm25</a></td>
+<td>using <a href="https://en.wikipedia.org/wiki/Okapi_BM25">Okapi BM25</a>  ranking function to estimate the relevance of documents to a given search query</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Implementation</p>
+<pre><code class="language-python">class MultipleChoiceSolver(AbstractSolver):
+    &quot;&quot;&quot; select best answer from question + multiple choice
+    handling automatic translation back and forth as needed&quot;&quot;&quot;
+
+    # plugin methods to override
+    @abc.abstractmethod
+    def select_answer(self, query: str, options: List[str],
+                      context: Optional[dict] = None) -&gt; str:
+        &quot;&quot;&quot;
+        query and options assured to be in self.default_lang
+        return best answer from options list
+        &quot;&quot;&quot;
+        raise NotImplementedError
+
+</code></pre>
+<h2 id="evidence-solver">Evidence Solver</h2>
+<p><strong>NEW</strong> in <code>ovos-core</code> version <strong>0.0.8</strong></p>
+<p>given a document and a question about it, select the best passage that answers the question</p>
+<p>non-exhaustive reference table of evidence solver plugins</p>
+<table>
+<thead>
+<tr>
+<th>plugin</th>
+<th>description</th>
+<th>native language</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/OpenVoiceOS/ovos-classifiers/blob/dev/ovos_classifiers/opm/heuristics.py">ovos-evidence-solver-bm25</a></td>
+<td>using <a href="https://en.wikipedia.org/wiki/Okapi_BM25">Okapi BM25</a>  ranking function to estimate the relevance of documents to a given search query</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Implementation</p>
+<pre><code class="language-python">class EvidenceSolver(AbstractSolver):
+    &quot;&quot;&quot;perform NLP reading comprehension task,
+    handling automatic translation back and forth as needed&quot;&quot;&quot;
+
+    # plugin methods to override
+    @abc.abstractmethod
+    def get_best_passage(self, evidence: str, question: str,
+                         context: Optional[dict] = None) -&gt; str:
+        &quot;&quot;&quot;
+        evidence and question assured to be in self.default_lang
+         returns summary of provided document
+        &quot;&quot;&quot;
+        raise NotImplementedError
+</code></pre>
+<h2 id="entailment-solver">Entailment Solver</h2>
+<p><strong>NEW</strong> in <code>ovos-core</code> version <strong>0.0.8</strong></p>
+<p>Given a hypothesis and a premise, return True if the premise entails the hypothesis, False otherwise</p>
+<pre><code class="language-python">
+class EntailmentSolver(AbstractSolver):
+    &quot;&quot;&quot; select best answer from question + multiple choice
+    handling automatic translation back and forth as needed&quot;&quot;&quot;
+
+    # plugin methods to override
+    @abc.abstractmethod
+    def check_entailment(self, premise: str, hypothesis: str,
+                         context: Optional[dict] = None) -&gt; bool:
+        &quot;&quot;&quot;
+        premise and hyopithesis assured to be in self.default_lang
+        return Bool, True if premise entails the hypothesis False otherwise
+        &quot;&quot;&quot;
+        raise NotImplementedError
+</code></pre>
+<h2 id="summarization-solver">Summarization Solver</h2>
+<p><strong>NEW</strong> in <code>ovos-core</code> version <strong>0.0.8</strong></p>
+<p>Given a document, return it's summary</p>
+<p>non-exhaustive reference table of multiple choice solver plugins</p>
+<table>
+<thead>
+<tr>
+<th>plugin</th>
+<th>description</th>
+<th>native language</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/OpenVoiceOS/ovos-classifiers/blob/dev/ovos_classifiers/opm/heuristics.py">ovos-summarizer-solver-wordfreq</a></td>
+<td>using word frequencies select the top utterances</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Implementation</p>
+<pre><code class="language-python">class TldrSolver(AbstractSolver):
+    &quot;&quot;&quot;perform NLP summarization task,
+    handling automatic translation back and forth as needed&quot;&quot;&quot;
+
+    # plugin methods to override
+    @abc.abstractmethod
+    def get_tldr(self, document: str,
+                 context: Optional[dict] = None) -&gt; str:
+        &quot;&quot;&quot;
+        document assured to be in self.default_lang
+         returns summary of provided document
+        &quot;&quot;&quot;
+        raise NotImplementedError
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../lang_plugins/" class="btn btn-neutral float-left" title="Language Detection/Translation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../nlp_plugins/" class="btn btn-neutral float-right" title="NLP Plugins">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../lang_plugins/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../nlp_plugins/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

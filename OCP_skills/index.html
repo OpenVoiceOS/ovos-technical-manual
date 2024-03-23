@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://openvoiceos.github.io/ovos-technical-manual/OCP_skills/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Media Skills - OVOS Technical Manual</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Media Skills";
+        var mkdocs_page_input_path = "OCP_skills.md";
+        var mkdocs_page_url = "/ovos-technical-manual/OCP_skills/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OVOS Technical Manual
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Home</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../community/">Community</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../versioning/">Versioning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../license/">License</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../timeline/">Timeline</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Architecture</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../bus_service/">Bus</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../speech_service/">Listener</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../core/">Core</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../audio_service/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gui_service/">GUI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../OCP/">Media</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../config/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../backend/">Backend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Self Hosting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../stt_server/">STT Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_server/">TTS Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../persona_server/">Persona Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../translate_server/">Translate Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../personal_backend/">Personal Backend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Plugins</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../OPM/">Plugin Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mic_plugins/">Microphone</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../vad_plugins/">Voice Activity Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ww_plugins/">Wake Word</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../stt_plugins/">Speech To Text</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_plugins/">Text To Speech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../g2p_plugins/">Grapheme to Phoneme</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../transformer_plugins/">Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../lang_plugins/">Language Detection/Translation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../solvers/">Question Solvers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../nlp_plugins/">NLP Plugins</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../PHAL/">Platform/Hardware Abstraction Layer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ocp_plugins/">OCP Stream Extractors</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../media_plugins/">Media Playback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Skills</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../guidelines/">Design Guidelines</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_structure/">Anatomy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../statements/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../intents/">Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../user_res_files/">Customization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skills_bus/">Bus Interaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_filesystem/">Filesystem</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_settings/">Skill Settings</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_api/">Skill API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../runtime/">Runtime Requirements</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_json/">Skill Json</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_tests/">Skill Tests</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dev/">F.A.Q.</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Continuous Conversation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../prompts/">Prompts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../context/">Follow up Questions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../converse/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../layers/">Intent Layers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../session_skills/">Session Aware Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Voice Apps</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../voice_apps/">Standalone Apps</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../qt_apps/">QT Voice Apps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Fallback</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../fallbacks/">Fallback Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Common Query</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../common_query/">Common Query Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Auto Translation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../universal_skills/">Universal Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Media</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Media Skills</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#search-results">Search Results</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#ocp-skill">OCP Skill</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ocp-keywords">OCP Keywords</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#ocp-voc-match">OCP Voc match</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ocp-database-skill">OCP Database Skill</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#playlist-results">Playlist Results</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#playlist-skill">Playlist Skill</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../OCP_pipeline/">OCP Pipeline</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">GUI</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../homescreen/">Homescreen</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gui_protocol/">Protocol</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../shell/">Shell</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../qt5/">QT5 mycroft-gui</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">MessageBus APIs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_gui/">GUI Interface</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mk1_api/">Enclosure Api</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Technologies</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../eggscript/">Eggscript</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bus_client/">Messagebus Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mk1_utils/">Mark1 Utils</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../backend_client/">Backend Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../jurebes/">Jurebes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../padacioso/">Padacioso</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ovos_bigscreen/">Plasma Bigscreen</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OVOS Technical Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Media</li>
+      <li class="breadcrumb-item active">Media Skills</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="ocp-skills">OCP Skills</h1>
+<p>OCP skills are built from the OVOSCommonPlaybackSkill class</p>
+<p>These skills work as media providers, they return results for OCP to playback</p>
+<p>The actual voice interaction is handled by OCP, skills only implement the returning of results</p>
+<h2 id="search-results">Search Results</h2>
+<p>Search results are returned as a list of dicts, skills can also use iterators to yield results 1 at a time as they become available</p>
+<p>Mandatory fields are</p>
+<pre><code class="language-python">uri: str  # URL/URI of media, OCP will handle formatting and file handling
+title: str
+media_type: MediaType
+playback: PlaybackType
+match_confidence: int  # 0-100
+</code></pre>
+<p>Other optional metadata includes artists, album, length and images for the GUI</p>
+<pre><code class="language-python">artist: str
+album: str
+image: str # uri/file path
+bg_image: str # uri/file path
+skill_icon: str # uri/file path
+length: int # seconds, -1 for live streams
+</code></pre>
+<p><img alt="imagem" src="https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/08e31d2d-90e8-45ea-ab2f-dbd235892cb3" /></p>
+<h3 id="ocp-skill">OCP Skill</h3>
+<p>General Steps to create a skill</p>
+<ul>
+<li>subclass your skill from <code>OVOSCommonPlaybackSkill</code></li>
+<li>In the __init__ method indicate <a href="https://github.com/OpenVoiceOS/ovos-ocp-audio-plugin/blob/31701ded43a4f7ff6c02833d6aaf1bc0740257fc/ovos_plugin_common_play/ocp/status.py#L95">the media types you want to handle</a></li>
+<li><code>self.voc_match(phrase, "skill_name")</code> to handle specific requests for your skill</li>
+<li><code>self.remove_voc(phrase, "skill_name")</code> to remove matched phrases from the search request</li>
+<li>Implement the <code>ocp_search</code> decorator, as many as you want (they run in parallel)</li>
+<li>The decorated method can return a list or be an iterator of <code>result_dict</code> (track or playlist)</li>
+<li>The search function can be entirely inline or call another Python library, like <a href="https://github.com/OpenJarbas/pandorinha">pandorinha</a> or <a href="https://github.com/pkkid/python-plexapi">plexapi</a></li>
+<li><code>self.extend_timeout()</code> to delay OCP from selecting a result, requesting more time to perform the search</li>
+<li>Implement a confidence score formula</li>
+<li><a href="https://github.com/OpenVoiceOS/ovos-ocp-audio-plugin/blob/31701ded43a4f7ff6c02833d6aaf1bc0740257fc/ovos_plugin_common_play/ocp/status.py#L4">Values are between 0 and 100</a></li>
+<li>High confidence scores cancel other OCP skill searches</li>
+<li><code>ocp_featured_media</code>, return a playlist for the OCP menu if selected from GUI (optional)</li>
+<li>Create a <code>requirements.txt</code> file with third-party package requirements</li>
+</ul>
+<pre><code class="language-python">from os.path import join, dirname
+
+import radiosoma
+
+from ovos_utils import classproperty
+from ovos_utils.ocp import MediaType, PlaybackType
+from ovos_utils.parse import fuzzy_match
+from ovos_workshop.decorators.ocp import ocp_search, ocp_featured_media
+from ovos_workshop.skills.common_play import OVOSCommonPlaybackSkill
+
+
+class SomaFMSkill(OVOSCommonPlaybackSkill):
+
+    def __init__(self, *args, **kwargs):
+        # media type this skill can handle
+        self.supported_media = [MediaType.MUSIC, MediaType.RADIO]
+        self.skill_icon = join(dirname(__file__), &quot;ui&quot;, &quot;somafm.png&quot;)
+        super().__init__(*args, **kwargs)
+
+    @ocp_featured_media()
+    def featured_media(self):
+        # playlist when selected from OCP skills menu
+        return [{
+            &quot;match_confidence&quot;: 90,
+            &quot;media_type&quot;: MediaType.RADIO,
+            &quot;uri&quot;: ch.direct_stream,
+            &quot;playback&quot;: PlaybackType.AUDIO,
+            &quot;image&quot;: ch.image,
+            &quot;bg_image&quot;: ch.image,
+            &quot;skill_icon&quot;: self.skill_icon,
+            &quot;title&quot;: ch.title,
+            &quot;author&quot;: &quot;SomaFM&quot;,
+            &quot;length&quot;: 0
+        } for ch in radiosoma.get_stations()]
+
+    @ocp_search()
+    def search_somafm(self, phrase, media_type):
+        # check if user asked for a known radio station
+        base_score = 0
+
+        if media_type == MediaType.RADIO:
+            base_score += 20
+        else:
+            base_score -= 30
+
+        if self.voc_match(phrase, &quot;radio&quot;):
+            base_score += 10
+            phrase = self.remove_voc(phrase, &quot;radio&quot;)
+
+        if self.voc_match(phrase, &quot;somafm&quot;):
+            base_score += 30  # explicit request
+            phrase = self.remove_voc(phrase, &quot;somafm&quot;)
+
+        for ch in radiosoma.get_stations():
+            score = round(base_score + fuzzy_match(ch.title.lower(),
+                                                   phrase.lower()) * 100)
+            if score &lt; 50:
+                continue
+            yield {
+                &quot;match_confidence&quot;: min(100, score),
+                &quot;media_type&quot;: MediaType.RADIO,
+                &quot;uri&quot;: ch.direct_stream,
+                &quot;playback&quot;: PlaybackType.AUDIO,
+                &quot;image&quot;: ch.image,
+                &quot;bg_image&quot;: ch.image,
+                &quot;skill_icon&quot;: self.skill_icon,
+                &quot;title&quot;: ch.title,
+                &quot;artistr&quot;: &quot;SomaFM&quot;,
+                &quot;length&quot;: 0
+            }
+</code></pre>
+<h2 id="ocp-keywords">OCP Keywords</h2>
+<p>OCP skills often need to match hundreds or thousands of strings against the query string, <code>self.voc_match</code> can quickly become impractical to use in this scenario</p>
+<p>To help with this the OCP skill class provides efficient keyword matching</p>
+<pre><code class="language-python">def register_ocp_keyword(self, label: str, samples: List, langs: List[str] = None):
+    &quot;&quot;&quot; register strings as native OCP keywords (eg, movie_name, artist_name ...)
+    ocp keywords can be efficiently matched with self.ocp_match helper method
+    that uses Aho–Corasick algorithm
+    &quot;&quot;&quot;
+
+def load_ocp_keyword_from_csv(self, csv_path: str, lang: str):
+    &quot;&quot;&quot; load entities from a .csv file for usage with self.ocp_voc_match
+    see the ocp_entities.csv datatsets for example files built from wikidata SPARQL queries
+
+    examples contents of csv file
+
+        label,entity
+        film_genre,swashbuckler film
+        film_genre,neo-noir
+        film_genre,actual play film
+        film_genre,alternate history film
+        film_genre,spy film
+        ...
+    &quot;&quot;&quot;
+</code></pre>
+<h3 id="ocp-voc-match">OCP Voc match</h3>
+<p>uses <a href="https://en.wikipedia.org/wiki/Aho%E2%80%93Corasick_algorithm">Aho–Corasick algorithm</a> to match OCP keywords</p>
+<p>this efficiently matches many keywords against an utterance</p>
+<p>OCP keywords are registered via <code>self.register_ocp_keyword</code></p>
+<p>wordlists can also be loaded from a .csv file, see <a href="https://github.com/OpenVoiceOS/ovos-classifiers/tree/dev/scripts/training/ocp/datasets">the OCP dataset</a> for a list of keywords gathered from wikidata with SPARQL queries</p>
+<h3 id="ocp-database-skill">OCP Database Skill</h3>
+<pre><code class="language-python">import json
+
+from ovos_utils.messagebus import FakeBus
+from ovos_utils.ocp import MediaType
+from ovos_workshop.skills.common_play import OVOSCommonPlaybackSkill
+
+
+class HorrorBabbleSkill(OVOSCommonPlaybackSkill):
+
+    def initialize(self):
+        # get file from
+        # https://github.com/JarbasSkills/skill-horrorbabble/blob/dev/bootstrap.json
+        with open(&quot;hb.json&quot;) as f:
+            db = json.load(f)
+        book_names = []
+        book_authors = []
+        for url, data in db.items():
+            t = data[&quot;title&quot;].split(&quot;/&quot;)[0].strip()
+            if &quot; by &quot; in t:
+                title, author = t.split(&quot; by &quot;)
+                title = title.replace('&quot;', &quot;&quot;).strip()
+                author = author.split(&quot;(&quot;)[0].strip()
+                book_names.append(title)
+                book_authors.append(author)
+                if &quot; &quot; in author:
+                    book_authors += author.split(&quot; &quot;)
+            elif t.startswith('&quot;') and t.endswith('&quot;'):
+                book_names.append(t[1:-1])
+            else:
+                book_names.append(t)
+        self.register_ocp_keyword(MediaType.AUDIOBOOK,
+                                  &quot;book_author&quot;,
+                                  list(set(book_authors)))
+        self.register_ocp_keyword(MediaType.AUDIOBOOK,
+                                  &quot;book_name&quot;,
+                                  list(set(book_names)))
+        self.register_ocp_keyword(MediaType.AUDIOBOOK,
+                                  &quot;audiobook_streaming_provider&quot;,
+                                  [&quot;HorrorBabble&quot;, &quot;Horror Babble&quot;])
+</code></pre>
+<pre><code class="language-python">s = HorrorBabbleSkill(bus=FakeBus(), skill_id=&quot;demo.fake&quot;)
+
+entities = s.ocp_voc_match(&quot;read The Call of Cthulhu by Lovecraft&quot;)
+# {'book_author': 'Lovecraft', 'book_name': 'The Call of Cthulhu'}
+print(entities)
+
+entities = s.ocp_voc_match(&quot;play HorrorBabble&quot;)
+# {'audiobook_streaming_provider': 'HorrorBabble'}
+print(entities)
+</code></pre>
+<h2 id="playlist-results">Playlist Results</h2>
+<p>Results can also be playlists, not only single tracks, for instance full albums or a full season for a series</p>
+<p>When a playlist is selected from Search Results, it will replace the Now Playing list</p>
+<p>Playlist results look exactly the same as regular results, but instead of a <code>uri</code> they provide a <code>playlist</code></p>
+<pre><code class="language-python">playlist: list  # list of dicts, each dict is a regular search result
+title: str
+media_type: MediaType
+playback: PlaybackType
+match_confidence: int  # 0-100
+</code></pre>
+<blockquote>
+<p>NOTE: nested playlists are a work in progress and not guaranteed to be functional, ie, the <code>"playlist"</code> dict key should not include other playlists</p>
+</blockquote>
+<h3 id="playlist-skill">Playlist Skill</h3>
+<pre><code class="language-python">class MyJamsSkill(OVOSCommonPlaybackSkill):
+
+    def __init__(self, *args, **kwargs):
+        self.supported_media = [MediaType.MUSIC]
+        self.skill_icon = join(dirname(__file__), &quot;ui&quot;, &quot;myjams.png&quot;)
+        super().__init__(*args, **kwargs)
+
+    @ocp_search()
+    def search_my_jams(self, phrase, media_type):
+        if self.voc_match(...):
+            results = [...]  # regular result dicts, as in examples above
+            score = 70  # TODO
+
+            yield {
+                &quot;match_confidence&quot;: min(100, score),
+                &quot;media_type&quot;: MediaType.MUSIC,
+                &quot;playlist&quot;: results, # replaces &quot;uri&quot;
+                &quot;playback&quot;: PlaybackType.AUDIO,
+                &quot;image&quot;: self.image,
+                &quot;bg_image&quot;: self.image,
+                &quot;skill_icon&quot;: self.skill_icon,
+                &quot;title&quot;: &quot;MyJams&quot;,
+                &quot;length&quot;: sum([r[&quot;length&quot;] for r in results])  # total playlist duration
+            }
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../universal_skills/" class="btn btn-neutral float-left" title="Universal Skills"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../OCP_pipeline/" class="btn btn-neutral float-right" title="OCP Pipeline">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../universal_skills/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../OCP_pipeline/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

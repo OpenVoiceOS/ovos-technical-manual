@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://openvoiceos.github.io/ovos-technical-manual/gui_protocol/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Protocol - OVOS Technical Manual</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Protocol";
+        var mkdocs_page_input_path = "gui_protocol.md";
+        var mkdocs_page_url = "/ovos-technical-manual/gui_protocol/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OVOS Technical Manual
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Home</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../community/">Community</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../versioning/">Versioning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../license/">License</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../timeline/">Timeline</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Architecture</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../bus_service/">Bus</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../speech_service/">Listener</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../core/">Core</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../audio_service/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gui_service/">GUI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../OCP/">Media</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../config/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../backend/">Backend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Self Hosting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../stt_server/">STT Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_server/">TTS Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../persona_server/">Persona Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../translate_server/">Translate Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../personal_backend/">Personal Backend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Plugins</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../OPM/">Plugin Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mic_plugins/">Microphone</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../vad_plugins/">Voice Activity Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ww_plugins/">Wake Word</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../stt_plugins/">Speech To Text</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_plugins/">Text To Speech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../g2p_plugins/">Grapheme to Phoneme</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../transformer_plugins/">Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../lang_plugins/">Language Detection/Translation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../solvers/">Question Solvers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../nlp_plugins/">NLP Plugins</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../PHAL/">Platform/Hardware Abstraction Layer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ocp_plugins/">OCP Stream Extractors</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../media_plugins/">Media Playback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Skills</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../guidelines/">Design Guidelines</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_structure/">Anatomy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../statements/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../intents/">Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../user_res_files/">Customization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skills_bus/">Bus Interaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_filesystem/">Filesystem</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_settings/">Skill Settings</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_api/">Skill API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../runtime/">Runtime Requirements</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_json/">Skill Json</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_tests/">Skill Tests</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dev/">F.A.Q.</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Continuous Conversation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../prompts/">Prompts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../context/">Follow up Questions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../converse/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../layers/">Intent Layers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../session_skills/">Session Aware Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Voice Apps</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../voice_apps/">Standalone Apps</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../qt_apps/">QT Voice Apps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Fallback</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../fallbacks/">Fallback Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Common Query</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../common_query/">Common Query Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Auto Translation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../universal_skills/">Universal Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Media</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../OCP_skills/">Media Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../OCP_pipeline/">OCP Pipeline</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">GUI</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../homescreen/">Homescreen</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Protocol</a>
+    <ul class="current">
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../shell/">Shell</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../qt5/">QT5 mycroft-gui</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">MessageBus APIs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_gui/">GUI Interface</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mk1_api/">Enclosure Api</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Technologies</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../eggscript/">Eggscript</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bus_client/">Messagebus Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mk1_utils/">Mark1 Utils</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../backend_client/">Backend Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../jurebes/">Jurebes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../padacioso/">Padacioso</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ovos_bigscreen/">Plasma Bigscreen</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OVOS Technical Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">GUI</li>
+      <li class="breadcrumb-item active">Protocol</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="protocol">Protocol</h2>
+<p>The <a href="https://github.com/OpenVoiceOS/ovos-gui">gui service</a> in ovos-core will expose a websocket to
+the GUI clients following the protocol outlined in this page</p>
+<p>The transport protocol works between gui service and the gui clients, OpenVoiceOS does not directly use the protocol but instead communicates with <code>ovos-gui</code> via the standard messagebus</p>
+<p>The QT library which implements the protocol lives in the <a href="https://github.com/OpenVoiceOS/mycroft-gui-qt5">mycroft-gui-qt5</a> repository. </p>
+<p><img alt="imagem" src="https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/92e73af7-f7d2-4aa3-a294-77f87aa22390" /></p>
+<h2 id="specification">Specification</h2>
+<p>This protocol defines how ovos-gui communicates with connected clients</p>
+<ul>
+<li><a href="#connection---mycroftguiconnected">CONNECTION - mycroft.gui.connected</a></li>
+<li><a href="#namespaces">NAMESPACES</a></li>
+<li><a href="#active-skills---mycroftsystemactive-skills">Active Skills - mycroft.system.active_skills</a></li>
+<li><a href="#pages---mycroftguilistxxx">PAGES - mycroft.gui.list.xxx</a></li>
+<li><a href="#insert-new-page-at-position">Insert new page at position</a></li>
+<li><a href="#move-pages-within-the-list">Move pages within the list</a></li>
+<li><a href="#remove-pages-from-the-list">Remove pages from the list</a></li>
+<li><a href="#events---mycrofteventstriggered">EVENTS - mycroft.events.triggered</a></li>
+<li><a href="#special-event--page-gained-focus">SPECIAL EVENT: page_gained_focus</a></li>
+<li><a href="#skill-data---mycroftsessionxxx">SKILL DATA - mycroft.session.xxx</a></li>
+<li><a href="#sets-a-new-key-value-in-the-sessiondata-dictionary">Sets a new key/value in the sessionData dictionary</a></li>
+<li><a href="#deletes-a-key-value-pair-from-the-sessiondata-dictionary">Deletes a key/value pair from the sessionData dictionary</a></li>
+<li><a href="#lists">Lists</a><ul>
+<li><a href="#inserts-new-items-at-position">Inserts new items at position</a></li>
+<li><a href="#updates-item-values-starting-at-the-given-position--as-many-items-as-there-are-in-the-array">Updates item values starting at the given position, as many items as there are in the array</a></li>
+<li><a href="#move-items-within-the-list">Move items within the list</a></li>
+<li><a href="#remove-items-from-the-list">Remove items from the list</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="connection-mycroftguiconnected">CONNECTION - mycroft.gui.connected</h2>
+<p>on connection gui clients announce themselves</p>
+<p>This is an extension by OVOS to the <a href="https://github.com/MycroftAI/mycroft-gui/blob/master/transportProtocol.md">original mycroft protocol</a></p>
+<pre><code class="language-javascript">{
+    &quot;type&quot;: &quot;mycroft.gui.connected&quot;,
+    &quot;gui_id&quot;: &quot;unique_identifier_provided_by_client&quot;
+}
+</code></pre>
+<h2 id="namespaces">NAMESPACES</h2>
+<p>ovos-gui maintains a list of namespaces with GUI data, namespaces usually correspond to a skill_id</p>
+<p>Every message in the gui protocol specifies a namespace it belongs to</p>
+<p>gui clients usualy display all namespaces, but can be requested to display a single one, </p>
+<p>eg, have a dedicated window to show a skill as a <a href="https://github.com/OpenVoiceOS/ovos-ocp-audio-plugin/blob/dev/ovos_plugin_common_play/ocp/res/desktop/OCP.desktop">traditional desktop app</a></p>
+<h3 id="active-skills-mycroftsystemactive_skills">Active Skills - mycroft.system.active_skills</h3>
+<p>a reserved namespace is "mycroft.system.active_skills", the data contained in this namespace defines the namespace display priority</p>
+<p>Recent skills are ordered from the last used to the oldest, so the first item of the list will always be the the one showing any GUI page, if available.</p>
+<p>see the section about <a href="https://github.com/OpenVoiceOS/ovos-gui/blob/dev/protocol.md#lists">lists</a> if you need to modify active skills</p>
+<h2 id="pages-mycroftguilistxxx">PAGES - mycroft.gui.list.xxx</h2>
+<p>Each active skill is associated with a list of uris to the QML files of all gui items that are supposed to be visible.</p>
+<p>Non QT GUIS get sent other file extensions such as .jsx or .html using the same message format</p>
+<h3 id="insert-new-page-at-position">Insert new page at position</h3>
+<pre><code class="language-javascript">{
+    &quot;type&quot;: &quot;mycroft.gui.list.insert&quot;,
+    &quot;namespace&quot;: &quot;mycroft.weather&quot;
+    &quot;position&quot;: 2
+    &quot;values&quot;: [{&quot;url&quot;: &quot;file://..../currentWeather.qml&quot;}, ...] //values must always be in array form
+}
+</code></pre>
+<h3 id="move-pages-within-the-list">Move pages within the list</h3>
+<pre><code class="language-javascript">{
+    &quot;type&quot;: &quot;mycroft.gui.list.move&quot;,
+    &quot;namespace&quot;: &quot;mycroft.weather&quot;
+    &quot;from&quot;: 2
+    &quot;to&quot;: 5
+    &quot;items_number&quot;: 2 //optional in case we want to move a big chunk of list at once
+}
+</code></pre>
+<h3 id="remove-pages-from-the-list">Remove pages from the list</h3>
+<pre><code class="language-javascript">{
+    &quot;type&quot;: &quot;mycroft.gui.list.remove&quot;,
+    &quot;namespace&quot;: &quot;mycroft.weather&quot;
+    &quot;position&quot;: 2
+    &quot;items_number&quot;: 5 //optional in case we want to get rid a big chunk of list at once
+}
+</code></pre>
+<h2 id="events-mycrofteventstriggered">EVENTS - mycroft.events.triggered</h2>
+<p>Events can either be emitted by a gui client (eg, some element clicked) or by the skill (eg, in response to a voice command)</p>
+<pre><code class="language-javascript">{
+    &quot;type&quot;: &quot;mycroft.events.triggered&quot;
+    &quot;namespace&quot;: &quot;my_skill_id&quot;
+    &quot;event_name&quot;: &quot;my.gui.event&quot;,
+    &quot;parameters&quot;: {&quot;item&quot;: 3}
+}
+</code></pre>
+<h3 id="special-event-page_gained_focus">SPECIAL EVENT: page_gained_focus</h3>
+<p>This event is used when the ovos-gui wants a page of a particular skill to gain user attention focus and become the current active view and "focus of attention" of the user. </p>
+<p>when a GUI client receives it, it should render the requested GUI page</p>
+<p>GUI clients can also emit this event, if a new page was rendered (eg, in response to a user swipping left)</p>
+<p>NOTE: for responsiveness it is recommened this message is only emitted after the rendering has actually been done, skills may be waiting for this event to initiate some actons</p>
+<pre><code class="language-javascript">{
+    &quot;type&quot;: &quot;mycroft.events.triggered&quot;,
+    &quot;namespace&quot;: &quot;mycroft.weather&quot;,
+    &quot;event_name&quot;: &quot;page_gained_focus&quot;,
+    &quot;data&quot;: {&quot;number&quot;: 0}
+}
+</code></pre>
+<p>The parameter "number" is the position (starting from zero) of the page</p>
+<h2 id="skill-data-mycroftsessionxxx">SKILL DATA - mycroft.session.xxx</h2>
+<p>At the center of data sharing there is a key/value dictionary that is kept synchronized between ovos-gui and the GUI client.</p>
+<p>Values can either be simple strings, numbers and booleans or be more complicated data types</p>
+<p>this event can be sent from gui clients (eg, in response to a dropdown selection) or from skills (eg, change weather data)</p>
+<p>NOTE: Once a new gui client connects to ovos-gui, all existing session data is sent to the client, 
+after that the client gets live updates via these events</p>
+<h3 id="sets-a-new-keyvalue-in-the-sessiondata-dictionary">Sets a new key/value in the sessionData dictionary</h3>
+<p>Either sets a new key/value pair or replace an existing old value.</p>
+<pre><code class="language-javascript">{
+    &quot;type&quot;: &quot;mycroft.session.set&quot;,
+    &quot;namespace&quot;: &quot;weather.mycroft&quot;
+    &quot;data&quot;: {
+        &quot;temperature&quot;: &quot;28&quot;,
+        &quot;icon&quot;: &quot;cloudy&quot;,
+        &quot;forecast&quot;: [{...},...] //if it's a list see below for more message types
+    }
+}
+</code></pre>
+<h3 id="deletes-a-keyvalue-pair-from-the-sessiondata-dictionary">Deletes a key/value pair from the sessionData dictionary</h3>
+<pre><code class="language-javascript">{
+    &quot;type&quot;: &quot;mycroft.session.delete&quot;,
+    &quot;namespace&quot;: &quot;weather.mycroft&quot;
+    &quot;property&quot;: &quot;temperature&quot;
+}
+</code></pre>
+<h3 id="lists">Lists</h3>
+<h4 id="inserts-new-items-at-position">Inserts new items at position</h4>
+<pre><code class="language-javascript">{
+    &quot;type&quot;: &quot;mycroft.session.list.insert&quot;,
+    &quot;namespace&quot;: &quot;weather.mycroft&quot;
+    &quot;property&quot;: &quot;forecast&quot; //the key of the main data map this list in contained into
+    &quot;position&quot;: 2
+    &quot;values&quot;: [{&quot;date&quot;: &quot;tomorrow&quot;, &quot;temperature&quot; : 13, ...}, ...] //values must always be in array form
+}
+</code></pre>
+<h4 id="updates-item-values-starting-at-the-given-position-as-many-items-as-there-are-in-the-array">Updates item values starting at the given position, as many items as there are in the array</h4>
+<pre><code class="language-javascript">{
+    &quot;type&quot;: &quot;mycroft.session.list.update&quot;,
+    &quot;namespace&quot;: &quot;weather.mycroft&quot;
+    &quot;property&quot;: &quot;forecast&quot;
+    &quot;position&quot;: 2
+    &quot;values&quot;: [{&quot;date&quot;: &quot;tomorrow&quot;, &quot;temperature&quot; : 13, ...}, ...] //values must always be in array form
+}
+</code></pre>
+<h4 id="move-items-within-the-list">Move items within the list</h4>
+<pre><code class="language-javascript">{
+    &quot;type&quot;: &quot;mycroft.session.list.move&quot;,
+    &quot;namespace&quot;: &quot;weather.mycroft&quot;
+    &quot;property&quot;: &quot;forecast&quot;
+    &quot;from&quot;: 2
+    &quot;to&quot;: 5
+    &quot;items_number&quot;: 2 //optional in case we want to move a big chunk of list at once
+}
+</code></pre>
+<h4 id="remove-items-from-the-list">Remove items from the list</h4>
+<pre><code class="language-javascript">{
+    &quot;type&quot;: &quot;mycroft.session.list.remove&quot;,
+    &quot;namespace&quot;: &quot;weather.mycroft&quot;
+    &quot;property&quot;: &quot;forecast&quot;
+    &quot;position&quot;: 2
+    &quot;items_number&quot;: 5 //optional in case we want to get rid a big chunk of list at once
+}
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../homescreen/" class="btn btn-neutral float-left" title="Homescreen"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../shell/" class="btn btn-neutral float-right" title="Shell">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../homescreen/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../shell/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

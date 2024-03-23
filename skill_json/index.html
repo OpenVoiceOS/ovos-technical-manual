@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://openvoiceos.github.io/ovos-technical-manual/skill_json/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Skill Json - OVOS Technical Manual</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Skill Json";
+        var mkdocs_page_input_path = "skill_json.md";
+        var mkdocs_page_url = "/ovos-technical-manual/skill_json/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OVOS Technical Manual
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Home</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../community/">Community</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../versioning/">Versioning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../license/">License</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../timeline/">Timeline</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Architecture</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../bus_service/">Bus</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../speech_service/">Listener</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../core/">Core</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../audio_service/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gui_service/">GUI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../OCP/">Media</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../config/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../backend/">Backend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Self Hosting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../stt_server/">STT Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_server/">TTS Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../persona_server/">Persona Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../translate_server/">Translate Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../personal_backend/">Personal Backend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Plugins</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../OPM/">Plugin Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mic_plugins/">Microphone</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../vad_plugins/">Voice Activity Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ww_plugins/">Wake Word</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../stt_plugins/">Speech To Text</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_plugins/">Text To Speech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../g2p_plugins/">Grapheme to Phoneme</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../transformer_plugins/">Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../lang_plugins/">Language Detection/Translation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../solvers/">Question Solvers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../nlp_plugins/">NLP Plugins</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../PHAL/">Platform/Hardware Abstraction Layer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ocp_plugins/">OCP Stream Extractors</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../media_plugins/">Media Playback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Skills</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../guidelines/">Design Guidelines</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_structure/">Anatomy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../statements/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../intents/">Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../user_res_files/">Customization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skills_bus/">Bus Interaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_filesystem/">Filesystem</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_settings/">Skill Settings</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_api/">Skill API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../runtime/">Runtime Requirements</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Skill Json</a>
+    <ul class="current">
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_tests/">Skill Tests</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dev/">F.A.Q.</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Continuous Conversation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../prompts/">Prompts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../context/">Follow up Questions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../converse/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../layers/">Intent Layers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../session_skills/">Session Aware Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Voice Apps</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../voice_apps/">Standalone Apps</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../qt_apps/">QT Voice Apps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Fallback</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../fallbacks/">Fallback Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Common Query</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../common_query/">Common Query Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Auto Translation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../universal_skills/">Universal Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Media</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../OCP_skills/">Media Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../OCP_pipeline/">OCP Pipeline</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">GUI</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../homescreen/">Homescreen</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gui_protocol/">Protocol</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../shell/">Shell</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../qt5/">QT5 mycroft-gui</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">MessageBus APIs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_gui/">GUI Interface</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mk1_api/">Enclosure Api</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Technologies</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../eggscript/">Eggscript</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bus_client/">Messagebus Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mk1_utils/">Mark1 Utils</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../backend_client/">Backend Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../jurebes/">Jurebes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../padacioso/">Padacioso</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ovos_bigscreen/">Plasma Bigscreen</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OVOS Technical Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Skills</li>
+      <li class="breadcrumb-item active">Skill Json</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="skilljson">skill.json</h1>
+<p>Skills can <strong>optionally</strong> include a <code>skill.json</code> file in their <code>locale</code> folder</p>
+<blockquote>
+<p><strong>WARNING</strong> skills in the wild might include an earlier and <strong>deprecated</strong> version of <code>skill.json</code> in the root of the skill directory</p>
+</blockquote>
+<p>This file contains metadata about the skill and all info about how to install and display the skill entry</p>
+<pre><code class="language-javascript">{
+  &quot;skill_id&quot;: &quot;skill-XXX.exampleauthor&quot;,
+  &quot;source&quot;: &quot;https://github.com/ExampleAuthor/skill-XXX&quot;,
+  &quot;package_name&quot;: &quot;ovos-skill-XXX&quot;,
+  &quot;pip_spec&quot;: &quot;git+https://github.com/ExampleAuthor/skill-XXX@BRANCH&quot;,
+  &quot;license&quot;: &quot;Apache-2.0&quot;,
+  &quot;author&quot;: &quot;ExampleAuthor&quot;,
+  &quot;extra_plugins&quot;: {
+    &quot;core&quot;: [&quot;ovos-utterance-transformer-XXX&quot;],
+    &quot;PHAL&quot;: [&quot;ovos-PHAL-XXX&quot;],
+    &quot;listener&quot;: [&quot;ovos-audio-transformer-XXX&quot;, &quot;ovos-ww-plugin-XXX&quot;, &quot;ovos-vad-plugin-XXX&quot;, &quot;ovos-stt-plugin-XXX&quot;],
+    &quot;audio&quot;: [&quot;ovos-dialog-transformer-XXX&quot;,&quot;ovos-tts-transformer-XXX&quot;, &quot;ovos-tts-plugin-XXX&quot;],
+    &quot;media&quot;: [&quot;ovos-ocp-XXX&quot;, &quot;ovos-media-XXX&quot;],
+    &quot;gui&quot;: [&quot;ovos-gui-extension-XXX&quot;]
+  },
+  &quot;icon&quot;: &quot;http://example_icon.svg&quot;,
+  &quot;images&quot;: [&quot;http://example_logo.png&quot;, &quot;http://example_screenshot.png&quot;],
+  &quot;name&quot;: &quot;My Skill&quot;,
+  &quot;description&quot;: &quot;Does awesome skill stuff!&quot;,
+  &quot;examples&quot;: [
+    &quot;do the thing&quot;,
+    &quot;say this to use the skill&quot;
+  ],
+  &quot;tags&quot;: [&quot;productivity&quot;, &quot;entertainment&quot;, &quot;aliens&quot;]
+}
+</code></pre>
+<blockquote>
+<p><strong>EXPERIMENTAL</strong> this specification might change, it is still at the proposal stage and open for feedback</p>
+</blockquote>
+<h1 id="spec">Spec</h1>
+<p>On the JSON file:</p>
+<ul>
+<li><code>skill_id</code> Required unique skill identifier, this is defined in <code>setup.py</code> and by convention is usually <code>repo.author</code> (lower-cased)</li>
+<li><code>source</code> Optional git url to download the source code, a skill can be installed from source with <code>pip install git+{source}</code></li>
+<li><code>package_name</code> Required package name of the skill, if the skill is on pypi it can be installed with <code>pip install {package_name}</code></li>
+<li><code>pip_spec</code> Optional <a href="https://peps.python.org/pep-0508/#specification">PEP 508</a> install spec to install the skill. <code>pip install {pip_spec}</code></li>
+<li><code>license</code> Optional <a href="https://spdx.org/licenses/">SPDX License ID</a></li>
+<li><code>author</code> Optional string author name. Overrides any name extracted from <code>skill_id</code> or <code>source</code> URL</li>
+<li><code>extra_plugins</code> Optional list of python requirements that are not direct dependencies of the skill but should be installed in a companion OVOS service</li>
+<li><code>name</code> Optional human-readable name for the skill to be used in store listings, UI, etc. Overrides any name extracted from <code>skill_id</code> or <code>source</code> URL</li>
+<li><code>description</code> Optional human-readable short description of the skill. This should be limited to one or two sentences max</li>
+<li><code>examples</code> Optional list of example utterances that this skill should handle</li>
+<li><code>tags</code> Optional list of arbitrary labels and categories, helps search results to find this skill</li>
+<li><code>icon</code> Optional skill icon to display</li>
+<li><code>images</code> Optional list of images to showcase the skill</li>
+</ul>
+<blockquote>
+<p><strong>LANG SUPPORT</strong>: include <code>skill.json</code> in each lang subfolder of your <code>locale</code> skill directory, this signals language support and allows translation of <code>name</code>, <code>description</code>, <code>examples</code> and <code>tags</code></p>
+</blockquote>
+<h1 id="installation">Installation</h1>
+<p>Installation of a skill should generally follow the priority of <code>&lt;pip_spec&gt;</code> &gt; <code>&lt;package_name&gt;</code> &gt; <code>git+&lt;source&gt;</code>. At least one of these <em>MUST</em> be a valid installation option. A minimal exmple of
+skill installation in Python is included <em>for reference only</em>:</p>
+<pre><code class="language-python">import pip
+import json
+
+with open(&quot;skill.json&quot;) as f:
+    skill_spec = json.load(f)
+
+specs = [skill_spec.get('pip_spec')] if skill_spec.get('pip_spec') else []
+specs.append(skill_spec['package_name']
+if skill_spec.get('source'):
+    specs.append(f&quot;git+{skill_spec['source']}&quot;)
+
+for spec in specs:
+    if pip.main(['install', spec) == 0:
+        # Successful installation
+        break
+</code></pre>
+<p>Note that this example does not account for existing packages and using it on its own could result in broken dependencies.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../runtime/" class="btn btn-neutral float-left" title="Runtime Requirements"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../skill_tests/" class="btn btn-neutral float-right" title="Skill Tests">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../runtime/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../skill_tests/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://openvoiceos.github.io/ovos-technical-manual/audio_service/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Audio - OVOS Technical Manual</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Audio";
+        var mkdocs_page_input_path = "audio_service.md";
+        var mkdocs_page_url = "/ovos-technical-manual/audio_service/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OVOS Technical Manual
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Home</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../community/">Community</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../versioning/">Versioning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../license/">License</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../timeline/">Timeline</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Architecture</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../bus_service/">Bus</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../speech_service/">Listener</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../core/">Core</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Audio</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#tts">TTS</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#skill-methods">Skill Methods</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#playbackthread">PlaybackThread</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#native-playback">Native playback</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#transformer-plugins">Transformer Plugins</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#dialog-transformers">Dialog Transformers</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tts-transformers">TTS Transformers</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#classic-audio-service">Classic Audio Service</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gui_service/">GUI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../OCP/">Media</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../config/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../backend/">Backend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Self Hosting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../stt_server/">STT Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_server/">TTS Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../persona_server/">Persona Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../translate_server/">Translate Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../personal_backend/">Personal Backend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Plugins</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../OPM/">Plugin Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mic_plugins/">Microphone</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../vad_plugins/">Voice Activity Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ww_plugins/">Wake Word</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../stt_plugins/">Speech To Text</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_plugins/">Text To Speech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../g2p_plugins/">Grapheme to Phoneme</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../transformer_plugins/">Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../lang_plugins/">Language Detection/Translation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../solvers/">Question Solvers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../nlp_plugins/">NLP Plugins</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../PHAL/">Platform/Hardware Abstraction Layer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ocp_plugins/">OCP Stream Extractors</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../media_plugins/">Media Playback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Skills</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../guidelines/">Design Guidelines</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_structure/">Anatomy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../statements/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../intents/">Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../user_res_files/">Customization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skills_bus/">Bus Interaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_filesystem/">Filesystem</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_settings/">Skill Settings</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_api/">Skill API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../runtime/">Runtime Requirements</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_json/">Skill Json</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_tests/">Skill Tests</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dev/">F.A.Q.</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Continuous Conversation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../prompts/">Prompts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../context/">Follow up Questions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../converse/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../layers/">Intent Layers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../session_skills/">Session Aware Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Voice Apps</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../voice_apps/">Standalone Apps</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../qt_apps/">QT Voice Apps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Fallback</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../fallbacks/">Fallback Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Common Query</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../common_query/">Common Query Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Auto Translation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../universal_skills/">Universal Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Media</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../OCP_skills/">Media Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../OCP_pipeline/">OCP Pipeline</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">GUI</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../homescreen/">Homescreen</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gui_protocol/">Protocol</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../shell/">Shell</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../qt5/">QT5 mycroft-gui</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">MessageBus APIs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../skill_gui/">GUI Interface</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mk1_api/">Enclosure Api</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Technologies</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../eggscript/">Eggscript</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bus_client/">Messagebus Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mk1_utils/">Mark1 Utils</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../backend_client/">Backend Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../jurebes/">Jurebes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../padacioso/">Padacioso</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ovos_bigscreen/">Plasma Bigscreen</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OVOS Technical Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Architecture</li>
+      <li class="breadcrumb-item active">Audio</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="audio-service">Audio Service</h1>
+<p>The audio service is responsible for handling TTS and simple sounds playback</p>
+<h2 id="tts">TTS</h2>
+<p>Two TTS plugins may be loaded at once, if the primary plugin fails for some reason the second plugin will be used.</p>
+<p>This allows you to have a lower quality offline voice as fallback to account for internet outages, this ensures your
+device can always give you feedback</p>
+<pre><code class="language-javascript">&quot;tts&quot;: {
+    &quot;pulse_duck&quot;: false,
+
+    // plugins to load
+    &quot;module&quot;: &quot;ovos-tts-plugin-server&quot;,
+    &quot;fallback_module&quot;: &quot;ovos-tts-plugin-mimic&quot;,
+
+    // individual plugin configs
+    &quot;ovos-tts-plugin-server&quot;: {
+        &quot;host&quot;: &quot;https://tts.smartgic.io/piper&quot;,
+        &quot;v2&quot;: true,
+        &quot;verify_ssl&quot;: true,
+        &quot;tts_timeout&quot;: 5,
+    }
+}
+</code></pre>
+<h2 id="skill-methods">Skill Methods</h2>
+<p>skills can use <code>self.play_audio</code>, <code>self.acknowledge</code>, <code>self.speak</code> and <code>self.speak_dialog</code> methods to interact with <code>ovos-audio</code></p>
+<pre><code class="language-python">def play_audio(self, filename: str, instant: bool = False):
+    &quot;&quot;&quot;
+    Queue and audio file for playback
+    @param filename: File to play
+    @param instant: if True audio will be played instantly 
+                    instead of queued with TTS
+    &quot;&quot;&quot;
+</code></pre>
+<pre><code class="language-python">def acknowledge(self):
+    &quot;&quot;&quot;
+    Acknowledge a successful request.
+
+    This method plays a sound to acknowledge a request that does not
+    require a verbal response. This is intended to provide simple feedback
+    to the user that their request was handled successfully.
+    &quot;&quot;&quot;
+</code></pre>
+<pre><code class="language-python">def speak(self, utterance: str, expect_response: bool = False, wait: Union[bool, int] = False):
+    &quot;&quot;&quot;Speak a sentence.
+
+    Args:
+        utterance (str):        sentence mycroft should speak
+        expect_response (bool): set to True if Mycroft should listen
+                                for a response immediately after
+                                speaking the utterance.
+        wait (Union[bool, int]): set to True to block while the text
+                                 is being spoken for 15 seconds. Alternatively, set
+                                 to an integer to specify a timeout in seconds.
+    &quot;&quot;&quot;
+</code></pre>
+<pre><code class="language-python">def speak_dialog(self, key: str, data: Optional[dict] = None,
+                 expect_response: bool = False, wait: Union[bool, int] = False):
+    &quot;&quot;&quot;
+    Speak a random sentence from a dialog file.
+
+    Args:
+        key (str): dialog file key (e.g. &quot;hello&quot; to speak from the file
+                                    &quot;locale/en-us/hello.dialog&quot;)
+        data (dict): information used to populate sentence
+        expect_response (bool): set to True if Mycroft should listen
+                                for a response immediately after
+                                speaking the utterance.
+        wait (Union[bool, int]): set to True to block while the text
+                                 is being spoken for 15 seconds. Alternatively, set
+                                 to an integer to specify a timeout in seconds.
+    &quot;&quot;&quot;
+</code></pre>
+<p>to play sounds via bus messages emit <code>"mycroft.audio.play_sound"</code> or <code>"mycroft.audio.queue"</code> with data <code>{"uri": "path/sound.mp3"}</code></p>
+<h2 id="playbackthread">PlaybackThread</h2>
+<p><code>ovos-audio</code> implements a queue for sounds, any OVOS component can queue a sound for playback.</p>
+<p>Usually only TTS speech is queue for playback, but sounds effects may also be queued for richer experiences, for example in a story telling skill</p>
+<p>The PlaybackThread ensures sounds don't play over each other but instead sequentially, listening might be triggered after TTS finishes playing if requested in the <code>"speak"</code> message</p>
+<p>shorts sounds can be played outside the PlaybackThread, usually when instant feedback is required, such as in the listening sound or on error sounds</p>
+<p>You can configure default sounds and the playback commands under <code>mycroft.conf</code></p>
+<pre><code class="language-javascript">  // File locations of sounds to play for default events
+  &quot;sounds&quot;: {
+    &quot;start_listening&quot;: &quot;snd/start_listening.wav&quot;,
+    &quot;end_listening&quot;: &quot;snd/end_listening.wav&quot;,
+    &quot;acknowledge&quot;: &quot;snd/acknowledge.mp3&quot;,
+    &quot;error&quot;: &quot;snd/error.mp3&quot;
+  },
+
+  // Mechanism used to play WAV audio files
+  // by default ovos-utils will try to detect best player
+  &quot;play_wav_cmdline&quot;: &quot;paplay %1 --stream-name=mycroft-voice&quot;,
+
+  // Mechanism used to play MP3 audio files
+  // by default ovos-utils will try to detect best player
+  &quot;play_mp3_cmdline&quot;: &quot;mpg123 %1&quot;,
+
+  // Mechanism used to play OGG audio files
+  // by default ovos-utils will try to detect best player
+  &quot;play_ogg_cmdline&quot;: &quot;ogg123 -q %1&quot;,
+
+</code></pre>
+<blockquote>
+<p>NOTE: by default the playback commands are not set and OVOS will try to determine the best way to play a sound automatically</p>
+</blockquote>
+<h2 id="native-playback">Native playback</h2>
+<p>Usually playback is triggered in response to originating bus message, eg <code>"recognizer_loop:utterance"</code>, this message contains
+metadata that is used to determine if playback should happen.</p>
+<p><code>message.context</code> may contain a source and destination, playback is only triggered if a message destination is a
+<code>native_source</code> or if missing (considered a broadcast).</p>
+<p>This separation of native sources allows remote clients such as an android app to interact with OVOS without the actual
+device where ovos-core is running repeating all TTS and music playback out loud</p>
+<p>You can learn more about message targeting <a href="https://openvoiceos.github.io/ovos-technical-manual/bus_service/#message-targeting">here</a></p>
+<p>By default, only utterances originating from the speech client are considered native</p>
+<pre><code class="language-javascript">&quot;Audio&quot;: {
+    &quot;native_sources&quot;: [&quot;debug_cli&quot;, &quot;audio&quot;]
+}
+</code></pre>
+<h2 id="transformer-plugins">Transformer Plugins</h2>
+<p><strong>NEW</strong> in <code>ovos-core</code> version <strong>0.0.8</strong></p>
+<p>Similarly to audio transformers in <code>ovos-dinkum-listener</code>, the utterance and audio data generated by TTS are exposed to a set
+of plugins that can transform them before playback</p>
+<p><img alt="imagem" src="https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/8269074a-8632-43b1-a2fc-89e829598669" /></p>
+<h3 id="dialog-transformers">Dialog Transformers</h3>
+<p>Similarly to utterance transformers in core,  <code>ovos-audio</code> exposes <code>utterance</code> and message.<code>context</code> to a set
+of plugins that can transform it before TTS stage</p>
+<p>The <code>utterance</code> to be spoken is sent sequentially to all transformer plugins, ordered by priority (developer defined),
+until finally it is sent to the TTS stage</p>
+<p>To enable a transformer add it to <code>mycroft.conf</code></p>
+<pre><code class="language-javascript">// To enable a dialog transformer plugin just add it's name with any relevant config
+// these plugins can mutate utterances before TTS
+&quot;dialog_transformers&quot;: {
+    &quot;ovos-dialog-translation-plugin&quot;: {},
+    &quot;ovos-dialog-transformer-openai-plugin&quot;: {
+        &quot;rewrite_prompt&quot;: &quot;rewrite the text as if you were explaining it to a 5 year old&quot;
+    }
+}
+</code></pre>
+<h3 id="tts-transformers">TTS Transformers</h3>
+<p>The audio to be spoken is sent sequentially to all transformer plugins, ordered by priority (developer defined),
+until finally it played back to the user</p>
+<blockquote>
+<p><strong>NOTE</strong>: Does not work with StreamingTTS</p>
+</blockquote>
+<p>To enable a transformer add it to <code>mycroft.conf</code></p>
+<pre><code class="language-javascript">// To enable a tts transformer plugin just add it's name with any relevant config
+// these plugins can mutate audio after TTS
+&quot;tts_transformers&quot;: {
+    &quot;ovos-tts-transformer-sox-plugin&quot;: {
+        &quot;default_effects&quot;: {
+            &quot;speed&quot;: {&quot;factor&quot;: 1.1}
+        }
+    }
+}
+</code></pre>
+<h2 id="classic-audio-service">Classic Audio Service</h2>
+<p><strong>DEPRECATION WARNING</strong> - <code>ovos-core</code> version <code>0.0.8</code> is moving long-form media playback to <code>ovos-media</code> service, this is a work in progress and
+will be a default in version <strong>0.1.0</strong> when <code>ovos-media</code> is introduced</p>
+<p><code>ovos-media</code> is a work in progress, it does not yet ship with OVOS by default, but it can be manually enabled</p>
+<p>In order to use <code>ovos-media</code> you need to enable the OCP pipeline in <code>ovos-core</code> and to disable the old audio service </p>
+<p>disabling old audio service</p>
+<pre><code class="language-json">{
+  &quot;enable_old_audioservice&quot;: false
+}
+</code></pre>
+<blockquote>
+<p><strong>DEPRECATION WARNING</strong> - <code>"enable_old_audioservice": true</code> will use the <a href="https://github.com/OpenVoiceOS/ovos-ocp-audio-plugin">old OCP</a> that shipped as an audio plugin in order to work in classic mycroft</p>
+</blockquote>
+<p>You can enable additional Audio plugins under the <code>"Audio"</code> section of <code>mycroft.conf</code></p>
+<p>OCP will decide when to call the Audio service and what plugin to use</p>
+<pre><code class="language-javascript">&quot;Audio&quot;: {
+    &quot;backends&quot;: {
+      &quot;OCP&quot;: {
+        &quot;type&quot;: &quot;ovos_common_play&quot;,
+        &quot;active&quot;: true
+      },
+      &quot;simple&quot;: {
+        &quot;type&quot;: &quot;ovos_audio_simple&quot;,
+        &quot;active&quot;: true
+      },
+      &quot;vlc&quot;: {
+        &quot;type&quot;: &quot;ovos_vlc&quot;,
+        &quot;active&quot;: true
+      }
+    }
+},
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../core/" class="btn btn-neutral float-left" title="Core"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../gui_service/" class="btn btn-neutral float-right" title="GUI">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../core/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../gui_service/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
