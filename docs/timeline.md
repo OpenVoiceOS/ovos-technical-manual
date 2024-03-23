@@ -288,4 +288,5 @@
 - Mar 2024 - Community Mycroft [skills updated to OVOS](https://github.com/orgs/OVOSHatchery/repositories?type=fork&q=skill) under OVOSHatchery
 - Mar 2024 - [OVOS Skill Store](https://openvoiceos.github.io/OVOS-skills-store) released!
 - Mar 2024 - [Hatchery Skill Store](https://ovoshatchery.github.io/OVOS-Hatchery-skills) released!
+- Mar 2023 - First successful run of OpenVoiceOS natively on Mac OS with Apple Silicon
 - Near Future - `ovos-core` version **0.0.8** released
