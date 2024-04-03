@@ -48,6 +48,7 @@ nav:
         - Skill Settings: skill_settings.md
         - Skill API: skill_api.md
         - Runtime Requirements: runtime.md
+        - SSML: ssml.md
         - Skill Json: skill_json.md
         - Skill Tests: skill_tests.md
         - F.A.Q.: dev.md
