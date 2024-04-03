@@ -79,6 +79,53 @@ OVOS TTS plugins implement support for SSML, ensuring that SSML content is proce
 
 - **SSML Tag Handling**: Supported SSML tags are processed by the TTS engine during synthesis. Unsupported tags are removed, while supported tags are modified or retained based on the implementation of the `modify_tag()` method.
 
+```python
+
+# default handling of ssml, advanced plugins may override this method
+def modify_tag(self, tag):
+    """Override to modify each supported ssml tag.
+
+    Arguments:
+        tag (str): SSML tag to check and possibly transform.
+    """
+    return tag
+
+def validate_ssml(self, utterance):
+    """Check if engine supports ssml, if not remove all tags.
+
+    Remove unsupported / invalid tags
+
+    Arguments:
+        utterance (str): Sentence to validate
+
+    Returns:
+        str: validated_sentence
+    """
+
+    # Validate speak tags
+    if not self.ssml_tags or "speak" not in self.ssml_tags:
+        self.format_speak_tags(utterance, False)
+    elif self.ssml_tags and "speak" in self.ssml_tags:
+        self.format_speak_tags(utterance)
+
+    # if ssml is not supported by TTS engine remove all tags
+    if not self.ssml_tags:
+        return self.remove_ssml(utterance)
+
+    # find ssml tags in string
+    tags = SSML_TAGS.findall(utterance)
+
+    for tag in tags:
+        if any(supported in tag for supported in self.ssml_tags):
+            utterance = utterance.replace(tag, self.modify_tag(tag))
+        else:
+            # remove unsupported tag
+            utterance = utterance.replace(tag, "")
+
+    # return text with supported ssml tags only
+    return utterance.replace("  ", " ")
+```
+
 ### Platform-Specific SSML Handling
 
 Some TTS plugins, like the PollyTTS plugin, may support platform-specific SSML tags that are not part of the standard specification. For example, Amazon Polly supports additional SSML tags specific to Amazon's speech synthesis service.
@@ -100,6 +147,9 @@ class PollyTTS(TTS):
         sentence = sentence.replace("\whispered", "/amazon:effect") \
             .replace("\\whispered", "/amazon:effect") \
             .replace("whispered", "amazon:effect name=\"whispered\"")
+
+        # altermatively the plugin could override self.modify_tag method instead
+
         # Synthesize speech using Amazon Polly API
         # Write audio stream to WAV file
         return wav_file, None
