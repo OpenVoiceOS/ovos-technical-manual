@@ -49,40 +49,87 @@ Token analysis functions are available for text sample comparison:
 
 ## Example Usage
 
-Here is an example demonstrating the usage of `quebra_frases` functionalities:
+Tokenization
 
 ```python
 import quebra_frases
 
-# Tokenization
-sentence = "This is an example sentence."
-words = quebra_frases.word_tokenize(sentence)
-print(words)
-# Output: ['This', 'is', 'an', 'example', 'sentence.']
+sentence = "sometimes i develop stuff for OpenVoiceOS, OpenVoiceOS is FOSS!"
+print(quebra_frases.word_tokenize(sentence))
+# ['sometimes', 'i', 'develop', 'stuff', 'for', 'OpenVoiceOS', ',', 
+# 'OpenVoiceOS', 'is', 'FOSS', '!']
 
-sentences = quebra_frases.sentence_tokenize("This is the first sentence. This is the second sentence.")
-print(sentences)
-# Output: ['This is the first sentence.', 'This is the second sentence.']
+print(quebra_frases.span_indexed_word_tokenize(sentence))
+# [(0, 9, 'sometimes'), (10, 11, 'i'), (12, 19, 'develop'), 
+# (20, 25, 'stuff'), (26, 29, 'for'), (30, 37, 'OpenVoiceOS'), 
+# (37, 38, ','), (39, 46, 'OpenVoiceOS'), (47, 49, 'is'), 
+# (50, 54, 'FOSS'), (54, 55, '!')]
 
-# Chunking
-delimiters = ["."]
-chunks = quebra_frases.chunk(sentence, delimiters)
-print(chunks)
-# Output: ['This is an example sentence']
+print(quebra_frases.sentence_tokenize(
+    "Mr. Smith bought cheapsite.com for 1.5 million dollars, i.e. he paid a lot for it. Did he mind? Adam Jones Jr. thinks he didn't. In any case, this isn't true... Well, with a probability of .9 it isn't."))
+#['Mr. Smith bought cheapsite.com for 1.5 million dollars, i.e. he paid a lot for it.',
+#'Did he mind?',
+#"Adam Jones Jr. thinks he didn't.",
+#"In any case, this isn't true...",
+#"Well, with a probability of .9 it isn't."]
 
-samples = ["The quick brown fox", "The lazy dog"]
-common_chunks = quebra_frases.get_common_chunks(samples)
-print(common_chunks)
-# Output: {'The'}
+print(quebra_frases.span_indexed_sentence_tokenize(
+    "Mr. Smith bought cheapsite.com for 1.5 million dollars, i.e. he paid a lot for it. Did he mind? Adam Jones Jr. thinks he didn't. In any case, this isn't true... Well, with a probability of .9 it isn't."))
+#[(0, 82, 'Mr. Smith bought cheapsite.com for 1.5 million dollars, i.e. he paid a lot for it.'),
+#(83, 95, 'Did he mind?'),
+#(96, 128, "Adam Jones Jr. thinks he didn't."),
+#(129, 160, "In any case, this isn't true..."),
+#(161, 201, "Well, with a probability of .9 it isn't.")]
 
-# Token Analysis
-sample_texts = ["apple banana orange", "banana mango kiwi"]
-common_tokens = quebra_frases.get_common_tokens(sample_texts)
-print(common_tokens)
-# Output: {'banana'}
+print(quebra_frases.paragraph_tokenize('This is a paragraph!\n\t\nThis is another '
+                                       'one.\t\n\tUsing multiple lines\t   \n     '
+                                       '\n\tparagraph 3 says goodbye'))
+#['This is a paragraph!\n\t\n',
+#'This is another one.\t\n\tUsing multiple lines\t   \n     \n',
+#'\tparagraph 3 says goodbye']
 
-uncommon_tokens = quebra_frases.get_uncommon_tokens(sample_texts)
-print(uncommon_tokens)
-# Output: {'apple', 'orange', 'mango', 'kiwi'}
+print(quebra_frases.span_indexed_paragraph_tokenize('This is a paragraph!\n\t\nThis is another '
+                                                    'one.\t\n\tUsing multiple lines\t   \n     '
+                                                    '\n\tparagraph 3 says goodbye'))
+#[(0, 23, 'This is a paragraph!\n\t\n'),
+#(23, 77, 'This is another one.\t\n\tUsing multiple lines\t   \n     \n'),
+#(77, 102, '\tparagraph 3 says goodbye')]
 ```
 
+chunking
+
+```python
+import quebra_frases
+
+delimiters = ["OpenVoiceOS"]
+sentence = "sometimes i develop stuff for OpenVoiceOS, OpenVoiceOS is FOSS!"
+print(quebra_frases.chunk(sentence, delimiters))
+# ['sometimes i develop stuff for', 'OpenVoiceOS', ',', 'OpenVoiceOS', 'is FOSS!']
+```
+
+token analysis
+
+```python
+import quebra_frases
+
+samples = ["tell me what do you dream about",
+           "tell me what did you dream about",
+           "tell me what are your dreams about",
+           "tell me what were your dreams about"]
+print(quebra_frases.get_common_chunks(samples))
+# {'tell me what', 'about'}
+print(quebra_frases.get_uncommon_chunks(samples))
+# {'do you dream', 'did you dream', 'are your dreams', 'were your dreams'}
+print(quebra_frases.get_exclusive_chunks(samples))
+# {'do', 'did', 'are', 'were'}
+
+samples = ["what is the speed of light",
+           "what is the maximum speed of a firetruck",
+           "why are fire trucks red"]
+print(quebra_frases.get_exclusive_chunks(samples))
+# {'light', 'maximum', 'a firetruck', 'why are fire trucks red'})
+print(quebra_frases.get_exclusive_chunks(samples, squash=False))
+#[['light'],
+#['maximum', 'a firetruck'],
+#['why are fire trucks red']])
+```
