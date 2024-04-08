@@ -79,6 +79,7 @@ nav:
         - GUI Interface: skill_gui.md
         - Enclosure Api: mk1_api.md
     - Technologies:
+        - Quebra Frases: quebra_frases.md
         - Eggscript: eggscript.md
         - Messagebus Client: bus_client.md
         - Mark1 Utils: mk1_utils.md
