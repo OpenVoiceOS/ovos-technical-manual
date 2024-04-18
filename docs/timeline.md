@@ -136,8 +136,8 @@
 - Feb 2022 - [OCP](https://github.com/OpenVoiceOS/ovos-ocp-audio-plugin) released as an audio plugin (mycroft compatible)
 - Feb 2022 - PHAL replaces `mycroft.client.enclosure` in `ovos-core`
 - Feb 2022 - [skill-ovos-date-time](https://github.com/OpenVoiceOS/skill-ovos-date-time) forked from Mycroft
-- Mar 2022 - Fallback STT support added 
-- Mar 2022 - VAD plugins support added 
+- Mar 2022 - Fallback STT support added
+- Mar 2022 - VAD plugins support added
 - Mar 2022 - [ovos-vad-plugin-webrtcvad](https://github.com/OpenVoiceOS/ovos-vad-plugin-webrtcvad) released
 - Mar 2022 - [ovos-vad-plugin-silero](https://github.com/OpenVoiceOS/ovos-vad-plugin-silero) released
 - Mar 2022 - [OCP](https://github.com/OpenVoiceOS/ovos-ocp-audio-plugin/) adopted in `ovos-core` as default media handler
@@ -234,7 +234,7 @@
 - Jun 2023 - Home Assistant plugin starts being maintained by community member @mikejgray
 - Jun 2023 - [quebra_frases](https://github.com/OpenVoiceOS/quebra_frases) transferred from @JarbasAl to OVOS
 - Jun 2023 - [ovos-translate-plugin-nllb](https://github.com/OpenVoiceOS/ovos-translate-plugin-nllb) released
-- Jun 2023 - [fasterwhisper.ziggyai.online](https://fasterwhisper.ziggyai.online/stt) public STT server added (large, GPU) 
+- Jun 2023 - [fasterwhisper.ziggyai.online](https://fasterwhisper.ziggyai.online/stt) public STT server added (large, GPU)
 - Jun 2023 - [Home Assistant Notify](https://blog.graywind.org/posts/ovos-homeassistant-notify-integration/) integration released by community member @mikejgray
 - Jun 2023 - First (and second!) successful run of OpenVoiceOS on Windows, using WSL2 and [ovos-docker](https://github.com/openvoiceos/ovos-docker)
 - Jun 2023 - [ovos-docker-tts](https://github.com/OpenVoiceOS/ovos-docker-tts) TTS containers released, maintained by community member @goldyfruit
@@ -261,7 +261,7 @@
 - Sep 2023 - [persona-server](https://github.com/OpenVoiceOS/ovos-persona-server) alpha version released
 - Sep 2023 - [ovos-audio-transformer-plugin-ggwave](https://github.com/OpenVoiceOS/ovos-audio-transformer-plugin-ggwave) released
 - Oct 2023 - [ovosnllb.ziggyai.online](https://ovosnllb.ziggyai.online)  public translation server added
-- Oct 2023 - [ovos-tts-plugin-mimic3-server](https://github.com/OpenVoiceOS/ovos-tts-plugin-mimic3-server) deprecated 
+- Oct 2023 - [ovos-tts-plugin-mimic3-server](https://github.com/OpenVoiceOS/ovos-tts-plugin-mimic3-server) deprecated
 - Oct 2023 - [ovos-PHAL-sensors](https://github.com/OpenVoiceOS/ovos-PHAL-sensors) released, exposing OVOS sensors in Home Assistant
 - Oct 2023 - [ovos-bidirectional-translation-plugin](https://github.com/OpenVoiceOS/ovos-bidirectional-translation-plugin) released
 - Nov 2023 - Plasma Bigscreen [moves to QT6 and explicitly drops support for OVOS](https://invent.kde.org/plasma/plasma-bigscreen/-/commit/05441d4b687950b6235ef466cbb9c777631618d8)
@@ -288,5 +288,8 @@
 - Mar 2024 - Community Mycroft [skills updated to OVOS](https://github.com/orgs/OVOSHatchery/repositories?type=fork&q=skill) under OVOSHatchery
 - Mar 2024 - [OVOS Skill Store](https://openvoiceos.github.io/OVOS-skills-store) released!
 - Mar 2024 - [Hatchery Skill Store](https://ovoshatchery.github.io/OVOS-Hatchery-skills) released!
-- Mar 2023 - First successful run of OpenVoiceOS natively on Mac OS with Apple Silicon
+- Mar 2024 - First successful run of OpenVoiceOS natively on Mac OS with Apple Silicon
+- Mar 2024 - [ovos-installer](https://github.com/OpenVoiceOS/ovos-installer) second release, codename `Doom` supports Mark II device, maintained by community member @goldyfruit
+- Apr 2024 - [Mark 2 demo](https://community.openconversational.ai/t/open-voice-os-running-on-a-mark-ii-with-its-local-ai-running-mistral/14572) running Open Voice OS connected to a local A.I.
+- Apr 2024 - First successful run of [HiveMind Satellite](https://github.com/JarbasHiveMind/HiveMind-voice-sat) on Mark 1 device
 - Near Future - `ovos-core` version **0.0.8** released
