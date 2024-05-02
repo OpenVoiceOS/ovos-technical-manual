@@ -11,6 +11,25 @@ your standalone projects
 By using OPM you can ensure a standard interface to plugins and easily make them configurable in your project, plugin
 code and example configurations are mapped to a string via python entrypoints in setup.py
 
+## Where to install plugins
+
+Each kind of plugin should go into it's respective ovos service, most of the time ovos is sharing the base environment but in some setups such as ovos-docker you should keep in mind the correct locations to install each plugin
+
+![image](https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/861cadfb-8be7-4c7f-b701-86fe49ac5a63)
+
+Each type of plugin has it's own dedicated documentation page, most of the time you only need to `pip install ovos-plugin-name` and edit `mycroft.conf` to configure and enable the plugin
+
+### HiveMind
+
+HiveMind setups allow you to decide which plugins run server side or satellite side
+
+In this example the hivemind server runs only core + skills, the satellites handle their own STT/TTS, this corresponds to the `server profile` in [ovos-installer](https://github.com/OpenVoiceOS/ovos-installer)
+
+![image](https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/55694b82-69c9-4288-9a89-1d9716eb3c57)
+
+In this example the hivemind server runs a full ovos-core, it handles STT/TTS for the satellites, this corresponds to the `listener profile` in [ovos-installer](https://github.com/OpenVoiceOS/ovos-installer)
+
+![image](https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/1455a488-af0f-44b4-a5e6-0418a7cd1f96)
 
 ## Plugin Packaging
 
