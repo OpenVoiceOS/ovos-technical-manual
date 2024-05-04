@@ -61,6 +61,13 @@ As the Weather Skill was called it has now been added to the front of the Active
 2. `TimerSkill.converse()`
 3. Normal intent parsing service
 
+When does a skill become active?
+
+1. **before** an intent is called the skill is **activated**
+2. if a fallback **returns True** (to consume the utterance) the skill is **activated** right **after** the fallback
+3. if converse **returns True** (to consume the utterance) the skill is **reactivated** right **after** converse
+4. a skill can activate/deactivate itself at any time
+
 ## Making a Skill Active
 
 There are occasions where a Skill has not been triggered by the User, but it should still be considered "Active".
@@ -121,31 +128,6 @@ class LazySkill(OVOSSkill):
         self.speak("leave me alone")
         self.deactivate()
 ```
-
-**CAVEATS**:
-
-- `self.deactivate()` can be called inside converse handlers, but **ONLY** if they **return False**
-
-- `self.deactivate()` can be called inside fallback handlers, but **ONLY** if they **return False**
-
-
-if converse/fallback **returns True** (to consume the utterance) the skill is **reactivated** right after the handler
-
-if you need to deactivate a skill and also consume the utterance, then you need to use the callback instead
-
-```python
-class MySkill(OVOSSkill):
-    def converse(self, message):  # or fallback skill handler
-        self.do_deactivation = True
-        return True
-
-    def handle_activate(self, message: Message):
-		"""called after converse return True (but not False)"""
-        if self.do_deactivation:
-            self.deactivate()
-       	    self.do_deactivation = False
-```
-
 
 ## Conversational Intents
 
