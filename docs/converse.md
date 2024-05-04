@@ -122,6 +122,29 @@ class LazySkill(OVOSSkill):
         self.deactivate()
 ```
 
+**CAVEATS**:
+- `self.deactivate()` can be called inside converse handlers, but **ONLY** if they **return False**
+- `self.deactivate()` can be called inside fallback handlers, but **ONLY** if they **return False**
+
+
+if converse/fallback **returns True** (to consume the utterance) the skill is **reactivated** right after the handler
+
+if you need to deactivate a skill and also consume the utterance, then you need to use the callback instead
+
+```python
+
+class MySkill(OVOSSkill):
+    def converse(self, message):  # or fallback skill handler
+        self.do_deactivation = True
+        return True
+
+    def handle_activate(self, message: Message):
+		"""called after converse return True (but not False)"""
+        if self.do_deactivation:
+			self.deactivate()
+       	    self.do_deactivation = False
+```
+
 
 ## Conversational Intents
 
