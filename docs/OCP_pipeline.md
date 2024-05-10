@@ -35,119 +35,6 @@ The new OCP Pipeline integrates media queries directly into ovos-core as a first
 
 > **NOTE**: needs to be explicitly enabled, `"experimental_ocp_pipeline"` defaults to `false`
 
-### Playback Frameworks
-
-After the OCP pipeline selects a skill, it proceeds as follows:
-
-- For OCP Skills: The pipeline collects results from all skills, selects the best one, and handles playback accordingly. 
-      
-- For CommonPlay Legacy Skills: The pipeline selects the best skill and instructs it to handle playback.
-
-Here's a simple table comparing the three playback handling options for OCPSkills:
-
-| Feature                | Legacy Audio System   | Classic OCP           | ovos-media           |
-|------------------------|-----------------------|-----------------------|----------------------|
-| Music Playback         | Basic support         | Yes                   | Work in Progress     |
-| Video Playback         | No                    | Yes                   | Work in Progress     |
-| Web Playback           | No                    | Yes                   | Work in Progress     |
-| Legacy Audio Plugins   | Yes                   | Yes                   | No                   |
-| Media Plugins          | No                    | No                    | Yes                  |
-| GUI                    | No                    | Yes                   | Yes                  |
-| Shuffle/Repeat         | No                    | Yes                   | Yes                  |
-| Multiple Results       | No                    | Yes                   | Yes                  |
-| Featured Media         | No                    | Yes                   | Yes                  |
-| Playlists              | Very Limited          | Yes                   | Yes                  |
-| Search Results Playlist | No                   | Yes                   | Yes                  |
-| Now Playing Playlist   | No                    | Yes                   | Yes                  |
-| Liked Songs Playlist   | No                    | No                    | Yes                  |
-| Deprecation Status     | Deprecated            | Scheduled for removal | N/A                  |
-| Development Status     | Bug fixes only        | Bug fixes only        | Work in Progress     |
-
-#### Legacy Audio Service
-
-Integrating with the [legacy audio service](https://openvoiceos.github.io/ovos-technical-manual/audio_service/#legacy-audio-service) enables basic playback functionality. While limited it should work in more platform
-
-Here's how to configure it **without OCP**:
-
-```
-{
-    "enable_old_audioservice": true,
-    "disable_ocp": true,
-    "Audio": {
-        "default-backend": "vlc",
-        "backends": {
-          "simple": {
-            "type": "ovos_audio_simple",
-            "active": true
-          },
-          "vlc": {
-            "type": "ovos_vlc",
-            "active": true
-          }
-        }
-    }
-  },
-}
-```
-
-> **NOTE**: `"default-backend"` **must** be set when `"disable_ocp"` is set to true
-
-
-#### Classic OCP
-
-Employing Classic OCP expands on the legacy audio service with additional functionality. It is tightly integrated with the legacy audio service
-
-OCP was developed for mycroft-core under the legacy audio system and will pose as a legacy plugin, translating the received bus events to the OCP API. 
-
-> **TIP**: OCP is **always** the default audio plugin unless `"disable_ocp"` is set to true in the configuration. `"default-backend"` has no effect here
-
-OCP internally uses the legacy API to delegate playback when GUI is not available (or if configured to do so).
-
-Here's how to configure it:
-
-```
-{
-    "enable_old_audioservice": true,
-    "disable_ocp": false,
-
-    "Audio": {
-        "backends": {
-          "OCP": {
-            "type": "ovos_common_play",
-            "disable_mpris": true,
-            "manage_external_players": false,
-            "active": true
-          },
-          "simple": {
-            "type": "ovos_audio_simple",
-            "active": true
-          },
-          "vlc": {
-            "type": "ovos_vlc",
-            "active": true
-          }
-        }
-    }
-  },
-}
-
-```
-
-#### ovos-media
-
-Utilizing [ovos-media](https://openvoiceos.github.io/ovos-technical-manual/OCP/) introduces a more modern approach to playback management. Here's how to configure it:
-
-```
-{
-    "enable_old_audioservice": false,
-    "disable_ocp": true
-}
-```
-
-You also need to manually launch the `ovos-media` service, it is not yet integrated into the installer, docker or pre-built images
-
-> **WARNING** This feature is a work in progress and not ready for end users
-
 ### Pipeline components
 
 > **TIP**: read the [pipeline](https://openvoiceos.github.io/ovos-technical-manual/core/#pipelines) documentation first!
@@ -335,6 +222,117 @@ print(ocp.match_fallback("i wanna hear metallica", "en-us"))
 
 ```
 
+### Playback Frameworks
+
+After the OCP pipeline selects a skill, it proceeds as follows:
+
+- For OCP Skills: The pipeline collects results from all skills, selects the best one, and handles playback accordingly. 
+      
+- For CommonPlay Legacy Skills: The pipeline selects the best skill and instructs it to handle playback.
+
+Here's a simple table comparing the three playback handling options for OCPSkills:
+
+| Feature                | Legacy Audio System   | Classic OCP           | ovos-media           |
+|------------------------|-----------------------|-----------------------|----------------------|
+| Music Playback         | Basic support         | Yes                   | Work in Progress     |
+| Video Playback         | No                    | Yes                   | Work in Progress     |
+| Web Playback           | No                    | Yes                   | Work in Progress     |
+| Legacy Audio Plugins   | Yes                   | Yes                   | No                   |
+| Media Plugins          | No                    | No                    | Yes                  |
+| GUI                    | No                    | Yes                   | Yes                  |
+| Shuffle/Repeat         | No                    | Yes                   | Yes                  |
+| Multiple Results       | No                    | Yes                   | Yes                  |
+| Featured Media         | No                    | Yes                   | Yes                  |
+| Playlists              | Very Limited          | Yes                   | Yes                  |
+| Search Results Playlist | No                   | Yes                   | Yes                  |
+| Now Playing Playlist   | No                    | Yes                   | Yes                  |
+| Deprecation Status     | Deprecated            | Scheduled for removal | N/A                  |
+| Development Status     | Bug fixes only        | Bug fixes only        | Work in Progress     |
+
+#### Legacy Audio Service
+
+Integrating with the [legacy audio service](https://openvoiceos.github.io/ovos-technical-manual/audio_service/#legacy-audio-service) enables basic playback functionality. While limited it should work in more platform
+
+Here's how to configure it **without OCP**:
+
+```
+{
+    "enable_old_audioservice": true,
+    "disable_ocp": true,
+    "Audio": {
+        "default-backend": "vlc",
+        "backends": {
+          "simple": {
+            "type": "ovos_audio_simple",
+            "active": true
+          },
+          "vlc": {
+            "type": "ovos_vlc",
+            "active": true
+          }
+        }
+    }
+  },
+}
+```
+
+> **NOTE**: `"default-backend"` **must** be set when `"disable_ocp"` is set to true
+
+#### Classic OCP
+
+Employing Classic OCP expands on the legacy audio service with additional functionality. It is tightly integrated with the legacy audio service
+
+OCP was developed for mycroft-core under the legacy audio system and will pose as a legacy plugin, translating the received bus events to the OCP API. 
+
+> **TIP**: OCP is **always** the default audio plugin unless `"disable_ocp"` is set to true in the configuration. `"default-backend"` has no effect here
+
+OCP internally uses the legacy API to delegate playback when GUI is not available (or if configured to do so).
+
+Here's how to configure it:
+
+```
+{
+    "enable_old_audioservice": true,
+    "disable_ocp": false,
+
+    "Audio": {
+        "backends": {
+          "OCP": {
+            "type": "ovos_common_play",
+            "disable_mpris": true,
+            "manage_external_players": false,
+            "active": true
+          },
+          "simple": {
+            "type": "ovos_audio_simple",
+            "active": true
+          },
+          "vlc": {
+            "type": "ovos_vlc",
+            "active": true
+          }
+        }
+    }
+  },
+}
+
+```
+
+#### ovos-media
+
+Utilizing [ovos-media](https://openvoiceos.github.io/ovos-technical-manual/OCP/) introduces a more modern approach to playback management. Here's how to configure it:
+
+```
+{
+    "enable_old_audioservice": false,
+    "disable_ocp": true
+}
+```
+
+You also need to manually launch the `ovos-media` service, it is not yet integrated into the installer, docker or pre-built images
+
+> **WARNING** This feature is a work in progress and not ready for end users
+
 ### Classifiers
 
 #### Architecture
@@ -390,9 +388,11 @@ class MediaType:
 The features of this classifier have been engineered to allow influencing classifications at runtime based on available skills
 
 Classifier options:
-- heuristic based on keyword features (baseline - lang agnostic) ~= 20% accuracy
+
 - trained on text only features (count vectorizer baseline - english) ~= 85% accuracy
+  
 - trained on keyword features (lang agnostic - runtime keywords influence classification) ~= 88% accuracy
+  
 - trained on probabilities of text only classifier + keyword features (english only - runtime keywords influence classification) ~= 95% accuracy
 
 NOTE: several classification algorithms have been tested, Perceptron and MLP are the most sensitive to the runtime bias properly
@@ -404,7 +404,9 @@ using the dataset collected for media type + ovos-datasets
 ![imagem](https://github.com/NeonJarbas/ocp-nlp/assets/59943014/bf9b796e-dc57-4320-a472-5b859b9dfcaf)
 
 Classifier options:
+
 - trained on text only features (count vectorizer baseline - english) ~= 95% accuracy
+
 - trained on keyword features (lang agnostic - runtime keywords influence classification) ~= 90% accuracy
 
 
