@@ -2,9 +2,12 @@
 
 > **EXPERIMENTAL** this feature is experimental during ovos-core **version 0.0.8**
 
-The OCP pipeline matches utterances and collects playback results from skills.
+The OCP framework matches utterances and collects playback results from skills.
 
-> **TIP**: read the [pipeline](https://openvoiceos.github.io/ovos-technical-manual/core/#pipelines) documentation first!
+In ovos-core <= **version 0.0.7** Classic OCP registered intents with the regular intent system, 
+if `"experimental_ocp_pipeline"` is set to False and Classic OCP is loaded the legacy mechanism will be used to match media queries
+
+The new OCP Pipeline integrates media queries directly into ovos-core as a first class NLP pipeline component
 
 ```
 {
@@ -146,6 +149,21 @@ You also need to manually launch the `ovos-media` service, it is not yet integra
 > **WARNING** This feature is a work in progress and not ready for end users
 
 ### Pipeline components
+
+> **TIP**: read the [pipeline](https://openvoiceos.github.io/ovos-technical-manual/core/#pipelines) documentation first!
+
+provide 4 new pipeline components:
+
+- ocp_high
+
+- ocp_medium
+
+- ocp_low
+
+- ocp_legacy
+
+
+> **REMINDER:**: needs to be explicitly enabled in `ovos-core`, `"experimental_ocp_pipeline"` defaults to `false`
 
 #### ocp_legacy - Legacy CommonPlay
 
