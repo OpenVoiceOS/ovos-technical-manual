@@ -196,45 +196,82 @@ To enable a transformer add it to `mycroft.conf`
 }
 ```
 
-## Classic Audio Service
+## Legacy Audio Service
 
-**DEPRECATION WARNING** - `ovos-core` version `0.0.8` is moving long-form media playback to `ovos-media` service, this is a work in progress and
-will be a default in version **0.1.0** when `ovos-media` is introduced
+The legacy audio service supports audio playback via the old mycroft api ([@mycroft](https://github.com/MycroftAI/mycroft-core/blob/dev/mycroft/skills/audioservice.py#L43) [@ovos](https://github.com/OpenVoiceOS/ovos-bus-client/blob/dev/ovos_bus_client/apis/ocp.py#L51))
 
-`ovos-media` is a work in progress, it does not yet ship with OVOS by default, but it can be manually enabled
+> **TIP**: HiveMind satellites can also run the legacy audio service and handle playback on the satellite devices
 
-In order to use `ovos-media` you need to enable the OCP pipeline in `ovos-core` and to disable the old audio service 
-
-disabling old audio service
-```json
+```javascript
 {
-  "enable_old_audioservice": false
+    "enable_old_audioservice": true,
+
+    "Audio": {
+        "backends": {
+          "OCP": {
+            "type": "ovos_common_play",
+            "disable_mpris": true,
+            "manage_external_players": false,
+            "active": true
+          },
+          "simple": {
+            "type": "ovos_audio_simple",
+            "active": true
+          },
+          "vlc": {
+            "type": "ovos_vlc",
+            "active": true
+          }
+        }
+    }
+  },
 }
 ```
 
-> **DEPRECATION WARNING** - `"enable_old_audioservice": true` will use the [old OCP](https://github.com/OpenVoiceOS/ovos-ocp-audio-plugin) that shipped as an audio plugin in order to work in classic mycroft
+> **NOTE:** `"enable_old_audioservice"` will default to `false` in ovos-core **version 0.1.0**
 
-You can enable additional Audio plugins under the `"Audio"` section of `mycroft.conf`
+legacy plugins:
+- [ocp](https://github.com/OpenVoiceOS/ovos-ocp-audio-plugin)
+- [vlc](https://github.com/OpenVoiceOS/ovos-vlc-plugin)
+- [simple](https://github.com/OpenVoiceOS/ovos-audio-plugin-simple) (no https support)
 
-OCP will decide when to call the Audio service and what plugin to use
+
+### Disabling Classic OCP
+
+Classic OCP is currently the default media playback subsystem for OVOS, scheduled to be replaced by [ovos-media](https://github.com/OpenVoiceOS/ovos-media) in ovos-core **version 0.1.0**
+
+by default OCP acts as a translation layer for the legacy audio api, but if you want to disable ocp the legacy audio service remains available in a standalone fashion
+
+> **NOTE:** `"default-backend"` needs to be set if you disable ocp
 
 ```javascript
-"Audio": {
-    "backends": {
-      "OCP": {
-        "type": "ovos_common_play",
-        "active": true
-      },
-      "simple": {
-        "type": "ovos_audio_simple",
-        "active": true
-      },
-      "vlc": {
-        "type": "ovos_vlc",
-        "active": true
-      }
+{
+    "enable_old_audioservice": true,
+    "disable_ocp": true,
+    "Audio": {
+        "default-backend": "vlc",
+        "backends": {
+          "simple": {
+            "type": "ovos_audio_simple",
+            "active": true
+          },
+          "vlc": {
+            "type": "ovos_vlc",
+            "active": true
+          }
+        }
     }
-},
+  },
+}
 ```
 
+**Classic OCP technical details:**
+
+- OCP was developed for mycroft-core under the legacy audio system
+- OCP will [pose as a legacy plugin](https://github.com/OpenVoiceOS/ovos-ocp-audio-plugin/blob/dev/ovos_plugin_common_play/__init__.py#L10) and translate the received bus events to the [OCP api](https://github.com/OpenVoiceOS/ovos-bus-client/blob/dev/ovos_bus_client/apis/ocp.py#L228)
+- OCP is **always** the default audio plugin, unless you set `"disable_ocp": true` in config
+- OCP uses the legacy api internally, to delegate playback when GUI is not available (or if configured to do so)
+
+
+> **NOTE:** `"disable_ocp"` will default to `true` in ovos-core **version 0.1.0**
 
