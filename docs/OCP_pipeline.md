@@ -72,7 +72,6 @@ If you can't migrate your old skills to the OCP framework, you can add `ocp_lega
     // NOTE: dont copy paste this, edit to your taste! "..." is not valid here
     "pipeline": [
         "converse",
-        "ocp_high",
         "...",
         "ocp_legacy",
         "...",
