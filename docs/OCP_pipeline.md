@@ -35,8 +35,9 @@ The OCP pipeline matches utterances and collects playback results from skills.
 ### Playback Frameworks
 
 After the OCP pipeline selects a skill, it proceeds as follows:
-- For OCP Skills: The pipeline collects results from all skills, selects the best one, and handles playback accordingly.
-    - Actually performs playback, selecting playback subsystem according to `mycroft.conf`
+
+- For OCP Skills: The pipeline collects results from all skills, selects the best one, and handles playback accordingly. 
+      
 - For CommonPlay Legacy Skills: The pipeline selects the best skill and instructs it to handle playback.
 
 Here's a simple Markdown table comparing the three playback handling options for OCPSkills:
@@ -53,6 +54,7 @@ Here's a simple Markdown table comparing the three playback handling options for
 | Multiple Results       | No                    | Yes                   | Yes                  |
 | Single Skill Playlists | Limited               | Yes                   | Yes                  |
 | Multi-Skill Playlists  | No                    | Yes                   | Yes                  |
+| Liked Songs Playlist   | No                    | No                    | Yes                  |
 | Deprecation Status     | Deprecated            | Scheduled for removal | N/A                  |
 | Development Status     | Bug fixes only        | Bug fixes only        | Work in Progress     |
 
@@ -83,13 +85,18 @@ Here's how to configure it **without OCP**:
 }
 ```
 
+> **NOTE**: `"default-backend"` **must** be set when `"disable_ocp"` is set to true
+
+
 #### Classic OCP
 
 Employing Classic OCP expands on the legacy audio service with additional functionality. It is tightly integrated with the legacy audio service
 
 OCP was developed for mycroft-core under the legacy audio system and will pose as a legacy plugin, translating the received bus events to the OCP API. 
 
-It's **always** the default audio plugin unless `"disable_ocp"` is set to true in the configuration. OCP internally uses the legacy API to delegate playback when GUI is not available (or if configured to do so).
+> **TIP**: OCP is **always** the default audio plugin unless `"disable_ocp"` is set to true in the configuration. `"default-backend"` has no effect here
+
+OCP internally uses the legacy API to delegate playback when GUI is not available (or if configured to do so).
 
 Here's how to configure it:
 
