@@ -141,9 +141,13 @@ Utilizing [ovos-media](https://openvoiceos.github.io/ovos-technical-manual/OCP/)
 }
 ```
 
+You also need to manually launch the `ovos-media` service, it is not yet integrated into the installer, docker or pre-built images
+
 > **WARNING** This feature is a work in progress and not ready for end users
 
-### ocp_legacy - Legacy CommonPlay
+### Pipeline components
+
+#### ocp_legacy - Legacy CommonPlay
 
 If you can't migrate your old skills to the OCP framework, you can add `ocp_legacy` to your pipeline to check for legacy common play skill matches
 
@@ -195,9 +199,24 @@ When comparing legacy common play skills to OCPSkills, it's essential to underst
 - Represent the future direction of media playback within ovos-core.
 - Natively supported by `ovos-core`
 
-### ocp_high - Unambiguous
+#### ocp_high - Unambiguous
 
 Before regular intent stage, taking into account current OCP state  (media ready to play / playing)
+
+```
+{
+  "intents" : {
+    "experimental_ocp_pipeline": true,
+    // NOTE: dont copy paste this, edit to your taste! "..." is not valid here
+    "pipeline": [
+        "converse",
+        "ocp_high",
+        "...",
+        "fallback_low"
+    ]
+  }
+}
+```
 
 Only matches if user unambiguously wants to trigger OCP
 
@@ -222,7 +241,25 @@ print(ocp.match_high("play metallica", "en-us"))
 
 ```
 
-### ocp_medium - Semi-Ambiguous
+#### ocp_medium - Semi-Ambiguous
+
+
+```
+{
+  "intents" : {
+    "experimental_ocp_pipeline": true,
+    // NOTE: dont copy paste this, edit to your taste! "..." is not valid here
+    "pipeline": [
+        "converse",
+        "...",
+        "ocp_medium",
+        "...",
+        "fallback_low"
+    ]
+  }
+}
+```
+
 
 uses a binary classifier to detect if a query is about media playback
 
@@ -242,9 +279,24 @@ print(ocp.match_medium("put on some metallica", "en-us"))
 #   skill_id='ovos.common_play', utterance='put on some metallica')
 ```
 
-### ocp_low - Ambiguous
+#### ocp_low - Ambiguous
 
 Uses keyword matching and requires at least 1 keyword
+
+```
+{
+  "intents" : {
+    "experimental_ocp_pipeline": true,
+    // NOTE: dont copy paste this, edit to your taste! "..." is not valid here
+    "pipeline": [
+        "converse",
+        "...",
+        "ocp_low",
+        "fallback_low"
+    ]
+  }
+}
+```
 
 OCP skills can provide these keywords at runtime, additional keywords for things such as media_genre were collected via SPARQL queries to wikidata
 
@@ -265,9 +317,9 @@ print(ocp.match_fallback("i wanna hear metallica", "en-us"))
 
 ```
 
-## Classifiers
+### Classifiers
 
-### Architecture
+#### Architecture
 
 ![imagem](https://github.com/NeonJarbas/ocp-nlp/assets/59943014/8abbd761-221f-4e59-8586-f35db7f48945)
 
@@ -280,7 +332,7 @@ Efficient entity matching is done via [Aho–Corasick algorithm](https://en.wiki
 The way the OCP dataset was collected ensures these features were present during training and interpretable, therefore during runtime any number of entities.csv files can be loaded, OVOS skills can also register their own keywords
 
 
-### Media Type Classifier
+#### Media Type Classifier
 
 internally used to tag utterances before OCP search process, this informs the result selection by giving priority to certain skills and helps performance by skipping some skills completely during search
 
@@ -329,7 +381,7 @@ Classifier options:
 
 NOTE: several classification algorithms have been tested, Perceptron and MLP are the most sensitive to the runtime bias properly
 
-### Binary classifier
+#### Binary classifier
 
 using the dataset collected for media type + ovos-datasets
 
@@ -340,7 +392,7 @@ Classifier options:
 - trained on keyword features (lang agnostic - runtime keywords influence classification) ~= 90% accuracy
 
 
-### Standalone Usage
+#### Standalone Usage
 
 check if an utterance is playback related
 
