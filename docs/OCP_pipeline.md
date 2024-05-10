@@ -40,7 +40,7 @@ After the OCP pipeline selects a skill, it proceeds as follows:
       
 - For CommonPlay Legacy Skills: The pipeline selects the best skill and instructs it to handle playback.
 
-Here's a simple Markdown table comparing the three playback handling options for OCPSkills:
+Here's a simple table comparing the three playback handling options for OCPSkills:
 
 | Feature                | Legacy Audio System   | Classic OCP           | ovos-media           |
 |------------------------|-----------------------|-----------------------|----------------------|
@@ -52,8 +52,10 @@ Here's a simple Markdown table comparing the three playback handling options for
 | GUI                    | No                    | Yes                   | Yes                  |
 | Shuffle/Repeat         | No                    | Yes                   | Yes                  |
 | Multiple Results       | No                    | Yes                   | Yes                  |
-| Single Skill Playlists | Limited               | Yes                   | Yes                  |
-| Multi-Skill Playlists  | No                    | Yes                   | Yes                  |
+| Featured Media         | No                    | Yes                   | Yes                  |
+| Playlists              | Very Limited          | Yes                   | Yes                  |
+| Search Results Playlist | No                   | Yes                   | Yes                  |
+| Now Playing Playlist   | No                    | Yes                   | Yes                  |
 | Liked Songs Playlist   | No                    | No                    | Yes                  |
 | Deprecation Status     | Deprecated            | Scheduled for removal | N/A                  |
 | Development Status     | Bug fixes only        | Bug fixes only        | Work in Progress     |
