@@ -1,6 +1,192 @@
 ## OCP Pipeline
 
-### Layer 1 - Unambiguous
+> **EXPERIMENTAL** this feature is experimental during ovos-core **version 0.0.8**
+
+The OCP pipeline matches utterances and collects playback results from skills.
+
+> **TIP**: read the [pipeline](https://openvoiceos.github.io/ovos-technical-manual/core/#pipelines) documentation first!
+
+```
+{
+  // Intent Pipeline / plugins config
+  "intents" : {
+    // enable OCP pipeline loading explicitly during pre-release phase
+    "experimental_ocp_pipeline": true,
+
+    // the pipeline is a ordered set of frameworks to send an utterance too
+    // if one of the frameworks fails the next one is used, until an answer is found
+    // NOTE: dont copy paste this, edit to your taste! "..." is not valid here
+    "pipeline": [
+        "converse",
+        "ocp_high",
+        "...",
+        "common_qa",
+        "ocp_medium",
+        "...",
+        "ocp_fallback",
+        "fallback_low"
+    ]
+  }
+}
+```
+
+> **NOTE**: needs to be explicitly enabled, `"experimental_ocp_pipeline"` defaults to `false`
+
+### Playback Frameworks
+
+After the OCP pipeline selects a skill, it proceeds as follows:
+- For OCP Skills: The pipeline collects results from all skills, selects the best one, and handles playback accordingly.
+    - Actually performs playback, selecting playback subsystem according to `mycroft.conf`
+- For CommonPlay Legacy Skills: The pipeline selects the best skill and instructs it to handle playback.
+
+Here's a simple Markdown table comparing the three playback handling options for OCPSkills:
+
+| Feature                | Legacy Audio System   | Classic OCP           | ovos-media           |
+|------------------------|-----------------------|-----------------------|----------------------|
+| Music Playback         | Basic support         | Yes                   | Work in Progress     |
+| Video Playback         | No                    | Yes                   | Work in Progress     |
+| Web Playback           | No                    | Yes                   | Work in Progress     |
+| Legacy Audio Plugins   | Yes                   | Yes                   | No                   |
+| Media Plugins          | No                    | No                    | Yes                  |
+| GUI                    | No                    | Yes                   | Yes                  |
+| Shuffle/Repeat         | No                    | Yes                   | Yes                  |
+| Multiple Results       | No                    | Yes                   | Yes                  |
+| Single Skill Playlists | Limited               | Yes                   | Yes                  |
+| Multi-Skill Playlists  | No                    | Yes                   | Yes                  |
+| Deprecation Status     | Deprecated            | Scheduled for removal | N/A                  |
+| Development Status     | Bug fixes only        | Bug fixes only        | Work in Progress     |
+
+#### Legacy Audio Service
+
+Integrating with the [legacy audio service](https://openvoiceos.github.io/ovos-technical-manual/audio_service/#legacy-audio-service) enables basic playback functionality. While limited it should work in more platform
+
+Here's how to configure it **without OCP**:
+
+```
+{
+    "enable_old_audioservice": true,
+    "disable_ocp": true,
+    "Audio": {
+        "default-backend": "vlc",
+        "backends": {
+          "simple": {
+            "type": "ovos_audio_simple",
+            "active": true
+          },
+          "vlc": {
+            "type": "ovos_vlc",
+            "active": true
+          }
+        }
+    }
+  },
+}
+```
+
+#### Classic OCP
+
+Employing Classic OCP expands on the legacy audio service with additional functionality. It is tightly integrated with the legacy audio service
+
+OCP was developed for mycroft-core under the legacy audio system and will pose as a legacy plugin, translating the received bus events to the OCP API. 
+
+It's **always** the default audio plugin unless `"disable_ocp"` is set to true in the configuration. OCP internally uses the legacy API to delegate playback when GUI is not available (or if configured to do so).
+
+Here's how to configure it:
+
+```
+{
+    "enable_old_audioservice": true,
+    "disable_ocp": false,
+
+    "Audio": {
+        "backends": {
+          "OCP": {
+            "type": "ovos_common_play",
+            "disable_mpris": true,
+            "manage_external_players": false,
+            "active": true
+          },
+          "simple": {
+            "type": "ovos_audio_simple",
+            "active": true
+          },
+          "vlc": {
+            "type": "ovos_vlc",
+            "active": true
+          }
+        }
+    }
+  },
+}
+
+```
+
+#### ovos-media
+
+Utilizing [ovos-media](https://openvoiceos.github.io/ovos-technical-manual/OCP/) introduces a more modern approach to playback management. Here's how to configure it:
+
+```
+{
+    "enable_old_audioservice": false,
+    "disable_ocp": true
+}
+```
+
+> **WARNING** This feature is a work in progress and not ready for end users
+
+### ocp_legacy - Legacy CommonPlay
+
+If you can't migrate your old skills to the OCP framework, you can add `ocp_legacy` to your pipeline to check for legacy common play skill matches
+
+> **NOTE**: This is independent from the OCPSkills handling and needs to be explicitly enabled, `"legacy_cps"` defaults to `false`
+
+```
+{
+  "intents" : {
+    // enable OCP pipeline loading explicitly during pre-release phase
+    "experimental_ocp_pipeline": true,
+
+    // enable legacy Common Play support
+    "legacy_cps": true,
+
+    // the pipeline is a ordered set of frameworks to send an utterance too
+    // if one of the frameworks fails the next one is used, until an answer is found
+    // NOTE: dont copy paste this, edit to your taste! "..." is not valid here
+    "pipeline": [
+        "converse",
+        "ocp_high",
+        "...",
+        "ocp_legacy",
+        "...",
+        "fallback_low"
+    ]
+  }
+}
+```
+
+When comparing legacy common play skills to OCPSkills, it's essential to understand the differences in how they handle playback within the OCP pipeline. 
+
+**Legacy CommonPlay Skills**:
+
+- Originate from Mycroft.
+- Used to depend on a companion skill under `mycroft-core`
+- Supported via OCP Pipeline in `ovos-core` **version 0.0.8**.
+- Deprecated since `ovos-core` **version 0.0.8**.
+- Scheduled for full removal on `ovos-core **version 0.1.0**.
+- Handle their own playback.
+- Typically reliant on the legacy audio system.
+- Requires manually enabling support in `mycroft.conf`
+
+**OCPSkills**:
+
+- Designed to work with the OCP Pipeline.
+- Return results only, leaving playback management to the OCP system.
+- Provide a more modular and maintainable system for media playback.
+- Offer enhanced capabilities such as GUI, playlists, and video support.
+- Represent the future direction of media playback within ovos-core.
+- Natively supported by `ovos-core`
+
+### ocp_high - Unambiguous
 
 Before regular intent stage, taking into account current OCP state  (media ready to play / playing)
 
@@ -16,8 +202,6 @@ uses padacioso for exact matches
 - stop (media needs to be loaded)
 
 ```python
-from ocp_nlp.intents import OCPPipelineMatcher
-
 ocp = OCPPipelineMatcher()
 print(ocp.match_high("play metallica", "en-us"))
 # IntentMatch(intent_service='OCP_intents',
@@ -29,13 +213,11 @@ print(ocp.match_high("play metallica", "en-us"))
 
 ```
 
-### Layer 2 - Semi-Ambiguous
+### ocp_medium - Semi-Ambiguous
 
 uses a binary classifier to detect if a query is about media playback
 
 ```python
-from ocp_nlp.intents import OCPPipelineMatcher
-
 ocp = OCPPipelineMatcher()
 
 print(ocp.match_high("put on some metallica", "en-us"))
@@ -51,15 +233,13 @@ print(ocp.match_medium("put on some metallica", "en-us"))
 #   skill_id='ovos.common_play', utterance='put on some metallica')
 ```
 
-### Layer 3 - Ambiguous
+### ocp_low - Ambiguous
 
 Uses keyword matching and requires at least 1 keyword
 
 OCP skills can provide these keywords at runtime, additional keywords for things such as media_genre were collected via SPARQL queries to wikidata
 
 ```python
-from ocp_nlp.intents import OCPPipelineMatcher
-
 ocp = OCPPipelineMatcher()
 
 print(ocp.match_medium("i wanna hear metallica", "en-us"))
@@ -151,13 +331,11 @@ Classifier options:
 - trained on keyword features (lang agnostic - runtime keywords influence classification) ~= 90% accuracy
 
 
-### Usage
+### Standalone Usage
 
 check if an utterance is playback related
 
 ```python
-from ocp_nlp.classify import BinaryPlaybackClassifier
-
 clf = BinaryPlaybackClassifier()
 clf.load()
 preds = clf.predict(["play a song", "play my morning jams",
@@ -168,8 +346,6 @@ print(preds)  # ['OCP' 'OCP' 'OCP' 'other' 'other' 'other']
 
 get media type of a playback utterance
 ```python
-from ocp_nlp.classify import MediaTypeClassifier, BiasedMediaTypeClassifier
-
 # basic text only classifier
 clf1 = MediaTypeClassifier()
 clf1.load()
