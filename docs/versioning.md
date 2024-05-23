@@ -11,10 +11,19 @@ Packages have automated alpha releases on every Pull Request, you can install th
 
 ![imagem](https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/68853cd1-6638-4c02-93d6-0dedc506afd9)
 
-## Automations
+## Alpha releases
 
-Please see [github shared actions](https://github.com/OpenVoiceOS/.github)
+![image](https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/a47d1f77-6b49-4e79-ac14-f703469033f8)
 
-## Release Process
+- green rectangles correspond to a human taking action
+- red rectangles correspond to waiting for human intervenience
+- yellow circles are alpha releases
+  
+## Quality Assurance Process
 
-![imagem](https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/f558b097-d86f-4804-bfdb-c08005044a94)
+![image](https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/7492c270-6e5f-4fb8-8941-85ffe2f43753)
+
+- green rectangles correspond to a human taking action
+- red rectangles correspond to waiting for human intervenience
+- yellow circles are alpha releases
+- green circles are stable releases
