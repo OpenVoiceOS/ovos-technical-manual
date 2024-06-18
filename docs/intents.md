@@ -287,6 +287,8 @@ what are your thoughts on {type} tomatoes
 
 Note the `{type}` in the above examples. These are wild-cards where matching content is forwarded to the skill's intent handler.
 
+> **WARNING**: digits are not allowed for the entity name inside the `{}`, **do NOT use {room1}**, use **{room_one}**.
+
 #### Specific Entities
 
 In the above example, `{type}` will match anything. While this makes the intent flexible, it will also match if we say something like Do you like eating tomatoes?. It would think the type of tomato is `"eating"` which doesn't make much sense. Instead, we can specify what type of things the {type} of tomato should be. We do this by defining the type entity file here:
