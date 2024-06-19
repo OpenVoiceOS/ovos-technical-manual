@@ -1,39 +1,36 @@
 ## OCP Pipeline
 
-> **EXPERIMENTAL** this feature is experimental during ovos-core **version 0.0.8**
+> **NEW** in ovos-core **version 0.0.8**
 
 The OCP framework matches utterances and collects playback results from skills.
 
-In ovos-core <= **version 0.0.7** Classic OCP registered intents with the regular intent system, 
-if `"experimental_ocp_pipeline"` is set to False and Classic OCP is loaded the legacy mechanism will be used to match media queries
+The new OCP Pipeline integrates media queries directly into ovos-core as a first class NLP pipeline component,
+in ovos-core <= **version 0.0.7** Classic OCP registered intents with the regular intent system,
 
-The new OCP Pipeline integrates media queries directly into ovos-core as a first class NLP pipeline component
-
-```
+```javascript
 {
-  // Intent Pipeline / plugins config
   "intents" : {
-    // enable OCP pipeline loading explicitly during pre-release phase
-    "experimental_ocp_pipeline": true,
-
-    // the pipeline is a ordered set of frameworks to send an utterance too
-    // if one of the frameworks fails the next one is used, until an answer is found
-    // NOTE: dont copy paste this, edit to your taste! "..." is not valid here
-    "pipeline": [
-        "converse",
-        "ocp_high",
-        "...",
-        "common_qa",
-        "ocp_medium",
-        "...",
-        "ocp_fallback",
-        "fallback_low"
-    ]
-  }
+    "OCP": {
+      // legacy forces old audio service instead of OCP
+      "legacy": false,
+      // min confidence (0.0 - 1.0) to accept MediaType
+      "classifier_threshold": 0.4,
+      // min conf for each result (0 - 100)
+      "min_score": 50,
+      // filter results from "wrong" MediaType
+      "filter_media": true,
+      // filter results we lack plugins to play
+      "filter_SEI": true,
+      // playback mode
+      // 0 - auto
+      // 10 - audio results only
+      // 20 - video results only
+      "playback_mode": 0,
+      // if MediaType query fails, try Generic query
+      "search_fallback": true
+    }
 }
 ```
-
-> **NOTE**: needs to be explicitly enabled, `"experimental_ocp_pipeline"` defaults to `false`
 
 ### Pipeline components
 
@@ -49,24 +46,16 @@ provide 4 new pipeline components:
 
 - ocp_legacy
 
-
-> **REMINDER:**: needs to be explicitly enabled in `ovos-core`, `"experimental_ocp_pipeline"` defaults to `false`
-
 #### ocp_legacy - Legacy CommonPlay
 
-If you can't migrate your old skills to the OCP framework, you can add `ocp_legacy` to your pipeline to check for legacy common play skill matches
+If you can't migrate your old skills to the OCP framework, you can add `ocp_legacy` to your pipeline to check for legacy
+common play skill matches
 
-> **NOTE**: This is independent from the OCPSkills handling and needs to be explicitly enabled, `"legacy_cps"` defaults to `false`
+> **NOTE**: This is independent of the OCPSkills handling and needs to be explicitly added to your pipeline config
 
 ```
 {
   "intents" : {
-    // enable OCP pipeline loading explicitly during pre-release phase
-    "experimental_ocp_pipeline": true,
-
-    // enable legacy Common Play support
-    "legacy_cps": true,
-
     // the pipeline is a ordered set of frameworks to send an utterance too
     // if one of the frameworks fails the next one is used, until an answer is found
     // NOTE: dont copy paste this, edit to your taste! "..." is not valid here
@@ -81,7 +70,8 @@ If you can't migrate your old skills to the OCP framework, you can add `ocp_lega
 }
 ```
 
-When comparing legacy common play skills to OCPSkills, it's essential to understand the differences in how they handle playback within the OCP pipeline. 
+When comparing legacy common play skills to OCPSkills, it's essential to understand the differences in how they handle
+playback within the OCP pipeline.
 
 **Legacy CommonPlay Skills**:
 
@@ -110,7 +100,6 @@ Before regular intent stage, taking into account current OCP state  (media ready
 ```
 {
   "intents" : {
-    "experimental_ocp_pipeline": true,
     // NOTE: dont copy paste this, edit to your taste! "..." is not valid here
     "pipeline": [
         "converse",
@@ -147,11 +136,9 @@ print(ocp.match_high("play metallica", "en-us"))
 
 #### ocp_medium - Semi-Ambiguous
 
-
 ```
 {
   "intents" : {
-    "experimental_ocp_pipeline": true,
     // NOTE: dont copy paste this, edit to your taste! "..." is not valid here
     "pipeline": [
         "converse",
@@ -163,7 +150,6 @@ print(ocp.match_high("play metallica", "en-us"))
   }
 }
 ```
-
 
 uses a binary classifier to detect if a query is about media playback
 
@@ -190,7 +176,6 @@ Uses keyword matching and requires at least 1 keyword
 ```
 {
   "intents" : {
-    "experimental_ocp_pipeline": true,
     // NOTE: dont copy paste this, edit to your taste! "..." is not valid here
     "pipeline": [
         "converse",
@@ -202,7 +187,8 @@ Uses keyword matching and requires at least 1 keyword
 }
 ```
 
-OCP skills can provide these keywords at runtime, additional keywords for things such as media_genre were collected via SPARQL queries to wikidata
+OCP skills can provide these keywords at runtime, additional keywords for things such as media_genre were collected via
+SPARQL queries to wikidata
 
 ```python
 ocp = OCPPipelineMatcher()
@@ -225,32 +211,34 @@ print(ocp.match_fallback("i wanna hear metallica", "en-us"))
 
 After the OCP pipeline selects a skill, it proceeds as follows:
 
-- For OCP Skills: The pipeline collects results from all skills, selects the best one, and handles playback accordingly. 
-      
+- For OCP Skills: The pipeline collects results from all skills, selects the best one, and handles playback accordingly.
+
 - For CommonPlay Legacy Skills: The pipeline selects the best skill and instructs it to handle playback.
 
 Here's a simple table comparing the three playback handling options for OCPSkills:
 
-| Feature                | Legacy Audio System   | Classic OCP           | ovos-media           |
-|------------------------|-----------------------|-----------------------|----------------------|
-| Music Playback         | Basic support         | Yes                   | Work in Progress     |
-| Video Playback         | No                    | Yes                   | Work in Progress     |
-| Web Playback           | No                    | Yes                   | Work in Progress     |
-| Legacy Audio Plugins   | Yes                   | Yes                   | No                   |
-| Media Plugins          | No                    | No                    | Yes                  |
-| GUI                    | No                    | Yes                   | Yes                  |
-| Shuffle/Repeat         | No                    | Yes                   | Yes                  |
-| Multiple Results       | No                    | Yes                   | Yes                  |
-| Featured Media         | No                    | Yes                   | Yes                  |
-| Playlists              | Very Limited          | Yes                   | Yes                  |
-| Search Results Playlist | No                   | Yes                   | Yes                  |
-| Now Playing Playlist   | No                    | Yes                   | Yes                  |
-| Deprecation Status     | Deprecated            | Scheduled for removal | N/A                  |
-| Development Status     | Bug fixes only        | Bug fixes only        | Work in Progress     |
+| Feature                 | Legacy Audio System | Classic OCP           | ovos-media       |
+|-------------------------|---------------------|-----------------------|------------------|
+| Music Playback          | Basic support       | Yes                   | Work in Progress |
+| Video Playback          | No                  | Yes                   | Work in Progress |
+| Web Playback            | No                  | Yes                   | Work in Progress |
+| Legacy Audio Plugins    | Yes                 | Yes                   | No               |
+| Media Plugins           | No                  | No                    | Yes              |
+| GUI                     | No                  | Yes                   | Yes              |
+| Shuffle/Repeat          | No                  | Yes                   | Yes              |
+| Multiple Results        | No                  | Yes                   | Yes              |
+| Featured Media          | No                  | Yes                   | Yes              |
+| Playlists               | Very Limited        | Yes                   | Yes              |
+| Search Results Playlist | No                  | Yes                   | Yes              |
+| Now Playing Playlist    | No                  | Yes                   | Yes              |
+| Deprecation Status      | Deprecated          | Scheduled for removal | N/A              |
+| Development Status      | Bug fixes only      | Bug fixes only        | Work in Progress |
 
 #### Legacy Audio Service
 
-Integrating with the [legacy audio service](https://openvoiceos.github.io/ovos-technical-manual/audio_service/#legacy-audio-service) enables basic playback functionality. While limited it should work in more platform
+Integrating with
+the [legacy audio service](https://openvoiceos.github.io/ovos-technical-manual/audio_service/#legacy-audio-service)
+enables basic playback functionality. While limited it should work in more platform
 
 Here's how to configure it **without OCP**:
 
@@ -279,11 +267,14 @@ Here's how to configure it **without OCP**:
 
 #### Classic OCP
 
-Employing Classic OCP expands on the legacy audio service with additional functionality. It is tightly integrated with the legacy audio service
+Employing Classic OCP expands on the legacy audio service with additional functionality. It is tightly integrated with
+the legacy audio service
 
-OCP was developed for mycroft-core under the legacy audio system and will pose as a legacy plugin, translating the received bus events to the OCP API. 
+OCP was developed for mycroft-core under the legacy audio system and will pose as a legacy plugin, translating the
+received bus events to the OCP API.
 
-> **TIP**: OCP is **always** the default audio plugin unless `"disable_ocp"` is set to true in the configuration. `"default-backend"` has no effect here
+> **TIP**: OCP is **always** the default audio plugin unless `"disable_ocp"` is set to true in the
+> configuration. `"default-backend"` has no effect here
 
 OCP internally uses the legacy API to delegate playback when GUI is not available (or if configured to do so).
 
@@ -319,7 +310,8 @@ Here's how to configure it:
 
 #### ovos-media
 
-Utilizing [ovos-media](https://openvoiceos.github.io/ovos-technical-manual/OCP/) introduces a more modern approach to playback management. Here's how to configure it:
+Utilizing [ovos-media](https://openvoiceos.github.io/ovos-technical-manual/OCP/) introduces a more modern approach to
+playback management. Here's how to configure it:
 
 ```
 {
@@ -328,7 +320,8 @@ Utilizing [ovos-media](https://openvoiceos.github.io/ovos-technical-manual/OCP/)
 }
 ```
 
-You also need to manually launch the `ovos-media` service, it is not yet integrated into the installer, docker or pre-built images
+You also need to manually launch the `ovos-media` service, it is not yet integrated into the installer, docker or
+pre-built images
 
 > **WARNING** This feature is a work in progress and not ready for end users
 
@@ -336,18 +329,21 @@ You also need to manually launch the `ovos-media` service, it is not yet integra
 
 #### Architecture
 
-Efficient entity matching is done via [Aho–Corasick algorithm](https://en.wikipedia.org/wiki/Aho%E2%80%93Corasick_algorithm), keyword features are essentially a keyword count. 
+Efficient entity matching is done
+via [Aho–Corasick algorithm](https://en.wikipedia.org/wiki/Aho%E2%80%93Corasick_algorithm), keyword features are
+essentially a keyword count.
 
-The way the OCP dataset was collected ensures these keyword features were present during training and interpretable, therefore during runtime any number of entities can be loaded, OVOS skills can also register their own keywords. 
+The way the OCP dataset was collected ensures these keyword features were present during training and interpretable,
+therefore during runtime any number of entities can be loaded, OVOS skills can also register their own keywords.
 
 This approach together with classical text features is used to train classifiers used in the OCP Pipeline
 
 ![imagem](https://github.com/NeonJarbas/ocp-nlp/assets/59943014/2144c6a7-d32d-4b3f-89c3-0151f6257f60)
 
-
 #### Media Type Classifier
 
-internally used to tag utterances before OCP search process, this informs the result selection by giving priority to certain skills and helps performance by skipping some skills completely during search
+internally used to tag utterances before OCP search process, this informs the result selection by giving priority to
+certain skills and helps performance by skipping some skills completely during search
 
 uses a scikit-learn classifier trained in a large synthetic dataset
 
@@ -384,17 +380,20 @@ class MediaType:
     ADULT_AUDIO = 71  # for content filtering
 ```
 
-The features of this classifier have been engineered to allow influencing classifications at runtime based on available skills
+The features of this classifier have been engineered to allow influencing classifications at runtime based on available
+skills
 
 Classifier options:
 
 - trained on text only features (count vectorizer baseline - english) ~= 85% accuracy
-  
-- trained on keyword features (lang agnostic - runtime keywords influence classification) ~= 88% accuracy
-  
-- trained on probabilities of text only classifier + keyword features (english only - runtime keywords influence classification) ~= 95% accuracy
 
-NOTE: several classification algorithms have been tested, Perceptron and MLP are the most sensitive to the runtime bias properly
+- trained on keyword features (lang agnostic - runtime keywords influence classification) ~= 88% accuracy
+
+- trained on probabilities of text only classifier + keyword features (english only - runtime keywords influence
+  classification) ~= 95% accuracy
+
+NOTE: several classification algorithms have been tested, Perceptron and MLP are the most sensitive to the runtime bias
+properly
 
 #### Binary classifier
 
@@ -408,7 +407,6 @@ Classifier options:
 
 - trained on keyword features (lang agnostic - runtime keywords influence classification) ~= 90% accuracy
 
-
 #### Standalone Usage
 
 check if an utterance is playback related
@@ -417,12 +415,13 @@ check if an utterance is playback related
 clf = BinaryPlaybackClassifier()
 clf.load()
 preds = clf.predict(["play a song", "play my morning jams",
-                   "i want to watch the matrix",
-                   "tell me a joke", "who are you", "you suck"])
+                     "i want to watch the matrix",
+                     "tell me a joke", "who are you", "you suck"])
 print(preds)  # ['OCP' 'OCP' 'OCP' 'other' 'other' 'other']
 ```
 
 get media type of a playback utterance
+
 ```python
 # basic text only classifier
 clf1 = MediaTypeClassifier()
