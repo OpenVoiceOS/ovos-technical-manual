@@ -13,7 +13,6 @@ nav:
         - Core: core.md
         - Audio: audio_service.md
         - GUI: gui_service.md
-        - Media: OCP.md
         - Configuration: config.md
         - Backend: backend.md
     - Self Hosting:
