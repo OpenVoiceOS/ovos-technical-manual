@@ -287,7 +287,7 @@ what are your thoughts on {type} tomatoes
 
 Note the `{type}` in the above examples. These are wild-cards where matching content is forwarded to the skill's intent handler.
 
-> **WARNING**: digits are not allowed for the entity name inside the `{}`, **do NOT use {room1}**, use **{room_one}**.
+> **WARNING**: digits are not allowed for the entity name inside the `{}`, **do NOT use `{room1}`, use `{room_one}`.
 
 #### Specific Entities
 
