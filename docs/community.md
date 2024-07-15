@@ -14,6 +14,7 @@ Thank you guys!
 
 ## Skills
 
+- [ovos-skill-pyradios](https://github.com/OpenVoiceOS/skill-ovos-pyradios)
 - [ovos-skill-easter-eggs](https://github.com/OpenVoiceOS/ovos-skill-easter-eggs)
 - [ovos-skill-randomness](https://github.com/OpenVoiceOS/skill-ovos-randomness)
 
