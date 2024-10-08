@@ -42,6 +42,9 @@ OVOS is moving towards a plugin system for intent engines, currently only the de
 - **Padatious** is a light-weight neural network that is trained on whole phrases. You can find the official documentation [here](https://mycroft-ai.gitbook.io/docs/mycroft-technologies/padatious)
 - **Adapt** is a keyword based parser. You can find the official documentation [here](https://mycroft-ai.gitbook.io/docs/mycroft-technologies/adapt)
 
+> NOTE: Padatious doesnt handle numbers well, internally sees all digits as "#". If you need to use digits in your intents, it is recommended you use Adapt instead.
+
+
 We will now look at each in more detail, including how to use them in a Skill.
 
 ## Keyword Intents
