@@ -1,15 +1,6 @@
 # Developer FAQ
 
-* [How do I know what is currently happening in the GUI?](#how-do-i-know-what-is-currently-happening-in-the-gui)
-* [How do I stop an intent mid execution?](#how-do-i-stop-an-intent-mid-execution)
-* [How do I send files over the bus?](#how-do-i-send-files-over-the-bus)
-* [How do I use OAuth in a skill?](#how-do-i-use-oauth-in-a-skill)
-* [How do I manage remote skill settings?](#how-do-i-manage-remote-skill-settings-)
-* [How do I share data between devices?](#how-do-i-share-data-between-devices-)
-* [How do I use Geolocation backend services?](#how-do-i-use-geolocation-backend-services-)
-* [How do I use Weather backend services?](#how-do-i-use-weather-backend-services-)
-* [How do I use WolframAlpha backend services?](#how-do-i-use-wolframalpha-backend-services-)
-
+> This list is a work in progress, [Suggestions and Pull Requests welcome](https://github.com/OpenVoiceOS/ovos-technical-manual)!
 
 ## How do I know what is currently happening in the GUI?
 
@@ -169,54 +160,6 @@ class MySkill(OVOSSkill):
         binary_data = decode_binary_message(message)
          # TODO process data somehow
 ```
-
-## How do I manage remote skill settings?
-
-To interact with skill settings via DeviceApi
-
-```python
-from ovos_backend_client.settings import RemoteSkillSettings
-
-# in ovos-core skill_id is deterministic and safe
-s = RemoteSkillSettings("skill.author")
-s.download()
-
-s.settings["existing_value"] = True
-s.settings["new_value"] = "will NOT show up in UI"
-s.upload()
-
-# auto generate new settings meta for all new values before uploading
-s.settings["new_value"] = "will show up in UI"
-s.generate_meta()  # now "new_value" is in meta
-s.upload()
-
-
-```
-
-## How do I share data between devices?
-
-by hijacking skill settings we allow storing arbitrary data via DeviceApi and use it across devices and skills
-
-```python
-from ovos_backend_client.cloud import SeleneCloud
-
-cloud = SeleneCloud()
-cloud.add_entry("test", {"secret": "NOT ENCRYPTED MAN"})
-data = cloud.get_entry("test")
-```
-
-an encrypted version is also supported if you don't trust the backend!
-
-```python
-from ovos_backend_client.cloud import SecretSeleneCloud
-
-k = "D8fmXEP5VqzVw2HE"  # you need this to read back the data
-cloud = SecretSeleneCloud(k)
-cloud.add_entry("test", {"secret": "secret data, selene cant read this"})
-data = cloud.get_entry("test")
-```
-
-![](https://matrix-client.matrix.org/_matrix/media/r0/download/matrix.org/SrqxZnxzRNSqJaydKGRQCFKo)
 
 ## How do I use Geolocation backend services?
 
