@@ -4,8 +4,6 @@
 
 Welcome to the OVOS developer documentation
 
-if you are not looking to develop with OpenVoiceOS the [community-docs](https://openvoiceos.github.io/community-docs) might be more suitable for your needs
-
 ## Perspective
 
 OVOS aims to be a full voice operating system, a operating system needs many applications and frameworks, OVOS provides all the required tooling to integrate voice in your projects
@@ -24,8 +22,6 @@ The following companion projects can be seen as "OVOS distros", opinionated comb
 In these docs you will find info about the architecture of OVOS, the several kinds of plugins available, and OVOS application development guidelines.
 
 ## External Resources
-
-User oriented docs are automatically published at [https://openvoiceos.github.io/community-docs](https://openvoiceos.github.io/community-docs)
 
 Docker specific documentation can be found at [https://openvoiceos.github.io/ovos-docker](https://openvoiceos.github.io/ovos-docker/)
 
