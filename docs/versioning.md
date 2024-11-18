@@ -22,7 +22,7 @@ These distros provide an easier way to get started with OVOS on specific hardwar
 
 OVOS follows [**semantic versioning**](https://semver.org/) (SemVer) and a **rolling release model** with three primary release channels: **stable**, **testing**, and **alpha**.
 
-These channels are managed via the [constraints files](https://pip.pypa.io/en/stable/user_guide/#constraints-files) hosted in this repository
+These channels are managed via the [constraints files](https://pip.pypa.io/en/stable/user_guide/#constraints-files) hosted in [ovos-releases](ttps://github.com/OpenVoiceOS/ovos-releases) repository
 
 > ℹ️ constraints files are similar to `requirements.txt`, but they specify *allowed versions* instead of *required versions*, packages in constraints files are not automatically installed
 
