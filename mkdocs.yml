@@ -47,7 +47,6 @@ nav:
         - Runtime Requirements: runtime.md
         - SSML: ssml.md
         - Skill Json: skill_json.md
-        - Skill Tests: skill_tests.md
         - F.A.Q.: dev.md
     - Continuous Conversation:
         - Prompts: prompts.md
