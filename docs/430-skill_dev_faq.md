@@ -161,11 +161,3 @@ class MySkill(OVOSSkill):
          # TODO process data somehow
 ```
 
-## How do I use Geolocation backend services?
-
-```python
-from ovos_backend_client.api import GeolocationApi
-
-geo = GeolocationApi()
-data = geo.get_geolocation("Lisbon Portugal")
-```
