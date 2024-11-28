@@ -2,7 +2,7 @@ site_name: OVOS Technical Manual
 site_url: https://openvoiceos.github.io/ovos-technical-manual
 nav:
     - Home:
-        - Introduction: 000-index.md
+        - Introduction: index.md
         - Release Channels: 001-release_channels.md
         - License: 002-license.md
         - Timeline: 003-timeline.md
