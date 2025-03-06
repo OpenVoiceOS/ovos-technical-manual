@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://openvoiceos.github.io/ovos-technical-manual/202-persona_server/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Persona Server - OVOS Technical Manual</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Persona Server";
+        var mkdocs_page_input_path = "202-persona_server.md";
+        var mkdocs_page_url = "/ovos-technical-manual/202-persona_server/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OVOS Technical Manual
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Home</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../001-release_channels/">Release Channels</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../002-license/">License</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../003-timeline/">Timeline</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../004-community/">Community</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Architecture</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../100-bus_service/">Bus</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../101-speech_service/">Listener</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../102-core/">Core</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../103-audio_service/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../104-gui_service/">GUI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../110-config/">Configuration</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Self Hosting</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../200-stt_server/">STT Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../201-tts_server/">TTS Server</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Persona Server</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#companion-plugin">Companion plugin</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#personas">Personas</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#llms">LLMs</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#running">Running</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#openai-api-compatible">OpenAI API compatible</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#compatible-projects">Compatible Projects</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../203-translate_server/">Translate Server</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Plugins</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../300-plugin-manager/">Plugin Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../310-mic_plugins/">Microphone</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../311-vad_plugins/">Voice Activity Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../312-wake_word_plugins/">Wake Word</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../313-stt_plugins/">Speech To Text</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../320-tts_plugins/">Text To Speech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../321-g2p_plugins/">Grapheme to Phoneme</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../330-transformer_plugins/">Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../340-PHAL/">Platform/Hardware Abstraction Layer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../350-translation_plugins/">Language Detection/Translation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../360-solver_plugins/">Question Solvers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../370-ocp_plugins/">OCP Stream Extractors</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../371-media_plugins/">Media Playback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Skills</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../400-skill-design-guidelines/">Design Guidelines</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../401-skill_structure/">Anatomy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../402-statements/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../403-intents/">Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../405-customization/">Customization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../406-messagebus/">Bus Interaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../407-skill_filesystem/">Filesystem</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../408-skill_settings/">Skill Settings</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../409-skill_api/">Skill API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../410-skill_runtime_requirements/">Runtime Requirements</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../411-skill_json/">Skill Json</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../420-ssml/">SSML</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../430-skill_dev_faq/">F.A.Q.</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Continuous Conversation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../500-prompts/">Prompts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../501-context/">Follow up Questions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../502-converse/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../503-layers/">Intent Layers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../504-session/">Session Aware Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Fallback</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../600-fallbacks/">Fallback Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Common Query</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../610-common_query/">Common Query Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Auto Translation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../620-universal_skills/">Universal Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Media</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../630-OCP_skills/">Media Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../631-OCP_pipeline/">OCP Pipeline</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">GUI</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../700-homescreen/">Homescreen</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../701-gui_protocol/">Protocol</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../702-ovos-shell/">Shell</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../710-qt5-gui/">QT5 mycroft-gui</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Voice Apps</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../590-voice_apps/">Standalone Apps</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../711-qt_voice_apps/">QT Voice Apps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">MessageBus APIs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../720-skill_gui/">GUI Interface</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../800-mk1_api/">Enclosure Api</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Technologies</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../910-quebra_frases/">Quebra Frases</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../900-bus_client/">Messagebus Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../920-padacioso/">Padacioso</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../801-mk1_utils/">Mark1 Utils</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../950-jurebes/">Jurebes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../980-lingua_podre/">Lingua Podre</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../970-wallpaper_changer/">Wallpaper Changer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../999-ovos_bigscreen/">Plasma Bigscreen</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OVOS Technical Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Self Hosting</li>
+      <li class="breadcrumb-item active">Persona Server</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="persona-server">Persona Server</h1>
+<p>Personas give personality to OVOS, they can be anything from classic chatbots to state of the art language models!</p>
+<p>Persona server follows the standard OpenAI API, also allowing you to connect personas to existing ChatGPT applications</p>
+<h2 id="companion-plugin">Companion plugin</h2>
+<p>Use with <a href="https://github.com/OpenVoiceOS/ovos-openai-plugin">ovos-openai-plugin</a></p>
+<h2 id="personas">Personas</h2>
+<p>A Persona is defined by a combination
+of <a href="https://openvoiceos.github.io/ovos-technical-manual/solvers/">question solver plugins</a>, the solvers are tried
+sequentially until one succeeds in answering the question similarly to fallback skills</p>
+<p>some repos and skills also provide solvers, such as ovos-classifiers (wordnet), skill-ddg, skill-wikipedia and
+skill-wolfie</p>
+<pre><code>{
+  &quot;name&quot;: &quot;OldSchoolBot&quot;,
+  &quot;solvers&quot;: [
+    &quot;ovos-solver-wikipedia-plugin&quot;,
+    &quot;ovos-solver-ddg-plugin&quot;,
+    &quot;ovos-solver-plugin-wolfram-alpha&quot;,
+    &quot;ovos-solver-wordnet-plugin&quot;,
+    &quot;ovos-solver-rivescript-plugin&quot;,
+    &quot;ovos-solver-failure-plugin&quot;
+  ],
+  &quot;ovos-solver-plugin-wolfram-alpha&quot;: {&quot;appid&quot;: &quot;Y7353-9HQAAL8KKA&quot;}
+}
+</code></pre>
+<p>this persona would search ddg api / wikipedia for "what is"/"tell me about" questions,
+falling back to wordnet when offline for dictionary look up,
+and finally rivescript for general chitchat,
+we also add the failure solver to be sure the persona always says something</p>
+<p>wolfram alpha illustrates how to pass solver configs, it has a requirement for an API key</p>
+<p>search/knowledge base solvers can be used together with chatbot solvers to ensure factual answers and act as a tool/internet
+access layer, for classic chatbots the example above serves as a rudimentary implementation of tool use</p>
+<p>Chatbots are a nice toy and for chit-chat work well as a fallback if internet is not available, but you most likely want to connect a LLM to persona, be it remote or local</p>
+<h2 id="llms">LLMs</h2>
+<p>A basic example connecting to ChatGPT or compatible LLM (or a remote persona!)</p>
+<pre><code>&quot;name&quot;: &quot;ChatGPT&quot;,
+&quot;solvers&quot;: [
+    &quot;ovos-solver-openai-persona-plugin&quot;
+],
+&quot;ovos-solver-openai-persona-plugin&quot;: {
+    &quot;api_url&quot;: &quot;&lt;OpenAI_or_compatible_server_url&gt;&quot;,
+    &quot;key&quot;: &quot;&lt;your_OpenAI_key&gt;&quot;,
+    &quot;persona&quot;: &quot;helpful, creative, clever, and very friendly.&quot;
+}
+</code></pre>
+<blockquote>
+<p><strong>NOTE</strong>: In the config above "persona" sets the system prompt, this is specific to the solver plugin</p>
+</blockquote>
+<p>Wrapping your LLM in a solver plugin provides you <a href="https://openvoiceos.github.io/ovos-technical-manual/lang_plugins">Bidirectional translation</a>, even if your LLM is language specific you are able to use it in any language</p>
+<p>RAG and tool use for LLMs is better implemented as part of a dedicated solver plugin, LLM solvers may also use other solvers internally as agents/tools for LLMs, </p>
+<h2 id="running">Running</h2>
+<p><code>$ ovos-persona-server --persona rivescript_bot.json</code></p>
+<h2 id="openai-api-compatible">OpenAI API compatible</h2>
+<p>OpenAI compatible API, can be used with hundreds of projects that support it</p>
+<pre><code class="language-python">import openai
+
+openai.api_key = &quot;&quot;
+openai.api_base = &quot;http://localhost:8337&quot;
+
+# NOTE - most solvers don't support a chat history,
+#  only last message in messages list is considered
+chat_completion = openai.ChatCompletion.create(
+    model=&quot;&quot;,  # individual personas might support this, passed under context
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;tell me a joke&quot;}],
+    stream=False,
+)
+
+if isinstance(chat_completion, dict):
+    # not stream
+    print(chat_completion.choices[0].message.content)
+else:
+    # stream
+    for token in chat_completion:
+        content = token[&quot;choices&quot;][0][&quot;delta&quot;].get(&quot;content&quot;)
+        if content != None:
+            print(content, end=&quot;&quot;, flush=True)
+
+</code></pre>
+<h2 id="compatible-projects">Compatible Projects</h2>
+<p>The OpenAI API ended up becoming a sort of standard, <a href="https://github.com/OpenVoiceOS/ovos-openai-plugin">ovos-openai-plugin</a> can not only connect to ChatGPT, but is also compatible with public servers for several projects</p>
+<ul>
+<li><a href="https://github.com/oobabooga/text-generation-webui/wiki/12-%E2%80%90-OpenAI-API">oobabooga/text-generation-webui</a></li>
+<li><a href="https://github.com/ggerganov/llama.cpp/blob/master/examples/server/README.md">llama.cpp</a></li>
+<li><a href="https://github.com/mudler/LocalAI">LocalAI</a></li>
+<li><a href="https://github.com/xorbitsai/inference">Xinference</a></li>
+<li><a href="https://github.com/ray-project/ray-llm">RayLLM</a></li>
+<li><a href="https://github.com/bentoml/OpenLLM">OpenLLM</a></li>
+<li><a href="https://github.com/lm-sys/FastChat">FastChat</a></li>
+<li><a href="https://github.com/elgatopanzon/gatogpt">gatogpt</a></li>
+<li><a href="https://github.com/BerriAI/litellm">litellm</a></li>
+<li><a href="https://github.com/janhq/nitro">nitro</a></li>
+<li><a href="https://github.com/tensorchord/modelz-llm">modelz-llm</a></li>
+<li><a href="https://github.com/c0sogi/llama-api">llama-api</a></li>
+<li><a href="https://github.com/theroyallab/tabbyAPI">tabbyAPI</a></li>
+<li><a href="https://github.com/hyperonym/basaran">basaran</a></li>
+<li>... and many more</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../201-tts_server/" class="btn btn-neutral float-left" title="TTS Server"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../203-translate_server/" class="btn btn-neutral float-right" title="Translate Server">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../201-tts_server/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../203-translate_server/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
