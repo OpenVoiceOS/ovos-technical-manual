@@ -31,7 +31,6 @@ nav:
         - Platform/Hardware Abstraction Layer: 340-PHAL.md
         - Language Detection/Translation: 350-translation_plugins.md
         - Question Solvers: 360-solver_plugins.md
-        - NLP Plugins: 361-nlp_plugins.md
         - OCP Stream Extractors: 370-ocp_plugins.md
         - Media Playback: 371-media_plugins.md
     - Skills:
