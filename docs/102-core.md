@@ -98,8 +98,7 @@ Similar to utterance transformers, these plugins only transform the `message.con
 
 ## Pipelines
 
-**NEW** in `ovos-core` version **0.0.8**, The concept of configurable pipelines has been introduced in `ovos-core` **0.0.8** and will be fully implemented as
-plugins after version **0.1.0**
+**NEW** in `ovos-core` version **0.0.8**
 
 after the `utterance` has been transformed it is sent to various OVOS components by priority order until one can handle
 the query
@@ -114,42 +113,53 @@ Pipelines include intent parsers, converse framework, common query framework and
     // NOTE: if padatious is not installed, it will be replaced with padacioso (much slower)
     // in the future these will become plugins, and new pipeline stages can be added by end users
     "pipeline": [
+        "ocp_high",
         "stop_high",
         "converse",
         "padatious_high",
         "adapt_high",
         "fallback_high",
         "stop_medium",
-        "padatious_medium",
         "adapt_medium",
+        "ovos-persona-pipeline-plugin-high",
         "adapt_low",
         "common_qa",
         "fallback_medium",
+        "ovos-persona-pipeline-plugin-low",
         "fallback_low"
     ]
   },
 ```
 
+### Pipeline Overview
+
+**NEW** The concept of configurable pipelines has been introduced in `ovos-core` **0.0.8** and will be fully implemented as plugins after version **1.0.0**
+
 Most pipeline components will provide a high/medium/low variety with different confidence levels, but this is not
 required
 
-| pipeline         | description                                                 | notes                                                                                  |
-|------------------|-------------------------------------------------------------|----------------------------------------------------------------------------------------|
-| stop_high        | stop command exact matches                                  | replaces [OpenVoiceOS/skill-ovos-stop](https://github.com/OpenVoiceOS/skill-ovos-stop) |
-| converse         | continuous conversation interception for skills             |                                                                                        |
-| padacioso_high   | high confidence intent matches from padacioso               | slow !!! <br> disabled by default                                                      |
-| padatious_high   | high confidence intent matches from padatious               |                                                                                        |
-| adapt_high       | high confidence intent matches from adapt                   |                                                                                        |
-| fallback_high    | high priority fallback skill matches                        |                                                                                        |
-| stop_medium      | medium confidence stop matches                              | replaces [OpenVoiceOS/skill-ovos-stop](https://github.com/OpenVoiceOS/skill-ovos-stop) |
-| padacioso_medium | medium confidence intent matches from padacioso             | slow !!! <br> disabled by default                                                      |
-| padatious_medium | medium confidence intent matches from padatious             |                                                                                        |
-| adapt_medium     | medium confidence intent matches from adapt                 |                                                                                        |
-| adapt_low        | low confidence intent matches from adapt                    |                                                                                        |
-| common_query     | send utterance to common_query skills and select best match |                                                                                        |
-| fallback_medium  | medium priority fallback skill matches                      |                                                                                        |
-| stop_low         | low confidence stop matches                                 | disabled by default                                                                    |
-| padacioso_low    | low confidence intent matches from padacioso                | slow !!! <br> disabled by default                                                      |
-| padatious_low    | low confidence intent matches from padatious                | almost always wrong <br> disabled by default                                           |
-| fallback_low     | low priority fallback skill matches                         |                                                                                        |
+| pipeline                          | description                                                 | notes                                                                                  |
+|-----------------------------------|-------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| stop_high                         | stop command exact matches                                  | replaces [OpenVoiceOS/skill-ovos-stop](https://github.com/OpenVoiceOS/skill-ovos-stop) |
+| converse                          | continuous conversation interception for skills             |                                                                                        |
+| padacioso_high                    | high confidence intent matches from padacioso               | slow !!! <br> disabled by default                                                      |
+| padatious_high                    | high confidence intent matches from padatious               |                                                                                        |
+| adapt_high                        | high confidence intent matches from adapt                   |                                                                                        |
+| fallback_high                     | high priority fallback skill matches                        |                                                                                        |
+| ocp_high                          | high confidence media related queries                       |                                                                                        |
+| stop_medium                       | medium confidence stop matches                              | replaces [OpenVoiceOS/skill-ovos-stop](https://github.com/OpenVoiceOS/skill-ovos-stop) |
+| padacioso_medium                  | medium confidence intent matches from padacioso             | slow !!! <br> disabled by default                                                      |
+| padatious_medium                  | medium confidence intent matches from padatious             |                                                                                        |
+| adapt_medium                      | medium confidence intent matches from adapt                 |                                                                                        |
+| ovos-persona-pipeline-plugin-high | active persona conversation (eg. a LLM)                     |                                                                                        |
+| ocp_medium                        | medium confidence media related queries                     |                                                                                        |
+| adapt_low                         | low confidence intent matches from adapt                    |                                                                                        |
+| common_query                      | send utterance to common_query skills and select best match |                                                                                        |
+| ocp_low                           | low confidence media related queries                        |                                                                                        |
+| fallback_medium                   | medium priority fallback skill matches                      |                                                                                        |
+| stop_low                          | low confidence stop matches                                 | disabled by default                                                                    |
+| ovos-persona-pipeline-plugin-low  | persona catch all fallback (eg. a LLM)                      |                                                                                        |
+| padacioso_low                     | low confidence intent matches from padacioso                | slow !!! <br> disabled by default                                                      |
+| padatious_low                     | low confidence intent matches from padatious                | almost always wrong <br> disabled by default                                           |
+| fallback_low                      | low priority fallback skill matches                         |                                                                                        |
 

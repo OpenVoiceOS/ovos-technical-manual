@@ -76,7 +76,6 @@ nav:
         - Enclosure Api: 800-mk1_api.md
     - Technologies:
         - Quebra Frases: 910-quebra_frases.md
-        - Eggscript: 990-eggscript.md
         - Messagebus Client: 900-bus_client.md
         - Padacioso: 920-padacioso.md
         - Mark1 Utils: 801-mk1_utils.md
