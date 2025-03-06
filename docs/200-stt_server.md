@@ -2,18 +2,9 @@
 
 Turn any OVOS STT plugin into a microservice!
 
-
 ## Companion plugin
 
 Use with OpenVoiceOS [companion plugin](https://github.com/OpenVoiceOS/ovos-stt-server-plugin)
-
-## Public Servers
-
-| Member | Service | Plugin | URL |
-|---|:---:|:---:|:---:|
-| <div><a href="https://github.com/builderjer"><img src="https://avatars.githubusercontent.com/u/34875857?v=4" alt="builderjer" width="25" height="25"></a></div> | STT | [ovos-stt-plugin-server](https://github.com/OpenVoiceOS/ovos-stt-plugin-server) | <div>Faster Whisper - [https://fasterwhisper.ziggyai.online/stt](https://fasterwhisper.ziggyai.online/status)</div> |
-| <div><a href="https://github.com/goldyfruit"><img src="https://avatars.githubusercontent.com/u/614115?v=4" alt="goldyfruit" width="25" height="25"></a></div> | STT | [ovos-stt-plugin-server](https://github.com/OpenVoiceOS/ovos-stt-plugin-server) | <div>Faster Whisper - [https://stt.smartgic.io/fasterwhisper](https://stt.smartgic.io/fasterwhisper/status)</div><div>Chromium - [https://stt.smartgic.io/chromium](https://stt.smartgic.io/chromium/status)</div><div>Nemo - [https://stt.smartgic.io/nemo](https://stt.smartgic.io/nemo/status)</div>  |
-| <div><a href="https://github.com/NeonGeckoCom"><img src="https://avatars.githubusercontent.com/u/32377662?s=200&v=4" alt="Neon" width="25" height="25"></a></div>| STT | [ovos-stt-server-plugin](https://github.com/OpenVoiceOS/ovos-Stt-server-plugin) | <div>Nemo - [https://nemo.neonaialpha.com](https://nemo.neonaialpha.com/status)</div> |
 
 ## Install
 

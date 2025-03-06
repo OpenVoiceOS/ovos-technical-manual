@@ -1,25 +1,12 @@
 # Persona Server
 
-**EXPERIMENTAL** - **NEW** `ovos-core` version **0.0.8**
-
-The Persona initiative is a work in progress, it can be integrated
-via [persona-server](https://github.com/OpenVoiceOS/ovos-persona-server/)
-and [ChatGPT skill](https://github.com/OpenVoiceOS/skill-ovos-fallback-chatgpt/) as a developer preview
-
 Personas give personality to OVOS, they can be anything from classic chatbots to state of the art language models!
 
 Persona server follows the standard OpenAI API, also allowing you to connect personas to existing ChatGPT applications
 
-## Public Servers
-
-| Member                                                                                                                                                        |                                     Solvers / LLM model                                     | Native Language |                                URL                                |
-|---------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------:|:---------------:|:-----------------------------------------------------------------:|
-| <div><a href="https://github.com/goldyfruit"><img src="https://avatars.githubusercontent.com/u/614115?v=4" alt="goldyfruit" width="25" height="25"></a></div> | [mistral-7b-openorca.Q4_K_M.gguf](https://huggingface.co/TheBloke/Mistral-7B-OpenOrca-GGUF) |     english     | <div>[https://llama.smartgic.io/v1](https://llama.smartgic.io/v1)</div> |
-
-
 ## Companion plugin
 
-Use with [ovos-solver-plugin-openai-persona](https://github.com/OpenVoiceOS/ovos-solver-plugin-openai-persona)
+Use with [ovos-openai-plugin](https://github.com/OpenVoiceOS/ovos-openai-plugin)
 
 ## Personas
 
@@ -115,7 +102,7 @@ else:
 
 ## Compatible Projects
 
-The OpenAI API ended up becoming a sort of standard, [ovos-solver-plugin-openai-persona](https://github.com/OpenVoiceOS/ovos-solver-plugin-openai-persona) can not only connect to ChatGPT, but is also compatible with public servers for several projects
+The OpenAI API ended up becoming a sort of standard, [ovos-openai-plugin](https://github.com/OpenVoiceOS/ovos-openai-plugin) can not only connect to ChatGPT, but is also compatible with public servers for several projects
 
 - [oobabooga/text-generation-webui](https://github.com/oobabooga/text-generation-webui/wiki/12-%E2%80%90-OpenAI-API)
 - [llama.cpp](https://github.com/ggerganov/llama.cpp/blob/master/examples/server/README.md)
