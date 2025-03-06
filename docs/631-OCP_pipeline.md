@@ -234,18 +234,14 @@ Here's a simple table comparing the three playback handling options for OCPSkill
 | Deprecation Status      | Deprecated          | Scheduled for removal | N/A              |
 | Development Status      | Bug fixes only      | Bug fixes only        | Work in Progress |
 
-#### Legacy Audio Service
+#### Audio Service
 
 Integrating with
-the [legacy audio service](https://openvoiceos.github.io/ovos-technical-manual/audio_service/#legacy-audio-service)
+the [audio service](https://openvoiceos.github.io/ovos-technical-manual/audio_service/#legacy-audio-service)
 enables basic playback functionality. While limited it should work in more platform
-
-Here's how to configure it **without OCP**:
 
 ```
 {
-    "enable_old_audioservice": true,
-    "disable_ocp": true,
     "Audio": {
         "default-backend": "vlc",
         "backends": {
@@ -262,68 +258,6 @@ Here's how to configure it **without OCP**:
   },
 }
 ```
-
-> **NOTE**: `"default-backend"` **must** be set when `"disable_ocp"` is set to true
-
-#### Classic OCP
-
-Employing Classic OCP expands on the legacy audio service with additional functionality. It is tightly integrated with
-the legacy audio service
-
-OCP was developed for mycroft-core under the legacy audio system and will pose as a legacy plugin, translating the
-received bus events to the OCP API.
-
-> **TIP**: OCP is **always** the default audio plugin unless `"disable_ocp"` is set to true in the
-> configuration. `"default-backend"` has no effect here
-
-OCP internally uses the legacy API to delegate playback when GUI is not available (or if configured to do so).
-
-Here's how to configure it:
-
-```
-{
-    "enable_old_audioservice": true,
-    "disable_ocp": false,
-
-    "Audio": {
-        "backends": {
-          "OCP": {
-            "type": "ovos_common_play",
-            "disable_mpris": true,
-            "manage_external_players": false,
-            "active": true
-          },
-          "simple": {
-            "type": "ovos_audio_simple",
-            "active": true
-          },
-          "vlc": {
-            "type": "ovos_vlc",
-            "active": true
-          }
-        }
-    }
-  },
-}
-
-```
-
-#### ovos-media
-
-Utilizing [ovos-media](https://openvoiceos.github.io/ovos-technical-manual/OCP/) introduces a more modern approach to
-playback management. Here's how to configure it:
-
-```
-{
-    "enable_old_audioservice": false,
-    "disable_ocp": true
-}
-```
-
-You also need to manually launch the `ovos-media` service, it is not yet integrated into the installer, docker or
-pre-built images
-
-> **WARNING** This feature is a work in progress and not ready for end users
 
 ### Classifiers
 
