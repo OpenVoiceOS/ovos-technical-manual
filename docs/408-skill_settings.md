@@ -1,85 +1,123 @@
 # Skill Settings
 
-Skill settings provide the ability for users to configure a Skill using the command line or a web-based interface. 
 
-This is often used to:
+Skill settings in OVOS allow users to configure and personalize the behavior of Skills—either through the command line, configuration files, or a web-based interface. This enables advanced customization and support for external integrations, while remaining completely optional for basic usage.
 
-* Change default behaviors - such as the sound used for users alarms.
-* Authenticate with external services - such as Spotify
-* Enter longer data as text rather than by voice - such as the IP address of the users Home Assistant server.
+## Common Use Cases
 
-Skill settings are completely optional.
+- Changing default behaviors (e.g. alarm sounds, display preferences)
+- Authenticating with third-party services (e.g. Spotify)
+- Entering longer or complex data (e.g. IP addresses, API keys)
 
-## Using settings in your Skill
+---
 
-Settings can be managed via command line, shipped by images or managed via a backend if ovos-core us configured to use one
+## Using Skill Settings in Your Skill
 
-When settings are fetched from the backend server, they are saved into a `settings.json` file. 
-This file is automatically created when a Skill is loaded even if the Skill does not have any settings. 
-Your Skill then accesses the settings from this file. 
-Nowadays, the file is located in the Skill's XDG\_CONFIG\_DIR (usually `~/config/mycroft/skills/<skillname>`), however if a `settings.json` file already exists in the Skill's root directory (the deprecated location) that location is used for compatibility.
+Settings are managed through a dictionary-like object available on the `OVOSSkill` base class. They are persisted to disk and can be updated locally by the Skill or remotely by the user via a frontend.
 
-### Reading settings
+Settings are stored in your Skill's configuration directory, usually:
 
-Skill settings are available on the OVOSSkill class and inherit from a Python Dict. This means that you can use it just like you would any other Python dictionary.
-
-To access the `show_time` variable from our example above we would use the `Dict.get` method:
-
-```python
-self.settings.get('show_time')
+```
+~/.config/mycroft/skills/<your_skill_id>/settings.json
 ```
 
-If the setting we are trying to access is not available, the `get` method will return `None`. Instead of assigning this to a variable and then testing for `None`, we can provide a default value as the second argument to the `get` method.
+### Accessing Settings
+
+You can read settings like a standard Python dictionary, but it's recommended to use `.get()` to avoid `KeyError` exceptions:
 
 ```python
-self.settings.get('show_time', False)
+# Safely read the 'show_time' setting with a default fallback
+show_time = self.settings.get("show_time", False)
 ```
 
-In this example, if the settings have not been received, or the `show_time` setting has not been assigned, it will return the default value `False`.
+> ⚠️ Avoid using `self.settings['show_time']` directly, as it will raise a `KeyError` if the setting is not defined.
 
+Also, do not access `self.settings` in your `__init__()` method—wait until the `initialize()` method to ensure the settings are fully loaded.
 
-**A few warnings**
+---
 
-We recommend using the `Dict.get` method above rather than accessing the setting directly with:
+## Handling Settings Updates
 
-```python
-self.settings['show_time']
-```
-
-Directly referencing the value may throw a KeyError if the setting has not yet been fetched from the server.
-
-It is also important to note that the `settings` dictionary will not be available in your Skills `__init__` method as this is setting up your Skills Class. 
-You should instead use an `initialize` method which is called after the Skill is fully constructed and registered with the system.
-
-
-### Handling settings changes
-
-OVOS will check for updates to a users settings regularly, both locally and on the configured backend. 
-
-To perform some action when settings are updated, you can register a callback function in your Skill.
+OVOS automatically checks for setting changes, either locally or from a remote backend. You can register a callback to react when settings change:
 
 ```python
 def initialize(self):
-  self.settings_change_callback = self.on_settings_changed
-  self.on_settings_changed()
+    self.settings_change_callback = self.on_settings_changed
+    self.on_settings_changed()  # Also run immediately on start
 
 def on_settings_changed(self):
-  show_time = self.settings.get('show_time', False)
-  self.trigger_time_display(show_time)
+    show_time = self.settings.get('show_time', False)
+    self.trigger_time_display(show_time)
 ```
 
-In the example above, we have registered the `on_settings_changed` method to be our callback function. 
-We have then immediately called the method to perform the relevant actions when the Skill is being initialized even though the Skills settings have not changed.
+This ensures your Skill responds to user configuration changes dynamically.
 
-In the `on_settings_changed` method we have assigned the value of the `show_time` setting to a local variable. Then we have passed it as an argument to another method in our Skill that will trigger the display of the time based on its value.
+---
 
-### Writing to settings
+## Writing to Settings
 
-Your Skill can reassign a setting locally. To do this we assign a value like you would with any other dictionary key.
+You can update and persist values to the settings file simply by assigning them:
 
 ```python
 self.settings['show_time'] = True
 ```
 
-The new value for the `show_time` setting will persist until a new setting is assigned locally by the Skill, or remotely if the user configured a backend
+Changes will persist across restarts unless overridden remotely via a backend or web interface.
 
+---
+
+## Web-Based Skill Settings (Optional UI)
+
+A **community-built** web interface, [OVOS Skill Config Tool](https://github.com/OscillateLabsLLC/ovos-skill-config-tool), provides a modern, user-friendly way to configure OVOS skills.
+
+### Features
+
+- Clean UI for managing skill-specific settings
+- Grouping and organization of Skills
+- Dark mode support
+- Built-in Basic Authentication for security
+
+![Skill Config Interface](https://github.com/OscillateLabsLLC/ovos-skill-config-tool/raw/main/skills-interface.webp)
+
+### Installation
+
+Install via pip:
+
+```bash
+pip install ovos-skill-config-tool
+```
+
+Run the tool:
+
+```bash
+ovos-skill-config-tool
+```
+
+Access it in your browser at [http://0.0.0.0:8000](http://0.0.0.0:8000)
+
+#### Default Login
+
+- **Username**: `ovos`
+- **Password**: `ovos`
+
+To customize credentials:
+
+```bash
+export OVOS_CONFIG_USERNAME=myuser
+export OVOS_CONFIG_PASSWORD=mypassword
+ovos-skill-config-tool
+```
+
+---
+
+## Tips
+
+- Always use `.get(key, default)` for safe reads.
+- Use `initialize()` instead of `__init__()` for anything that depends on settings.
+- Use settings callbacks to keep your Skill reactive to user changes.
+
+---
+
+## See Also
+
+- [OVOS Skill Config Tool on GitHub](https://github.com/OscillateLabsLLC/ovos-skill-config-tool)

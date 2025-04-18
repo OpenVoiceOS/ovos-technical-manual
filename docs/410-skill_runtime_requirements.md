@@ -1,29 +1,16 @@
-# Runtime Requirements
+# Runtime Requirements in OVOS
 
+OVOS (Open Voice OS) introduces advanced runtime management to ensure skills are only loaded and active when the system is ready. This improves performance, avoids premature skill activation, and enables greater flexibility across different system setups (offline, headless, GUI-enabled, etc.).
 
+This guide covers how to control when OVOS declares readiness, how dynamic skill loading works, and how developers can use `RuntimeRequirements` to specify resource dependencies for their skills.
 
-## ready_settings
+---
 
-The `ready_settings` configuration is part of the `SkillManager` and determines when the `'mycroft.ready'` message is
-emitted, indicating that OVOS is ready to operate.
+## Usage Guide
 
-- **'skills':**
-    - Waits for the all offline skills to be loaded
+### Step 1: Customize `ready_settings` (in your configuration)
 
-- **'network_skills':**
-    - Waits for the `'mycroft.network.connected'` message  
-
-- **'internet_skills':**
-    - Waits for the `'mycroft.internet.connected'` message  
-
-- **'setup':**
-    - Waits for an external setup skill to handle actions such as pairing and configuration. 
-
-- **'audio':**
-    - Waits for the audio stack to be initialized 
-
-- **'speech':**
-    - Waits for the speech engine (STT) to be initialized  
+You can specify what the system must wait for before emitting the `mycroft.ready` message:
 
 ```json
 {
@@ -37,19 +24,60 @@ emitted, indicating that OVOS is ready to operate.
 }
 ```
 
-> **WARNING** The default behavior is to wait only for offline skills at the start. This is a departure from mycroft-core, which did not have dynamic skills. It may impact skills listening for the `mycroft.ready` event. 
-
 In this example, the `ready_settings` are configured to wait for network and internet connectivity before emitting
-the `'mycroft.ready'` message. Each setup can costumize these settings based on their needs, a offline install won't
+the `'mycroft.ready'` message. Each setup can customize these settings based on their needs, a offline install won't
 want internet skills, a server wont want a audio stack etc.
+
+### Step 2: Define `RuntimeRequirements` in your skill
+
+Use the `runtime_requirements` class property to control when and how your skill should load based on system resources like internet, network, or GUI.
+
+Example:
+```python
+from ovos_utils import classproperty
+from ovos_workshop.skills import OVOSSkill
+from ovos_utils.process_utils import RuntimeRequirements
+
+class MySkill(OVOSSkill):
+
+    @classproperty
+    def runtime_requirements(self):
+        return RuntimeRequirements(
+            requires_internet=True
+        )
+```
+
+---
+
+## Technical Explanation
+
+### `ready_settings`
+
+The `ready_settings` config controls when OVOS emits `mycroft.ready`, which signals that the system is ready for use. Each entry in this list waits for a different component:
+
+- **"skills"** – Waits for offline skills to load.
+- **"network_skills"** – Waits for the system to detect a network connection (`mycroft.network.connected`).
+- **"internet_skills"** – Waits for an internet connection (`mycroft.internet.connected`).
+- **"setup"** – Waits for an external setup process (e.g., pairing or configuration).
+- **"audio"** – Waits for the audio playback and capture systems to be initialized.
+- **"speech"** – Waits for the STT (speech-to-text) engine to be ready.
+- **{skill_id}** - Waits for a specific skill to be available
+
+> ⚠️ **Note**: By default, OVOS only waits for offline skills. Unlike Mycroft-core, OVOS supports dynamic loading, so timing can impact skills that depend on the `mycroft.ready` message.
+
+---
 
 ## Dynamic Loading and Unloading
 
-**NEW** in `ovos-core` version **0.0.8**
+Introduced in `ovos-core 0.0.8`, dynamic skill management improves system performance and reliability by:
 
-**Optimizing Resource Usage**
+- **Only loading skills when their requirements are met.**
+- **Unloading skills when they become unusable due to lost resources.**
 
-OVOS introduces dynamic loading and unloading of skills, streamlining resource management. Skill developers no longer need to perform connectivity checks during the skill loading process.
+### Benefits:
+- Reduces memory and CPU usage.
+- Avoids unnecessary skill activations.
+- Simplifies skill logic (e.g., no need to check for connectivity manually).
 
 Skills are loaded only when their specific requirements are met. This optimization prevents unnecessary loading, conserving system resources and ensuring a more efficient skill environment.
 
@@ -59,26 +87,34 @@ Dynamic unloading of skills based on specific conditions significantly reduces t
 
 This approach aligns with resource-conscious design, providing a more responsive and reliable voice assistant environment. Developers can focus on skill functionality, knowing that OVOS efficiently manages skill loading and unloading based on runtime requirements.
 
-## The RuntimeRequirements @classproperty
+---
 
-**NEW** in `ovos-core` version **0.0.8**
+## RuntimeRequirements (`@classproperty`)
 
-> **WARNING** this functionality deprecates `"priority_skills"` config option
+Also introduced in `ovos-core 0.0.8`, the `RuntimeRequirements` class property allows skill developers to declare when a skill should be loaded or unloaded based on runtime conditions.
 
-The `RuntimeRequirements` property is a class property that skill developers can utilize to define the conditions and
-resource requirements of their skill during initialization and runtime. This property is a part of the `OVOSSkill` class
-and is used to guide the loading and unloading of skills based on specified criteria.
+> ⚠️ Replaces the deprecated `"priority_skills"` config.
 
-To use `RuntimeRequirements`, skill developers need to override the property within their skill class.
+### Key fields:
 
-It's important to note that `RuntimeRequirements` is optional. If not defined, OVOS will assume internet is required but GUI is optional. This default behavior reflects the original behavior of `mycroft-core` and **might change in the future**.
+| Field                 | Description |
+|----------------------|-------------|
+| `internet_before_load` | Wait for internet before loading |
+| `requires_internet`     | Unload if internet is lost (unless fallback enabled) |
+| `no_internet_fallback` | If true, do **not** unload when internet is lost |
+| `network_before_load`  | Wait for network before loading |
+| `requires_network`     | Unload if network is lost (unless fallback enabled) |
+| `gui_before_load`      | Wait for GUI before loading |
+| `requires_gui`         | Unload if GUI is lost (unless fallback enabled) |
+| `no_gui_fallback`      | If true, do **not** unload when GUI is lost |
 
-> **NOTE:** The `@classproperty` decorator allows `SkillManager` to read this without instantiating the skill.
+> 🧠 Uses `@classproperty` so the system can evaluate the requirements without loading the skill.
 
-These examples showcase how `RuntimeRequirements` can be used to tailor the loading and runtime conditions of a skill
-based on specific requirements and dependencies.
+---
 
-### Fully Offline Skill
+## Examples
+
+### 1. Fully Offline Skill
 
 In this example, a fully offline skill is defined. The skill does not require internet or network connectivity during
 loading or runtime. If the network or internet is unavailable, the skill can still operate.
@@ -88,6 +124,7 @@ Defining this will ensure your skill loads as soon as possible; otherwise, the `
 ```python
 from ovos_utils import classproperty
 from ovos_workshop.skills import OVOSSkill
+from ovos_utils.process_utils import RuntimeRequirements
 
 
 class MyOfflineSkill(OVOSSkill):
@@ -101,8 +138,11 @@ class MyOfflineSkill(OVOSSkill):
                                    no_internet_fallback=True,
                                    no_network_fallback=True)
 ```
+Loads immediately, runs without internet or network.
 
-### Internet-Dependent Skill
+---
+
+### 2. Internet-Dependent Skill (with fallback)
 
 In this example, an online search skill with a local cache is defined. The skill requires internet connectivity during
 both loading and runtime. If the internet is not available, the skill won't load. Once loaded, the skill continues to
@@ -114,6 +154,7 @@ be unloaded when the internet goes down.
 ```python
 from ovos_utils import classproperty
 from ovos_workshop.skills import OVOSSkill
+from ovos_utils.process_utils import RuntimeRequirements
 
 
 class MyInternetSkill(OVOSSkill):
@@ -130,8 +171,11 @@ class MyInternetSkill(OVOSSkill):
     def initialize(self):
         ...  # do something that requires internet connectivity
 ```
+Loads only when internet is available. Stays loaded even if internet is lost, using a cached fallback.
 
-### IOT Skill Controlling Devices via LAN
+---
+
+### 3. LAN-Controlled IOT Skill
 
 Consider a skill that should only load once we have a network connection.
 By specifying that requirement, we can ensure that the skill is only loaded once the requirements are met, and it is
@@ -145,6 +189,7 @@ Once loaded, the skill continues to require network connectivity and will unload
 ```python
 from ovos_utils import classproperty
 from ovos_workshop.skills import OVOSSkill
+from ovos_utils.process_utils import RuntimeRequirements
 
 
 class MyIOTSkill(OVOSSkill):
@@ -160,8 +205,11 @@ class MyIOTSkill(OVOSSkill):
     def initialize(self):
         ...  # do something that needs LAN connectivity
 ```
+Loads when the local network is connected. Unloads if the network is lost.
 
-### GUI and Internet-Dependent Skill with Fallback
+---
+
+### 4. GUI + Internet Skill (Unloads without GUI)
 
 Consider a skill with both graphical user interface (GUI) and internet dependencies is defined.
 
@@ -177,12 +225,13 @@ If we do not have internet but have a GUI, the skill will still operate, using a
 ```python
 from ovos_utils import classproperty
 from ovos_workshop.skills import OVOSSkill
+from ovos_utils.process_utils import RuntimeRequirements
 
 
 class MyGUIAndInternetSkill(OVOSSkill):
 
     @classproperty
-    def runtime_requirements(self) -> RuntimeRequirements:
+    def runtime_requirements(self):
         return RuntimeRequirements(
             gui_before_load=True,  # only load if GUI is available
             requires_gui=True,  # continue requiring GUI once loaded
@@ -195,3 +244,12 @@ class MyGUIAndInternetSkill(OVOSSkill):
     def initialize(self):
         ...  # do something that requires both GUI and internet connectivity
 ```
+Requires GUI and internet to load. Will stay loaded if internet is lost (e.g., to show a cached picture), but unloads if GUI becomes unavailable.
+
+---
+
+## Tips and Caveats
+
+- If `runtime_requirements` is not defined, OVOS assumes **internet is required** but **GUI is optional**.
+- You can combine different requirements to handle a wide range of usage patterns (e.g., headless servers, embedded devices, smart displays).
+- Consider defining graceful fallbacks to avoid unnecessary unloading.
