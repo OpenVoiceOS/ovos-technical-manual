@@ -1,42 +1,41 @@
-# OPM
+# OVOS Plugin Manager (OPM)
 
-![](https://raw.githubusercontent.com/OpenVoiceOS/ovos_assets/72edbcca11ac25b09d164afb42bf04cee23b801d/Logo/Raw/opm-logo.svg)
+![image](https://github.com/OpenVoiceOS/ovos-plugin-manager/assets/33701864/8c939267-42fc-4377-bcdb-f7df65e73252)
 
-OPM is the [OVOS Plugin Manager](https://github.com/OpenVoiceOS/OVOS-plugin-manager), this base package provides
-arbitrary plugins to the ovos ecosystem
+## Summary
 
-OPM plugins import their base classes from OPM making them portable and independent of core, plugins can be used in
-your standalone projects
+The OVOS Plugin Manager (OPM) is a base package designed to provide arbitrary plugins to the OVOS ecosystem. It standardizes the interface for plugins, allowing them to be easily portable and configurable, whether integrated into OVOS projects or used in standalone applications.
 
-By using OPM you can ensure a standard interface to plugins and easily make them configurable in your project, plugin
-code and example configurations are mapped to a string via python entrypoints in setup.py
+---
 
-## Where to install plugins
+## Usage Guide
 
-Each kind of plugin should go into it's respective ovos service, most of the time ovos is sharing the base environment but in some setups such as ovos-docker you should keep in mind the correct locations to install each plugin
+To install a plugin using OPM, you can typically follow this process:
 
-![image](https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/861cadfb-8be7-4c7f-b701-86fe49ac5a63)
+- **Install the plugin using pip:**
+```bash
+pip install ovos-plugin-name
+```
+- **Edit your configuration file (e.g., `mycroft.conf`) to enable and configure the plugin.**
+- **Restart your OVOS service to apply the changes.**
 
-Each type of plugin has it's own dedicated documentation page, most of the time you only need to `pip install ovos-plugin-name` and edit `mycroft.conf` to configure and enable the plugin
+> 💡 In some setups like `ovos-docker`, make sure you install plugins in the correct environment.
 
-### HiveMind
+---
 
-HiveMind setups allow you to decide which plugins run server side or satellite side
+## Technical Explanation
 
-In this example the hivemind server runs only core + skills, the satellites handle their own STT/TTS, this corresponds to the `server profile` in [ovos-installer](https://github.com/OpenVoiceOS/ovos-installer)
+OPM allows developers to create plugins that are decoupled from OVOS core functionality. By using OPM's standard interface, plugins can be easily integrated into a variety of OVOS services or other projects.
 
-![image](https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/55694b82-69c9-4288-9a89-1d9716eb3c57)
+Each plugin can be classified according to its functionality, with its own entry point defined in `setup.py`. This approach ensures that plugins are portable and independent, allowing them to be reused in other projects.
 
-In this example the hivemind server runs a full ovos-core, it handles STT/TTS for the satellites, this corresponds to the `listener profile` in [ovos-installer](https://github.com/OpenVoiceOS/ovos-installer)
+---
 
-![image](https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/1455a488-af0f-44b4-a5e6-0418a7cd1f96)
+## Plugin Types
 
-## Plugin Packaging
-
-Plugins need to define one entrypoint with their plugin type and plugin class
+OPM recognizes several plugin types, each serving a specific purpose within the OVOS ecosystem. These types help categorize plugins for easier integration and configuration:
 
 ```python
-# OPM recognized plugin types
 class PluginTypes(str, Enum):
     PHAL = "ovos.plugin.phal"
     ADMIN = "ovos.plugin.phal.admin"
@@ -59,47 +58,71 @@ class PluginTypes(str, Enum):
     TOKENIZATION = "intentbox.tokenization"
     POSTAG = "intentbox.postag"
 ```
-plugins can also optionally provide metadata about language support and sample configs via the `{plugin_type}.config` entrypoint
 
-A typical `setup.py` for a plugin looks like this
+Each plugin type has its own category, with the most common being `skill`, `stt` (speech-to-text), `tts` (text-to-speech), and `wake_word`.
+
+---
+
+## Plugin Packaging
+
+When creating a plugin, you need to define an entry point for the plugin type and class in your `setup.py`. Here’s a typical `setup.py` structure for packaging a plugin:
+
 ```python
 from setuptools import setup
 
-### replace this data with your plugin specific info
-PLUGIN_TYPE = "mycroft.plugin.stt"  # see Enum above
+PLUGIN_TYPE = "mycroft.plugin.stt"  # Adjust based on the plugin type
 PLUGIN_NAME = "ovos-stt-plugin-name"
 PLUGIN_PKG = PLUGIN_NAME.replace("-", "_")
 PLUGIN_CLAZZ = "MyPlugin"
 PLUGIN_CONFIGS = "MyPluginConfig"
-###
 
 PLUGIN_ENTRY_POINT = f'{PLUGIN_NAME} = {PLUGIN_PKG}:{PLUGIN_CLAZZ}'
 CONFIG_ENTRY_POINT = f'{PLUGIN_NAME}.config = {PLUGIN_PKG}:{PLUGIN_CONFIGS}'
 
-# add version, author, license, description....
 setup(
     name=PLUGIN_NAME,
     version='0.1.0',
     packages=[PLUGIN_PKG],
-    install_requires=["speechrecognition>=3.8.1",
-                      "ovos-plugin-manager>=0.0.1"],
+    install_requires=["speechrecognition>=3.8.1", "ovos-plugin-manager>=0.0.1"],
     keywords='mycroft ovos plugin',
-    entry_points={PLUGIN_TYPE: PLUGIN_ENTRY_POINT,
-                  f'{PLUGIN_TYPE}.config': CONFIG_ENTRY_POINT}
+    entry_points={PLUGIN_TYPE: PLUGIN_ENTRY_POINT, f'{PLUGIN_TYPE}.config': CONFIG_ENTRY_POINT}
 )
 ```
 
+---
 
-## Projects using OPM
+## 🛰️ Voice Satellites
 
-OPM plugins are know to be natively supported by the following projects (non-exhaustive list)
+HiveMind setups allow you to configure which plugins run server-side or satellite-side. Here are two examples:
+
+- **Skills Server**: In this setup, the HiveMind server runs only core services and skills, while the satellites handle their own STT/TTS.
+
+  ![Server Profile](https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/55694b82-69c9-4288-9a89-1d9716eb3c57)
+
+- **Audio Server**: Here, the HiveMind server runs a full OVOS core, handling STT/TTS for the satellites.
+
+  ![Listener Profile](https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/1455a488-af0f-44b4-a5e6-0418a7cd1f96)
+
+These profiles help balance the workload between the server and satellites, improving performance based on the setup.
+
+---
+
+## Projects Using OPM
+
+Several OVOS projects and tools support OPM plugins, either as dependencies or directly within their ecosystem:
 
 - [ovos-core](https://github.com/OpenVoiceOS/ovos-core)
-- [ovos-local-backend](https://github.com/OpenVoiceOS/ovos-local-backend)
 - [ovos-tts-server](https://github.com/OpenVoiceOS/ovos-tts-server)
 - [ovos-stt-http-server](https://github.com/OpenVoiceOS/ovos-stt-http-server)
 - [ovos-translate-server](https://github.com/OpenVoiceOS/ovos-translate-server)
 - [neon-core](https://github.com/NeonGeckoCom/NeonCore)
 - [HiveMind voice satellite](https://github.com/JarbasHiveMind/HiveMind-voice-sat)
 
-Additionally, some plugins (AudioService, WakeWord, TTS and STT) are also backwards compatible with mycroft-core
+Additionally, some plugins like AudioService, WakeWord, TTS, and STT are backwards compatible with Mycroft-Core, ensuring broad compatibility.
+
+--- 
+
+## Related Links
+
+- [OVOS Plugin Manager Repository](https://github.com/OpenVoiceOS/OVOS-plugin-manager)
+- [OVOS Installer](https://github.com/OpenVoiceOS/ovos-installer)

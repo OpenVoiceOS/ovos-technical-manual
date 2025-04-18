@@ -2,7 +2,7 @@
 
 **EXPERIMENTAL** - experimental repository
 
-> **WARNING** - Not actively maintained, this fork is a temporary measure since Plasma Bigscreen dropped support for OVOS and moved to QT6
+> **WARNING** - Not actively maintained, this fork is essentially a snapshot in time since Plasma Bigscreen dropped support for OVOS and moved to QT6
 
 ## Introduction
 

@@ -1,13 +1,16 @@
-
-## OVOS MessageBus Client
+# MessageBus Client
 
 The [OVOS MessageBus Client](https://github.com/OpenVoiceOS/ovos-bus-client) is a Python module providing a simple interface for the OVOS MessageBus. It can be used to connect to OVOS, send messages, and react to messages sent by the OVOS system.
 
 The module is available through [PyPI.org](https://pypi.org/project/ovos-bus-client) or directly [on Github](https://github.com/OpenVoiceOS/ovos-bus-client).
 
-#### OVOSBusClient\(\)
+#### MessageBusClient\(\)
 
-The `OVOSBusClient()` object can be setup to connect to any host and port as well as any endpoint on that host. this makes it quite versatile and will work on the main bus as well as on a gui bus. If no arguments are provided it will try to connect to a local instance of OVOS on the default endpoint and port.
+The `MessageBusClient()` object can be setup to connect to any host and port as well as any endpoint on that host. this makes it quite versatile and will work on the main bus as well as on a gui bus. 
+
+If no arguments are provided it will try to connect to a local instance of OVOS on the default endpoint and port.
+
+> 💡 in skills and plugins `self.bus` provides a MessageBusClient connections out of the box, you don't usually need to initialize this yourself
 
 #### Message\(\)
 
@@ -53,30 +56,3 @@ client.on('speak', print_utterance)
 
 client.run_forever()
 ```
-
-### Manually connecting to the MessageBus
-
-Here is an example Python script to connect to the `messagebus`:
-
-```python
-#! /usr/bin/env python3
-
-import sys
-from websocket import create_connection
-uri = 'ws://' + sys.argv[1] + ':8181/core'
-ws = create_connection(uri)
-print("Sending " + sys.argv[2] + " to " + uri + "...")
-if len(sys.argv) >= 4:
-    data = sys.argv[3]
-else:  
-    data = "{}"
-
-message = '{"type": "' + sys.argv[2] + '", "data": ' + data +'}'  
-result = ws.send(message)  
-print("Receiving..." )
-result = ws.recv()  
-print("Received '%s'" % result)
-ws.close()
-```
-
-

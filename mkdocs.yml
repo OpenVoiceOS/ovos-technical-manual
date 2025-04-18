@@ -1,88 +1,89 @@
 site_name: OVOS Technical Manual
 site_url: https://openvoiceos.github.io/ovos-technical-manual
 nav:
-    - Home:
-        - Introduction: index.md
-        - Release Channels: 001-release_channels.md
-        - License: 002-license.md
-        - Timeline: 003-timeline.md
-        - Community: 004-community.md
-    - Architecture:
-        - Bus: 100-bus_service.md
-        - Listener: 101-speech_service.md
-        - Core: 102-core.md
-        - Audio: 103-audio_service.md
-        - GUI: 104-gui_service.md
-        - Configuration: 110-config.md
-    - Self Hosting:
-        - STT Server: 200-stt_server.md
-        - TTS Server: 201-tts_server.md
-        - Persona Server: 202-persona_server.md
-        - Translate Server: 203-translate_server.md
-    - Plugins:
-        - Plugin Manager: 300-plugin-manager.md
-        - Microphone: 310-mic_plugins.md
-        - Voice Activity Detection: 311-vad_plugins.md
-        - Wake Word: 312-wake_word_plugins.md
-        - Speech To Text: 313-stt_plugins.md
-        - Text To Speech: 320-tts_plugins.md
-        - Grapheme to Phoneme: 321-g2p_plugins.md
-        - Transformers: 330-transformer_plugins.md
-        - Platform/Hardware Abstraction Layer: 340-PHAL.md
-        - Language Detection/Translation: 350-translation_plugins.md
-        - Question Solvers: 360-solver_plugins.md
-        - OCP Stream Extractors: 370-ocp_plugins.md
-        - Media Playback: 371-media_plugins.md
-    - Skills:
-        - Design Guidelines: 400-skill-design-guidelines.md
-        - Anatomy: 401-skill_structure.md
-        - Dialog: 402-statements.md
-        - Intents: 403-intents.md
-        - Customization: 405-customization.md
-        - Bus Interaction: 406-messagebus.md
-        - Filesystem: 407-skill_filesystem.md
-        - Skill Settings: 408-skill_settings.md
-        - Skill API: 409-skill_api.md
-        - Runtime Requirements: 410-skill_runtime_requirements.md
-        - Skill Json: 411-skill_json.md
-        - SSML: 420-ssml.md
-        - F.A.Q.: 430-skill_dev_faq.md
-    - Continuous Conversation:
-        - Prompts: 500-prompts.md
-        - Follow up Questions: 501-context.md
-        - Converse: 502-converse.md
-        - Intent Layers: 503-layers.md
-        - Session Aware Skills: 504-session.md
-    - Fallback:
-        - Fallback Skills: 600-fallbacks.md
-    - Common Query:
-        - Common Query Skills: 610-common_query.md
-    - Auto Translation:
-        - Universal Skills: 620-universal_skills.md
-    - Media:
-        - Media Skills: 630-OCP_skills.md
-        - OCP Pipeline: 631-OCP_pipeline.md
-    - GUI:
-        - Homescreen: 700-homescreen.md
-        - Protocol: 701-gui_protocol.md
-        - Shell: 702-ovos-shell.md
-        - QT5 mycroft-gui: 710-qt5-gui.md
-    - Voice Apps:
-        - Standalone Apps: 590-voice_apps.md
-        - QT Voice Apps: 711-qt_voice_apps.md
-    - MessageBus APIs:
-        - GUI Interface: 720-skill_gui.md
-        - Enclosure Api: 800-mk1_api.md
-    - Technologies:
-        - Quebra Frases: 910-quebra_frases.md
-        - Messagebus Client: 900-bus_client.md
-        - Padacioso: 920-padacioso.md
-        - Mark1 Utils: 801-mk1_utils.md
-        - Jurebes: 950-jurebes.md
-        - Lingua Podre: 980-lingua_podre.md
-        - Wallpaper Changer: 970-wallpaper_changer.md
-        - Plasma Bigscreen: 999-ovos_bigscreen.md
-
+  - Home:
+      - Introduction: index.md
+      - Release Channels: 001-release_channels.md
+      - License: 002-license.md
+      - Timeline: 003-timeline.md
+  - Architecture:
+      - Overview: 99-architecture-overview.md
+      - Bus: 100-bus_service.md
+      - Listener: 101-speech_service.md
+      - Core: 102-core.md
+      - Audio: 103-audio_service.md
+      - GUI: 104-gui_service.md
+      - Platform/Hardware Abstraction Layer: 340-PHAL.md
+      - Plugin Manager: 300-plugin-manager.md
+      - Configuration: 110-config.md
+  - AI Agents:
+      - Personas: 150-personas.md
+      - Transformers: 151-llm-transformers.md
+  - Self Hosting:
+      - Persona Server: 202-persona_server.md
+      - HiveMind: 152-hivemind-agents.md
+      - STT Server: 200-stt_server.md
+      - TTS Server: 201-tts_server.md
+      - Translate Server: 203-translate_server.md
+  - Skill Development:
+      - Design Guidelines: 400-skill-design-guidelines.md
+      - Anatomy: 401-skill_structure.md
+      - Dialog: 402-statements.md
+      - Intents: 403-intents.md
+      - Customization: 405-customization.md
+      - Bus Interaction: 406-messagebus.md
+      - Filesystem: 407-skill_filesystem.md
+      - Skill Settings: 408-skill_settings.md
+      - Skill API: 409-skill_api.md
+      - Runtime Requirements: 410-skill_runtime_requirements.md
+      - Skill Json: 411-skill_json.md
+      - SSML: 420-ssml.md
+      - F.A.Q.: 430-skill_dev_faq.md
+  - Continuous Conversation:
+      - Prompts: 500-prompts.md
+      - Follow up Questions: 501-context.md
+      - Converse: 502-converse.md
+      - Intent Layers: 503-layers.md
+      - Session Aware Skills: 504-session.md
+  - Fallback:
+      - Fallback Skills: 600-fallbacks.md
+  - Common Query:
+      - Common Query Skills: 610-common_query.md
+  - Auto Translation:
+      - Universal Skills: 620-universal_skills.md
+  - Media:
+      - Media Skills: 630-OCP_skills.md
+      - OCP Pipeline: 631-OCP_pipeline.md
+  - GUI:
+      - Homescreen: 700-homescreen.md
+      - Protocol: 701-gui_protocol.md
+      - Shell: 702-ovos-shell.md
+      - QT5 mycroft-gui: 710-qt5-gui.md
+      - Plasma Bigscreen: 999-ovos_bigscreen.md
+  - Voice Apps:
+      - Standalone Apps: 590-voice_apps.md
+      - QT Voice Apps: 711-qt_voice_apps.md
+  - MessageBus:
+      - Messagebus Client: 900-bus_client.md
+      - GUI Interface: 720-skill_gui.md
+      - Enclosure Api: 800-mk1_api.md
+  - Plugin Development:
+      - Microphone: 310-mic_plugins.md
+      - Voice Activity Detection: 311-vad_plugins.md
+      - Wake Word: 312-wake_word_plugins.md
+      - Speech To Text: 313-stt_plugins.md
+      - Text To Speech: 320-tts_plugins.md
+      - Grapheme to Phoneme: 321-g2p_plugins.md
+      - Transformers: 330-transformer_plugins.md
+      - Language Detection/Translation: 350-translation_plugins.md
+      - Question Solvers: 360-solver_plugins.md
+      - OCP Stream Extractors: 370-ocp_plugins.md
+      - Media Playback: 371-media_plugins.md
+  - Misc. Utilities:
+      - Quebra Frases: 910-quebra_frases.md
+      - Padacioso: 920-padacioso.md
+      - Mark1 Utils: 801-mk1_utils.md
+      - Wallpaper Changer: 970-wallpaper_changer.md
 theme: readthedocs
 extra_css:
-    - css/extra.css
+  - css/extra.css

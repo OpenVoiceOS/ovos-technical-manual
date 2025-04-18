@@ -124,27 +124,6 @@ You can configure default sounds and the playback commands under `mycroft.conf`
 > NOTE: by default the playback commands are not set and OVOS will try to determine the best way to play a sound automatically
 
 
-## Native playback
-
-Usually playback is triggered in response to originating bus message, eg `"recognizer_loop:utterance"`, this message contains
-metadata that is used to determine if playback should happen.
-
-`message.context` may contain a source and destination, playback is only triggered if a message destination is a
-`native_source` or if missing (considered a broadcast).
-
-This separation of native sources allows remote clients such as an android app to interact with OVOS without the actual
-device where ovos-core is running repeating all TTS and music playback out loud
-
-You can learn more about message targeting [here](https://openvoiceos.github.io/ovos-technical-manual/bus_service/#message-targeting)
-
-By default, only utterances originating from the speech client are considered native
-
-```javascript
-"Audio": {
-    "native_sources": ["debug_cli", "audio"]
-}
-```
-
 ## Transformer Plugins
 
 **NEW** in `ovos-core` version **0.0.8**

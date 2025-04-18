@@ -1,143 +1,121 @@
-# PHAL
+# PHAL – Platform/Hardware Abstraction Layer
 
-[PHAL](https://github.com/OpenVoiceOS/ovos_PHAL) is our Platform/Hardware Abstraction Layer, it completely replaces the
-concept of hardcoded "enclosure" from mycroft-core
+The Platform/Hardware Abstraction Layer (PHAL) in OpenVoiceOS (OVOS) provides a flexible, plugin-based system for integrating hardware-specific and platform-level functionality. 
 
-Any number of plugins providing functionality can be loaded and validated at runtime, plugins can
-be [system integrations](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-system) to handle things like reboot and
-shutdown, or hardware drivers such as [mycroft mark2 plugin](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-mk2)
+---
 
-PHAL plugins can perform actions such as hardware detection before loading, eg, the mark2 plugin will not load if it
-does not detect the sj201 hat. This makes plugins safe to install and bundle by default in our base images
+## Usage Guide
 
-## to PHAL or not to PHAL
+PHAL plugins are loaded at runtime based on system compatibility and user configuration. You can:
 
-In mycroft-core the equivalent to PHAL plugins would usually be shipped as skills or hardcoded
+- Install multiple PHAL plugins for system and hardware support.
+- Rely on automatic hardware detection to load relevant plugins safely.
+- Use AdminPHAL when elevated privileges are required.
 
-in OVOS sometimes it may be unclear if we should develop a skill or plugin, there isn't a one size fits all answer, in
-some circumstances it may make sense to create both a plugin and a companion skill
+---
 
-![flow](img/phal_or_skill.png)
 
-## Plugins
+## Technical Explanation
 
-Platform/Hardware specific integrations are loaded by PHAL, these plugins can handle all sorts of system activities
+### PHAL Plugins
 
-| Plugin                                                                                                                                                                                               | Description                         |
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|
-| [ovos-PHAL-plugin-alsa](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-alsa)                                                                                                                        | volume control                      |
-| [ovos-PHAL-plugin-system](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-system)                                                                                                                    | reboot / shutdown / factory reset   |
-| [ovos-PHAL-plugin-mk1](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-mk1)                                                                                                                          | mycroft mark1 integration           |
-| [ovos-PHAL-plugin-respeaker-2mic](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-respeaker-2mic)                                                                                                    | respeaker 2mic hat integration      |
-| [ovos-PHAL-plugin-respeaker-4mic](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-respeaker-4mic)                                                                                                    | respeaker 4mic hat integration      |
-| [ovos-PHAL-plugin-wifi-setup](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-wifi-setup)                                                                                                            | wifi setup (central plugin)         |
-| [ovos-PHAL-plugin-gui-network-client](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-gui-network-client)                                                                                            | wifi setup (GUI interface)          |
-| [ovos-PHAL-plugin-balena-wifi](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-balena-wifi)                                                                                                          | wifi setup (hotspot)                |
-| [ovos-PHAL-plugin-network-manager](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-network-manager)                                                                                                  | wifi setup (network manager)        |
-| [ovos-PHAL-plugin-ipgeo](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-ipgeo)                                                                                                                      | automatic geolocation  (IP address) |
-| [ovos-PHAL-plugin-gpsd](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-gpsd)                                                                                                                        | automatic geolocation  (GPS)        |
-| ![imagem](https://github.com/OpenVoiceOS/ovos-media/assets/33701864/90f31b0a-dd56-457d-a3cf-7fc08b460038) [neon-phal-plugin-linear_led](https://github.com/NeonGeckoCom/neon-phal-plugin-linear_led) | LED control for the mycroft mark2   |
+PHAL plugins dynamically extend your voice assistant's functionality by listening to events and integrating with system or hardware components. Examples include:
 
-### Template
+- **System control**: Restart, shutdown, or factory reset via `ovos-PHAL-plugin-system`.
+- **Audio management**: Volume control with `ovos-PHAL-plugin-alsa`.
+- **Hardware support**: Mark 1 and Mark 2 integrations using hardware detection.
 
-PHAL plugins do not follow a strict template, they are usually event listeners that perform certain actions and
-integrate with other components
+Plugins are validated before loading. For example, the `ovos-PHAL-plugin-mk2` checks for the presence of the SJ201 HAT before activating.
+
+### AdminPHAL
+
+AdminPHAL is a specialized version of PHAL that loads plugins with root privileges. This allows for deeper OS integration—ideal for tasks like system configuration or device control. However, all admin plugins must be:
+
+- Marked as admin in their entry point.
+- Explicitly enabled in the config (`"enabled": true`).
+- Carefully audited, as they can modify system state.
+
+AdminPHAL and PHAL will not load each other's plugins.
+
+---
+
+### Developing a PHAL Plugin
+
+PHAL plugins usually consist of a validator (to determine compatibility) and an event listener. Here's a minimal example:
 
 ```python
 from ovos_bus_client import Message
 from ovos_plugin_manager.phal import PHALPlugin
 
-
 class MyPHALPluginValidator:
     @staticmethod
     def validate(config=None):
-        """ this method is called before loading the plugin.
-        If it returns False the plugin is not loaded.
-        This allows a plugin to run platform checks"""
+        # Return False to prevent loading (e.g., missing hardware)
         return True
-
 
 class MyPHALPlugin(PHALPlugin):
     validator = MyPHALPluginValidator
 
     def __init__(self, bus=None, config=None):
         super().__init__(bus=bus, name="ovos-PHAL-plugin-NAME", config=config)
-        # register events for plugin
         self.bus.on("my.event", self.handle_event)
 
     def handle_event(self, message):
-        # TODO plugin stuff
         self.bus.emit(Message("my.event.response"))
 
     def shutdown(self):
-        # cleanly remove any event listeners and perform shutdown actions
         self.bus.remove("my.event", self.handle_event)
         super().shutdown()
 ```
 
-You can find plugin packaging documentation [here](https://openvoiceos.github.io/community-docs/OPM/#packaging)
+More details on plugin packaging are available in the [OVOS Plugin Manager documentation](https://openvoiceos.github.io/ovos-technical-manual/300-plugin-manager).
 
-## Admin PHAL
+---
 
-AdminPHAL performs the exact same function as PHAL, but plugins it loads will have `root` privileges.
+## Choosing Between a PHAL Plugin and a Skill
 
-This service is intended for handling any OS-level interactions requiring escalation of privileges. Be very careful when
-installing Admin plugins and scrutinize them closely
+Not sure whether to build a skill or a PHAL plugin? Here's a quick guideline:
 
-NOTE: Because this service runs as root, plugins it loads are responsible for not writing
-configuration changes which would result in breaking config file permissions.
+- Use **PHAL** for low-level system or hardware integration.
+- Use **skills** for voice interactions and user-facing features.
+- In some cases, both might be appropriate—a PHAL plugin for backend support and a skill as a frontend interface.
 
-### Service
+![Should you use a skill or a PHAL plugin?](img/phal_or_skill.png)
 
-to use AdminPHAL create a launcher `/usr/libexec/mycroft-systemd-admin-phal`
+---
 
-```python
-import sdnotify
-from ovos_PHAL.admin import main
+## Available Plugins
 
-n = sdnotify.SystemdNotifier()
+| Plugin                                                                                                    | Description                            |
+|-----------------------------------------------------------------------------------------------------------|----------------------------------------|
+| [ovos-PHAL-plugin-alsa](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-alsa)                             | Volume control                         |
+| [ovos-PHAL-plugin-system](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-system)                         | Reboot, shutdown, and factory reset    |
+| [ovos-PHAL-plugin-mk1](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-mk1)                               | Mycroft Mark 1 hardware integration    |
+| [ovos-PHAL-plugin-respeaker-2mic](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-respeaker-2mic)         | Respeaker 2-mic HAT support            |
+| [ovos-PHAL-plugin-respeaker-4mic](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-respeaker-4mic)         | Respeaker 4-mic HAT support            |
+| [ovos-PHAL-plugin-wifi-setup](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-wifi-setup)                 | Central Wi-Fi setup                    |
+| [ovos-PHAL-plugin-gui-network-client](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-gui-network-client) | GUI-based Wi-Fi setup                  |
+| [ovos-PHAL-plugin-balena-wifi](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-balena-wifi)               | Wi-Fi hotspot setup                    |
+| [ovos-PHAL-plugin-network-manager](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-network-manager)       | Network Manager integration            |
+| [ovos-PHAL-plugin-ipgeo](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-ipgeo)                           | Geolocation using IP address           |
+| [ovos-PHAL-plugin-gpsd](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-gpsd)                             | Geolocation using GPS                  |
+| [neon-phal-plugin-linear_led](https://github.com/NeonGeckoCom/neon-phal-plugin-linear_led)                | LED control for Mycroft Mark 2         |
 
+---
 
-def notify_ready():
-    n.notify('READY=1')
-    print('Startup of Admin service complete')
+## Tips & Caveats
 
+- **Safe Defaults**: Most plugins are hardware-aware and won't load if the required device isn’t detected.
+- **Admin Responsibility**: AdminPHAL plugins have full system access. Only use trusted sources and review their code.
+- **Extensibility**: PHAL is designed to grow with your system. Don't hesitate to build your own plugins for unique hardware.
 
-def notify_stopping():
-    n.notify('STOPPING=1')
-    print('Stopping Admin service')
+---
 
+## Related Documentation
 
-main(ready_hook=notify_ready, stopping_hook=notify_stopping)
-```
+- [OVOS Plugin Manager (OPM) Docs – Packaging Plugins](https://openvoiceos.github.io/ovos-technical-manual/300-plugin-manager)
+- [PHAL Plugins on GitHub](https://github.com/OpenVoiceOS?q=ovos-PHAL&type=all)
 
-and system service `/usr/lib/systemd/user/mycroft-admin-phal.service`
+---  
+By decoupling system and hardware features from core logic, PHAL makes OVOS more modular, secure, and adaptable to any platform—from Raspberry Pi setups to full-featured smart assistants.
 
-```
-[Unit]
-Description=Admin PHAL
-PartOf=mycroft.service
-After=mycroft-messagebus.service
-
-[Service]
-Type=notify
-TimeoutStopSec=30
-Restart=always
-User=root
-ExecStart=/usr/libexec/mycroft-systemd-admin-phal
-
-[Install]
-WantedBy=mycroft.service
-```
-
-## Admin Plugins
-
-AdminPlugins are just like regular PHAL plugins that run with `root` privileges
-
-A plugin needs to identify itself as an admin plugin via it's entry point, PHAL will not load Admin plugins and
-AdminPHAL will not load regular plugins
-
-Admin plugins will only load if their configuration contains `"enabled": true`. All admin plugins need to be explicitly
-enabled
-
-You can find plugin packaging documentation [here](https://openvoiceos.github.io/community-docs/OPM/#packaging)
