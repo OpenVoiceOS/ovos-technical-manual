@@ -83,7 +83,6 @@ nav:
       - Quebra Frases: 910-quebra_frases.md
       - Padacioso: 920-padacioso.md
       - Mark1 Utils: 801-mk1_utils.md
-      - Wallpaper Changer: 970-wallpaper_changer.md
 theme: readthedocs
 extra_css:
   - css/extra.css
