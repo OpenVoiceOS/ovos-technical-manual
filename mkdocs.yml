@@ -77,7 +77,6 @@ nav:
       - Grapheme to Phoneme: 321-g2p_plugins.md
       - Transformers: 330-transformer_plugins.md
       - Language Detection/Translation: 350-translation_plugins.md
-      - Question Solvers: 360-solver_plugins.md
       - OCP Stream Extractors: 370-ocp_plugins.md
       - Media Playback: 371-media_plugins.md
   - Misc. Utilities:

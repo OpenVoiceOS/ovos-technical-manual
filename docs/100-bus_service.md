@@ -88,6 +88,9 @@ Sessions are typically auto-managed by `ovos-core` for local interactions using 
 
 See the [Session-Aware Skills](https://openvoiceos.github.io/ovos-technical-manual/session_skills/) documentation for implementation guidelines.
 
+> ⚠️ Skills that are not session-aware may behave unexpectedly when used with external voice clients.
+
+
 ---
 
 ## Message Targeting and Routing
@@ -122,5 +125,3 @@ OVOS itself does not implement any actual routing, everything connected to the o
 - The Intent Service replies directly to utterance messages.
 - Skill and intent interactions use `.forward()` to retain context.
 - Skills sending their own events should manually manage routing.
-
-> ⚠️ Skills that are not session-aware may behave unexpectedly when used with external voice clients.
