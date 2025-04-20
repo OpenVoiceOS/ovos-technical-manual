@@ -251,18 +251,6 @@ Use DuckDuckGo to answer questions.
 -------
 
 
-## skill-ovos-fallback-chatgpt.openvoiceos
-
-When in doubt, ask ChatGPT
-
-**Usage examples:**
-
-- Got any creative ideas for a 10 year old’s birthday?
-- Explain quantum computing in simple terms
-
--------
-
-
 ## skill-ovos-hello-world.openvoiceos
 
 Introductory Skill so that Skill Authors can see how an OVOS Skill is put together
