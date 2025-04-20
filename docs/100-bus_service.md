@@ -40,11 +40,11 @@ By default, all skills share a single bus connection. This can be exploited by m
 - To improve isolation, set `"shared_connection": false`. This ensures each skill uses a separate WebSocket connection.
 - For a demonstration of potential vulnerabilities, see [BusBrickerSkill](https://github.com/EvilJarbas/BusBrickerSkill).
 
-> Never expose the messagebus to the public internet. It provides full control over the OVOS instance and the host system.
-
-For remote interaction, use [HiveMind](https://openvoiceos.github.io/community-docs/friends/#hivemind), which offers secure proxy access to the bus.
-
 Security concerns are further documented in [Nhoya/MycroftAI-RCE](https://github.com/Nhoya/MycroftAI-RCE).
+
+> ⚠️ Never expose the messagebus to the public internet. It provides full control over the OVOS instance and the host system.
+
+> 💡 For remote interaction, use [HiveMind](https://openvoiceos.github.io/community-docs/friends/#hivemind), which offers secure proxy access to the bus.
 
 ---
 
@@ -109,7 +109,9 @@ bus.emit(Message('recognizer_loop:utterance', data,
     }))
 ```
 
-> [HiveMind](https://jarbashivemind.github.io/HiveMind-community-docs/) uses these fields extensively to direct replies to the correct satellite.
+OVOS itself does not implement any actual routing, everything connected to the ovos messagebus receives every message, however this metadata enables 3rd party applications to fully manage these messages and decide if and where to send them
+
+> 💡 [HiveMind](https://jarbashivemind.github.io/HiveMind-community-docs/) uses these fields extensively to direct replies to the correct satellite.
 
 ---
 
@@ -121,4 +123,4 @@ bus.emit(Message('recognizer_loop:utterance', data,
 - Skill and intent interactions use `.forward()` to retain context.
 - Skills sending their own events should manually manage routing.
 
-> Skills that are not session-aware may behave unexpectedly when used with external voice clients.
+> ⚠️ Skills that are not session-aware may behave unexpectedly when used with external voice clients.
