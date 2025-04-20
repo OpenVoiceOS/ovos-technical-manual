@@ -1,253 +1,91 @@
 # Wake Word Plugins
 
-WakeWord plugins classify audio and report if a certain word or sound is present or not
+Wake Word plugins allow Open Voice OS to detect specific words or sounds, typically the assistant’s name (e.g., "Hey Mycroft"), but can be customized for various use cases. These plugins enable the system to listen for and react to activation commands or phrases.
 
-These plugins usually correspond to the name of the voice assistant, "hey mycroft", but can also be used for other purposes
+## Available Plugins
 
-All Mycroft Wake Word Plugins need to provide a class derived from the HotWordEngine base class in `ovos-plugin-manager`
+OVOS supports different wake word detection plugins, each with its own strengths and use cases
 
-When the `__init__()` method of the base class is run the config for that module will be loaded and available through `self.config`. 
-OVOS's selected language will also be available through `self.lang`.
+The default OVOS plugins are:
 
-## HotwordPlugin
+- **[ovos-ww-plugin-precise-lite](https://github.com/OpenVoiceOS/ovos-ww-plugin-precise-lite)**: A model-based plugin that uses a trained machine learning model to detect wake words.
+- **[ovos-ww-plugin-vosk](https://github.com/OpenVoiceOS/ovos-ww-plugin-vosk)**: A text-based plugin leveraging Vosk, which allows you to define a wake word without requiring a trained model. This is useful during the initial stages of data collection.
 
-### found\_wake\_word\(\)
+Each plugin has its pros and cons, with Vosk offering a faster setup for simple wakeword recognition without model training.
 
-Each Wake Word plugin must define the `found_wake_word()` method taking one argument:
+## Wakeword Configuration
 
-* `frame_data` - this is the audio data that needs to be checked for a wake word. You can process audio here or return a result previously handled in the `update()` method.
+The `hotwords` section in your `mycroft.conf` allows you to configure the wakeword detection parameters for each plugin. For instance:
 
-### update\(\)
-
-The `update()` method is optional and takes one argument:
-
-* `chunk` - live audio chunks allowing for streaming predictions. Results must be returned in the `found_wake_word()` method.
-
-### stop\(\)
-
-The `stop()` method is optional and takes no arguments. It should be used to perform any actions needed to shut down the hot word engine. This may include things such as unloading data or to shutdown external processes.
-
-## Entry point
-
-To make the class detectable as a Wake Word plugin, the package needs to provide an entry point under the `mycroft.plugin.wake_word` namespace.
-
-```python
-setup([...],
-      entry_points = {'mycroft.plugin.wake_word': 'example_wake_word_plugin = my_example_ww:myWakeWordEngine'}
-      )
+```json
+"hotwords": {
+  "hey_mycroft": {
+    "module": "ovos-ww-plugin-precise-lite",
+    "model": "https://github.com/OpenVoiceOS/precise-lite-models/raw/master/wakewords/en/hey_mycroft.tflite",
+    "expected_duration": 3,
+    "trigger_level": 3,
+    "sensitivity": 0.5,
+    "listen": true
+  }
+}
 ```
 
-Where: 
-
-* `example_wake_word_plugin` is the Wake Word module name for the plugin
-* `my_example_ww` is the Python module; and
-* `myWakeWordEngine` is the class in the module to return
-
-## List of Wake Word plugins
-
-| Plugin                                                                                        | Type         |
-|-----------------------------------------------------------------------------------------------|--------------|
-| [ovos-ww-plugin-openWakeWord](https://github.com/OpenVoiceOS/ovos-ww-plugin-openWakeWord)     | model        |
-| [ovos-ww-plugin-precise-lite](https://github.com/OpenVoiceOS/ovos-ww-plugin-precise-lite)     | model        |
-| [ovos-ww-plugin-vosk](https://github.com/OpenVoiceOS/ovos-ww-plugin-vosk)                     | text samples |
-| [ovos-ww-plugin-pocketsphinx](https://github.com/OpenVoiceOS/ovos-ww-plugin-pocketsphinx)     | phonemes     |
-| [ovos-ww-plugin-precise](https://github.com/OpenVoiceOS/ovos-ww-plugin-precise)               | model        |
-| [ovos-ww-plugin-snowboy](https://github.com/OpenVoiceOS/ovos-ww-plugin-snowboy)               | model        |
-| [ovos-ww-plugin-nyumaya](https://github.com/OpenVoiceOS/ovos-ww-plugin-nyumaya)               | model        |
-| [ovos-ww-plugin-hotkeys](https://github.com/OpenVoiceOS/ovos_ww_plugin_hotkeys)               | keyboard     |
+> 💡 see the full docs for the [listener service](https://openvoiceos.github.io/ovos-technical-manual/101-speech_service/#hotwords)
 
 
-## Standalone Usage
+## Tips and Caveats
 
-first lets get some boilerplate ouf of the way for the microphone handling logic
+- **Vosk Plugin**: The Vosk plugin is useful when you need a simple setup that doesn’t require training a wake word model. It’s great for quickly gathering data during the development stage.
+- **Precision and Sensitivity**: Adjust the `sensitivity` and `trigger_level` settings carefully. Too high a sensitivity can lead to false positives, while too low may miss detection.
 
-```python
-import pyaudio
+## Plugin Development
 
-# helper class
-class CyclicAudioBuffer:
-    def __init__(self, duration=0.98, initial_data=None,
-                 sample_rate=16000, sample_width=2):
-        self.size = self.duration_to_bytes(duration, sample_rate, sample_width)
-        initial_data = initial_data or self.get_silence(self.size)
-        # Get at most size bytes from the end of the initial data
-        self._buffer = initial_data[-self.size:]
+### Key Methods
 
-    @staticmethod
-    def duration_to_bytes(duration, sample_rate=16000, sample_width=2):
-        return int(duration * sample_rate) * sample_width
+When developing a custom wake word plugin, the following methods are essential:
 
-    @staticmethod
-    def get_silence(num_bytes):
-        return b'\0' * num_bytes
+- **`found_wake_word(frame_data)`**: This method must be defined. It checks whether a wake word is found in the provided audio data.
 
-    def append(self, data):
-        """Add new data to the buffer, and slide out data if the buffer is full
-        Arguments:
-            data (bytes): binary data to append to the buffer. If buffer size
-                          is exceeded the oldest data will be dropped.
-        """
-        buff = self._buffer + data
-        if len(buff) > self.size:
-            buff = buff[-self.size:]
-        self._buffer = buff
+- **`update(chunk)`**: An optional method for processing live audio chunks and making streaming predictions.
 
-    def get(self):
-        """Get the binary data."""
-        return self._buffer
+- **`stop()`**: An optional method to shut down the plugin, like unloading data or halting external processes.
 
-# pyaudio params
-FORMAT = pyaudio.paInt16
-CHANNELS = 1
-RATE = 16000
-CHUNK = 1024
-MAX_RECORD_SECONDS = 20
-SAMPLE_WIDTH = pyaudio.get_sample_size(FORMAT)
-audio = pyaudio.PyAudio()
+> ⚠️ `found_wake_word(frame_data)` should ignore `frame_data`, this has been deprecated and is only provided for backwards-compatibility. Plugins are now expected to handle real time audio via `update` method
 
-# start Recording
-stream = audio.open(channels=CHANNELS, format=FORMAT,
-    rate=RATE, frames_per_buffer=CHUNK, input=True)
+### Registering Your Plugin
 
-
-def load_plugin():
-    # Wake word initialization
-    config = {"model": "path/to/hey_computer.model"}
-    return MyHotWord("hey computer", config=config)
-
-
-def listen_for_ww(plug):
-    # TODO - see examples below
-    return False
-
-plug = load_plugin()
-
-print(f"Waiting for wake word {MAX_RECORD_SECONDS} seconds")
-found = listen_for_ww(plug)
-        
-if found:
-    print("Found wake word!")
-else:
-    print("No wake word found")
-
-# stop everything
-plug.stop()
-stream.stop_stream()
-stream.close()
-audio.terminate()
-```
-
-***new style*** plugins
-
-New style plugins expect to receive live audio, they may keep their own cyclic buffers internally
+To integrate your custom plugin, add it to OVOS via the following entry point:
 
 ```python
-
-def listen_for_ww(plug):
-    for i in range(0, int(RATE / CHUNK * MAX_RECORD_SECONDS)):
-        data = stream.read(CHUNK)
-        # feed data directly to streaming prediction engines
-        plug.update(data)
-        # streaming engines return result here
-        found = plug.found_wake_word(data)
-        if found:
-            return True
+setup([...], entry_points={'mycroft.plugin.wake_word': 'example_wake_word_plugin = my_example_ww:MyWakeWordEngine'})
 ```
 
-***old style*** plugins (DEPRECATED)
+### Example Plugin
 
-Old style plugins expect to receive ~3 seconds of audio data at once
-
-```python
-def listen_for_ww(plug):
-    # used for old style non-streaming wakeword (deprecated)
-    audio_buffer = CyclicAudioBuffer(plug.expected_duration,
-                                     sample_rate=RATE, sample_width=SAMPLE_WIDTH)
-    for i in range(0, int(RATE / CHUNK * MAX_RECORD_SECONDS)):
-        data = stream.read(CHUNK)
-        # add data to rolling buffer, used by non-streaming engines
-        audio_buffer.append(data)
-        # non-streaming engines check the byte_data in audio_buffer
-        audio_data = audio_buffer.get()
-        found = plug.found_wake_word(audio_data)
-        if found:
-            return True
-```
-
-***new + old style*** plugins (backwards compatibility)
-
-if you are unsure what kind of plugin you will be using you can be compatible with both approaches like ovos-core
-
-```python
-def listen_for_ww(plug):
-    # used for old style non-streaming wakeword (deprecated)
-    audio_buffer = CyclicAudioBuffer(plug.expected_duration,
-                                     sample_rate=RATE, sample_width=SAMPLE_WIDTH)
-    for i in range(0, int(RATE / CHUNK * MAX_RECORD_SECONDS)):
-        data = stream.read(CHUNK)
-        # old style engines will ignore the update
-        plug.update(data)
-        # streaming engines will ignore the byte_data
-        audio_buffer.append(data)
-        audio_data = audio_buffer.get()
-        found = plug.found_wake_word(audio_data)
-        if found:
-            return True
-```
-
-
-## Plugin Template
+Here’s a simple implementation of a wake word plugin:
 
 ```python
 from ovos_plugin_manager.templates.hotwords import HotWordEngine
 from threading import Event
 
-
 class MyWWPlugin(HotWordEngine):
     def __init__(self, key_phrase="hey mycroft", config=None, lang="en-us"):
         super().__init__(key_phrase, config, lang)
         self.detection = Event()
-        # read config settings for your plugin
-        self.sensitivity = self.config.get("sensitivity", 0.5)
-        # TODO - plugin stuff
-        # how does your plugin work? phonemes? text? models?
-        self.engine = MyWW(key_phrase) 
+        self.engine = MyWW(key_phrase)
 
     def found_wake_word(self, frame_data):
-        """Check if wake word has been found.
-
-        Checks if the wake word has been found. Should reset any internal
-        tracking of the wake word state.
-
-        Arguments:
-            frame_data (binary data): Deprecated. Audio data for large chunk
-                                      of audio to be processed. This should not
-                                      be used to detect audio data instead
-                                      use update() to incrementally update audio
-        Returns:
-            bool: True if a wake word was detected, else False
-        """
+        # NOTE: frame_data should be ignored, it is deprecated
+        # inference happens via the self.update_method
         detected = self.detection.is_set()
         if detected:
             self.detection.clear()
         return detected
 
     def update(self, chunk):
-        """Updates the hotword engine with new audio data.
-
-        The engine should process the data and update internal trigger state.
-
-        Arguments:
-            chunk (bytes): Chunk of audio data to process
-        """
-        if self.engine.found_it(chunk): # TODO - check for wake word
+        if self.engine.found_it(chunk):
             self.detection.set()
 
     def stop(self):
-        """Perform any actions needed to shut down the wake word engine.
-
-        This may include things such as unloading data or shutdown
-        external processess.
-        """
-        self.engine.bye()  # TODO - plugin specific shutdown
+        self.engine.bye()
 ```

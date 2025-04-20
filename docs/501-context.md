@@ -1,8 +1,10 @@
 # Follow up questions
 
-_NOTE: Conversational context is currently only available with the_ [_Adapt_](https://mycroft.ai/documentation/adapt) _Intent Parser, and is not yet available for_ [_Padatious_](https://mycroft.ai/documentation/padatious)
+Conversational context in Open Voice OS (OVOS) allows voice interactions to feel more natural by remembering parts of a conversation, like the subject being discussed. This is especially useful for follow-up questions where repeating context (like a person's name) would otherwise be necessary.
 
+Currently, conversational context is only supported with the [Adapt Intent Parser](https://mycroft.ai/documentation/adapt), not [Padatious](https://mycroft.ai/documentation/padatious).
 
+---
 ## Keyword Contexts
 
 > How tall is John Cleese?

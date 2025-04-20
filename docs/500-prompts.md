@@ -1,22 +1,24 @@
-# Prompts
+# Prompting the User for Responses in OVOS Skills
+
+OVOS provides several built-in methods for engaging users in interactive conversations. These include asking open-ended questions, confirming yes/no responses, and offering multiple-choice selections — all handled in a natural, voice-first way.
 
 Here we look at how to implement the most common types of prompts. For more information on conversation design see
 the [Voice User Interface Design Guidelines](https://mycroft-ai.gitbook.io/docs/skill-development/voice-user-interface-design-guidelines/interactions-and-guidelines/statements-and-prompts).
 
-## Open Ended Questions
+---
 
-Sometimes after a Skill finishes speaking, we want to activate the microphone and let the utterance be handled as usual
+## Usage Guide
 
-It is possible to speak some dialog, and activate the listener, directing the response back to the standard intent parsing engine. We
-may do this to let the user trigger another Skill, or because we want to make use of our own intents to handle the
-response.
+Here’s how to use different types of prompts in your OVOS skills:
 
-To do this, we use the `expect_response` parameter of `self.speak` and  `self.speak_dialog` methods expose a keyword argument to trigger listening once TTS has finished playback
+### 1. Open-Ended Questions
+
+Let the user respond freely, either to trigger another skill or to handle the response with a custom intent.
 
 ```python
 from ovos_workshop.skills import OVOSSkill
 from ovos_workshop.decorators import intent_handler
-
+import random
 
 class AskMeSkill(OVOSSkill):
     @intent_handler('ask_me_something.intent')
@@ -25,19 +27,17 @@ class AskMeSkill(OVOSSkill):
         self.speak(question, expect_response=True)
 ```
 
-## Request Extra Information
+> `expect_response=True` keeps the mic open after speaking, so the response can be handled by OVOS's intent pipeline.
 
-Any Skill can request extra information from the user before continuing - making a statement or asking a question before the microphone is
-activated to record the User's response.
+---
 
-The base implementation of this is the `get_response()` method
+### 2. Request Extra Information with `get_response()`
 
-To see it in action, let's create a simple Skill that asks the User what their favorite flavor of ice cream is.
+Use this to ask a specific question and directly capture the user's reply.
 
 ```python
 from ovos_workshop.skills import OVOSSkill
 from ovos_workshop.decorators import intent_handler
-
 
 class IceCreamSkill(OVOSSkill):
     @intent_handler('set.favorite.intent')
@@ -46,41 +46,22 @@ class IceCreamSkill(OVOSSkill):
         self.speak_dialog('confirm.favorite.flavor', {'flavor': favorite_flavor})
 ```
 
-In this Skill we have used `get_response()` and passed it the name of our dialog
-file `'what.is.your.favorite.flavor.dialog'`. This is the simplest form of this method. It will speak dialog from the
-given file, then activate the microphone for 3-10 seconds allowing the User to respond. The transcript of their response
-will then be assigned to our variable `favorite_flavor`. To confirm that we have heard the User correctly we then speak
-a confirmation dialog passing the value of `favorite_flavor` to be spoken as part of that dialog.
+**Optional `get_response()` arguments:**
 
-### Optional Arguments
+- `data`: Dictionary to format the dialog file
+- `validator`: A function to check if the user response is valid
+- `on_fail`: A fallback string to say if validation fails
+- `num_retries`: How many times to retry if the response isn’t valid
 
-The `get_response()` method also takes the following optional arguments:
+---
 
-* `data` (dict) - used to populate the dialog file, just like `speak_dialog()`
-* `validator` (function) - returns a boolean to define whether the response meets some criteria for success
-* `on_fail` (function) - returns a string that will be spoken if the validator returns False
-* `num_retries` (int) - number of times the system should repeat the question to get a successful result
+### 3. Yes/No Questions with `ask_yesno()`
 
-## Yes / No Questions
-
-`ask_yesno()` checks if the response contains "yes" or "no" like phrases.
-
-A longer phrase containing the required vocab is considered successful e.g. both "yes" and "yeah that would be great
-thanks" would be considered a successful "yes".
-
-If "yes" or "no" responses are detected, then the method will return the string "yes" or "no". If the response does not
-contain "yes" or "no" vocabulary then the entire utterance will be returned. 
-
-If no speech was detected indicating the User did not respond, or said something unexpected, then the method will return `None`.
-
-`None` indicates an invalid answer, this tells the skill it should handle the error, such as by asking the question again
-
-Let's add a new intent to our `IceCreamSkill` to see how this works.
+Detects affirmations or negations from user responses.
 
 ```python
 from ovos_workshop.skills import OVOSSkill
 from ovos_workshop.decorators import intent_handler
-
 
 class IceCreamSkill(OVOSSkill):
     @intent_handler('do.you.like.intent')
@@ -94,24 +75,24 @@ class IceCreamSkill(OVOSSkill):
             self.speak_dialog('could.not.understand')
 ```
 
-In this example we have asked the User if they like ice cream. We then speak different dialog whether they respond yes
-or no. We also speak some error dialog if neither yes nor no are returned.
+**Behavior:**
 
-A dedicated parser for each language is provided by [ovos-lingua-franca](https://github.com/OpenVoiceOS/ovos-lingua-franca/blob/dev/lingua_franca/parse.py#L121),
-ensuring we can understand nuances such as double negation
+- Returns `"yes"` or `"no"` for matching phrases.
+- Returns the full utterance if unclear.
+- Returns `None` if no valid response is detected.
 
-Some example sentences that would be considered either "yes" or "no". 
+> uses [ovos-solver-YesNo-plugin](https://github.com/OpenVoiceOS/ovos-solver-YesNo-plugin) to understand complex affirmations and denials — even double negations.
 
-| Test Utterance                    | Expected Result |
-|-----------------------------------|-----------------|
-| "beans"                           | None            |
-| "yes"                             | "yes"           |
-| "no"                              | "no"            |
-| "don't think so"                  | "no"            |
-| "i think not"                     | "no"            |
-| "that's affirmative"              | "yes"           |
-| "no, but actually, yes"           | "yes"           |
-| "yes, but actually, no"           | "no"            |
+Example mappings:
+
+| User Says                        | Detected As |
+|----------------------------------|--------------|
+| "yes"                            | yes          |
+| "no"                             | no           |
+| "don't think so"                 | no           |
+| "that's affirmative"             | yes          |
+| "no, but actually, yes"          | yes          |
+| "yes, but actually, no"          | no           |
 | "yes, yes, yes, but actually, no" | "no"            |
 | "please"                          | "yes"           |
 | "please don't"                    | "no"            |
@@ -135,22 +116,17 @@ Some example sentences that would be considered either "yes" or "no".
 | "he is not lying"                 | "yes"           |
 | "you are not mistaken"            | "yes"           |
 | "tou are not wrong"               | "yes"           |
+| "beans"                           | None            |
 
-## Providing a list of options
+---
 
-`ask_selection()` provides a list of options to the User for them to select from. The User can respond with either the
-name of one of these options or select with a numbered ordinal eg "the third".
+### 4. Multiple-Choice Prompts with `ask_selection()`
 
-This method automatically manages fuzzy matching the users response against the list of options provided. 
-
-It also understands "numeric" responses, such as "the first option", "the third one", "option 4", "the last one"
-
-Let's jump back into our `IceCreamSkill` to give the User a list of options to choose from.
+Let users choose from a list of options, by name or number.
 
 ```python
 from ovos_workshop.skills import OVOSSkill
 from ovos_workshop.decorators import intent_handler
-
 
 class IceCreamSkill(OVOSSkill):
     def initialize(self):
@@ -160,17 +136,29 @@ class IceCreamSkill(OVOSSkill):
     def handle_request_icecream(self):
         self.speak_dialog('welcome')
         selection = self.ask_selection(self.flavors, 'what.flavor')
-        self.speak_dialog('coming.right.up', {'flavor': selection})
+        self.speak_dialog('coming.right_up', {'flavor': selection})
 ```
 
-In this example we first speak some `welcome.dialog`. The list of flavors is then spoken, followed by
-the `what.flavor.dialog`. Finally, we confirm the Users selection by speaking `coming.right.up.dialog`
+**Optional arguments:**
 
-### Optional arguments
+- `min_conf` (float): Minimum confidence threshold for fuzzy matching
+- `numeric` (bool): If `True`, speak the list with numbered options
 
-There are two optional arguments for this method.
+User responses like "chocolate", "the second one", or "option three" are all supported.
 
-`min_conf` (float) defines the minimum confidence level for fuzzy matching the Users response against the list of
-options. `numeric` (bool) if set to True will speak the options as a numbered list eg "One, vanilla. Two, chocolate. Or
-three, mint"
+---
+
+## Technical Notes
+
+- All methods handle microphone activation and parsing behind the scenes.
+- OVOS automatically integrates with the intent engine to resolve follow-up responses.
+- These prompts are designed to support natural dialogue flows, validating and re-prompting as needed.
+
+---
+
+## Tips
+
+- Always confirm user input when using `get_response()` or `ask_selection()` for clarity.
+- Use `validator` with `get_response()` to catch unclear or unwanted input.
+- Use `ask_yesno()` for quick binary decisions, but gracefully handle unexpected answers.
 
