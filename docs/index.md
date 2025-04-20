@@ -21,7 +21,7 @@ OVOS is designed to work wherever voice interfaces are needed — whether that�
 
 ---
 
-## 🖥️ OVOS Distros
+## OVOS Distros
 
 If you’d rather not install and configure components manually, OVOS has several prebuilt distributions:
 

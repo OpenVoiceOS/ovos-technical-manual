@@ -43,7 +43,7 @@ pip install ovos-core[mycroft] --pre -c https://raw.githubusercontent.com/OpenVo
 
 ---
 
-## 🔧 OVOS From Scratch: Custom Installation
+## OVOS From Scratch: Custom Installation
 
 Rather than using a full distro, you can manually pick which components to install:
 
@@ -102,6 +102,7 @@ pip install ovos-core[mycroft,plugins,skills-essential]
 - Using `--pre` installs pre-releases across all dependencies, not just OVOS-specific ones — so use with caution.
 - You can mix and match extras based on your hardware or use case, e.g., omit GUI skills on a headless server.
 - When using constraints files, make sure all packages are pinned — it avoids installing incompatible versions.
+- After installing you need to launch the individual ovos services, either manually or by creating a systemd service
 
 ---
 

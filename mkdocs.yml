@@ -3,9 +3,16 @@ site_url: https://openvoiceos.github.io/ovos-technical-manual
 nav:
   - Home:
       - Introduction: index.md
-      - Release Channels: 001-release_channels.md
       - License: 002-license.md
       - Timeline: 003-timeline.md
+  - Getting Started:
+      - Manual Install: 001-release_channels.md
+      - ovos-installer: 50-ovos_installer.md
+      - RaspOVOS: 51-install_raspovos.md
+      - Default Skills: 54-skill-examples.md
+      - RaspOVOS Troubleshooting: 55-raspovos_troubleshooting.md
+  - Language Support:
+      - Translations: lang_support.md
   - Architecture:
       - Overview: 99-architecture-overview.md
       - Bus: 100-bus_service.md
