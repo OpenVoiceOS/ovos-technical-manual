@@ -36,6 +36,9 @@ The `hivemind-persona-agent-plugin` project allows you to **expose a single pers
 
 This enables you to deploy AI agents for external use without needing a full OVOS assistant.
 
+![Untitled-2025-04-15-2340(15)](https://github.com/user-attachments/assets/f71d24c2-8a12-472b-9a44-3034fe6595e3)
+
+
 ### Why Use It?
 - Minimal attack surface (persona only, no full assistant features).
 - Can be queried remotely using the HiveMind protocol.
