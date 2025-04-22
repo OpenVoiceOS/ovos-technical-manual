@@ -117,7 +117,8 @@ Each strategy enables different dynamics between solvers—be it a single judge,
 
 An advanced trick: **`ovos-core` itself can act as a solver plugin**. This allows you to expose OVOS itself as an agent to other applications in localhost
 
-![Untitled-2025-04-15-2340(2)](https://github.com/user-attachments/assets/534759ee-39a6-4ac7-aaaf-5fae71816f41)
+![Untitled-2025-04-15-2340(3)](https://github.com/user-attachments/assets/8022ff8a-5847-4bd7-93eb-316830ae7849)
+
 
 - 🐳 Good for chaining OVOS instances in docker.
 - 🦾 Use skills in a collaborative AI / MoS (mixture-of-solvers) setup.
