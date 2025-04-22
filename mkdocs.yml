@@ -26,6 +26,7 @@ nav:
   - AI Agents:
       - Personas: 150-personas.md
       - Persona Pipeline: 153-persona_pipeline.md
+      - Specialized Solvers: 150-advanced_solvers.md
       - Transformers: 151-llm-transformers.md
   - Self Hosting:
       - Persona Server: 202-persona_server.md
