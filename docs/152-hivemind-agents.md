@@ -77,6 +77,8 @@ The hivemind-bus-client can function as a solver plugin, allowing you to:
 - 🦾 Delegate processing to a more powerful/secure server for specific tasks.
 - 🌍 Handle outages: Handle intermitent local agent failures from other solver plugins in your persona definition
 - 🤝 Use remote hivemind agents in a collaborative AI / MoS (mixture-of-solvers) setup.
+  
+![Untitled-2025-04-15-2340(14)](https://github.com/user-attachments/assets/3222e4f3-ba75-4e95-9775-7a39c8e06381)
 
 > 🤖 *“When in doubt, ask a smarter OVOS.”*
 
