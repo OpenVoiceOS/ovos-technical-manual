@@ -142,6 +142,8 @@ Examples include:
 
 Each strategy enables different dynamics between solvers—be it a single judge, a voting panel, or a back-and-forth discussion between agents.
 
+![Untitled-2025-04-15-2340(17)](https://github.com/user-attachments/assets/64748c82-c17d-4421-a9d6-62b24f779dd2)
+
 ---
 
 ## OVOS as a Solver Plugin
