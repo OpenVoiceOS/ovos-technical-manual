@@ -8,6 +8,9 @@ OpenVoiceOS (OVOS) introduces a flexible and modular system for integrating AI a
 
 At the core of the AI agent system are [**solver plugins**](https://openvoiceos.github.io/ovos-technical-manual//360-solver_plugins/). These are simple black-box components responsible for handling a single task: receiving a text input (typically a question) and returning a text output (typically an answer).
 
+![Untitled-2025-04-15-2340](https://github.com/user-attachments/assets/8a58417d-409e-4b87-94d0-0f2234064981)
+
+
 ### Key Features:
 - **Input/Output**: Plain text in, plain text out.
 - **Functionality**: Usually question-answering, though more specialized solvers exist (e.g., summarization, multiple choice).
@@ -114,6 +117,8 @@ Each strategy enables different dynamics between solvers—be it a single judge,
 
 An advanced trick: **`ovos-core` itself can act as a solver plugin**. This allows you to expose OVOS itself as an agent to other applications in localhost
 
+![Untitled-2025-04-15-2340(2)](https://github.com/user-attachments/assets/534759ee-39a6-4ac7-aaaf-5fae71816f41)
+
 - 🐳 Good for chaining OVOS instances in docker.
 - 🦾 Use skills in a collaborative AI / MoS (mixture-of-solvers) setup.
 - ❌ `ovos-bus-solver-plugin` makes **no sense inside a local persona** (infinite loop!), but is **great for standalone usage**.
@@ -135,7 +140,6 @@ An advanced trick: **`ovos-core` itself can act as a solver plugin**. This allow
 ```
 
 > 💡 if you are looking to access OVOS remotely or expose it as a service see [hivemind agents documentation](https://openvoiceos.github.io/ovos-technical-manual/152-hivemind-agents/) for a more secure alternative
-
 
 ---
 
