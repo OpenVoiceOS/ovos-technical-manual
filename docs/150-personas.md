@@ -21,12 +21,17 @@ At the core of the AI agent system are [**solver plugins**](https://openvoiceos.
 
 ## Personas (Agent Definition Layer)
 
-A **persona** represents a higher-level abstraction over solver plugins. It behaves like an AI agent with a defined personality and behavior, built by combining one or more solvers in a specific order.
+A **persona** represents a higher-level abstraction over solver plugins. It behaves like an AI agent with a defined personality and behavior, built by combining one or more solvers in a specific order
 
 ### Key Features:
 - **Composition**: Each persona consists of a name, a list of solver plugins, and optional configuration for each.
 - **Chained Execution**: When a user question is received, the persona tries solvers one by one. If the first solver fails (returns `None`), the next one is tried until a response is generated.
 - **Customizable Behavior**: Different personas can emulate different personalities or knowledge domains by varying their solver stack.
+
+![Untitled-2025-04-15-2340(7)](https://github.com/user-attachments/assets/453a906f-6d38-4878-ae7b-49b24270339f)
+
+![Untitled-2025-04-15-2340(8)](https://github.com/user-attachments/assets/731835a3-44b1-463d-9fc6-085ca2658abc)
+
 
 ```
 {
@@ -42,6 +47,7 @@ A **persona** represents a higher-level abstraction over solver plugins. It beha
   "ovos-solver-plugin-wolfram-alpha": {"appid": "Y7353-XXX"}
 }
 ```
+
 
 > 💡 personas don't need to use LLMs, you don't need a beefy GPU to use ovos-persona, any solver plugin can be used to define a persona
 
@@ -81,6 +87,31 @@ in your `mycroft.conf`
           "fallback_low"
     ]
   }
+}
+```
+
+---
+
+## ReRankers / MultipleChoiceQuestionSolvers
+
+A specialized kind of solver plugin that chooses the best answer out of several options
+
+![Untitled-2025-04-15-2340(1)](https://github.com/user-attachments/assets/61c5034b-e54f-434a-8cbf-e967154af983)
+
+These specialized solvers are used internally by [ovos-common-query-pipeline-plugin](https://github.com/OpenVoiceOS/ovos-common-query-pipeline-plugin), some skills and even by other question solver plugins!
+
+Example configuration of [ovos-flashrank-reranker-plugin](https://github.com/TigreGotico/ovos-flashrank-reranker-plugin) for usage with `ovos-common-query-pipeline-plugin`
+
+```json
+"intents": {
+    "common_query": {
+        "min_self_confidence": 0.5,
+        "min_reranker_score": 0.5,
+        "reranker": "ovos-flashrank-reranker-plugin",
+        "ovos-flashrank-reranker-plugin": {
+          "model": "ms-marco-TinyBERT-L-2-v2"
+        }
+    }
 }
 ```
 
