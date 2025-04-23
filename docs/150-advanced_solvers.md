@@ -69,8 +69,8 @@ Instead of relying on a single model or backend, a MoS solver delegates the quer
 Examples include:
 
 - **The King**: Uses a central "king" (reranker or LLM) to select or generate the best answer based on multiple solver outputs.
-  
-![Untitled-2025-04-15-2340(17)](https://github.com/user-attachments/assets/64748c82-c17d-4421-a9d6-62b24f779dd2)
+
+![Untitled-2025-04-15-2340(25)](https://github.com/user-attachments/assets/733bb874-2ee1-4e98-a7c3-ab084edfe4d9)
 
 ---
 
