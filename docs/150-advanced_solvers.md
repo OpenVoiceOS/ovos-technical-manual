@@ -29,6 +29,29 @@ Example configuration of [ovos-flashrank-reranker-plugin](https://github.com/Tig
 
 ---
 
+## Evidence Solver
+
+Evidence solvers accept not only a question but also a companion piece of text containing the answer.
+
+Some question solver plugins like `ovos-solver-wikipedia-plugin` use evidence solvers internally, they are often helpful to generate a question out of a search result
+
+![Untitled-2025-04-15-2340(9)](https://github.com/user-attachments/assets/0c02a323-2098-4e4d-a577-0721e8326380)
+
+![Untitled-2025-04-15-2340(10)](https://github.com/user-attachments/assets/d789d3ce-b425-405c-8ae1-3ff495817507)
+
+---
+
+## Summarizer
+
+Some question solver plugin use summarizers internally, they are often helpful to shorten long text from web search results
+
+![Untitled-2025-04-15-2340(11)](https://github.com/user-attachments/assets/1ae97ca9-e33e-4448-abec-311f99074bbd)
+
+![Untitled-2025-04-15-2340(12)](https://github.com/user-attachments/assets/416e0eb9-0da9-4515-9c69-7667fb878ba5)
+
+
+---
+
 ## Collaborative Agents via MoS (Mixture of Solvers)
 
 One of the most powerful features of the OVOS solver architecture is its ability to **orchestrate multiple agents collaboratively** through specialized **Mixture of Solvers (MoS)** plugins.
@@ -64,27 +87,4 @@ Each strategy enables different dynamics between solvers—be it a single judge,
 
 
 > 🌀 **Recursive Composition**: Any MoS strategy can recursively use another MoS as a sub-solver, allowing for arbitrarily deep collaboration trees.
-
-
----
-
-## Evidence Solver
-
-Evidence solvers accept not only a question but also a companion piece of text containing the answer.
-
-Some question solver plugins like `ovos-solver-wikipedia-plugin` use evidence solvers internally, they are often helpful to generate a question out of a search result
-
-![Untitled-2025-04-15-2340(9)](https://github.com/user-attachments/assets/0c02a323-2098-4e4d-a577-0721e8326380)
-
-![Untitled-2025-04-15-2340(10)](https://github.com/user-attachments/assets/d789d3ce-b425-405c-8ae1-3ff495817507)
-
----
-
-## Summarizer
-
-Some question solver plugin use summarizers internally, they are often helpful to shorten long text from web search results
-
-![Untitled-2025-04-15-2340(11)](https://github.com/user-attachments/assets/1ae97ca9-e33e-4448-abec-311f99074bbd)
-
-![Untitled-2025-04-15-2340(12)](https://github.com/user-attachments/assets/416e0eb9-0da9-4515-9c69-7667fb878ba5)
 
