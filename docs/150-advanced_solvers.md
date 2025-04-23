@@ -69,17 +69,20 @@ Instead of relying on a single model or backend, a MoS solver delegates the quer
 Examples include:
 
 - **The King**: Uses a central "king" (reranker or LLM) to select or generate the best answer based on multiple solver outputs.
+  
 ![Untitled-2025-04-15-2340(17)](https://github.com/user-attachments/assets/64748c82-c17d-4421-a9d6-62b24f779dd2)
 
 ---
 
 - **Democracy**: Implements a voting system among reranker solvers to choose the most agreed-upon response.
-![Untitled-2025-04-15-2340(19)](https://github.com/user-attachments/assets/df41d305-72ba-4420-9b7c-948cae0a6b7c)
+
+![Untitled-2025-04-15-2340(23)](https://github.com/user-attachments/assets/088939db-08df-4a03-b194-e0e6a823ef51)
 
 ---
 
 - **Duopoly**: A pair of collaborating LLMs generate and discuss answers before passing them to a final decider ("the president" solver).
-![Untitled-2025-04-15-2340(21)](https://github.com/user-attachments/assets/1077ac42-bb24-44fd-940e-dde8ff5d7d5b)
+  
+![Untitled-2025-04-15-2340(24)](https://github.com/user-attachments/assets/cf5a2d82-b768-42c4-9d44-068d5c2d2d42)
 
 ---
 
