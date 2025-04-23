@@ -3,14 +3,13 @@ site_url: https://openvoiceos.github.io/ovos-technical-manual
 nav:
   - Home:
       - Introduction: index.md
-      - License: 002-license.md
-      - Timeline: 003-timeline.md
   - Getting Started:
-      - Manual Install: 001-release_channels.md
       - ovos-installer: 50-ovos_installer.md
-      - RaspOVOS: 51-install_raspovos.md
+      - Manual Install: 001-release_channels.md
+  - RaspOVOS:
+      - Tutorial: 51-install_raspovos.md
       - Default Skills: 54-skill-examples.md
-      - RaspOVOS Troubleshooting: 55-raspovos_troubleshooting.md
+      - Troubleshooting: 55-raspovos_troubleshooting.md
   - Language Support:
       - Translations: lang_support.md
   - Architecture:
@@ -91,6 +90,9 @@ nav:
       - Quebra Frases: 910-quebra_frases.md
       - Padacioso: 920-padacioso.md
       - Mark1 Utils: 801-mk1_utils.md
+  - Misc. Information:
+      - License: 002-license.md
+      - Timeline: 003-timeline.md
 theme: readthedocs
 extra_css:
   - css/extra.css
