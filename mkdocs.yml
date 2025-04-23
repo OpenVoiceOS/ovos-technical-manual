@@ -87,6 +87,9 @@ nav:
       - OCP Stream Extractors: 370-ocp_plugins.md
       - Media Playback: 371-media_plugins.md
   - Misc. Utilities:
+      - Number Parser: 891-number_parser.md
+      - Date Parser: 890-date_parser.md
+      - Color Parser: 893-color_parser.md
       - Quebra Frases: 910-quebra_frases.md
       - Padacioso: 920-padacioso.md
       - Mark1 Utils: 801-mk1_utils.md
