@@ -1,6 +1,6 @@
 ## Contribute to Our Project Translations with GitLocalize!
 
-<iframe width="1324" height="745" src="https://www.youtube.com/embed/2udvdIW9W2s" title="OVOS translation guide (preview)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/2udvdIW9W2s" title="OVOS translation guide" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 Thank you for your interest in helping translate our project! Your contributions will help make our project accessible to more people around the world. We’ve made it easy for you to get started, even if you’re not familiar with GitHub or coding. Follow the steps below to join our translation effort using GitLocalize.
 
