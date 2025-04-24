@@ -12,6 +12,7 @@ nav:
       - Troubleshooting: 55-raspovos_troubleshooting.md
   - Language Support:
       - Translations: lang_support.md
+      - GitLocalize: gitlocalize_tutorial.md
   - Architecture:
       - Overview: 99-architecture-overview.md
       - Bus: 100-bus_service.md
