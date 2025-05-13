@@ -18,6 +18,7 @@ nav:
       - Bus: 100-bus_service.md
       - Listener: 101-speech_service.md
       - Core: 102-core.md
+      - Skills and Intents: 399-intents.md
       - Audio: 103-audio_service.md
       - GUI: 104-gui_service.md
       - Platform/Hardware Abstraction Layer: 340-PHAL.md
@@ -38,7 +39,7 @@ nav:
       - Design Guidelines: 400-skill-design-guidelines.md
       - Anatomy: 401-skill_structure.md
       - Dialog: 402-statements.md
-      - Intents: 403-intents.md
+      - Intent Design: 403-intents.md
       - Customization: 405-customization.md
       - Bus Interaction: 406-messagebus.md
       - Filesystem: 407-skill_filesystem.md

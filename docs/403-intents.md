@@ -1,4 +1,4 @@
-# Intents
+# Intent Design
 
 A user can accomplish the same task by expressing their intent in multiple ways. The role of the intent parser is to
 extract from the user's speech key data elements that specify their intent in more detail. This data can then be passed
@@ -463,12 +463,6 @@ class TomatoSkill(OVOSSkill):
                               {'type': tomato_type})
         else:
             self.speak_dialog('like.tomato.generic')
-
-    def stop(self):
-        pass
-
-def create_skill():
-    return TomatoSkill()
 ```
 
 See a Padatious intent handler example in the [Hello World Skill](https://github.com/MycroftAI/skill-hello-world/blob/67a972792a07da7e3406bf7f94acd54aa2674829/__init__.py#L42)
