@@ -24,10 +24,26 @@ nav:
       - Platform/Hardware Abstraction Layer: 340-PHAL.md
       - Plugin Manager: 300-plugin-manager.md
       - Configuration: 110-config.md
+  - Intent Pipelines:
+      - Overview: pipelines_overview.md
+      - Adapt: adapt_pipeline.md
+      - Padatious: padatious_pipeline.md
+      - Model2Vec: m2v_pipeline.md
+      - Converse: converse_pipeline.md
+      - Stop: stop_pipeline.md
+      - Persona: 153-persona_pipeline.md
+      - Common Query: cq_pipeline.md
+      - OCP: 631-OCP_pipeline.md
+      - Fallback: fallback_pipeline.md
+  - Transformers:
+      - Audio: audio_transformers.md
+      - Utterance: utterance_transformers.md
+      - Intents: intent_transformers.md
+      - Dialog: dialog_transformers.md
+      - TTS: tts_transformers.md
   - AI Agents:
       - Personas: 150-personas.md
-      - Persona Pipeline: 153-persona_pipeline.md
-      - Transformers: 151-llm-transformers.md
+      - AI Transformers: 151-llm-transformers.md
       - Specialized Solvers: 150-advanced_solvers.md
   - Self Hosting:
       - Persona Server: 202-persona_server.md
@@ -55,15 +71,11 @@ nav:
       - Converse: 502-converse.md
       - Intent Layers: 503-layers.md
       - Session Aware Skills: 504-session.md
-  - Fallback:
+  - Advanced Skill Types:
       - Fallback Skills: 600-fallbacks.md
-  - Common Query:
       - Common Query Skills: 610-common_query.md
-  - Auto Translation:
-      - Universal Skills: 620-universal_skills.md
-  - Media:
       - Media Skills: 630-OCP_skills.md
-      - OCP Pipeline: 631-OCP_pipeline.md
+      - Universal Skills: 620-universal_skills.md
   - GUI:
       - Homescreen: 700-homescreen.md
       - Protocol: 701-gui_protocol.md

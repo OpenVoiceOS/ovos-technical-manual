@@ -1,4 +1,4 @@
-# 🔧 Transformer Plugins (Runtime Modifiers)
+# Generative AI Transformer Plugins
 
 **Transformer plugins** operate independently of personas and provide fine-grained control over OVOS’s internal processing pipeline. They are not part of the persona framework but can synergize with it.
 

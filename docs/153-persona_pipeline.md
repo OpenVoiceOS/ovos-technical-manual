@@ -31,7 +31,7 @@ You must **insert these plugin IDs** in your `mycroft.conf` under the `intents.p
 
 ## Configuration
 
-```jsonc
+```json
 {
   "intents": {
     "persona": {
