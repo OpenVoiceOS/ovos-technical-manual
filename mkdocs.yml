@@ -45,6 +45,7 @@ nav:
       - Personas: 150-personas.md
       - AI Transformers: 151-llm-transformers.md
       - Specialized Solvers: 150-advanced_solvers.md
+      - Tools for Agents: tools.md
   - Self Hosting:
       - Persona Server: 202-persona_server.md
       - HiveMind: 152-hivemind-agents.md
