@@ -29,8 +29,6 @@ If the screen size allows it platform specific gui client applications are free 
 
 The GUI clients may be implemented in any programming language, the default page templates provided to skills via [GUIInterface](https://openvoiceos.github.io/ovos-technical-manual/skill_gui) should be implemented and provided by all alternative clients.
 
-> **QML tip**: - set `fillWidth: true` under `Mycroft.Delegate` to have a page always using the full screen
-
 ## Active Namespaces
 
 In the context of a smartspeaker, when the GUI is idle a `homescreen` may be displayed, eg. an animated face or clock
@@ -58,23 +56,6 @@ Example:
 - music ends and page times out - homescreen is the active `namespace`
 
 > **NOTE**: GUI does not yet support Session, in the future namespaces will be tracked per Session allowing remote clients to each have their own GUI state
-
-## GUI Plugins
-
-**NEW** in `ovos-core` version **0.0.8**
-
-The active namespace is tracked by `ovos-gui` and manages
-the [homescreen skill](https://github.com/OpenVoiceOS/skill-ovos-homescreen), desktop implementations like Plasma
-Bigscreen do not have a homescreen, instead they manage each skill in their own window
-
-A single GUI plugin can be loaded in `ovos-gui` to handle bus events and provide companion python code to GUI clients,
-this is usually done by your OS and specific to a use case.
-
-| plugin                                                                                            | description                                                                                                                                       | notes                                                                                                                                                                                                                 |
-|---------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [ovos-gui-plugin-shell-companion](https://github.com/OpenVoiceOS/ovos-gui-plugin-shell-companion) | extra functionality for ovos-shell                                                                                                                | [message specs](https://openvoiceos.github.io/message_spec/shell)                                                                                                                                                     |
-| [ovos-gui-plugin-bigscreen](https://github.com/OVOSHatchery/ovos-gui-plugin-bigscreen)            | window management for [Plasma Bigscreen](https://invent.kde.org/plasma/plasma-bigscreen) [Voice Apps](https://plasma-bigscreen.org/docs/develop/) | **UNMAINTED** <br> [message specs](https://openvoiceos.github.io/message_spec/gui_bigscreen/) <br> backup fork in life support [ovos-plasma-bigscreen-qt5](https://github.com/OVOSHatchery/ovos-plasma-bigscreen-qt5) |
-| [ovos-gui-plugin-plasmoid](https://github.com/OVOSHatchery/ovos-gui-plugin-plasmoid)              | [Plasma integration of different Mycroft AI services](https://invent.kde.org/utilities/mycroft-plasmoid)                                          | **UNMAINTED** <br> never migrated to OVOS                                                                                                                                                                             |
 
 
 ## Configuration
