@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://openvoiceos.github.io/ovos-technical-manual/54-skill-examples/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Default Skills - OVOS Technical Manual</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Default Skills";
+        var mkdocs_page_input_path = "54-skill-examples.md";
+        var mkdocs_page_url = "/ovos-technical-manual/54-skill-examples/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OVOS Technical Manual
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Home</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../50-ovos_installer/">ovos-installer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../001-release_channels/">Manual Install</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">RaspOVOS</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../51-install_raspovos/">Tutorial</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Default Skills</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#ovos-skill-alertsopenvoiceos">ovos-skill-alerts.openvoiceos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ovos-skill-cmdforslund">ovos-skill-cmd.forslund</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ovos-skill-confucius-quotesopenvoiceos">ovos-skill-confucius-quotes.openvoiceos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ovos-skill-days-in-historyopenvoiceos">ovos-skill-days-in-history.openvoiceos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ovos-skill-dictationopenvoiceos">ovos-skill-dictation.openvoiceos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ovos-skill-ipopenvoiceos">ovos-skill-ip.openvoiceos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ovos-skill-iss-locationopenvoiceos">ovos-skill-iss-location.openvoiceos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ovos-skill-moviemasteropenvoiceos">ovos-skill-moviemaster.openvoiceos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ovos-skill-number-factsopenvoiceos">ovos-skill-number-facts.openvoiceos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ovos-skill-personalopenvoiceos">ovos-skill-personal.openvoiceos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ovos-skill-pyradiosopenvoiceos">ovos-skill-pyradios.openvoiceos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ovos-skill-speedtestopenvoiceos">ovos-skill-speedtest.openvoiceos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ovos-skill-wikihowopenvoiceos">ovos-skill-wikihow.openvoiceos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#skill-ovos-audio-recordingopenvoiceos">skill-ovos-audio-recording.openvoiceos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#skill-ovos-boot-finishedopenvoiceos">skill-ovos-boot-finished.openvoiceos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#skill-ovos-date-timeopenvoiceos">skill-ovos-date-time.openvoiceos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#skill-ovos-ddgopenvoiceos">skill-ovos-ddg.openvoiceos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#skill-ovos-hello-worldopenvoiceos">skill-ovos-hello-world.openvoiceos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#skill-ovos-icanhazdadjokesopenvoiceos">skill-ovos-icanhazdadjokes.openvoiceos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#skill-ovos-local-mediaopenvoiceos">skill-ovos-local-media.openvoiceos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#skill-ovos-naptimeopenvoiceos">skill-ovos-naptime.openvoiceos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#skill-ovos-newsopenvoiceos">skill-ovos-news.openvoiceos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#skill-ovos-parrotopenvoiceos">skill-ovos-parrot.openvoiceos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#skill-ovos-somafmopenvoiceos">skill-ovos-somafm.openvoiceos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#skill-ovos-spellingopenvoiceos">skill-ovos-spelling.openvoiceos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#skill-ovos-volumeopenvoiceos">skill-ovos-volume.openvoiceos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#skill-ovos-weatheropenvoiceos">skill-ovos-weather.openvoiceos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#skill-ovos-wikipediaopenvoiceos">skill-ovos-wikipedia.openvoiceos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#skill-ovos-wolfieopenvoiceos">skill-ovos-wolfie.openvoiceos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#skill-ovos-wordnetopenvoiceos">skill-ovos-wordnet.openvoiceos</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../55-raspovos_troubleshooting/">Troubleshooting</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Language Support</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../lang_support/">Translations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gitlocalize_tutorial/">GitLocalize Tutorial</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Architecture</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../99-architecture-overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../100-bus_service/">Bus</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../101-speech_service/">Listener</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../102-core/">Core</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../399-intents/">Skills and Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../103-audio_service/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../104-gui_service/">GUI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../340-PHAL/">Platform/Hardware Abstraction Layer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../300-plugin-manager/">Plugin Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../110-config/">Configuration</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Intent Pipelines</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../pipelines_overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../adapt_pipeline/">Adapt</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../padatious_pipeline/">Padatious</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../m2v_pipeline/">Model2Vec</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../converse_pipeline/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../stop_pipeline/">Stop</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../153-persona_pipeline/">Persona</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cq_pipeline/">Common Query</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../631-OCP_pipeline/">OCP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fallback_pipeline/">Fallback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Transformers</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../audio_transformers/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../utterance_transformers/">Utterance</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../intent_transformers/">Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dialog_transformers/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_transformers/">TTS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">AI Agents</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../150-personas/">Personas</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../151-llm-transformers/">AI Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../150-advanced_solvers/">Specialized Solvers</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Self Hosting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../202-persona_server/">Persona Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../152-hivemind-agents/">HiveMind</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../200-stt_server/">STT Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../201-tts_server/">TTS Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../203-translate_server/">Translate Server</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Skill Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../400-skill-design-guidelines/">Design Guidelines</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../401-skill_structure/">Anatomy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../402-statements/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../403-intents/">Intent Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../405-customization/">Customization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../406-messagebus/">Bus Interaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../407-skill_filesystem/">Filesystem</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../408-skill_settings/">Skill Settings</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../409-skill_api/">Skill API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../410-skill_runtime_requirements/">Runtime Requirements</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../411-skill_json/">Skill Json</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../420-ssml/">SSML</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../430-skill_dev_faq/">F.A.Q.</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Continuous Conversation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../500-prompts/">Prompts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../501-context/">Follow up Questions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../502-converse/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../503-layers/">Intent Layers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../504-session/">Session Aware Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Advanced Skill Types</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../600-fallbacks/">Fallback Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../610-common_query/">Common Query Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../630-OCP_skills/">Media Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../620-universal_skills/">Universal Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">GUI</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../701-gui_protocol/">Protocol</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Voice Apps</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../590-voice_apps/">Standalone Apps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">MessageBus</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../900-bus_client/">Messagebus Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../720-skill_gui/">GUI Interface</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../800-mk1_api/">Enclosure Api</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Plugin Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../310-mic_plugins/">Microphone</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../311-vad_plugins/">Voice Activity Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../312-wake_word_plugins/">Wake Word</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../313-stt_plugins/">Speech To Text</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../320-tts_plugins/">Text To Speech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../321-g2p_plugins/">Grapheme to Phoneme</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../330-transformer_plugins/">Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../350-translation_plugins/">Language Detection/Translation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../370-ocp_plugins/">OCP Stream Extractors</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../371-media_plugins/">Media Playback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Misc. Utilities</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../891-number_parser/">Number Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../890-date_parser/">Date Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../893-color_parser/">Color Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../910-quebra_frases/">Quebra Frases</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../920-padacioso/">Padacioso</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../801-mk1_utils/">Mark1 Utils</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Misc. Information</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../002-license/">License</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../003-timeline/">Timeline</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OVOS Technical Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">RaspOVOS</li>
+      <li class="breadcrumb-item active">Default Skills</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="default-skills-overview">Default Skills overview</h1>
+<p>A non-exhaustive list of skills available for OpenVoiceOS, these might be available out of the box or not depending on how you installed OVOS</p>
+<hr />
+<h2 id="ovos-skill-alertsopenvoiceos">ovos-skill-alerts.openvoiceos</h2>
+<p>A skill to manage alarms, timers, reminders, events and todos and optionally sync them with a CalDAV service.</p>
+<p><strong>Usage examples:</strong></p>
+<ul>
+<li>What are my reminders?</li>
+<li>Cancel all reminders.</li>
+<li>When is my next alarm?</li>
+<li>Schedule a tennis event for 2 PM on friday spanning 2 hours.</li>
+<li>What did I miss?</li>
+<li>remind me to take out the trash every Thursday and Sunday at 7 PM.</li>
+<li>Start a bread timer for 30 minutes.</li>
+<li>Did I miss anything?</li>
+<li>Set an alarm for 8 AM.</li>
+<li>Set a daily alarm for 8 AM.</li>
+</ul>
+<hr />
+<h2 id="ovos-skill-cmdforslund">ovos-skill-cmd.forslund</h2>
+<p>No description available</p>
+<p><strong>Usage examples:</strong></p>
+<ul>
+<li>run script ___</li>
+<li>launch command ___</li>
+</ul>
+<hr />
+<h2 id="ovos-skill-confucius-quotesopenvoiceos">ovos-skill-confucius-quotes.openvoiceos</h2>
+<p>Quotes from Confucius</p>
+<p><strong>Usage examples:</strong></p>
+<ul>
+<li>Quote from Confucius</li>
+<li>When did Confucius die</li>
+<li>When was Confucius born</li>
+<li>Who is Confucius</li>
+</ul>
+<hr />
+<h2 id="ovos-skill-days-in-historyopenvoiceos">ovos-skill-days-in-history.openvoiceos</h2>
+<p>Provides historical events for today or any other calendar day using information pulled from Wikipedia.</p>
+<p><strong>Usage examples:</strong></p>
+<ul>
+<li>who died today in history?</li>
+<li>who was born today in history?</li>
+<li>What historical events happened on June 16th?</li>
+<li>Tell me about events in history on December 12th</li>
+<li>What happened today in history?</li>
+</ul>
+<hr />
+<h2 id="ovos-skill-dictationopenvoiceos">ovos-skill-dictation.openvoiceos</h2>
+<p>continuously transcribes user speech to text file while enabled</p>
+<p><strong>Usage examples:</strong></p>
+<ul>
+<li>start dictation</li>
+<li>end dictation</li>
+</ul>
+<hr />
+<h2 id="ovos-skill-ipopenvoiceos">ovos-skill-ip.openvoiceos</h2>
+<p>Network connection information</p>
+<p><strong>Usage examples:</strong></p>
+<ul>
+<li>What's your IP address?</li>
+<li>What's your network address?</li>
+<li>Tell me your network address</li>
+<li>What network are you connected to?</li>
+<li>Tell me your IP address</li>
+</ul>
+<hr />
+<h2 id="ovos-skill-iss-locationopenvoiceos">ovos-skill-iss-location.openvoiceos</h2>
+<p>Track the location of the ISS</p>
+<p><strong>Usage examples:</strong></p>
+<ul>
+<li>When is the ISS passing over</li>
+<li>Where is the ISS</li>
+<li>Tell me about the IS</li>
+<li>how many persons on board of the space station</li>
+<li>Who is on board of the space station?</li>
+</ul>
+<hr />
+<h2 id="ovos-skill-moviemasteropenvoiceos">ovos-skill-moviemaster.openvoiceos</h2>
+<p>Find information about movies, actors, and production details. Easily find information about a movie with your voice.</p>
+<p><strong>Usage examples:</strong></p>
+<ul>
+<li>What are popular movies playing now?</li>
+<li>Tell me about the movie <strong><em>_</em></strong></li>
+<li>What genres does the flick <strong><em>_</em></strong> belong to?</li>
+<li>Who plays in the movie <strong><em>_</em></strong>?</li>
+<li>How long is the movie <strong><em>_</em></strong>?</li>
+<li>Look for information on the movie <strong><em>_</em></strong>.</li>
+<li>Do you have info on the film <strong><em>_</em></strong>?</li>
+<li>What is the movie <strong><em>_</em></strong> about?</li>
+<li>What are the highest rated movies out?</li>
+<li>When was the movie <strong><em>_</em></strong> made?</li>
+</ul>
+<hr />
+<h2 id="ovos-skill-number-factsopenvoiceos">ovos-skill-number-facts.openvoiceos</h2>
+<p>Facts about numbers</p>
+<p><strong>Usage examples:</strong></p>
+<ul>
+<li>random number trivia</li>
+<li>trivia about next week</li>
+<li>trivia about tomorrow</li>
+<li>fact about number 666</li>
+<li>fact about yesterday</li>
+<li>curiosity about year 1992</li>
+<li>math fact about number 7</li>
+</ul>
+<hr />
+<h2 id="ovos-skill-personalopenvoiceos">ovos-skill-personal.openvoiceos</h2>
+<p>Learn history and personality of the assistant. Ask about the 'birth' and parentage of the voice assistant and get a taste of the community who is fostering this open source artificial intelligence.</p>
+<p><strong>Usage examples:</strong></p>
+<ul>
+<li>Where were you born?</li>
+<li>What are you?</li>
+<li>When were you created?</li>
+<li>Who made you?</li>
+</ul>
+<hr />
+<h2 id="ovos-skill-pyradiosopenvoiceos">ovos-skill-pyradios.openvoiceos</h2>
+<p>a client for the client for the Radio Browser API</p>
+<p><strong>Usage examples:</strong></p>
+<ul>
+<li>play tsf jazz on pyradios</li>
+<li>play tsf jazz radio</li>
+</ul>
+<hr />
+<h2 id="ovos-skill-speedtestopenvoiceos">ovos-skill-speedtest.openvoiceos</h2>
+<p>runs an internet bandwidth test using speedtest.net</p>
+<p><strong>Usage examples:</strong></p>
+<ul>
+<li>run a speedtest</li>
+</ul>
+<hr />
+<h2 id="ovos-skill-wikihowopenvoiceos">ovos-skill-wikihow.openvoiceos</h2>
+<p>How to do nearly everything.</p>
+<p><strong>Usage examples:</strong></p>
+<ul>
+<li>how do i get my dog to stop barking</li>
+<li>how to boil an egg</li>
+</ul>
+<hr />
+<h2 id="skill-ovos-audio-recordingopenvoiceos">skill-ovos-audio-recording.openvoiceos</h2>
+<p>No description available</p>
+<p><strong>Usage examples:</strong></p>
+<ul>
+<li>new recording named {name}</li>
+<li>start recording</li>
+<li>start a recording called {name}</li>
+<li>start a new audio recording called {name}</li>
+<li>begin recording</li>
+</ul>
+<hr />
+<h2 id="skill-ovos-boot-finishedopenvoiceos">skill-ovos-boot-finished.openvoiceos</h2>
+<p>The Finished Booting skill provides notifications when OpenVoiceOS has fully started and all core services are ready</p>
+<p><strong>Usage examples:</strong></p>
+<ul>
+<li>Disable ready notifications.</li>
+<li>Is the system ready?</li>
+<li>Enable ready notifications.</li>
+</ul>
+<hr />
+<h2 id="skill-ovos-date-timeopenvoiceos">skill-ovos-date-time.openvoiceos</h2>
+<p>Get the time, date, day of the week</p>
+<p><strong>Usage examples:</strong></p>
+<ul>
+<li>What time is it?</li>
+<li>Tell me the day of the week</li>
+<li>What day is Memorial Day 2020?</li>
+<li>What's the date?</li>
+<li>Show me the time</li>
+<li>How many days until July 4th</li>
+<li>What time is it in Paris?</li>
+</ul>
+<hr />
+<h2 id="skill-ovos-ddgopenvoiceos">skill-ovos-ddg.openvoiceos</h2>
+<p>Use DuckDuckGo to answer questions.</p>
+<p><strong>Usage examples:</strong></p>
+<ul>
+<li>ask the duck about the big bang</li>
+<li>when was stephen hawking born</li>
+<li>who is elon musk</li>
+</ul>
+<hr />
+<h2 id="skill-ovos-hello-worldopenvoiceos">skill-ovos-hello-world.openvoiceos</h2>
+<p>Introductory Skill so that Skill Authors can see how an OVOS Skill is put together</p>
+<p><strong>Usage examples:</strong></p>
+<ul>
+<li>Hello world</li>
+<li>Thank you</li>
+<li>How are you?</li>
+</ul>
+<hr />
+<h2 id="skill-ovos-icanhazdadjokesopenvoiceos">skill-ovos-icanhazdadjokes.openvoiceos</h2>
+<p>Brighten your day with dad humor. Laughter is not guaranteed, but eye rolls are likely.</p>
+<p><strong>Usage examples:</strong></p>
+<ul>
+<li>Can you tell jokes?</li>
+<li>Make me laugh.</li>
+<li>Do you know any Chuck Norris jokes?</li>
+<li>Tell me a joke about dentists.</li>
+<li>Say a joke.</li>
+<li>Tell me a joke.</li>
+<li>Do you know any jokes?</li>
+</ul>
+<hr />
+<h2 id="skill-ovos-local-mediaopenvoiceos">skill-ovos-local-media.openvoiceos</h2>
+<p>Local Media File Browser For Open Voice OS</p>
+<p><strong>Usage examples:</strong></p>
+<ul>
+<li>open my file browser</li>
+<li>show my file browser</li>
+<li>show my usb drive</li>
+<li>start usb browser app</li>
+<li>show my usb</li>
+<li>show file browser app</li>
+<li>show file browser</li>
+<li>open usb</li>
+<li>start usb browser</li>
+<li>open my usb</li>
+</ul>
+<hr />
+<h2 id="skill-ovos-naptimeopenvoiceos">skill-ovos-naptime.openvoiceos</h2>
+<p>Put the assistant to sleep when you don't want to be disturbed.</p>
+<p><strong>Usage examples:</strong></p>
+<ul>
+<li>Nap time</li>
+<li>Wake up</li>
+<li>Go to sleep</li>
+</ul>
+<hr />
+<h2 id="skill-ovos-newsopenvoiceos">skill-ovos-news.openvoiceos</h2>
+<p>News streams from around the globe.</p>
+<p><strong>Usage examples:</strong></p>
+<ul>
+<li>play npr news</li>
+<li>play news in spanish</li>
+<li>play euronews</li>
+<li>play the news</li>
+<li>play portuguese news</li>
+<li>play catalan news</li>
+</ul>
+<hr />
+<h2 id="skill-ovos-parrotopenvoiceos">skill-ovos-parrot.openvoiceos</h2>
+<p>Turn OpenVoiceOS into a echoing parrot! Make OVOS repeat whatever you want.</p>
+<p><strong>Usage examples:</strong></p>
+<ul>
+<li>Tell me what I just said.</li>
+<li>say Goodnight, Gracie</li>
+<li>speak I can say anything you'd like!</li>
+<li>start parrot</li>
+<li>repeat Once upon a midnight dreary, while I pondered, weak and weary, Over many a quaint and curious volume of forgotten lore</li>
+<li>Repeat what you just said</li>
+<li>What did I just say?</li>
+<li>Can you repeat that?</li>
+<li>stop parrot</li>
+<li>Repeat that</li>
+</ul>
+<hr />
+<h2 id="skill-ovos-somafmopenvoiceos">skill-ovos-somafm.openvoiceos</h2>
+<p>No description available</p>
+<p><strong>Usage examples:</strong></p>
+<ul>
+<li>play soma fm radio</li>
+<li>play metal detector</li>
+<li>play secret agent</li>
+</ul>
+<hr />
+<h2 id="skill-ovos-spellingopenvoiceos">skill-ovos-spelling.openvoiceos</h2>
+<p>No description available</p>
+<p><strong>Usage examples:</strong></p>
+<ul>
+<li>How do you spell bureacracy?</li>
+<li>How do you spell aardvark?</li>
+<li>Spell omnipotence</li>
+<li>Spell succotash</li>
+</ul>
+<hr />
+<h2 id="skill-ovos-volumeopenvoiceos">skill-ovos-volume.openvoiceos</h2>
+<p>Control the volume of OVOS with verbal commands</p>
+<p><strong>Usage examples:</strong></p>
+<ul>
+<li>unmute volume</li>
+<li>volume low</li>
+<li>mute audio</li>
+<li>volume to high level</li>
+<li>reset volume</li>
+<li>volume to high</li>
+<li>volume level low</li>
+<li>toggle audio</li>
+<li>low volume</li>
+<li>set volume to maximum</li>
+</ul>
+<hr />
+<h2 id="skill-ovos-weatheropenvoiceos">skill-ovos-weather.openvoiceos</h2>
+<p>Get weather conditions, forecasts, expected precipitation and more! You can also ask for other cities around the world. Current conditions and weather forecasts come from OpenMeteo</p>
+<p><strong>Usage examples:</strong></p>
+<ul>
+<li>What's the temperature in Paris tomorrow in Celsius?</li>
+<li>When will it rain next?</li>
+<li>What's the high temperature tomorrow</li>
+<li>Is it going to snow in Baltimore?</li>
+<li>what is the weather like?</li>
+<li>How windy is it?</li>
+<li>What is the weather this weekend?</li>
+<li>What is the weather in Houston?</li>
+<li>Will it be cold on Tuesday</li>
+<li>What's the temperature?</li>
+</ul>
+<hr />
+<h2 id="skill-ovos-wikipediaopenvoiceos">skill-ovos-wikipedia.openvoiceos</h2>
+<p>Query Wikipedia for answers to all your questions. Get just a summary, or ask for more to get in-depth information.</p>
+<p><strong>Usage examples:</strong></p>
+<ul>
+<li>Search for chocolate</li>
+<li>More information</li>
+<li>Tell me about beans</li>
+<li>Tell me More</li>
+<li>Tell me about the Pembroke Welsh Corgi</li>
+<li>Check Wikipedia for beans</li>
+<li>Tell me about Elon Musk</li>
+</ul>
+<hr />
+<h2 id="skill-ovos-wolfieopenvoiceos">skill-ovos-wolfie.openvoiceos</h2>
+<p>Use Wolfram Alpha for general knowledge questions.</p>
+<p><strong>Usage examples:</strong></p>
+<ul>
+<li>How tall is Mount Everest?</li>
+<li>What's 18 times 4?</li>
+<li>How many inches in a meter?</li>
+<li>What is Madonna's real name?</li>
+<li>When was The Rocky Horror Picture Show released?</li>
+<li>ask the wolf what is the speed of light</li>
+</ul>
+<hr />
+<h2 id="skill-ovos-wordnetopenvoiceos">skill-ovos-wordnet.openvoiceos</h2>
+<p>Use Wordnet to answer dictionary-like questions.</p>
+<p><strong>Usage examples:</strong></p>
+<ul>
+<li>what is the definition of ...</li>
+<li>what is the antonym of ...</li>
+</ul>
+<hr />
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../51-install_raspovos/" class="btn btn-neutral float-left" title="Tutorial"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../55-raspovos_troubleshooting/" class="btn btn-neutral float-right" title="Troubleshooting">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../51-install_raspovos/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../55-raspovos_troubleshooting/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../javascripts/analytics.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

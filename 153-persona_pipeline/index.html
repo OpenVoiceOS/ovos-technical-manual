@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://openvoiceos.github.io/ovos-technical-manual/153-persona_pipeline/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Persona - OVOS Technical Manual</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Persona";
+        var mkdocs_page_input_path = "153-persona_pipeline.md";
+        var mkdocs_page_url = "/ovos-technical-manual/153-persona_pipeline/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OVOS Technical Manual
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Home</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../50-ovos_installer/">ovos-installer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../001-release_channels/">Manual Install</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">RaspOVOS</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../51-install_raspovos/">Tutorial</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../54-skill-examples/">Default Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../55-raspovos_troubleshooting/">Troubleshooting</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Language Support</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../lang_support/">Translations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gitlocalize_tutorial/">GitLocalize Tutorial</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Architecture</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../99-architecture-overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../100-bus_service/">Bus</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../101-speech_service/">Listener</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../102-core/">Core</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../399-intents/">Skills and Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../103-audio_service/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../104-gui_service/">GUI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../340-PHAL/">Platform/Hardware Abstraction Layer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../300-plugin-manager/">Plugin Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../110-config/">Configuration</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Intent Pipelines</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../pipelines_overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../adapt_pipeline/">Adapt</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../padatious_pipeline/">Padatious</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../m2v_pipeline/">Model2Vec</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../converse_pipeline/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../stop_pipeline/">Stop</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Persona</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#plugin-structure">Plugin Structure</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#persona-section-options">persona section options:</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#pipeline-strategies">Pipeline Strategies</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-full-control-persona-first">1. Full Control (Persona-First)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-hybrid-mode-skills-first">2. Hybrid Mode (Skills First)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3-fallback-mode-only">3. Fallback Mode Only</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#persona-resolution-flow">Persona Resolution Flow</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#persona-configuration">Persona Configuration</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#example">Example:</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#persona-intents">Persona Intents</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#list-personas">List Personas</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#check-active-persona">Check Active Persona</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#activate-a-persona">Activate a Persona</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#single-shot-persona-questions">Single-Shot Persona Questions</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#stop-conversation">Stop Conversation</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cq_pipeline/">Common Query</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../631-OCP_pipeline/">OCP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fallback_pipeline/">Fallback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Transformers</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../audio_transformers/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../utterance_transformers/">Utterance</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../intent_transformers/">Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dialog_transformers/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_transformers/">TTS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">AI Agents</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../150-personas/">Personas</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../151-llm-transformers/">AI Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../150-advanced_solvers/">Specialized Solvers</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Self Hosting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../202-persona_server/">Persona Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../152-hivemind-agents/">HiveMind</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../200-stt_server/">STT Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../201-tts_server/">TTS Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../203-translate_server/">Translate Server</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Skill Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../400-skill-design-guidelines/">Design Guidelines</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../401-skill_structure/">Anatomy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../402-statements/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../403-intents/">Intent Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../405-customization/">Customization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../406-messagebus/">Bus Interaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../407-skill_filesystem/">Filesystem</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../408-skill_settings/">Skill Settings</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../409-skill_api/">Skill API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../410-skill_runtime_requirements/">Runtime Requirements</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../411-skill_json/">Skill Json</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../420-ssml/">SSML</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../430-skill_dev_faq/">F.A.Q.</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Continuous Conversation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../500-prompts/">Prompts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../501-context/">Follow up Questions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../502-converse/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../503-layers/">Intent Layers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../504-session/">Session Aware Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Advanced Skill Types</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../600-fallbacks/">Fallback Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../610-common_query/">Common Query Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../630-OCP_skills/">Media Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../620-universal_skills/">Universal Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">GUI</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../701-gui_protocol/">Protocol</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Voice Apps</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../590-voice_apps/">Standalone Apps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">MessageBus</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../900-bus_client/">Messagebus Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../720-skill_gui/">GUI Interface</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../800-mk1_api/">Enclosure Api</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Plugin Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../310-mic_plugins/">Microphone</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../311-vad_plugins/">Voice Activity Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../312-wake_word_plugins/">Wake Word</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../313-stt_plugins/">Speech To Text</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../320-tts_plugins/">Text To Speech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../321-g2p_plugins/">Grapheme to Phoneme</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../330-transformer_plugins/">Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../350-translation_plugins/">Language Detection/Translation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../370-ocp_plugins/">OCP Stream Extractors</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../371-media_plugins/">Media Playback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Misc. Utilities</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../891-number_parser/">Number Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../890-date_parser/">Date Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../893-color_parser/">Color Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../910-quebra_frases/">Quebra Frases</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../920-padacioso/">Padacioso</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../801-mk1_utils/">Mark1 Utils</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Misc. Information</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../002-license/">License</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../003-timeline/">Timeline</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OVOS Technical Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Intent Pipelines</li>
+      <li class="breadcrumb-item active">Persona</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="persona-pipeline">Persona Pipeline</h1>
+<p>The <strong><code>ovos-persona-pipeline-plugin</code></strong> provides a dynamic way to integrate persona-based conversational behavior into the OVOS pipeline system. It allows you to route user utterances to AI personas instead of skill matchers, depending on context and configuration.</p>
+<hr />
+<h2 id="overview">Overview</h2>
+<p>The <code>persona-pipeline</code> is a plugin for the OVOS pipeline architecture. It dynamically delegates user utterances to a configured <strong>Persona</strong>, which attempts to resolve the intent using a sequence of <strong>Solver Plugins</strong> (e.g., LLMs, search tools, knowledge bases).</p>
+<p>You can configure it to:</p>
+<ul>
+<li>🔀 Intercept all utterances and give full control to the persona.</li>
+<li>🧠 Fall back to the persona only if skills don't match.</li>
+<li>⚙️ Operate based on confidence tiers (high/medium/low).</li>
+</ul>
+<hr />
+<h2 id="plugin-structure">Plugin Structure</h2>
+<p>The plugin is composed of two components:</p>
+<table>
+<thead>
+<tr>
+<th>Plugin Name</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ovos-persona-pipeline-plugin-high</code></td>
+<td>For active persona interactions</td>
+</tr>
+<tr>
+<td><code>ovos-persona-pipeline-plugin-low</code></td>
+<td>Fallback persona handling</td>
+</tr>
+</tbody>
+</table>
+<p>You must <strong>insert these plugin IDs</strong> in your <code>mycroft.conf</code> under the <code>intents.pipeline</code> key to activate persona handling at the appropriate tier.</p>
+<hr />
+<h2 id="configuration">Configuration</h2>
+<pre><code class="language-json">{
+  &quot;intents&quot;: {
+    &quot;persona&quot;: {
+      &quot;handle_fallback&quot;: true,
+      &quot;default_persona&quot;: &quot;Remote Llama&quot;,
+      &quot;short-term-memory&quot;: true
+    },
+    &quot;pipeline&quot;: [
+      // Depending on strategy, insert plugin here
+    ]
+  }
+}
+</code></pre>
+<h3 id="persona-section-options"><code>persona</code> section options:</h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>handle_fallback</code></td>
+<td>Enables fallback routing when no persona is active</td>
+</tr>
+<tr>
+<td><code>default_persona</code></td>
+<td>Sets a persona to use by default (e.g., after boot or reset)</td>
+</tr>
+<tr>
+<td><code>short-term-memory</code></td>
+<td>Maintains conversation state within a session (boolean)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="pipeline-strategies">Pipeline Strategies</h2>
+<h3 id="1-full-control-persona-first">1. <strong>Full Control (Persona-First)</strong></h3>
+<p>In this mode, <strong>personas override</strong> all skills. The persona handles every utterance unless explicitly deactivated.</p>
+<pre><code class="language-jsonc">&quot;pipeline&quot;: [
+  &quot;ovos-persona-pipeline-plugin-high&quot;,
+  &quot;stop_high&quot;,
+  &quot;converse&quot;,
+  &quot;padatious_high&quot;,
+  &quot;adapt_high&quot;,
+  ...
+]
+</code></pre>
+<ul>
+<li>✅ Best for immersive chatbot experiences</li>
+<li>⚠️ Skills like music, alarms, and weather will not trigger unless persona is disabled</li>
+</ul>
+<hr />
+<h3 id="2-hybrid-mode-skills-first">2. <strong>Hybrid Mode (Skills First)</strong></h3>
+<p>Only unmatched or low-confidence utterances are routed to the persona.</p>
+<pre><code class="language-jsonc">&quot;pipeline&quot;: [
+  &quot;stop_high&quot;,
+  &quot;converse&quot;,
+  &quot;padatious_high&quot;,
+  &quot;adapt_high&quot;,
+  &quot;ovos-persona-pipeline-plugin-high&quot;,
+  &quot;fallback_medium&quot;,
+  ...
+]
+</code></pre>
+<ul>
+<li>✅ Preserves traditional voice assistant behavior</li>
+<li>💬 Persona fills in where skills fall short</li>
+</ul>
+<hr />
+<h3 id="3-fallback-mode-only">3. <strong>Fallback Mode Only</strong></h3>
+<p>Even when no persona is active, this mode allows the pipeline to fall back to a <strong>default persona</strong> for unmatched utterances.</p>
+<pre><code class="language-jsonc">&quot;pipeline&quot;: [
+  ...
+  &quot;fallback_medium&quot;,
+  &quot;ovos-persona-pipeline-plugin-low&quot;,
+  &quot;fallback_low&quot;
+]
+</code></pre>
+<ul>
+<li>✅ Replaces <code>skill-ovos-fallback-chatgpt</code></li>
+<li>🔄 Fallbacks to a default persona response for a consistent assistant feel</li>
+</ul>
+<hr />
+<h2 id="persona-resolution-flow">Persona Resolution Flow</h2>
+<ol>
+<li><strong>Utterance Received</strong></li>
+<li>Pipeline matchers are checked in order.</li>
+<li>If <code>persona-pipeline</code> is reached:<ul>
+<li>If a persona is <strong>active</strong>, send utterance to that persona.</li>
+<li>If no persona is active and <code>handle_fallback</code> is enabled, use the <strong>default_persona</strong>.</li>
+</ul>
+</li>
+<li>The persona delegates to its configured <strong>solvers</strong> until one returns a response.</li>
+<li>The pipeline returns the matched response back to the user.</li>
+</ol>
+<hr />
+<h2 id="persona-configuration">Persona Configuration</h2>
+<p>Personas are defined in:</p>
+<pre><code>~/.config/ovos_persona/*.json
+</code></pre>
+<h3 id="example">Example:</h3>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;Remote Llama&quot;,
+  &quot;solvers&quot;: [
+    &quot;ovos-solver-openai-plugin&quot;,
+    &quot;ovos-solver-failure-plugin&quot;
+  ],
+  &quot;ovos-solver-openai-plugin&quot;: {
+    &quot;api_url&quot;: &quot;https://llama.smartgic.io/v1&quot;,
+    &quot;key&quot;: &quot;sk-xxx&quot;,
+    &quot;persona&quot;: &quot;friendly and concise assistant&quot;
+  }
+}
+</code></pre>
+<p>Each persona defines a <code>solvers</code> list.</p>
+<ul>
+<li>Solvers are attempted <strong>in order</strong>.</li>
+<li>The first solver to return a valid result ends the search.</li>
+<li>Include a <code>"ovos-solver-failure-plugin"</code> as a final fallback for graceful error handling.</li>
+</ul>
+<hr />
+<h2 id="persona-intents">Persona Intents</h2>
+<p><code>"ovos-persona-pipeline-plugin-high"</code> supports a set of core voice intents to manage persona interactions seamlessly. </p>
+<p>These intents provide <strong>out-of-the-box functionality</strong> for controlling the Persona Service, ensuring smooth integration with the conversational pipeline and enhancing user experience.</p>
+<h3 id="list-personas"><strong>List Personas</strong></h3>
+<p><strong>Example Utterances</strong>:</p>
+<ul>
+<li>"What personas are available?"</li>
+<li>"Can you list the personas?"</li>
+<li>"What personas can I use?"</li>
+</ul>
+<h3 id="check-active-persona"><strong>Check Active Persona</strong></h3>
+<p><strong>Example Utterances</strong>:</p>
+<ul>
+<li>"Who am I talking to right now?"</li>
+<li>"Is there an active persona?"</li>
+<li>"Which persona is in use?"</li>
+</ul>
+<h3 id="activate-a-persona"><strong>Activate a Persona</strong></h3>
+<p><strong>Example Utterances</strong>:</p>
+<ul>
+<li>"Connect me to {persona}"</li>
+<li>"Enable {persona}"</li>
+<li>"Awaken the {persona} assistant"</li>
+<li>"Start a conversation with {persona}"</li>
+<li>"Let me chat with {persona}"</li>
+</ul>
+<h3 id="single-shot-persona-questions"><strong>Single-Shot Persona Questions</strong></h3>
+<p>Enables users to query a persona directly without entering an interactive session.</p>
+<p><strong>Example Utterances</strong>:</p>
+<ul>
+<li>"Ask {persona} what they think about {utterance}"</li>
+<li>"What does {persona} say about {utterance}?"</li>
+<li>"Query {persona} for insights on {utterance}"</li>
+<li>"Ask {persona} for their perspective on {utterance}"</li>
+</ul>
+<h3 id="stop-conversation"><strong>Stop Conversation</strong></h3>
+<p><strong>Example Utterances</strong>:</p>
+<ul>
+<li>"Stop the interaction"</li>
+<li>"Terminate persona"</li>
+<li>"Deactivate the chatbot"</li>
+<li>"Go dormant"</li>
+<li>"Enough talking"</li>
+<li>"Shut up"</li>
+</ul>
+<hr />
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../stop_pipeline/" class="btn btn-neutral float-left" title="Stop"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../cq_pipeline/" class="btn btn-neutral float-right" title="Common Query">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../stop_pipeline/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../cq_pipeline/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../javascripts/analytics.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

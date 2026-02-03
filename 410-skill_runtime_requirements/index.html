@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://openvoiceos.github.io/ovos-technical-manual/410-skill_runtime_requirements/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Runtime Requirements - OVOS Technical Manual</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Runtime Requirements";
+        var mkdocs_page_input_path = "410-skill_runtime_requirements.md";
+        var mkdocs_page_url = "/ovos-technical-manual/410-skill_runtime_requirements/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OVOS Technical Manual
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Home</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../50-ovos_installer/">ovos-installer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../001-release_channels/">Manual Install</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">RaspOVOS</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../51-install_raspovos/">Tutorial</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../54-skill-examples/">Default Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../55-raspovos_troubleshooting/">Troubleshooting</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Language Support</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../lang_support/">Translations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gitlocalize_tutorial/">GitLocalize Tutorial</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Architecture</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../99-architecture-overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../100-bus_service/">Bus</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../101-speech_service/">Listener</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../102-core/">Core</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../399-intents/">Skills and Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../103-audio_service/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../104-gui_service/">GUI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../340-PHAL/">Platform/Hardware Abstraction Layer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../300-plugin-manager/">Plugin Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../110-config/">Configuration</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Intent Pipelines</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../pipelines_overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../adapt_pipeline/">Adapt</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../padatious_pipeline/">Padatious</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../m2v_pipeline/">Model2Vec</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../converse_pipeline/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../stop_pipeline/">Stop</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../153-persona_pipeline/">Persona</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cq_pipeline/">Common Query</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../631-OCP_pipeline/">OCP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fallback_pipeline/">Fallback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Transformers</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../audio_transformers/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../utterance_transformers/">Utterance</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../intent_transformers/">Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dialog_transformers/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_transformers/">TTS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">AI Agents</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../150-personas/">Personas</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../151-llm-transformers/">AI Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../150-advanced_solvers/">Specialized Solvers</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Self Hosting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../202-persona_server/">Persona Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../152-hivemind-agents/">HiveMind</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../200-stt_server/">STT Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../201-tts_server/">TTS Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../203-translate_server/">Translate Server</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Skill Development</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../400-skill-design-guidelines/">Design Guidelines</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../401-skill_structure/">Anatomy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../402-statements/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../403-intents/">Intent Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../405-customization/">Customization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../406-messagebus/">Bus Interaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../407-skill_filesystem/">Filesystem</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../408-skill_settings/">Skill Settings</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../409-skill_api/">Skill API</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Runtime Requirements</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#usage-guide">Usage Guide</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#step-1-customize-ready_settings-in-your-configuration">Step 1: Customize ready_settings (in your configuration)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#step-2-define-runtimerequirements-in-your-skill">Step 2: Define RuntimeRequirements in your skill</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#technical-explanation">Technical Explanation</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#ready_settings">ready_settings</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#dynamic-loading-and-unloading">Dynamic Loading and Unloading</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#benefits">Benefits:</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#runtimerequirements-classproperty">RuntimeRequirements (@classproperty)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#key-fields">Key fields:</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-fully-offline-skill">1. Fully Offline Skill</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-internet-dependent-skill-with-fallback">2. Internet-Dependent Skill (with fallback)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3-lan-controlled-iot-skill">3. LAN-Controlled IOT Skill</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#4-gui-internet-skill-unloads-without-gui">4. GUI + Internet Skill (Unloads without GUI)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tips-and-caveats">Tips and Caveats</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../411-skill_json/">Skill Json</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../420-ssml/">SSML</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../430-skill_dev_faq/">F.A.Q.</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Continuous Conversation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../500-prompts/">Prompts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../501-context/">Follow up Questions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../502-converse/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../503-layers/">Intent Layers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../504-session/">Session Aware Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Advanced Skill Types</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../600-fallbacks/">Fallback Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../610-common_query/">Common Query Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../630-OCP_skills/">Media Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../620-universal_skills/">Universal Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">GUI</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../701-gui_protocol/">Protocol</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Voice Apps</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../590-voice_apps/">Standalone Apps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">MessageBus</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../900-bus_client/">Messagebus Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../720-skill_gui/">GUI Interface</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../800-mk1_api/">Enclosure Api</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Plugin Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../310-mic_plugins/">Microphone</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../311-vad_plugins/">Voice Activity Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../312-wake_word_plugins/">Wake Word</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../313-stt_plugins/">Speech To Text</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../320-tts_plugins/">Text To Speech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../321-g2p_plugins/">Grapheme to Phoneme</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../330-transformer_plugins/">Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../350-translation_plugins/">Language Detection/Translation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../370-ocp_plugins/">OCP Stream Extractors</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../371-media_plugins/">Media Playback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Misc. Utilities</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../891-number_parser/">Number Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../890-date_parser/">Date Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../893-color_parser/">Color Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../910-quebra_frases/">Quebra Frases</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../920-padacioso/">Padacioso</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../801-mk1_utils/">Mark1 Utils</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Misc. Information</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../002-license/">License</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../003-timeline/">Timeline</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OVOS Technical Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Skill Development</li>
+      <li class="breadcrumb-item active">Runtime Requirements</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="runtime-requirements-in-ovos">Runtime Requirements in OVOS</h1>
+<p>OVOS (Open Voice OS) introduces advanced runtime management to ensure skills are only loaded and active when the system is ready. This improves performance, avoids premature skill activation, and enables greater flexibility across different system setups (offline, headless, GUI-enabled, etc.).</p>
+<p>This guide covers how to control when OVOS declares readiness, how dynamic skill loading works, and how developers can use <code>RuntimeRequirements</code> to specify resource dependencies for their skills.</p>
+<hr />
+<h2 id="usage-guide">Usage Guide</h2>
+<h3 id="step-1-customize-ready_settings-in-your-configuration">Step 1: Customize <code>ready_settings</code> (in your configuration)</h3>
+<p>You can specify what the system must wait for before emitting the <code>mycroft.ready</code> message:</p>
+<pre><code class="language-json">{
+  &quot;ready_settings&quot;: [
+    &quot;skills&quot;,
+    &quot;network_skills&quot;,
+    &quot;internet_skills&quot;,
+    &quot;audio&quot;,
+    &quot;speech&quot;
+  ]
+}
+</code></pre>
+<p>In this example, the <code>ready_settings</code> are configured to wait for network and internet connectivity before emitting
+the <code>'mycroft.ready'</code> message. Each setup can customize these settings based on their needs, a offline install won't
+want internet skills, a server wont want a audio stack etc.</p>
+<h3 id="step-2-define-runtimerequirements-in-your-skill">Step 2: Define <code>RuntimeRequirements</code> in your skill</h3>
+<p>Use the <code>runtime_requirements</code> class property to control when and how your skill should load based on system resources like internet, network, or GUI.</p>
+<p>Example:</p>
+<pre><code class="language-python">from ovos_utils import classproperty
+from ovos_workshop.skills import OVOSSkill
+from ovos_utils.process_utils import RuntimeRequirements
+
+class MySkill(OVOSSkill):
+
+    @classproperty
+    def runtime_requirements(self):
+        return RuntimeRequirements(
+            requires_internet=True
+        )
+</code></pre>
+<hr />
+<h2 id="technical-explanation">Technical Explanation</h2>
+<h3 id="ready_settings"><code>ready_settings</code></h3>
+<p>The <code>ready_settings</code> config controls when OVOS emits <code>mycroft.ready</code>, which signals that the system is ready for use. Each entry in this list waits for a different component:</p>
+<ul>
+<li><strong>"skills"</strong> – Waits for offline skills to load.</li>
+<li><strong>"network_skills"</strong> – Waits for the system to detect a network connection (<code>mycroft.network.connected</code>).</li>
+<li><strong>"internet_skills"</strong> – Waits for an internet connection (<code>mycroft.internet.connected</code>).</li>
+<li><strong>"setup"</strong> – Waits for an external setup process (e.g., pairing or configuration).</li>
+<li><strong>"audio"</strong> – Waits for the audio playback and capture systems to be initialized.</li>
+<li><strong>"speech"</strong> – Waits for the STT (speech-to-text) engine to be ready.</li>
+<li><strong>{skill_id}</strong> - Waits for a specific skill to be available</li>
+</ul>
+<blockquote>
+<p>⚠️ <strong>Note</strong>: By default, OVOS only waits for offline skills. Unlike Mycroft-core, OVOS supports dynamic loading, so timing can impact skills that depend on the <code>mycroft.ready</code> message.</p>
+</blockquote>
+<hr />
+<h2 id="dynamic-loading-and-unloading">Dynamic Loading and Unloading</h2>
+<p>Introduced in <code>ovos-core 0.0.8</code>, dynamic skill management improves system performance and reliability by:</p>
+<ul>
+<li><strong>Only loading skills when their requirements are met.</strong></li>
+<li><strong>Unloading skills when they become unusable due to lost resources.</strong></li>
+</ul>
+<h3 id="benefits">Benefits:</h3>
+<ul>
+<li>Reduces memory and CPU usage.</li>
+<li>Avoids unnecessary skill activations.</li>
+<li>Simplifies skill logic (e.g., no need to check for connectivity manually).</li>
+</ul>
+<p>Skills are loaded only when their specific requirements are met. This optimization prevents unnecessary loading, conserving system resources and ensuring a more efficient skill environment.</p>
+<p><strong>Reducing Unintended Activations</strong></p>
+<p>Dynamic unloading of skills based on specific conditions significantly reduces the chance of unintentional activations. In scenarios where required conditions are not met, skills are gracefully unloaded, enhancing the user experience by avoiding unintended skill triggers.</p>
+<p>This approach aligns with resource-conscious design, providing a more responsive and reliable voice assistant environment. Developers can focus on skill functionality, knowing that OVOS efficiently manages skill loading and unloading based on runtime requirements.</p>
+<hr />
+<h2 id="runtimerequirements-classproperty">RuntimeRequirements (<code>@classproperty</code>)</h2>
+<p>Also introduced in <code>ovos-core 0.0.8</code>, the <code>RuntimeRequirements</code> class property allows skill developers to declare when a skill should be loaded or unloaded based on runtime conditions.</p>
+<blockquote>
+<p>⚠️ Replaces the deprecated <code>"priority_skills"</code> config.</p>
+</blockquote>
+<h3 id="key-fields">Key fields:</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>internet_before_load</code></td>
+<td>Wait for internet before loading</td>
+</tr>
+<tr>
+<td><code>requires_internet</code></td>
+<td>Unload if internet is lost (unless fallback enabled)</td>
+</tr>
+<tr>
+<td><code>no_internet_fallback</code></td>
+<td>If true, do <strong>not</strong> unload when internet is lost</td>
+</tr>
+<tr>
+<td><code>network_before_load</code></td>
+<td>Wait for network before loading</td>
+</tr>
+<tr>
+<td><code>requires_network</code></td>
+<td>Unload if network is lost (unless fallback enabled)</td>
+</tr>
+<tr>
+<td><code>gui_before_load</code></td>
+<td>Wait for GUI before loading</td>
+</tr>
+<tr>
+<td><code>requires_gui</code></td>
+<td>Unload if GUI is lost (unless fallback enabled)</td>
+</tr>
+<tr>
+<td><code>no_gui_fallback</code></td>
+<td>If true, do <strong>not</strong> unload when GUI is lost</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>🧠 Uses <code>@classproperty</code> so the system can evaluate the requirements without loading the skill.</p>
+</blockquote>
+<hr />
+<h2 id="examples">Examples</h2>
+<h3 id="1-fully-offline-skill">1. Fully Offline Skill</h3>
+<p>In this example, a fully offline skill is defined. The skill does not require internet or network connectivity during
+loading or runtime. If the network or internet is unavailable, the skill can still operate.</p>
+<p>Defining this will ensure your skill loads as soon as possible; otherwise, the <code>SkillManager</code> will wait for internet before loading the skill.</p>
+<pre><code class="language-python">from ovos_utils import classproperty
+from ovos_workshop.skills import OVOSSkill
+from ovos_utils.process_utils import RuntimeRequirements
+
+
+class MyOfflineSkill(OVOSSkill):
+
+    @classproperty
+    def runtime_requirements(self):
+        return RuntimeRequirements(internet_before_load=False,
+                                   network_before_load=False,
+                                   requires_internet=False,
+                                   requires_network=False,
+                                   no_internet_fallback=True,
+                                   no_network_fallback=True)
+</code></pre>
+<p>Loads immediately, runs without internet or network.</p>
+<hr />
+<h3 id="2-internet-dependent-skill-with-fallback">2. Internet-Dependent Skill (with fallback)</h3>
+<p>In this example, an online search skill with a local cache is defined. The skill requires internet connectivity during
+both loading and runtime. If the internet is not available, the skill won't load. Once loaded, the skill continues to
+require internet connectivity.</p>
+<p>However, our skill keeps a cache of previous results; therefore, it declares it can handle internet outages and will not
+be unloaded when the internet goes down.</p>
+<pre><code class="language-python">from ovos_utils import classproperty
+from ovos_workshop.skills import OVOSSkill
+from ovos_utils.process_utils import RuntimeRequirements
+
+
+class MyInternetSkill(OVOSSkill):
+
+    @classproperty
+    def runtime_requirements(self):
+        # our skill can answer cached results when the internet goes down
+        return RuntimeRequirements(
+            internet_before_load=True,  # only load once we have internet
+            requires_internet=True,  # indicate we need internet to work
+            no_internet_fallback=True  # do NOT unload if internet goes down
+        )
+
+    def initialize(self):
+        ...  # do something that requires internet connectivity
+</code></pre>
+<p>Loads only when internet is available. Stays loaded even if internet is lost, using a cached fallback.</p>
+<hr />
+<h3 id="3-lan-controlled-iot-skill">3. LAN-Controlled IOT Skill</h3>
+<p>Consider a skill that should only load once we have a network connection.
+By specifying that requirement, we can ensure that the skill is only loaded once the requirements are met, and it is
+safe to utilize network resources on initialization.</p>
+<p>In this example, an IOT skill controlling devices via LAN is defined. The skill requires network connectivity during
+loading, and if the network is not available, it won't load.</p>
+<p>Once loaded, the skill continues to require network connectivity and will unload if the network is lost.</p>
+<pre><code class="language-python">from ovos_utils import classproperty
+from ovos_workshop.skills import OVOSSkill
+from ovos_utils.process_utils import RuntimeRequirements
+
+
+class MyIOTSkill(OVOSSkill):
+
+    @classproperty
+    def runtime_requirements(self):
+        return RuntimeRequirements(
+            network_before_load=True,  # only load once network available
+            requires_network=True,  # we need network to work
+            no_network_fallback=False  # unload if network goes down
+        )
+
+    def initialize(self):
+        ...  # do something that needs LAN connectivity
+</code></pre>
+<p>Loads when the local network is connected. Unloads if the network is lost.</p>
+<hr />
+<h3 id="4-gui-internet-skill-unloads-without-gui">4. GUI + Internet Skill (Unloads without GUI)</h3>
+<p>Consider a skill with both graphical user interface (GUI) and internet dependencies is defined.</p>
+<p>The skill requires both GUI availability and internet connectivity during loading.</p>
+<p>If either the GUI or the internet is not available, the skill won't load. Once loaded, the skill continues to require
+both GUI availability, but internet connectivity is optional.</p>
+<p>If the user asks "show me the picture of the day" and we have both internet and a GUI, our skill will match the intent.</p>
+<p>If we do not have internet but have a GUI, the skill will still operate, using a cached picture. If no GUI is available then the skill will unload regardless of internet status</p>
+<pre><code class="language-python">from ovos_utils import classproperty
+from ovos_workshop.skills import OVOSSkill
+from ovos_utils.process_utils import RuntimeRequirements
+
+
+class MyGUIAndInternetSkill(OVOSSkill):
+
+    @classproperty
+    def runtime_requirements(self):
+        return RuntimeRequirements(
+            gui_before_load=True,  # only load if GUI is available
+            requires_gui=True,  # continue requiring GUI once loaded
+            internet_before_load=True,  # only load if internet is available
+            requires_internet=True,  # continue requiring internet once loaded
+            no_gui_fallback=False,  # unload if GUI becomes unavailable
+            no_internet_fallback=True  # do NOT unload if internet becomes unavailable, use cached picture
+        )
+
+    def initialize(self):
+        ...  # do something that requires both GUI and internet connectivity
+</code></pre>
+<p>Requires GUI and internet to load. Will stay loaded if internet is lost (e.g., to show a cached picture), but unloads if GUI becomes unavailable.</p>
+<hr />
+<h2 id="tips-and-caveats">Tips and Caveats</h2>
+<ul>
+<li>If <code>runtime_requirements</code> is not defined, OVOS assumes <strong>internet is required</strong> but <strong>GUI is optional</strong>.</li>
+<li>You can combine different requirements to handle a wide range of usage patterns (e.g., headless servers, embedded devices, smart displays).</li>
+<li>Consider defining graceful fallbacks to avoid unnecessary unloading.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../409-skill_api/" class="btn btn-neutral float-left" title="Skill API"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../411-skill_json/" class="btn btn-neutral float-right" title="Skill Json">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../409-skill_api/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../411-skill_json/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../javascripts/analytics.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://openvoiceos.github.io/ovos-technical-manual/55-raspovos_troubleshooting/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Troubleshooting - OVOS Technical Manual</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Troubleshooting";
+        var mkdocs_page_input_path = "55-raspovos_troubleshooting.md";
+        var mkdocs_page_url = "/ovos-technical-manual/55-raspovos_troubleshooting/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OVOS Technical Manual
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Home</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../50-ovos_installer/">ovos-installer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../001-release_channels/">Manual Install</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">RaspOVOS</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../51-install_raspovos/">Tutorial</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../54-skill-examples/">Default Skills</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Troubleshooting</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#undervoltage-detected-warning">Undervoltage Detected Warning</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#system-boot-issues">System Boot Issues</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ovos-fails-to-speak-i-am-ready">OVOS Fails to Speak "I am Ready"</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-to-debug-intent-matching">How to debug intent matching</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-to-check-installed-skills">How to check installed skills</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-to-check-available-intents">How to check available intents</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-to-remove-all-skills">How to remove all skills</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#wake-word-issues">Wake Word Issues</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#custom-models">Custom Models</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#alternative-wake-word-vosk-plugin">Alternative Wake Word: Vosk Plugin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tips-for-choosing-a-good-wake-word">Tips for Choosing a Good Wake Word</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#audio-issues">Audio Issues</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#stt-tips-and-tricks">STT tips and tricks</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#saving-transcriptions">Saving Transcriptions</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#wrong-transcriptions">Wrong Transcriptions</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#silence-removal">Silence Removal</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#listen-sound">Listen Sound</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Language Support</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../lang_support/">Translations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gitlocalize_tutorial/">GitLocalize Tutorial</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Architecture</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../99-architecture-overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../100-bus_service/">Bus</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../101-speech_service/">Listener</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../102-core/">Core</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../399-intents/">Skills and Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../103-audio_service/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../104-gui_service/">GUI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../340-PHAL/">Platform/Hardware Abstraction Layer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../300-plugin-manager/">Plugin Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../110-config/">Configuration</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Intent Pipelines</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../pipelines_overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../adapt_pipeline/">Adapt</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../padatious_pipeline/">Padatious</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../m2v_pipeline/">Model2Vec</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../converse_pipeline/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../stop_pipeline/">Stop</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../153-persona_pipeline/">Persona</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cq_pipeline/">Common Query</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../631-OCP_pipeline/">OCP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fallback_pipeline/">Fallback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Transformers</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../audio_transformers/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../utterance_transformers/">Utterance</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../intent_transformers/">Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dialog_transformers/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_transformers/">TTS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">AI Agents</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../150-personas/">Personas</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../151-llm-transformers/">AI Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../150-advanced_solvers/">Specialized Solvers</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Self Hosting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../202-persona_server/">Persona Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../152-hivemind-agents/">HiveMind</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../200-stt_server/">STT Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../201-tts_server/">TTS Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../203-translate_server/">Translate Server</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Skill Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../400-skill-design-guidelines/">Design Guidelines</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../401-skill_structure/">Anatomy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../402-statements/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../403-intents/">Intent Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../405-customization/">Customization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../406-messagebus/">Bus Interaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../407-skill_filesystem/">Filesystem</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../408-skill_settings/">Skill Settings</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../409-skill_api/">Skill API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../410-skill_runtime_requirements/">Runtime Requirements</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../411-skill_json/">Skill Json</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../420-ssml/">SSML</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../430-skill_dev_faq/">F.A.Q.</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Continuous Conversation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../500-prompts/">Prompts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../501-context/">Follow up Questions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../502-converse/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../503-layers/">Intent Layers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../504-session/">Session Aware Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Advanced Skill Types</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../600-fallbacks/">Fallback Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../610-common_query/">Common Query Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../630-OCP_skills/">Media Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../620-universal_skills/">Universal Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">GUI</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../701-gui_protocol/">Protocol</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Voice Apps</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../590-voice_apps/">Standalone Apps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">MessageBus</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../900-bus_client/">Messagebus Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../720-skill_gui/">GUI Interface</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../800-mk1_api/">Enclosure Api</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Plugin Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../310-mic_plugins/">Microphone</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../311-vad_plugins/">Voice Activity Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../312-wake_word_plugins/">Wake Word</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../313-stt_plugins/">Speech To Text</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../320-tts_plugins/">Text To Speech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../321-g2p_plugins/">Grapheme to Phoneme</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../330-transformer_plugins/">Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../350-translation_plugins/">Language Detection/Translation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../370-ocp_plugins/">OCP Stream Extractors</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../371-media_plugins/">Media Playback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Misc. Utilities</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../891-number_parser/">Number Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../890-date_parser/">Date Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../893-color_parser/">Color Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../910-quebra_frases/">Quebra Frases</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../920-padacioso/">Padacioso</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../801-mk1_utils/">Mark1 Utils</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Misc. Information</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../002-license/">License</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../003-timeline/">Timeline</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OVOS Technical Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">RaspOVOS</li>
+      <li class="breadcrumb-item active">Troubleshooting</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="raspovos-troubleshooting">RaspOVOS Troubleshooting</h1>
+<blockquote>
+<p>⚠️ This guide applies to raspOVOS and may assume some raspOVOS exclusive utilities are available, if you are not using raspOVOS <a href="https://github.com/OpenVoiceOS/raspOVOS/tree/dev/overlays/base_ovos/usr/local/bin">some command line utilities</a> will not be available</p>
+</blockquote>
+<hr />
+<h2 id="undervoltage-detected-warning">Undervoltage Detected Warning</h2>
+<p>If you see an <strong>undervoltage detected</strong> warning:</p>
+<ul>
+<li>Check your power adapter and cable.</li>
+<li>Ensure the adapter can supply enough current (e.g., 5A for Raspberry Pi 5).</li>
+<li>Replace long or thin cables with shorter, thicker ones for better power delivery.</li>
+</ul>
+<hr />
+<h2 id="system-boot-issues">System Boot Issues</h2>
+<p>If the device does not complete its boot sequence:</p>
+<ol>
+<li>Ensure the power supply is stable and sufficient for your Raspberry Pi model.</li>
+<li>If the OS boots but OVOS doesn't work:<ul>
+<li>See if all OVOS services started up correctly with <code>ovos-status</code> command</li>
+<li>Check log files in <code>~/.local/state/mycroft/</code> for OVOS error messages.</li>
+</ul>
+</li>
+<li>Re-flash the image if necessary, ensuring all configuration options are set correctly.</li>
+</ol>
+<hr />
+<h2 id="ovos-fails-to-speak-i-am-ready">OVOS Fails to Speak "I am Ready"</h2>
+<ul>
+<li>Confirm the device has a working Internet connection. otherwise OVOS won't consider itself ready</li>
+</ul>
+<hr />
+<h2 id="how-to-debug-intent-matching">How to debug intent matching</h2>
+<p>To easily debug intent parsing open a terminal and run <code>ologs | grep intent</code> , this will show you live logs related only to intent parsing</p>
+<p>then in another terminal send commands with <code>ovos-say-to "sentence to test"</code>  (or use your voice)</p>
+<pre><code class="language-bash">(ovos) ovos@raspOVOS:~ $ ologs | grep intent
+2025-01-23 16:29:54.299 - skills - ovos_core.intent_services:handle_utterance:416 - INFO - common_qa match: IntentHandlerMatch(match_type='question:action.skill-ovos-wikipedia.openvoiceos', match_data={'phrase': 'Qui és Elon Musk', 'skill_id': 'skill-ovos-wikipedia.openvoiceos', 'answer': &quot;Elon Reeve Musk FRS és un empresari, inversor i magnat conegut pels seus papers clau a l'empresa espacial SpaceX i l'automobilística Tesla, Inc. Les accions i les opinions expressades per Musk l'han convertit en una figura polaritzadora. Després de guanyar al novembre, Trump va anunciar que havia triat Musk per codirigir la junta assessora del nou Departament d'Eficiència Governamental .&quot;, 'callback_data': {'answer': &quot;Elon Reeve Musk FRS és un empresari, inversor i magnat conegut pels seus papers clau a l'empresa espacial SpaceX i l'automobilística Tesla, Inc. Les accions i les opinions expressades per Musk l'han convertit en una figura polaritzadora. Després de guanyar al novembre, Trump va anunciar que havia triat Musk per codirigir la junta assessora del nou Departament d'Eficiència Governamental .&quot;}, 'conf': 0.6}, skill_id='skill-ovos-wikipedia.openvoiceos', utterance='Qui és Elon Musk', updated_session=None)
+2025-01-23 16:29:54.300 - skills - ovos_core.intent_services:handle_utterance:436 - DEBUG - intent matching took: 1.5732948780059814
+2025-01-23 16:34:07.672 - skills - ovos_core.intent_services:handle_utterance:399 - INFO - Parsing utterance: ['quina hora és']
+2025-01-23 16:34:07.675 - skills - ovos_core.intent_services:get_pipeline:234 - DEBUG - Session pipeline: ['stop_high', 'converse', 'ocp_high', 'padatious_high', 'adapt_high', 'ocp_medium', 'fallback_high', 'stop_medium', 'adapt_medium', 'padatious_medium', 'adapt_low', 'common_qa', 'fallback_medium', 'fallback_low']
+2025-01-23 16:34:07.678 - skills - ovos_core.intent_services:handle_utterance:430 - DEBUG - no match from &lt;bound method StopService.match_stop_high of &lt;ovos_core.intent_services.stop_service.StopService object at 0x7fff2b036310&gt;&gt;
+2025-01-23 16:34:07.686 - skills - ovos_core.intent_services:handle_utterance:430 - DEBUG - no match from &lt;bound method ConverseService.converse_with_skills of &lt;ovos_core.intent_services.converse_service.ConverseService object at 0x7fff7159ae50&gt;&gt;
+2025-01-23 16:34:07.691 - skills - ovos_core.intent_services:handle_utterance:430 - DEBUG - no match from &lt;bound method OCPPipelineMatcher.match_high of &lt;ocp_pipeline.opm.OCPPipelineMatcher object at 0x7fff26ac3910&gt;&gt;
+2025-01-23 16:34:07.696 - skills - ovos_core.intent_services:handle_utterance:416 - INFO - padatious_high match: IntentHandlerMatch(match_type='skill-ovos-date-time.openvoiceos:what.time.is.it.intent', match_data={}, skill_id='skill-ovos-date-time.openvoiceos', utterance='quina hora és', updated_session=None)
+2025-01-23 16:34:07.698 - skills - ovos_core.intent_services:handle_utterance:436 - DEBUG - intent matching took: 0.022924184799194336
+</code></pre>
+<h2 id="how-to-check-installed-skills">How to check installed skills</h2>
+<p>use the <code>ls-skills</code> command</p>
+<pre><code class="language-bash">(ovos) ovos@raspOVOS:~ $ ls-skills
+[INFO] Listing installed skills for OpenVoiceOS...
+[WARNING] Scanning for installed skills. This may take a few moments, depending on the number of installed skills...
+
+The following skills are installed:
+
+['skill-ovos-weather.openvoiceos',
+ 'ovos-skill-dictation.openvoiceos',
+ 'skill-ovos-parrot.openvoiceos',
+ 'ovos-skill-speedtest.openvoiceos',
+ 'ovos-skill-ip.openvoiceos',
+ 'skill-ovos-spelling.openvoiceos',
+ 'ovos-skill-iss-location.openvoiceos',
+ 'skill-ovos-audio-recording.openvoiceos',
+ 'skill-ovos-wordnet.openvoiceos',
+ 'ovos-skill-days-in-history.openvoiceos',
+ 'ovos-skill-confucius-quotes.openvoiceos',
+ 'skill-ovos-fallback-chatgpt.openvoiceos',
+ 'ovos-skill-alerts.openvoiceos',
+ 'skill-ovos-local-media.openvoiceos',
+ 'skill-ovos-volume.openvoiceos',
+ 'ovos-skill-wikihow.openvoiceos',
+ 'ovos-skill-personal.OpenVoiceOS',
+ 'ovos-skill-number-facts.openvoiceos',
+ 'skill-ovos-hello-world.openvoiceos',
+ 'ovos-skill-moviemaster.openvoiceos',
+ 'skill-ovos-date-time.openvoiceos',
+ 'skill-ovos-fallback-unknown.openvoiceos',
+ 'ovos-skill-pyradios.openvoiceos',
+ 'skill-ovos-icanhazdadjokes.openvoiceos',
+ 'ovos-skill-cmd.forslund',
+ 'ovos-skill-spotify.openvoiceos',
+ 'skill-ovos-randomness.openvoiceos',
+ 'skill-ovos-naptime.openvoiceos',
+ 'skill-ovos-wikipedia.openvoiceos',
+ 'skill-ovos-boot-finished.openvoiceos',
+ 'ovos-skill-camera.openvoiceos',
+ 'skill-ovos-ddg.openvoiceos',
+ 'ovos-skill-laugh.openvoiceos',
+ 'skill-ovos-somafm.openvoiceos',
+ 'skill-ovos-news.openvoiceos',
+ 'skill-ovos-wolfie.openvoiceos',
+ 'ovos-skill-fuster-quotes.openvoiceos']
+[SUCCESS] Skill listing completed.
+</code></pre>
+<h2 id="how-to-check-available-intents">How to check available intents</h2>
+<p>Skills can optionally provide metadata, if they do instructions will be available under <code>ovos-commands</code></p>
+<pre><code class="language-bash">(ovos) ovos@raspOVOS:~ $ ovos-commands 
+##########################
+OpenVoiceOS - Skills help
+##########################
+
+Scanning skills...
+Found 37 installed skills
+Skill ids:
+0) - skill-ovos-weather.openvoiceos
+1) - ovos-skill-dictation.openvoiceos
+2) - skill-ovos-parrot.openvoiceos
+3) - ovos-skill-speedtest.openvoiceos
+4) - ovos-skill-ip.openvoiceos
+5) - skill-ovos-spelling.openvoiceos
+6) - ovos-skill-iss-location.openvoiceos
+7) - skill-ovos-audio-recording.openvoiceos
+8) - skill-ovos-wordnet.openvoiceos
+9) - ovos-skill-days-in-history.openvoiceos
+10) - ovos-skill-confucius-quotes.openvoiceos
+11) - skill-ovos-fallback-chatgpt.openvoiceos
+12) - ovos-skill-alerts.openvoiceos
+13) - skill-ovos-local-media.openvoiceos
+14) - skill-ovos-volume.openvoiceos
+15) - ovos-skill-wikihow.openvoiceos
+16) - ovos-skill-personal.OpenVoiceOS
+17) - ovos-skill-number-facts.openvoiceos
+18) - skill-ovos-hello-world.openvoiceos
+19) - ovos-skill-moviemaster.openvoiceos
+20) - skill-ovos-date-time.openvoiceos
+21) - skill-ovos-fallback-unknown.openvoiceos
+22) - ovos-skill-pyradios.openvoiceos
+23) - skill-ovos-icanhazdadjokes.openvoiceos
+24) - ovos-skill-cmd.forslund
+25) - ovos-skill-spotify.openvoiceos
+26) - skill-ovos-randomness.openvoiceos
+27) - skill-ovos-naptime.openvoiceos
+28) - skill-ovos-wikipedia.openvoiceos
+29) - skill-ovos-boot-finished.openvoiceos
+30) - ovos-skill-camera.openvoiceos
+31) - skill-ovos-ddg.openvoiceos
+32) - ovos-skill-laugh.openvoiceos
+33) - skill-ovos-somafm.openvoiceos
+34) - skill-ovos-news.openvoiceos
+35) - skill-ovos-wolfie.openvoiceos
+36) - ovos-skill-fuster-quotes.openvoiceos
+Select skill number: 36
+
+Skill name: ovos-skill-fuster-quotes.openvoiceos
+Description: La cita del dia de Fuster
+Usage examples:
+    - La frase del Fuster del dia
+    - Necessito alguna idea fusteriana
+    - Algun pensament fusterià?
+    - Digue’m un aforisme del Fuster
+    - Què diria Joan Fuster, aquí?
+    - Vull sentir un aforisme fusterià
+    - Què diu en Fuster?
+    - Què pensen els fusterians?
+    - Digues-me alguna cosa fusteriana
+</code></pre>
+<hr />
+<h2 id="how-to-remove-all-skills">How to remove all skills</h2>
+<p>If you want to revert OVOS to a blank state you can use <code>ovos-reset-brain</code> to remove ALL skills</p>
+<pre><code class="language-bash">(ovos) ovos@raspOVOS:~ $ ovos-reset-brain 
+[INFO] Starting OpenVoiceOS skill uninstallation process...
+WARNING: This will uninstall all installed skills. Do you want to continue? (y/n): y
+Using Python 3.11.2 environment at: .venvs/ovos
+[INFO] The following skills will be uninstalled:
+- ovos-skill-alerts
+- ovos-skill-audio-recording
+- ovos-skill-boot-finished
+- ovos-skill-camera
+- ovos-skill-cmd
+- ovos-skill-confucius-quotes
+- ovos-skill-date-time
+- ovos-skill-days-in-history
+- ovos-skill-dictation
+- ovos-skill-fallback-unknown
+- ovos-skill-fuster-quotes
+- ovos-skill-hello-world
+- ovos-skill-icanhazdadjokes
+- ovos-skill-ip
+- ovos-skill-iss-location
+- ovos-skill-laugh
+- ovos-skill-local-media
+- ovos-skill-moviemaster
+- ovos-skill-naptime
+- ovos-skill-number-facts
+- ovos-skill-parrot
+- ovos-skill-personal
+- ovos-skill-pyradios
+- ovos-skill-randomness
+- ovos-skill-somafm
+- ovos-skill-speedtest
+- ovos-skill-spelling
+- ovos-skill-spotify
+- ovos-skill-volume
+- ovos-skill-weather
+- ovos-skill-wikihow
+- ovos-skill-wikipedia
+- skill-ddg
+- skill-news
+- skill-ovos-fallback-chatgpt
+- skill-wolfie
+- skill-wordnet
+[INFO] Uninstalling skills...
+Using Python 3.11.2 environment at: .venvs/ovos
+Uninstalled 37 packages in 513ms
+ - ovos-skill-alerts==0.1.15
+ - ovos-skill-audio-recording==0.2.5a5
+ - ovos-skill-boot-finished==0.4.9
+ - ovos-skill-camera==1.0.3a4
+ - ovos-skill-cmd==0.2.8
+ - ovos-skill-confucius-quotes==0.1.11a1
+ - ovos-skill-date-time==0.4.6
+ - ovos-skill-days-in-history==0.3.9
+ - ovos-skill-dictation==0.2.10
+ - ovos-skill-fallback-unknown==0.1.6a2
+ - ovos-skill-fuster-quotes==0.0.1
+ - ovos-skill-hello-world==0.1.11a4
+ - ovos-skill-icanhazdadjokes==0.3.2
+ - ovos-skill-ip==0.2.7a1
+ - ovos-skill-iss-location==0.2.10
+ - ovos-skill-laugh==0.2.1a3
+ - ovos-skill-local-media==0.2.9
+ - ovos-skill-moviemaster==0.0.8a4
+ - ovos-skill-naptime==0.3.12a1
+ - ovos-skill-number-facts==0.1.10
+ - ovos-skill-parrot==0.1.14
+ - ovos-skill-personal==0.1.9
+ - ovos-skill-pyradios==0.1.5a1
+ - ovos-skill-randomness==0.1.2a1
+ - ovos-skill-somafm==0.1.5
+ - ovos-skill-speedtest==0.3.3a4
+ - ovos-skill-spelling==0.2.6a3
+ - ovos-skill-spotify==0.1.9
+ - ovos-skill-volume==0.1.13a2
+ - ovos-skill-weather==0.1.14
+ - ovos-skill-wikihow==0.2.14
+ - ovos-skill-wikipedia==0.6.0a1
+ - skill-ddg==0.1.15
+ - skill-news==0.1.12
+ - skill-ovos-fallback-chatgpt==0.1.12
+ - skill-wolfie==0.3.0
+ - skill-wordnet==0.1.1
+[SUCCESS] All skills have been uninstalled successfully.
+[WARNING] Note: This operation only deletes the skills. Configuration files and pipeline plugins (which still influence intent matching) are NOT affected by this action.
+</code></pre>
+<h2 id="wake-word-issues">Wake Word Issues</h2>
+<p>Wake word detection in raspOVOS offers several options, each with its advantages and limitations. Understanding these
+can help resolve potential issues and improve performance.</p>
+<p>By default, raspOVOS uses the <code>precise-lite</code> model with the wake word "hey mycroft." This model was trained by MycroftAI
+for their Mark2 device. However, there are a few things to consider:</p>
+<ul>
+<li><strong>Microphone Compatibility:</strong> The performance of precise models can be impacted if the specific properties of your
+  microphone (e.g., sensitivity, frequency response) do not match the data used to train the model. While the default
+  <code>precise-lite</code> model was trained with a balanced dataset from a variety of Mycroft users, there is no guarantee it
+  will work optimally with your microphone.</li>
+<li><strong>Speaker Demographics:</strong> Precise models, including <code>precise-lite</code>, are often trained with datasets predominantly
+  featuring adult male voices. As a result, the model may perform poorly with voices that are outside this demographic,
+  such as children's or women's voices. This is a common issue also seen in Speech-to-Text (STT) models.</li>
+</ul>
+<h3 id="custom-models">Custom Models</h3>
+<p>If the default model is not working well for you, consider training your own precise model. Here are some helpful
+resources for creating a more tailored solution:</p>
+<ul>
+<li><a href="https://huggingface.co/collections/Jarbas/wake-word-datasets-672cc275fa4bddff9cf69c39">Helpful Wake Word Datasets on Hugging Face</a></li>
+<li><a href="https://github.com/secretsauceai/wakeword-data-collector">Data Collection</a></li>
+<li><a href="https://github.com/secretsauceai/precise-wakeword-model-maker">Wake Word Trainer</a></li>
+<li><a href="https://github.com/OpenVoiceOS/precise-lite-trainer">precise-lite-trainer Code</a></li>
+<li><a href="https://github.com/OpenVoiceOS/ovos-ww-auto-synth-dataset">Synthetic Data Creation for Wake Words</a></li>
+</ul>
+<h3 id="alternative-wake-word-vosk-plugin">Alternative Wake Word: Vosk Plugin</h3>
+<p>If you're looking for an alternative to the precise model, the Vosk wake word plugin is another option.</p>
+<ul>
+<li><a href="https://github.com/OpenVoiceOS/ovos-ww-plugin-vosk">Vosk Wake Word Plugin GitHub</a></li>
+</ul>
+<p>One of the main advantages of using the <strong>Vosk Wake Word Plugin</strong> is that it does <strong>not require a training step</strong>.</p>
+<p>Instead, it uses Kaldi with a limited language model, which means it can work out-of-the-box with certain wake words
+without needing to collect and train custom data.</p>
+<p>The performance of Vosk may vary depending on the wake word you choose. Some wake words may work better than
+others, so it’s essential to test and evaluate the plugin with your chosen word.</p>
+<p>Some wake words are hard to trigger, especially if missing from the language model vocabulary</p>
+<blockquote>
+<p>💡 e.g. <code>hey mycroft</code> is usually transcribed as <code>hey microsoft</code>,</p>
+</blockquote>
+<p>example for "hey  computer"</p>
+<pre><code class="language-json">  &quot;listener&quot;: {
+    &quot;wake_word&quot;: &quot;hey_computer&quot;
+  },
+  &quot;hotwords&quot;: {
+    &quot;hey_computer&quot;: {
+        &quot;module&quot;: &quot;ovos-ww-plugin-vosk&quot;,
+        &quot;lang&quot;: &quot;en&quot;,
+        &quot;listen&quot;: true,
+        &quot;debug&quot;: true,
+        &quot;samples&quot;: [&quot;hey computer&quot;, &quot;a computer&quot;, &quot;hey computed&quot;],
+        &quot;rule&quot;: &quot;equals&quot;,
+        &quot;full_vocab&quot;: false,
+    }
+  }
+</code></pre>
+<ul>
+<li><code>lang</code> - lang code for model, optional, will use global value if not set. only used to download models</li>
+<li><code>debug</code> - if true will print extra info, like the transcription contents, useful for adjusting "samples"</li>
+<li><code>rule</code> - how to process the transcript for detections<ul>
+<li><code>contains</code> - if the transcript contains any of provided samples</li>
+<li><code>equals</code> - if the transcript exactly matches any of provided samples</li>
+<li><code>starts</code> - if the transcript starts with any of provided samples</li>
+<li><code>ends</code> - if the transcript ends with any of provided samples</li>
+<li><code>fuzzy</code> - fuzzy match transcript against samples</li>
+</ul>
+</li>
+<li><code>samples</code> - list of samples to match the rules against, optional, by default uses keyword name</li>
+<li><code>full_vocab</code> - use the full language model vocabulary for transcriptions, if false (default) will run in keyword mode</li>
+</ul>
+<blockquote>
+<p>💡 <code>"lang"</code> does not need to match the main language, if there is no vosk model for your language you can try faking it with similar sounding words from a different one</p>
+</blockquote>
+<h3 id="tips-for-choosing-a-good-wake-word">Tips for Choosing a Good Wake Word</h3>
+<p>Selecting a wake word is crucial to improving the accuracy and responsiveness of your system. Here are some tips for
+choosing a wake word that will work well in various environments:</p>
+<ul>
+<li>
+<p><strong>3 or 4 Syllables:</strong> Wake words that are 3 or 4 syllables long tend to perform better because they are more distinct
+  and less likely to be confused with common words in everyday speech. For example:</p>
+<ul>
+<li><strong>Bad Example:</strong> "Bob" (short, common name)</li>
+<li><strong>Less Bad Example:</strong> "Computer" (common word)</li>
+<li><strong>Good Example:</strong> "Ziggy" (uncommon)</li>
+<li><strong>Better Example:</strong> "Hey Ziggy" (3 syllables, longer)</li>
+</ul>
+</li>
+<li>
+<p><strong>Uncommon Words:</strong> Choose a wake word that is not often used in regular conversation. This reduces the chance of
+  false triggers when other words sound similar to your wake word. Unique and uncommon names, phrases, or combinations
+  of sounds work best.</p>
+</li>
+<li>
+<p><strong>Clear Pronunciation:</strong> Make sure the wake word has a clear and easy-to-pronounce structure. Words with ambiguous or
+  difficult-to-articulate syllables may cause detection issues, especially in noisy environments.</p>
+</li>
+<li>
+<p><strong>Avoid Overused Words:</strong> Stay away from wake words like "hey" or "hello," as they are often used in daily speech and
+  can trigger false positives. Try combining a less common word with a familiar greeting for better results.</p>
+</li>
+</ul>
+<hr />
+<h2 id="audio-issues">Audio Issues</h2>
+<ul>
+<li><strong>Run Diagnostics script:</strong><ul>
+<li>raspOVOS includes a helper script <code>ovos-audio-diagnostics</code> that will print basic info about your sound system</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-bash">(ovos) ovos@raspOVOS:~ $ ovos-audio-diagnostics
+=========================== 
+raspOVOS Audio Diagnostics
+===========================
+
+# Detected sound server:
+pipewire
+
+# Available audio outputs:
+36 - Built-in Audio Stereo [vol: 0.40]
+45 - Built-in Audio Stereo [vol: 0.85]
+46 - Built-in Audio Digital Stereo (HDMI) [vol: 0.40]
+
+# Default audio output:
+ID: 36
+NAME: WM8731 HiFi wm8731-hifi-0
+CARD NUMBER: 2
+CARD NAME: snd_rpi_proto
+</code></pre>
+<ul>
+<li><strong>Check Input Devices:</strong><ul>
+<li>Run <code>arecord -l</code> to list all detected audio capture devices (microphones).</li>
+</ul>
+</li>
+</ul>
+<pre><code>**** List of CAPTURE Hardware Devices ****
+card 2: sndrpiproto [snd_rpi_proto], device 0: WM8731 HiFi wm8731-hifi-0 [WM8731 HiFi wm8731-hifi-0]
+Subdevices: 0/1
+Subdevice #0: subdevice #0
+card 3: Device [USB Audio Device], device 0: USB Audio [USB Audio]
+Subdevices: 1/1
+Subdevice #0: subdevice #0
+</code></pre>
+<ul>
+<li><strong>Check Output Devices:</strong><ul>
+<li>Run <code>aplay -l</code> to list all detected audio playback devices (speakers). Verify your card is being detected
+  correctly</li>
+</ul>
+</li>
+</ul>
+<pre><code>**** List of PLAYBACK Hardware Devices ****
+card 0: Headphones [bcm2835 Headphones], device 0: bcm2835 Headphones [bcm2835 Headphones]
+Subdevices: 7/8
+Subdevice #0: subdevice #0
+Subdevice #1: subdevice #1
+Subdevice #2: subdevice #2
+Subdevice #3: subdevice #3
+Subdevice #4: subdevice #4
+Subdevice #5: subdevice #5
+Subdevice #6: subdevice #6
+Subdevice #7: subdevice #7
+card 1: vc4hdmi [vc4-hdmi], device 0: MAI PCM i2s-hifi-0 [MAI PCM i2s-hifi-0]
+Subdevices: 1/1
+Subdevice #0: subdevice #0
+card 2: sndrpiproto [snd_rpi_proto], device 0: WM8731 HiFi wm8731-hifi-0 [WM8731 HiFi wm8731-hifi-0]
+Subdevices: 1/1
+Subdevice #0: subdevice #0
+</code></pre>
+<ul>
+<li>
+<p><strong>Verify Volume and Mute status:</strong></p>
+<ul>
+<li>Run <code>alsamixer</code> and verify that volume isn't too low or audio muted.</li>
+</ul>
+</li>
+<li>
+<p><strong>Check audio setup logs:</strong></p>
+</li>
+<li>During boot the audio setup generates logs, which are saved to the <code>/tmp</code> directory:<ul>
+<li><code>/tmp/autosoundcard.log</code> (for soundcard autoconfiguration)</li>
+</ul>
+</li>
+</ul>
+<pre><code>==&gt; /tmp/autosoundcard.log &lt;==
+Fri 17 Jan 11:42:46 WET 2025 - **** List of PLAYBACK Hardware Devices ****
+card 0: Headphones [bcm2835 Headphones], device 0: bcm2835 Headphones [bcm2835 Headphones]
+Subdevices: 8/8
+Subdevice #0: subdevice #0
+Subdevice #1: subdevice #1
+Subdevice #2: subdevice #2
+Subdevice #3: subdevice #3
+Subdevice #4: subdevice #4
+Subdevice #5: subdevice #5
+Subdevice #6: subdevice #6
+Subdevice #7: subdevice #7
+card 1: Device [USB Audio Device], device 0: USB Audio [USB Audio]
+Subdevices: 1/1
+Subdevice #0: subdevice #0
+card 2: vc4hdmi [vc4-hdmi], device 0: MAI PCM i2s-hifi-0 [MAI PCM i2s-hifi-0]
+Subdevices: 1/1
+Subdevice #0: subdevice #0
+card 3: sndrpiproto [snd_rpi_proto], device 0: WM8731 HiFi wm8731-hifi-0 [WM8731 HiFi wm8731-hifi-0]
+Subdevices: 0/1
+Subdevice #0: subdevice #0
+Fri 17 Jan 11:42:48 WET 2025 - Mark 1 soundcard detected by ovos-i2csound.
+Fri 17 Jan 11:42:48 WET 2025 - Detected CARD_NUMBER for Mark 1 soundcard: 3
+Fri 17 Jan 11:42:48 WET 2025 - Configuring ALSA default card
+Fri 17 Jan 11:42:48 WET 2025 - Running as user, modifying ~/.asoundrc
+Fri 17 Jan 11:42:48 WET 2025 - ALSA default card set to: 3
+</code></pre>
+<ul>
+<li><strong>Confirm available audio sinks:</strong><ul>
+<li>Run <code>wpctl status</code> to check the available outputs as seen by <code>pipewire</code>.</li>
+<li>The default sinks will be marked with <code>*</code></li>
+</ul>
+</li>
+<li>You can inspect a sink by its number with <code>wpctl inspect $SINK_ID</code></li>
+</ul>
+<pre><code>(ovos) ovos@raspOVOS:~ $ wpctl status
+PipeWire 'pipewire-0' [1.2.4, ovos@raspOVOS, cookie:3349583741]
+└─ Clients:
+   33. WirePlumber                         [1.2.4, ovos@raspOVOS, pid:695]
+   34. WirePlumber [export]                [1.2.4, ovos@raspOVOS, pid:695]
+   47. PipeWire ALSA [librespot]           [1.2.4, ovos@raspOVOS, pid:702]
+   67. PipeWire ALSA [python3.11]          [1.2.4, ovos@raspOVOS, pid:691]
+   75. PipeWire ALSA [python3.11]          [1.2.4, ovos@raspOVOS, pid:699]
+   83. PipeWire ALSA [python3.11]          [1.2.4, ovos@raspOVOS, pid:700]
+   84. wpctl                               [1.2.4, ovos@raspOVOS, pid:1710]
+
+Audio
+├─ Devices:
+│      42. Built-in Audio                      [alsa]
+│      43. Built-in Audio                      [alsa]
+│      44. Built-in Audio                      [alsa]
+│  
+├─ Sinks:
+│  *   36. Built-in Audio Stereo               [vol: 0.40]
+│      45. Built-in Audio Stereo               [vol: 0.85]
+│      46. Built-in Audio Digital Stereo (HDMI) [vol: 0.40]
+│  
+├─ Sink endpoints:
+│  
+├─ Sources:
+│  *   37. Built-in Audio Stereo               [vol: 1.00]
+│  
+├─ Source endpoints:
+│  
+└─ Streams:
+   48. PipeWire ALSA [librespot]                                   
+        63. output_FL       &gt; WM8731 HiFi wm8731-hifi-0:playback_FL [active]
+        64. output_FR       &gt; WM8731 HiFi wm8731-hifi-0:playback_FR [active]
+   68. PipeWire ALSA [python3.11]                                  
+        69. input_FL        &lt; WM8731 HiFi wm8731-hifi-0:capture_FL  [active]
+        70. monitor_FL     
+        71. input_FR        &lt; WM8731 HiFi wm8731-hifi-0:capture_FR  [active]
+        72. monitor_FR              
+
+(ovos) ovos@raspOVOS:~ $ wpctl inspect 36
+id 36, type PipeWire:Interface:Node
+   alsa.card = &quot;2&quot;
+   alsa.card_name = &quot;snd_rpi_proto&quot;
+   alsa.class = &quot;generic&quot;
+   alsa.device = &quot;0&quot;
+   alsa.driver_name = &quot;snd_soc_rpi_proto&quot;
+   alsa.id = &quot;sndrpiproto&quot;
+   alsa.long_card_name = &quot;snd_rpi_proto&quot;
+   alsa.name = &quot;WM8731 HiFi wm8731-hifi-0&quot;
+   alsa.resolution_bits = &quot;16&quot;
+   alsa.subclass = &quot;generic-mix&quot;
+   alsa.subdevice = &quot;0&quot;
+   alsa.subdevice_name = &quot;subdevice #0&quot;
+   ...
+</code></pre>
+<ul>
+<li><strong>Test Audio:</strong><ul>
+<li>Record a short test file with <code>arecord -f test.wav</code>.</li>
+<li>Play it back with <code>aplay test.wav</code>.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="stt-tips-and-tricks">STT tips and tricks</h2>
+<h3 id="saving-transcriptions">Saving Transcriptions</h3>
+<p>You can enable saving of recordings to file, this should be your first step to diagnose problems, is the audio
+inteligible? is it being cropped? too noisy? low volume?</p>
+<blockquote>
+<p>💡 set <code>"save_utterances": true</code> in
+your <a href="https://github.com/OpenVoiceOS/ovos-config/blob/V0.0.13a19/ovos_config/mycroft.conf#L436">listener config</a>,
+recordings will be saved to <code>~/.local/share/mycroft/listener/utterances</code></p>
+</blockquote>
+<p>If the recorded audio looks good to you, maybe you need to use a different STT plugin, maybe the one you are using does
+not like your microphone, or just isn't very good for your language</p>
+<h3 id="wrong-transcriptions">Wrong Transcriptions</h3>
+<p>If you consistently get specific words or utterances transcribed wrong, you can remedy around this to some extent by
+using the <a href="https://github.com/OpenVoiceOS/ovos-utterance-corrections-plugin">ovos-utterance-corrections-plugin</a></p>
+<blockquote>
+<p>💡 You can define replacements at word level <code>~/.local/share/mycroft/word_corrections.json</code></p>
+</blockquote>
+<p>for example whisper STT often gets artist names wrong, this allows you to correct them</p>
+<pre><code class="language-json">{
+  &quot;Jimmy Hendricks&quot;: &quot;Jimi Hendrix&quot;,
+  &quot;Eric Klapptern&quot;: &quot;Eric Clapton&quot;,
+  &quot;Eric Klappton&quot;: &quot;Eric Clapton&quot;
+}
+</code></pre>
+<h3 id="silence-removal">Silence Removal</h3>
+<p>By default OVOS applies VAD (Voice Activity Detection) to crop silence from the audio sent to STT, this helps in
+performance and in accuracy (reduces hallucinations in plugins like FasterWhisper)</p>
+<p>Depending on your microphone/VAD plugin, this might be removing too much audio</p>
+<blockquote>
+<p>💡 set <code>"remove_silence": false</code> in
+your <a href="https://github.com/OpenVoiceOS/ovos-config/blob/V0.0.13a19/ovos_config/mycroft.conf#L452">listener config</a>, this
+will send the full audio recording to STT</p>
+</blockquote>
+<h3 id="listen-sound">Listen Sound</h3>
+<p>does your listen sound contain speech? some users replace the "ding" sound with words such as "yes?"</p>
+<p>In this case the listen sound will be sent to STT and might negatively affect the transcription</p>
+<blockquote>
+<p>💡 set <code>"instant_listen": false</code> in your <a href="https://github.com/OpenVoiceOS/ovos-config/blob/V0.0.13a19/ovos_config/mycroft.conf#L519">listener config</a>, this
+will drop the listen sound audio from the STT audio buffer. You will need to wait for the listen sound to finish before speaking your command in this case</p>
+</blockquote>
+<hr />
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../54-skill-examples/" class="btn btn-neutral float-left" title="Default Skills"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../lang_support/" class="btn btn-neutral float-right" title="Translations">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../54-skill-examples/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../lang_support/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../javascripts/analytics.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

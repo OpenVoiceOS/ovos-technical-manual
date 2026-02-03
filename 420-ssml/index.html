@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://openvoiceos.github.io/ovos-technical-manual/420-ssml/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>SSML - OVOS Technical Manual</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "SSML";
+        var mkdocs_page_input_path = "420-ssml.md";
+        var mkdocs_page_url = "/ovos-technical-manual/420-ssml/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OVOS Technical Manual
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Home</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../50-ovos_installer/">ovos-installer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../001-release_channels/">Manual Install</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">RaspOVOS</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../51-install_raspovos/">Tutorial</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../54-skill-examples/">Default Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../55-raspovos_troubleshooting/">Troubleshooting</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Language Support</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../lang_support/">Translations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gitlocalize_tutorial/">GitLocalize Tutorial</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Architecture</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../99-architecture-overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../100-bus_service/">Bus</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../101-speech_service/">Listener</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../102-core/">Core</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../399-intents/">Skills and Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../103-audio_service/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../104-gui_service/">GUI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../340-PHAL/">Platform/Hardware Abstraction Layer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../300-plugin-manager/">Plugin Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../110-config/">Configuration</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Intent Pipelines</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../pipelines_overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../adapt_pipeline/">Adapt</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../padatious_pipeline/">Padatious</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../m2v_pipeline/">Model2Vec</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../converse_pipeline/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../stop_pipeline/">Stop</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../153-persona_pipeline/">Persona</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cq_pipeline/">Common Query</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../631-OCP_pipeline/">OCP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fallback_pipeline/">Fallback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Transformers</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../audio_transformers/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../utterance_transformers/">Utterance</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../intent_transformers/">Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dialog_transformers/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_transformers/">TTS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">AI Agents</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../150-personas/">Personas</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../151-llm-transformers/">AI Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../150-advanced_solvers/">Specialized Solvers</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Self Hosting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../202-persona_server/">Persona Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../152-hivemind-agents/">HiveMind</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../200-stt_server/">STT Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../201-tts_server/">TTS Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../203-translate_server/">Translate Server</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Skill Development</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../400-skill-design-guidelines/">Design Guidelines</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../401-skill_structure/">Anatomy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../402-statements/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../403-intents/">Intent Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../405-customization/">Customization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../406-messagebus/">Bus Interaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../407-skill_filesystem/">Filesystem</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../408-skill_settings/">Skill Settings</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../409-skill_api/">Skill API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../410-skill_runtime_requirements/">Runtime Requirements</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../411-skill_json/">Skill Json</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">SSML</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#what-is-ssml">What is SSML?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ssmlbuilder_1">SSMLBuilder</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#text-manipulation">Text Manipulation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#timing-and-prosody">Timing and Prosody</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#voice-and-phoneme">Voice and Phoneme</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#build-and-utility">Build and Utility</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ssml-support-in-tts-plugins">SSML Support in TTS Plugins</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#platform-specific-ssml-handling">Platform-Specific SSML Handling</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#behavior-with-plugins-that-do-not-support-ssml">Behavior with Plugins That Do Not Support SSML</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../430-skill_dev_faq/">F.A.Q.</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Continuous Conversation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../500-prompts/">Prompts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../501-context/">Follow up Questions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../502-converse/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../503-layers/">Intent Layers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../504-session/">Session Aware Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Advanced Skill Types</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../600-fallbacks/">Fallback Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../610-common_query/">Common Query Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../630-OCP_skills/">Media Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../620-universal_skills/">Universal Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">GUI</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../701-gui_protocol/">Protocol</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Voice Apps</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../590-voice_apps/">Standalone Apps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">MessageBus</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../900-bus_client/">Messagebus Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../720-skill_gui/">GUI Interface</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../800-mk1_api/">Enclosure Api</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Plugin Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../310-mic_plugins/">Microphone</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../311-vad_plugins/">Voice Activity Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../312-wake_word_plugins/">Wake Word</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../313-stt_plugins/">Speech To Text</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../320-tts_plugins/">Text To Speech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../321-g2p_plugins/">Grapheme to Phoneme</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../330-transformer_plugins/">Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../350-translation_plugins/">Language Detection/Translation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../370-ocp_plugins/">OCP Stream Extractors</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../371-media_plugins/">Media Playback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Misc. Utilities</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../891-number_parser/">Number Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../890-date_parser/">Date Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../893-color_parser/">Color Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../910-quebra_frases/">Quebra Frases</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../920-padacioso/">Padacioso</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../801-mk1_utils/">Mark1 Utils</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Misc. Information</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../002-license/">License</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../003-timeline/">Timeline</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OVOS Technical Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Skill Development</li>
+      <li class="breadcrumb-item active">SSML</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="ssmlbuilder">SSMLBuilder</h1>
+<h2 id="what-is-ssml">What is SSML?</h2>
+<p>Speech Synthesis Markup Language (SSML) is a markup language used to enhance synthesized speech output. It provides developers with a way to control various aspects of speech synthesis, such as pronunciation, intonation, volume, and speed, by using predefined tags and attributes.</p>
+<p>SSML allows developers to create more natural and expressive speech output, making interactions with voice-based applications more engaging and user-friendly.</p>
+<p>These use cases demonstrate how SSML can be applied in various contexts to improve the quality, expressiveness, and accessibility of synthesized speech output, ultimately enhancing the overall user experience.</p>
+<ol>
+<li>
+<p><strong>Narration with Emphasis</strong>: In storytelling applications or audiobooks, developers can use SSML to emphasize specific words or phrases to convey emotions or highlight key points in the narrative. For example, during a suspenseful moment in a story, the narrator's voice could be slowed down for dramatic effect using SSML.</p>
+</li>
+<li>
+<p><strong>Interactive Voice Responses</strong>: In voice-based applications such as virtual assistants or customer service bots, SSML can be used to provide more natural and engaging interactions with users. For instance, developers can use SSML to insert pauses between sentences to mimic natural speech patterns or adjust the pitch and volume of the voice to convey empathy or urgency.</p>
+</li>
+<li>
+<p><strong>Educational Content</strong>: SSML can be valuable in educational applications where synthesized speech is used to deliver instructional content or quizzes. Developers can use SSML to modify the speaking rate to accommodate different learning paces or employ phonetic pronunciation tags to ensure correct pronunciation of specialized terms or foreign words.</p>
+</li>
+<li>
+<p><strong>Accessibility Features</strong>: For applications designed to assist users with visual impairments or reading difficulties, SSML can play a crucial role in enhancing accessibility. Developers can use SSML to provide auditory cues, such as tone changes or speech emphasis, to indicate important information or user interface elements.</p>
+</li>
+</ol>
+<h2 id="ssmlbuilder_1">SSMLBuilder</h2>
+<p>The <code>SSMLBuilder</code> class simplifies the creation of SSML strings by providing intuitive methods to control various aspects of speech synthesis. It offers a range of methods for manipulating text, adjusting timing and prosody, specifying voice and phoneme characteristics, and more.</p>
+<pre><code class="language-python">from ovos_utils.ssml import SSMLBuilder
+
+class MySkill:
+
+    def handle_intent(self, message):
+        # Create an instance of SSMLBuilder
+        ssml_builder = SSMLBuilder()
+
+        # Generate SSML
+        ssml_text = ssml_builder.sentence(&quot;Hello, world!&quot;).pause(500, &quot;ms&quot;).say_slow(&quot;How are you today?&quot;).build()
+
+        # Output:
+        # '&lt;speak&gt;\n&lt;s&gt;Hello, world!&lt;/s&gt; &lt;break time=500ms/&gt;&lt;prosody rate='0.4'&gt;How are you today?&lt;/prosody&gt;\n&lt;/speak&gt;'
+
+        # Speak the SSML text
+        self.speak(ssml_text)
+</code></pre>
+<h3 id="text-manipulation">Text Manipulation</h3>
+<ol>
+<li><code>sub(alias, word)</code>: Replaces a word with a specified alias.</li>
+<li><code>emphasis(level, word)</code>: Emphasizes a word with a specified level.</li>
+<li><code>parts_of_speech(word, role)</code>: Specifies the usage or role of a word.</li>
+<li><code>pause_by_strength(strength)</code>: Inserts a pause with a specified strength.</li>
+<li><code>sentence(text)</code>: Wraps text with <code>&lt;s&gt;</code> tags to denote a sentence.</li>
+<li><code>say_emphasis(text)</code>: Emphasizes the text strongly.</li>
+<li><code>say_strong(text)</code>: Modifies the vocal-tract length to increase speech intensity.</li>
+<li><code>say_weak(text)</code>: Modifies the vocal-tract length to decrease speech intensity.</li>
+<li><code>say_softly(text)</code>: Modifies the phonation to produce softer speech.</li>
+<li><code>say_auto_breaths(text)</code>: Adds automatic breaths to the speech.</li>
+<li><code>paragraph(text)</code>: Wraps text with <code>&lt;p&gt;</code> tags to denote a paragraph.</li>
+<li><code>audio(audio_file, text)</code>: Embeds audio with specified text.</li>
+</ol>
+<h3 id="timing-and-prosody">Timing and Prosody</h3>
+<ol>
+<li><code>pause(time, unit)</code>: Inserts a pause for a specified duration.</li>
+<li><code>prosody(attribute, text)</code>: Modifies prosodic attributes of the text such as pitch, rate, or volume.</li>
+<li><code>pitch(pitch, text)</code>: Changes the pitch of the text.</li>
+<li><code>volume(volume, text)</code>: Modifies the volume of the text.</li>
+<li><code>rate(rate, text)</code>: Adjusts the speaking rate of the text.</li>
+</ol>
+<h3 id="voice-and-phoneme">Voice and Phoneme</h3>
+<ol>
+<li><code>say(text)</code>: Adds normal speed text to SSML.</li>
+<li><code>say_loud(text)</code>: Increases the volume of the text.</li>
+<li><code>say_slow(text)</code>: Slows down the speaking rate of the text.</li>
+<li><code>say_fast(text)</code>: Speeds up the speaking rate of the text.</li>
+<li><code>say_low_pitch(text)</code>: Lowers the pitch of the text.</li>
+<li><code>say_high_pitch(text)</code>: Raises the pitch of the text.</li>
+<li><code>say_whispered(text)</code>: Converts text into whispered speech.</li>
+<li><code>phoneme(ph, text)</code>: Specifies the phonetic pronunciation of the text.</li>
+<li><code>voice(voice, text)</code>: Specifies the voice to use for the text.</li>
+<li><code>whisper(text)</code>: Converts text into whispered speech.</li>
+</ol>
+<h3 id="build-and-utility">Build and Utility</h3>
+<ol>
+<li><code>build()</code>: Constructs the final SSML string.</li>
+<li><code>remove_ssml(text)</code>: Removes SSML tags from the given text.</li>
+<li><code>extract_ssml_tags(text)</code>: Extracts SSML tags from the given text.</li>
+</ol>
+<h2 id="ssml-support-in-tts-plugins">SSML Support in TTS Plugins</h2>
+<p>OVOS TTS plugins implement support for SSML, ensuring that SSML content is processed accurately during speech synthesis. Let's take a closer look at how SSML handling works within the <code>TTS</code> abstract class:</p>
+<ul>
+<li>
+<p><strong>SSML Validation</strong>: The <code>validate_ssml()</code> method checks if the TTS engine supports SSML. Unsupported or invalid SSML tags are removed from the input text to ensure proper processing.</p>
+</li>
+<li>
+<p><strong>SSML Tag Handling</strong>: Supported SSML tags are processed by the TTS engine during synthesis. Unsupported tags are removed, while supported tags are modified or retained based on the implementation of the <code>modify_tag()</code> method.</p>
+</li>
+</ul>
+<pre><code class="language-python">
+# default handling of ssml, advanced plugins may override this method
+def modify_tag(self, tag):
+    &quot;&quot;&quot;Override to modify each supported ssml tag.
+
+    Arguments:
+        tag (str): SSML tag to check and possibly transform.
+    &quot;&quot;&quot;
+    return tag
+
+def validate_ssml(self, utterance):
+    &quot;&quot;&quot;Check if engine supports ssml, if not remove all tags.
+
+    Remove unsupported / invalid tags
+
+    Arguments:
+        utterance (str): Sentence to validate
+
+    Returns:
+        str: validated_sentence
+    &quot;&quot;&quot;
+
+    # Validate speak tags
+    if not self.ssml_tags or &quot;speak&quot; not in self.ssml_tags:
+        self.format_speak_tags(utterance, False)
+    elif self.ssml_tags and &quot;speak&quot; in self.ssml_tags:
+        self.format_speak_tags(utterance)
+
+    # if ssml is not supported by TTS engine remove all tags
+    if not self.ssml_tags:
+        return self.remove_ssml(utterance)
+
+    # find ssml tags in string
+    tags = SSML_TAGS.findall(utterance)
+
+    for tag in tags:
+        if any(supported in tag for supported in self.ssml_tags):
+            utterance = utterance.replace(tag, self.modify_tag(tag))
+        else:
+            # remove unsupported tag
+            utterance = utterance.replace(tag, &quot;&quot;)
+
+    # return text with supported ssml tags only
+    return utterance.replace(&quot;  &quot;, &quot; &quot;)
+</code></pre>
+<h3 id="platform-specific-ssml-handling">Platform-Specific SSML Handling</h3>
+<p>Some TTS plugins, like the PollyTTS plugin, may support platform-specific SSML tags that are not part of the standard specification. For example, Amazon Polly supports additional SSML tags specific to Amazon's speech synthesis service.</p>
+<p>Let's take a closer look at how SSML support is implemented in the <code>PollyTTS</code> plugin:</p>
+<pre><code class="language-python">class PollyTTS(TTS):
+    def __init__(self, *args, **kwargs):
+        ssml_tags = [&quot;speak&quot;, &quot;say-as&quot;, &quot;voice&quot;, &quot;prosody&quot;, &quot;break&quot;,
+                     &quot;emphasis&quot;, &quot;sub&quot;, &quot;lang&quot;, &quot;phoneme&quot;, &quot;w&quot;, &quot;whisper&quot;,
+                     &quot;amazon:auto-breaths&quot;, &quot;p&quot;, &quot;s&quot;, &quot;amazon:effect&quot;, &quot;mark&quot;]
+        super().__init__(*args, **kwargs, audio_ext=&quot;mp3&quot;,
+                         ssml_tags=ssml_tags, validator=PollyTTSValidator(self))
+
+    def get_tts(self, sentence, wav_file, lang=None, voice=None):
+        # SSML handling specific to PollyTTS
+        # Replace custom SSML tags for Amazon Polly
+        sentence = sentence.replace(&quot;\whispered&quot;, &quot;/amazon:effect&quot;) \
+            .replace(&quot;\\whispered&quot;, &quot;/amazon:effect&quot;) \
+            .replace(&quot;whispered&quot;, &quot;amazon:effect name=\&quot;whispered\&quot;&quot;)
+
+        # altermatively the plugin could override self.modify_tag method instead
+
+        # Synthesize speech using Amazon Polly API
+        # Write audio stream to WAV file
+        return wav_file, None
+</code></pre>
+<p>In this example, the <code>PollyTTS</code> plugin defines a list of supported SSML tags, including both standard and Amazon-specific tags. During initialization, the plugin sets up SSML support by providing the list of tags to the <code>TTS</code> superclass.</p>
+<p>When synthesizing speech using Amazon Polly, the plugin translates platform-specific SSML tags like <code>amazon:effect</code> to ensure compatibility with Amazon's speech synthesis service.</p>
+<h3 id="behavior-with-plugins-that-do-not-support-ssml">Behavior with Plugins That Do Not Support SSML</h3>
+<p>When SSML text is sent to a TTS plugin that does not support SSML, the plugin will typically ignore the SSML tags and process the text as regular speech. </p>
+<p>This means that any SSML-specific effects, such as pauses, emphasis, or prosody modifications, will be dropped, and the synthesized speech will be generated without considering the SSML markup.</p>
+<p>It's important to ensure compatibility between the SSML content and the capabilities of the TTS plugin being used. If SSML-specific effects are essential for the intended speech output, it's recommended to verify that the selected TTS plugin supports SSML or consider using a different plugin that provides SSML support.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../411-skill_json/" class="btn btn-neutral float-left" title="Skill Json"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../430-skill_dev_faq/" class="btn btn-neutral float-right" title="F.A.Q.">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../411-skill_json/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../430-skill_dev_faq/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../javascripts/analytics.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

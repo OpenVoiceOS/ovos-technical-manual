@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://openvoiceos.github.io/ovos-technical-manual/51-install_raspovos/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Tutorial - OVOS Technical Manual</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Tutorial";
+        var mkdocs_page_input_path = "51-install_raspovos.md";
+        var mkdocs_page_url = "/ovos-technical-manual/51-install_raspovos/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OVOS Technical Manual
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Home</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../50-ovos_installer/">ovos-installer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../001-release_channels/">Manual Install</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">RaspOVOS</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Tutorial</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#step-1-prepare-your-hardware">Step 1: Prepare Your Hardware</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#raspberry-pi-model-recommendations">Raspberry Pi Model Recommendations</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#storage-options">Storage Options</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#power-supply-considerations">Power Supply Considerations</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-2-install-raspovos-image">Step 2: Install RaspOVOS Image</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-3-initial-setup-and-first-boot">Step 3: Initial Setup and First Boot</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#connect-and-power-on">Connect and Power On</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#first-boot-process">First Boot Process</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-4-setting-up-wi-fi">Step 4: Setting Up Wi-Fi</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#option-1-configure-wi-fi-using-raspberry-pi-imager">Option 1: Configure Wi-Fi Using Raspberry Pi Imager</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#option-2-use-audio-based-wi-fi-setup-ggwave">Option 2: Use Audio-Based Wi-Fi Setup (ggwave)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-5-running-ovos">Step 5: Running OVOS</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#ovos-first-launch">OVOS First Launch</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-6-using-ovos-commands">Step 6: Using OVOS Commands</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#helpful-commands">Helpful Commands</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#check-logs-in-real-time">Check Logs in Real-Time</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../54-skill-examples/">Default Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../55-raspovos_troubleshooting/">Troubleshooting</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Language Support</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../lang_support/">Translations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gitlocalize_tutorial/">GitLocalize Tutorial</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Architecture</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../99-architecture-overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../100-bus_service/">Bus</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../101-speech_service/">Listener</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../102-core/">Core</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../399-intents/">Skills and Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../103-audio_service/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../104-gui_service/">GUI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../340-PHAL/">Platform/Hardware Abstraction Layer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../300-plugin-manager/">Plugin Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../110-config/">Configuration</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Intent Pipelines</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../pipelines_overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../adapt_pipeline/">Adapt</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../padatious_pipeline/">Padatious</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../m2v_pipeline/">Model2Vec</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../converse_pipeline/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../stop_pipeline/">Stop</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../153-persona_pipeline/">Persona</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cq_pipeline/">Common Query</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../631-OCP_pipeline/">OCP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fallback_pipeline/">Fallback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Transformers</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../audio_transformers/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../utterance_transformers/">Utterance</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../intent_transformers/">Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dialog_transformers/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_transformers/">TTS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">AI Agents</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../150-personas/">Personas</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../151-llm-transformers/">AI Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../150-advanced_solvers/">Specialized Solvers</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Self Hosting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../202-persona_server/">Persona Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../152-hivemind-agents/">HiveMind</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../200-stt_server/">STT Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../201-tts_server/">TTS Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../203-translate_server/">Translate Server</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Skill Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../400-skill-design-guidelines/">Design Guidelines</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../401-skill_structure/">Anatomy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../402-statements/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../403-intents/">Intent Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../405-customization/">Customization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../406-messagebus/">Bus Interaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../407-skill_filesystem/">Filesystem</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../408-skill_settings/">Skill Settings</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../409-skill_api/">Skill API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../410-skill_runtime_requirements/">Runtime Requirements</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../411-skill_json/">Skill Json</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../420-ssml/">SSML</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../430-skill_dev_faq/">F.A.Q.</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Continuous Conversation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../500-prompts/">Prompts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../501-context/">Follow up Questions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../502-converse/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../503-layers/">Intent Layers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../504-session/">Session Aware Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Advanced Skill Types</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../600-fallbacks/">Fallback Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../610-common_query/">Common Query Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../630-OCP_skills/">Media Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../620-universal_skills/">Universal Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">GUI</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../701-gui_protocol/">Protocol</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Voice Apps</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../590-voice_apps/">Standalone Apps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">MessageBus</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../900-bus_client/">Messagebus Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../720-skill_gui/">GUI Interface</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../800-mk1_api/">Enclosure Api</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Plugin Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../310-mic_plugins/">Microphone</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../311-vad_plugins/">Voice Activity Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../312-wake_word_plugins/">Wake Word</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../313-stt_plugins/">Speech To Text</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../320-tts_plugins/">Text To Speech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../321-g2p_plugins/">Grapheme to Phoneme</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../330-transformer_plugins/">Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../350-translation_plugins/">Language Detection/Translation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../370-ocp_plugins/">OCP Stream Extractors</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../371-media_plugins/">Media Playback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Misc. Utilities</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../891-number_parser/">Number Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../890-date_parser/">Date Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../893-color_parser/">Color Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../910-quebra_frases/">Quebra Frases</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../920-padacioso/">Padacioso</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../801-mk1_utils/">Mark1 Utils</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Misc. Information</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../002-license/">License</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../003-timeline/">Timeline</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OVOS Technical Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">RaspOVOS</li>
+      <li class="breadcrumb-item active">Tutorial</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="raspovos-a-beginners-guide-to-setting-up-your-raspberry-pi-with-ovos">RaspOVOS: A Beginner's Guide to Setting Up Your Raspberry Pi with OVOS</h1>
+<p>This tutorial is designed for users new to Raspberry Pi and RaspOVOS. Follow these steps to set up and optimize your device for the best experience.</p>
+<hr />
+<h2 id="step-1-prepare-your-hardware">Step 1: Prepare Your Hardware</h2>
+<h3 id="raspberry-pi-model-recommendations">Raspberry Pi Model Recommendations</h3>
+<ul>
+<li><strong>Recommended:</strong> Raspberry Pi 4 or 5.<ul>
+<li>For offline STT (speech-to-text), the <strong>Raspberry Pi 5</strong> offers significant performance improvements.</li>
+</ul>
+</li>
+<li><strong>Minimum Requirement:</strong> Raspberry Pi 3.<ul>
+<li><strong>Note:</strong> The Raspberry Pi 3 will work but may be <strong>extremely slow</strong> compared to newer models.</li>
+</ul>
+</li>
+</ul>
+<h3 id="storage-options">Storage Options</h3>
+<ul>
+<li><strong>SD Card or USB Storage:</strong><ul>
+<li>You can use either a microSD card or a USB drive.</li>
+</ul>
+</li>
+<li><strong>Recommended:</strong> USB SSD Drive for maximum speed and performance.<ul>
+<li>Connect the USB drive to the <strong>blue USB 3.0 port</strong> for optimal performance.</li>
+</ul>
+</li>
+</ul>
+<h3 id="power-supply-considerations">Power Supply Considerations</h3>
+<p>Raspberry Pi boards are notoriously <strong>picky about power supplies</strong>. Insufficient power can lead to performance issues, random reboots, or the appearance of the <strong>undervoltage detected</strong> warning (a lightning bolt symbol in the top-right corner of the screen).</p>
+<ul>
+<li><strong>Recommended Power Supplies:</strong><ul>
+<li>Raspberry Pi 4: 5V 3A USB-C power adapter.</li>
+<li>Raspberry Pi 5: Official Raspberry Pi 5 USB-C power adapter or equivalent high-quality adapter with sufficient current capacity.</li>
+</ul>
+</li>
+<li><strong>Common Issues:</strong><ul>
+<li>Using cheap or low-quality chargers or cables may result in voltage drops.</li>
+<li>Long or thin USB cables can cause resistance, reducing the power delivered to the board.</li>
+</ul>
+</li>
+<li><strong>How to Fix:</strong><ul>
+<li>Always use the official power adapter or a trusted brand with a stable 5V output.</li>
+<li>If you see the <strong>"undervoltage detected"</strong> warning, consider replacing your power supply or cable.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="step-2-install-raspovos-image">Step 2: Install RaspOVOS Image</h2>
+<ol>
+<li>
+<p><strong>Download and Install Raspberry Pi Imager</strong></p>
+<ul>
+<li>Visit <a href="https://www.raspberrypi.com/software/">Raspberry Pi Imager</a> and download the appropriate version for your OS.</li>
+<li>Install and launch the imager.</li>
+</ul>
+</li>
+<li>
+<p><strong>Flash the Image to Storage</strong></p>
+<ul>
+<li>Insert your SD card or USB drive into your computer.</li>
+<li>In the Raspberry Pi Imager:<ul>
+<li><strong>Choose OS:</strong> Select "Use custom" and locate the RaspOVOS image file.</li>
+<li><strong>Choose Storage:</strong> Select your SD card or USB drive.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p><img alt="image" src="https://github.com/user-attachments/assets/92458289-a3c3-4c7b-afc8-126881445f9f" /></p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/36a83d0a-ebc2-4095-94ba-604ad78b5452" /></p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/47c92497-d1a2-4f2d-90be-189806736c0d" /></p>
+<ol>
+<li><strong>Advanced Configuration Options</strong><ul>
+<li>Click <strong>Next</strong> and select <strong>Edit Settings</strong> to customize settings, including:<ul>
+<li><strong>Password:</strong> Change the default password.</li>
+<li><strong>Hostname:</strong> Set a custom hostname for your device.</li>
+<li><strong>Wi-Fi Credentials:</strong> Enter your Wi-Fi network name and password.</li>
+<li><strong>Keyboard Layout:</strong> Configure the correct layout for your region.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>Important:</strong> <strong>Do NOT change the default username</strong> (<code>ovos</code>), as it is required for the system to function properly.</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/9509ea57-ae46-4c0b-b9e9-97935579d207" /></p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/252af1a0-54dc-4450-aa4a-eb0f0a4d139f" /></p>
+<ol>
+<li><strong>Write the Image</strong><ul>
+<li>Click <strong>Save</strong> and then <strong>Yes</strong> to flash the image onto your storage device.</li>
+<li>Once complete, safely remove the SD card or USB drive from your computer.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="step-3-initial-setup-and-first-boot">Step 3: Initial Setup and First Boot</h2>
+<h3 id="connect-and-power-on">Connect and Power On</h3>
+<ul>
+<li>Insert the SD card or connect the USB drive to your Raspberry Pi.</li>
+<li>Plug in the power supply and connect an HDMI monitor to observe the boot process.</li>
+</ul>
+<h3 id="first-boot-process">First Boot Process</h3>
+<ol>
+<li><strong>Initialization:</strong><ul>
+<li>The system will expand the filesystem, generate SSH keys, and perform other setups.</li>
+</ul>
+</li>
+<li><strong>Reboots:</strong><ul>
+<li>The device will reboot <strong>up to three times</strong> during this process.</li>
+</ul>
+</li>
+<li>
+<p><strong>Autologin:</strong></p>
+<ul>
+<li>The <code>ovos</code> user will automatically log in to the terminal after boot.</li>
+</ul>
+</li>
+<li>
+<p><strong>Check System Status:</strong></p>
+<ul>
+<li>Use the <code>ologs</code> command to monitor logs and confirm that the system has fully initialized.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="step-4-setting-up-wi-fi">Step 4: Setting Up Wi-Fi</h2>
+<h3 id="option-1-configure-wi-fi-using-raspberry-pi-imager">Option 1: Configure Wi-Fi Using Raspberry Pi Imager</h3>
+<p>The most straightforward method is to set up Wi-Fi during the imaging process.</p>
+<ol>
+<li>Open Raspberry Pi Imager and select Edit Settings Option.</li>
+<li>Enter your <strong>SSID (Wi-Fi network name)</strong> and <strong>password</strong> in the Wi-Fi configuration fields.</li>
+<li>Write the image to your SD card or USB drive, and your Wi-Fi will be pre-configured.</li>
+</ol>
+<h3 id="option-2-use-audio-based-wi-fi-setup-ggwave">Option 2: Use Audio-Based Wi-Fi Setup (ggwave)</h3>
+<ol>
+<li>Open <a href="https://openvoiceos.github.io/ovos-audio-transformer-plugin-ggwave/">ggwave Wi-Fi setup</a> on a device with speakers.</li>
+<li>Enter your <strong>SSID</strong> and <strong>password</strong> and transmit the data as sound.</li>
+<li>Place the transmitting device near the Raspberry Pi microphone.</li>
+<li>If successful, you’ll hear an acknowledgment tone.<ul>
+<li>If decoding fails or credentials are incorrect, you’ll hear an error tone.</li>
+</ul>
+</li>
+</ol>
+<p>🚧 <strong>Note:</strong> ggwave is a <strong>work-in-progress</strong> feature and does not have any dialogs or provide on-screen feedback. 🚧</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/ce2857b1-b93f-4092-99f3-43f555e04920" /></p>
+<hr />
+<h2 id="step-5-running-ovos">Step 5: Running OVOS</h2>
+<h3 id="ovos-first-launch">OVOS First Launch</h3>
+<ul>
+<li>On the first run, OVOS may take longer to initialize.</li>
+<li>When ready, OVOS will say: <strong>"I am ready"</strong> (requires an Internet connection).</li>
+</ul>
+<hr />
+<h2 id="step-6-using-ovos-commands">Step 6: Using OVOS Commands</h2>
+<h3 id="helpful-commands">Helpful Commands</h3>
+<p>Once the terminal appears, you’ll see a guide with OVOS commands. Some key commands include:</p>
+<ul>
+<li><strong>Configuration:</strong><ul>
+<li><code>ovos-config</code> — Manage configuration files.</li>
+</ul>
+</li>
+<li><strong>Voice Commands:</strong><ul>
+<li><code>ovos-listen</code> — Activate the microphone for commands.</li>
+<li><code>ovos-speak &lt;phrase&gt;</code> — Make OVOS speak a specific phrase.</li>
+</ul>
+</li>
+<li><strong>Skill Management:</strong><ul>
+<li><code>ovos-install [PACKAGE_NAME]</code> — Install OVOS packages.</li>
+<li><code>ovos-update</code> — Update all OVOS and skill packages.</li>
+</ul>
+</li>
+<li><strong>Logs and Status:</strong><ul>
+<li><code>ologs</code> — View logs in real-time.</li>
+<li><code>ovos-status</code> — Check the status of OVOS-related services.</li>
+</ul>
+</li>
+</ul>
+<p>You use the command <code>ovos-help</code> to print the message with all commands again at any point</p>
+<h3 id="check-logs-in-real-time">Check Logs in Real-Time</h3>
+<ul>
+<li>Use the <code>ologs</code> command to monitor logs live on your screen.</li>
+<li>If you’re unsure whether the system has finished booting, check logs using this command.</li>
+</ul>
+<hr />
+<p>Enjoy your journey with RaspOVOS! With your Raspberry Pi set up, you can start exploring all the features of OpenVoiceOS.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../001-release_channels/" class="btn btn-neutral float-left" title="Manual Install"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../54-skill-examples/" class="btn btn-neutral float-right" title="Default Skills">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../001-release_channels/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../54-skill-examples/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../javascripts/analytics.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

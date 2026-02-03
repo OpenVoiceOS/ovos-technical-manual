@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://openvoiceos.github.io/ovos-technical-manual/gitlocalize_tutorial/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>GitLocalize Tutorial - OVOS Technical Manual</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "GitLocalize Tutorial";
+        var mkdocs_page_input_path = "gitlocalize_tutorial.md";
+        var mkdocs_page_url = "/ovos-technical-manual/gitlocalize_tutorial/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OVOS Technical Manual
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Home</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../50-ovos_installer/">ovos-installer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../001-release_channels/">Manual Install</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">RaspOVOS</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../51-install_raspovos/">Tutorial</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../54-skill-examples/">Default Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../55-raspovos_troubleshooting/">Troubleshooting</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Language Support</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../lang_support/">Translations</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">GitLocalize Tutorial</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#step-by-step-guide-to-translating-with-gitlocalize">Step-by-Step Guide to Translating with GitLocalize</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#visit-our-gitlocalize-project-page">Visit Our GitLocalize Project Page</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sign-up-or-log-in">Sign Up or Log In</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#choose-a-language">Choose a Language</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#start-translating">Start Translating</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#variables">Variables</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#slots">Slots</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#alternativeoptional-words">Alternative/Optional words</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tips-for-effective-translation">Tips for Effective Translation</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#key-take-aways">Key Take Aways</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#review-and-feedback">Review and Feedback</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#need-help">Need Help?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#thank-you">Thank You!</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Architecture</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../99-architecture-overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../100-bus_service/">Bus</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../101-speech_service/">Listener</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../102-core/">Core</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../399-intents/">Skills and Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../103-audio_service/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../104-gui_service/">GUI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../340-PHAL/">Platform/Hardware Abstraction Layer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../300-plugin-manager/">Plugin Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../110-config/">Configuration</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Intent Pipelines</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../pipelines_overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../adapt_pipeline/">Adapt</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../padatious_pipeline/">Padatious</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../m2v_pipeline/">Model2Vec</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../converse_pipeline/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../stop_pipeline/">Stop</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../153-persona_pipeline/">Persona</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cq_pipeline/">Common Query</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../631-OCP_pipeline/">OCP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fallback_pipeline/">Fallback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Transformers</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../audio_transformers/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../utterance_transformers/">Utterance</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../intent_transformers/">Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dialog_transformers/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_transformers/">TTS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">AI Agents</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../150-personas/">Personas</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../151-llm-transformers/">AI Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../150-advanced_solvers/">Specialized Solvers</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Self Hosting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../202-persona_server/">Persona Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../152-hivemind-agents/">HiveMind</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../200-stt_server/">STT Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../201-tts_server/">TTS Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../203-translate_server/">Translate Server</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Skill Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../400-skill-design-guidelines/">Design Guidelines</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../401-skill_structure/">Anatomy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../402-statements/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../403-intents/">Intent Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../405-customization/">Customization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../406-messagebus/">Bus Interaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../407-skill_filesystem/">Filesystem</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../408-skill_settings/">Skill Settings</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../409-skill_api/">Skill API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../410-skill_runtime_requirements/">Runtime Requirements</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../411-skill_json/">Skill Json</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../420-ssml/">SSML</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../430-skill_dev_faq/">F.A.Q.</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Continuous Conversation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../500-prompts/">Prompts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../501-context/">Follow up Questions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../502-converse/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../503-layers/">Intent Layers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../504-session/">Session Aware Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Advanced Skill Types</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../600-fallbacks/">Fallback Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../610-common_query/">Common Query Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../630-OCP_skills/">Media Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../620-universal_skills/">Universal Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">GUI</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../701-gui_protocol/">Protocol</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Voice Apps</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../590-voice_apps/">Standalone Apps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">MessageBus</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../900-bus_client/">Messagebus Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../720-skill_gui/">GUI Interface</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../800-mk1_api/">Enclosure Api</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Plugin Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../310-mic_plugins/">Microphone</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../311-vad_plugins/">Voice Activity Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../312-wake_word_plugins/">Wake Word</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../313-stt_plugins/">Speech To Text</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../320-tts_plugins/">Text To Speech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../321-g2p_plugins/">Grapheme to Phoneme</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../330-transformer_plugins/">Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../350-translation_plugins/">Language Detection/Translation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../370-ocp_plugins/">OCP Stream Extractors</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../371-media_plugins/">Media Playback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Misc. Utilities</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../891-number_parser/">Number Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../890-date_parser/">Date Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../893-color_parser/">Color Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../910-quebra_frases/">Quebra Frases</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../920-padacioso/">Padacioso</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../801-mk1_utils/">Mark1 Utils</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Misc. Information</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../002-license/">License</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../003-timeline/">Timeline</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OVOS Technical Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Language Support</li>
+      <li class="breadcrumb-item active">GitLocalize Tutorial</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="contribute-to-translations-with-gitlocalize">Contribute to Translations with GitLocalize!</h2>
+<p>Thank you for your interest in helping translate our project! Your contributions will help make our project accessible to more people around the world. </p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/2udvdIW9W2s" title="OVOS translation guide" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<p>We’ve made it easy for you to get started, even if you’re not familiar with GitHub or coding. Follow the steps below to join our translation effort using GitLocalize.</p>
+<h3 id="step-by-step-guide-to-translating-with-gitlocalize">Step-by-Step Guide to Translating with GitLocalize</h3>
+<h4 id="visit-our-gitlocalize-project-page">Visit Our GitLocalize Project Page</h4>
+<p><img alt="image" src="https://gist.github.com/assets/33701864/0a678e87-2cdf-4a9b-924c-e496e47befb4" /></p>
+<ol>
+<li><strong>Click on the link</strong> to our GitLocalize project: https://gitlocalize.com/users/OpenVoiceOS</li>
+<li>You will see a list of OVOS repositories to translate, select one</li>
+<li>You will see a list of languages and translation tasks available.</li>
+</ol>
+<p><img alt="image" src="https://gist.github.com/assets/33701864/c3770638-1452-44fb-ada1-39e39683aea8" /></p>
+<h4 id="sign-up-or-log-in">Sign Up or Log In</h4>
+<ol>
+<li>If you don’t have an account, <strong>sign up</strong> with your email or GitHub account (you don’t need to know GitHub to do this!).</li>
+<li>If you already have an account, simply <strong>log in</strong>.</li>
+</ol>
+<h4 id="choose-a-language">Choose a Language</h4>
+<blockquote>
+<p>Adding new languages to the list is a manual process, if your language is unlisted let us know!</p>
+</blockquote>
+<ol>
+<li>Select the language you want to translate into from the list of available languages.</li>
+<li>You will see a list of files that need translation. </li>
+<li><code>dialogs.json</code> contains sentences that OVOS will speak</li>
+<li><code>intents.json</code> contains sentences that the user will speak to OVOS</li>
+<li><code>vocabs.json</code> similar to intents, but contain sentence fragments/keywords, not full utterances</li>
+</ol>
+<p><img alt="image" src="https://gist.github.com/assets/33701864/444cbb6d-1e9e-47b0-84f1-aeb38eef6a17" /></p>
+<h4 id="start-translating">Start Translating</h4>
+<ol>
+<li>Click on a file that you want to translate.</li>
+<li>The translation editor will open. Here, you’ll see the original text on the left and a space to enter your translation on the right.</li>
+<li>Begin translating the text. If you’re unsure about any phrase, feel free to leave it and move on to the next one.</li>
+</ol>
+<p>When you open a JSON file for translation in GitLocalize, you’ll see two parts:</p>
+<ul>
+<li><strong>Key</strong>: This corresponds to a file name in the OVOS repository you selected.</li>
+<li><strong>Value</strong>: This is the sentence you need to translate.</li>
+</ul>
+<h4 id="variables">Variables</h4>
+<p>Variables are placeholders within sentences that represent changing content, such as names or numbers. </p>
+<ul>
+<li>Original: <code>My name is {var_name}</code></li>
+<li>Translation: <code>Mi nombre es {var_name}</code></li>
+</ul>
+<p><img alt="image" src="https://gist.github.com/assets/33701864/2779c8a3-46de-47b3-894f-eccab0bdd2b5" /></p>
+<p><strong>Important Rules</strong>:</p>
+<ul>
+<li><strong>Do not translate the variable names</strong> (the text inside curly braces <code>{}</code>).</li>
+<li>You can <strong>rearrange the position</strong> of variables in your translation, but do not create new variables.</li>
+<li>Ensure that variables are not separated by only whitespace; there should be at least one word between them.</li>
+</ul>
+<h4 id="slots">Slots</h4>
+<p>Sometimes, the same file will appear several times, each with a different variation of the same sentence. These variations are called "slots". </p>
+<p><img alt="image" src="https://gist.github.com/assets/33701864/70f30bc5-56f0-4d87-a521-2c4c77790bfe" /></p>
+<p><strong>Important Rules</strong>:</p>
+<ul>
+<li><strong>Translate at least one slot</strong> in each file.</li>
+<li>If a slot is not needed in your language, enter <code>[UNUSED]</code>. This tells us that you reviewed the slot and marked it as translated.</li>
+<li>If you run out of slots to fit all variations of a sentence, you can use newlines to add more translations.</li>
+</ul>
+<p><img alt="image" src="https://gist.github.com/assets/33701864/c70379ef-ef29-484d-a6fb-84d9fca47660" /></p>
+<h4 id="alternativeoptional-words">Alternative/Optional words</h4>
+<p>You can use the "alternative word" syntax to provide options or optional words within a sentence.</p>
+<ul>
+<li>Alternative words: <code>I love (cats|dogs|birds)</code> becomes <code>Amo (gatos|perros|pájaros)</code></li>
+<li>Optional words: <code>I (really|) love (cats|dogs|birds)</code> becomes <code>Yo (realmente|) amo (gatos|perros|pájaros)</code></li>
+</ul>
+<p><img alt="image" src="https://gist.github.com/assets/33701864/75288b2d-559e-47c3-8e73-bb5391e4a888" /></p>
+<h3 id="tips-for-effective-translation">Tips for Effective Translation</h3>
+<ul>
+<li><strong>Consistency</strong>: Try to use consistent terminology throughout the project.</li>
+<li><strong>Context</strong>: If a phrase seems unclear, consider the overall context of the project or reach out for clarification.</li>
+<li><strong>Accuracy</strong>: Aim to convey the meaning as accurately as possible, rather than a literal word-for-word translation.</li>
+</ul>
+<h4 id="key-take-aways">Key Take Aways</h4>
+<ul>
+<li>For each sentence (slot), enter your translation.</li>
+<li>If a slot is not needed, enter <code>[UNUSED]</code>.</li>
+<li>Leave the variable names in curly braces <code>{}</code> unchanged.</li>
+<li>Rearrange variables as needed but do not create new ones.</li>
+<li>Provide multiple options using the syntax <code>(option1|option2|option3)</code>.</li>
+<li>Include optional words using the syntax <code>(optional|)</code>.</li>
+<li>If there are not enough slots, press <code>Enter</code> to add a new line and enter your alternative translation on the new line.</li>
+</ul>
+<h4 id="review-and-feedback">Review and Feedback</h4>
+<ol>
+<li>Once you’ve finished translating a file, you can <strong>submit</strong> it for review.</li>
+<li>Your translations will be reviewed by other native speakers and project maintainers.</li>
+<li>If any changes are needed, you might receive feedback. Simply log back in, review the comments, and make the necessary adjustments.
+<img alt="image" src="https://gist.github.com/assets/33701864/f76df4fb-a825-48ec-8e76-c8e47e013392" /></li>
+</ol>
+<h3 id="need-help">Need Help?</h3>
+<p>If you have any questions or need assistance at any point:</p>
+<ul>
+<li><strong>Join our Matrix chat</strong>: https://matrix.to/#/#openvoiceos-languages:matrix.org</li>
+<li><strong>Email us</strong>: support@openvoiceos.org</li>
+</ul>
+<h3 id="thank-you">Thank You!</h3>
+<p>Your contributions are invaluable, and we appreciate your effort in helping us reach a global audience. Happy translating!</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../lang_support/" class="btn btn-neutral float-left" title="Translations"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../99-architecture-overview/" class="btn btn-neutral float-right" title="Overview">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../lang_support/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../99-architecture-overview/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../javascripts/analytics.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

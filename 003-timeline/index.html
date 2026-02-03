@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://openvoiceos.github.io/ovos-technical-manual/003-timeline/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Timeline - OVOS Technical Manual</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Timeline";
+        var mkdocs_page_input_path = "003-timeline.md";
+        var mkdocs_page_url = "/ovos-technical-manual/003-timeline/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OVOS Technical Manual
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Home</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../50-ovos_installer/">ovos-installer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../001-release_channels/">Manual Install</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">RaspOVOS</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../51-install_raspovos/">Tutorial</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../54-skill-examples/">Default Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../55-raspovos_troubleshooting/">Troubleshooting</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Language Support</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../lang_support/">Translations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gitlocalize_tutorial/">GitLocalize Tutorial</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Architecture</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../99-architecture-overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../100-bus_service/">Bus</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../101-speech_service/">Listener</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../102-core/">Core</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../399-intents/">Skills and Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../103-audio_service/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../104-gui_service/">GUI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../340-PHAL/">Platform/Hardware Abstraction Layer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../300-plugin-manager/">Plugin Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../110-config/">Configuration</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Intent Pipelines</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../pipelines_overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../adapt_pipeline/">Adapt</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../padatious_pipeline/">Padatious</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../m2v_pipeline/">Model2Vec</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../converse_pipeline/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../stop_pipeline/">Stop</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../153-persona_pipeline/">Persona</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cq_pipeline/">Common Query</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../631-OCP_pipeline/">OCP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fallback_pipeline/">Fallback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Transformers</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../audio_transformers/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../utterance_transformers/">Utterance</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../intent_transformers/">Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dialog_transformers/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_transformers/">TTS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">AI Agents</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../150-personas/">Personas</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../151-llm-transformers/">AI Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../150-advanced_solvers/">Specialized Solvers</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Self Hosting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../202-persona_server/">Persona Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../152-hivemind-agents/">HiveMind</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../200-stt_server/">STT Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../201-tts_server/">TTS Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../203-translate_server/">Translate Server</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Skill Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../400-skill-design-guidelines/">Design Guidelines</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../401-skill_structure/">Anatomy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../402-statements/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../403-intents/">Intent Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../405-customization/">Customization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../406-messagebus/">Bus Interaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../407-skill_filesystem/">Filesystem</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../408-skill_settings/">Skill Settings</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../409-skill_api/">Skill API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../410-skill_runtime_requirements/">Runtime Requirements</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../411-skill_json/">Skill Json</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../420-ssml/">SSML</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../430-skill_dev_faq/">F.A.Q.</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Continuous Conversation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../500-prompts/">Prompts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../501-context/">Follow up Questions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../502-converse/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../503-layers/">Intent Layers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../504-session/">Session Aware Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Advanced Skill Types</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../600-fallbacks/">Fallback Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../610-common_query/">Common Query Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../630-OCP_skills/">Media Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../620-universal_skills/">Universal Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">GUI</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../701-gui_protocol/">Protocol</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Voice Apps</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../590-voice_apps/">Standalone Apps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">MessageBus</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../900-bus_client/">Messagebus Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../720-skill_gui/">GUI Interface</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../800-mk1_api/">Enclosure Api</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Plugin Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../310-mic_plugins/">Microphone</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../311-vad_plugins/">Voice Activity Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../312-wake_word_plugins/">Wake Word</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../313-stt_plugins/">Speech To Text</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../320-tts_plugins/">Text To Speech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../321-g2p_plugins/">Grapheme to Phoneme</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../330-transformer_plugins/">Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../350-translation_plugins/">Language Detection/Translation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../370-ocp_plugins/">OCP Stream Extractors</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../371-media_plugins/">Media Playback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Misc. Utilities</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../891-number_parser/">Number Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../890-date_parser/">Date Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../893-color_parser/">Color Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../910-quebra_frases/">Quebra Frases</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../920-padacioso/">Padacioso</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../801-mk1_utils/">Mark1 Utils</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Misc. Information</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../002-license/">License</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Timeline</a>
+    <ul class="current">
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OVOS Technical Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Misc. Information</li>
+      <li class="breadcrumb-item active">Timeline</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="family-tree">Family Tree</h2>
+<p><img alt="imagem" src="https://github.com/OpenVoiceOS/ovos-technical-manual/assets/33701864/95db65ea-0aff-49f3-bd80-85919a3356e5" /></p>
+<ul>
+<li>mycroft-core created</li>
+<li>neon-core forked from mycroft-core</li>
+<li>chatterbox forked from mycroft-core  (closed source)</li>
+<li>mycroft-lib forked from mycroft-core to become a library, it is only a properly packaged mycroft-core</li>
+<li>chatterbox rewritten to use mycroft-lib internally, no longer a hard fork</li>
+<li>neon-core rewritten to use mycroft-lib internally, no longer a hard fork</li>
+<li>mycroft-lib renamed to HolmesIV to avoid trademark issues</li>
+<li>HolmesV created to use HolmesIV internally, HolmesV gets features and HolmesIV bug fixes only</li>
+<li>chatterbox updated to HolmesV</li>
+<li>neon-core updated to HolmesV</li>
+<li>HolmesIV+HolmesV abandoned, chatterbox focus on closed source product</li>
+<li>ovos-core forked from HolmesV</li>
+<li>neon-core updated to ovos-core</li>
+<li>mycroft-dinkum forked from mycroft-core</li>
+</ul>
+<h2 id="events-timeline">Events timeline</h2>
+<ul>
+<li>Aug 2015 - <a href="https://www.kickstarter.com/projects/aiforeveryone/mycroft-an-open-source-artificial-intelligence-for">MycroftAI kickstarter</a> launch</li>
+<li>Feb 2016 - MycroftAI <a href="https://github.com/MycroftAI/mimic1">Mimic</a> TTS released</li>
+<li>May 2016 - <a href="https://github.com/MycroftAI/mycroft-core">mycroft-core</a> repositories made public under GPL</li>
+<li>Jun 2016 - @Aix releases <a href="https://extensions.gnome.org/extension/1197/mycroft-assistant/">MycroftAI gnome shell</a> extension</li>
+<li>Jun 2016 - @Aix becomes a contributor on the desktop-integration team</li>
+<li>Aug 2016 - Steve Penrod becomes MycroftAI CTO</li>
+<li>??? 2016 - NeonGecko begins working with Mycroft AI</li>
+<li>Jan 2017 - @Aix release <a href="https://invent.kde.org/utilities/mycroft-plasmoid">MycrofAI plasmoid</a> for KDE Plasma desktop</li>
+<li>Mar 2017 - @Aix incubates Mycroft plasmoid project under KDE</li>
+<li>Apr 2017 - @JarbasAI forks <code>mycroft-core</code> as <code>jarbas-core</code></li>
+<li>May 2017 - @JarbasAI becomes a <code>mycroft-core</code> contributor</li>
+<li>Sep 2017 - MycroftAI Mark 1 released / mycroft kickstarter campaign fullfilled</li>
+<li>Sep 2017 - @Aix joins Blue Systems to work on MycroftAI and Plasma integration projects</li>
+<li>Sep 2017 - <code>jarbas-core</code> tacotron TTS integration added</li>
+<li>Aug 2017 - MycroftAI starts supporting KDE plasmoid project and installers</li>
+<li>Oct 2017 - <code>mycroft-core</code> relicensed as Apache 2.0</li>
+<li>Nov 2017 - @Aix becomes a <code>mycroft-core</code> contributor</li>
+<li>Dec 2017 - <code>jarbas-core</code> abandoned</li>
+<li>??? 2017 - Neon AI forks <code>mycroft-core</code> as <code>neon-core</code> to remove dependency on MycroftAI servers and work on other features</li>
+<li>Jan 2018 - initial release of <a href="https://github.com/OpenVoiceOS/ovos-personal-backend/tree/a457b03adc771783ec8714dfdabccdacb2482188">personal-backend</a>, reverse engineered MycroftAI backend by @JarbasAI, licensed as Apache 2.0</li>
+<li>Jan 2018 - MycroftAI <a href="https://www.kickstarter.com/projects/aiforeveryone/mycroft-mark-ii-the-open-voice-assistant">mark 2 kickstarter</a> launch</li>
+<li>Jul 2018 - personal-backend added to MycroftAI Roadmap</li>
+<li>Aug 2018 - MycroftAI Mimic2 TTS based on tacotron released</li>
+<li>Sep 2018 - <a href="https://github.com/MycroftAI/mycroft-gui">Mycroft-GUI</a> was created by collaboration between MycroftAI, Blue Systems based on KDE frameworks, maintained by @Aix</li>
+<li>Oct 2018 - @j1nx creates <a href="https://community.openconversational.ai/t/openvoiceos-a-bare-minimal-production-type-of-os-based-on-buildroot/4708">"MycroftOS"</a>, the first version of what will eventually become the OpenVoiceOS smart speaker</li>
+<li>Jan 2019 - @JarbasAI <a href="https://github.com/MycroftAI/personal-backend/tree/31ee96a8189d96f8102276bf4b9073811ee9a9b2">personal-backend</a> implementation adopted by MycroftAI</li>
+<li>Mar 2019 - MycroftAI mark 2 completely redesigned and based on different hardware</li>
+<li>Apr 2019 - Steve Penrod and @JarbasAI create <a href="https://github.com/MycroftAI/lingua-franca/tree/130c77026e22d9afb1d4d3a383a743483ea007d8">lingua-franca</a> under MycroftAI with @JarbasAI as maintainer</li>
+<li>??? 2019 - @JarbasAI partners with NeonAI to maintain <code>neon-core</code></li>
+<li>Jul 2019 - steve penrod leaves MycroftAI</li>
+<li>Jul 2019 - <a href="https://www.kickstarter.com/projects/hellochatterbox/chatterbox-the-smart-speaker-that-kids-build-and-p">Chatterbox kickstarter</a> launched by @JarbasAI</li>
+<li>Sep 2019 - <a href="https://conf.kde.org/en/akademy2019/public/events/141.html">Mycroft on Plasma Automobile Demo</a> at Akademy 2019 by @aix</li>
+<li>Oct 2019 - Official MycroftAI backend open sourced, licensed as AGPL</li>
+<li>Dec 2019 - @Chance joins <code>lingua-franca</code> as a maintainer</li>
+<li>Dec 2019 - Chatterbox released (closed source) / kickstarter campaign fullfilled</li>
+<li>Dec 2019 - MycroftAI starts to work on Kivy based UI</li>
+<li>??? 2020 - MycroftAI starts neglecting community contributions</li>
+<li>Mar 2020 - MycroftAI abandons <a href="https://github.com/MycroftAI/personal-backend">personal-backend</a></li>
+<li>Mar 2020 - Michael Lewis becomes MycroftAI CEO</li>
+<li>May 2020 - @JarbasAI and @AIX partner up to create a <a href="https://github.com/JarbasSkills/skill-voip">VOIP skill</a></li>
+<li>Sep 2020 - Community takes stand against reimplementation of GUI using Kivy</li>
+<li>Oct 2020 - Kivy has been dropped in support for QT Mycroft-GUI</li>
+<li>Oct 2020 - @JarbasAI, @AIX and @j1nx form OpenVoiceOS community project around <code>mycroft-core</code></li>
+<li>Oct 2020 - <a href="https://github.com/OpenVoiceOS/ovos-utils">ovos-utils</a> transferred from @Jarbasai to OVOS and renamed from <code>jarbas-utils</code></li>
+<li>??? 2020 - Chatterbox forks <code>mycroft-core</code> as <code>mycroft-lib</code> (open source)</li>
+<li>??? 2020 - <code>mycroft-lib</code> reorganizes <code>mycroft</code> imports cleanly separating each service</li>
+<li>??? 2020 - Chatterbox (closed source) recreated on top of <code>mycroft-lib</code></li>
+<li>??? 2020 - <code>neon-core</code> recreated on top of <code>mycroft-lib</code></li>
+<li>Oct 2020 - MycroftOS renamed to OpenVoiceOS - Mycroft Edition due to trademark issues</li>
+<li>??? 2020 - @JarbasAI leaves <code>lingua-franca</code></li>
+<li>??? 2020 - @Chance joins OpenVoiceOS</li>
+<li>Nov 2020 - @Jarbas gives a talk about <a href="https://collectivat.cat/blog/2020-11-06-jornades-de-tecnologies-lliures-de-la-parla/">translating mycroft</a> for <a href="https://collectivat.cat">collectivat</a> Jornades de tecnologies lingüístiques lliures en català</li>
+<li>Dec 2020 - <a href="https://github.com/OpenVoiceOS/ovos-ww-plugin-pocketsphinx">ovos-ww-plugin-pocketsphinx</a> released</li>
+<li>Dec 2020 - <a href="https://github.com/OpenVoiceOS/ovos-ww-plugin-snowboy">ovos-ww-plugin-snowboy</a> released</li>
+<li>Dec 2020 - <a href="https://github.com/OpenVoiceOS/ovos-ww-plugin-precise">ovos-ww-plugin-precise</a> released</li>
+<li>Dec 2020 - <a href="https://github.com/OpenVoiceOS/ovos-stt-plugin-vosk">ovos-stt-plugin-vosk</a> released</li>
+<li>Dec 2020 - <a href="https://github.com/OpenVoiceOS/ovos-stt-plugin-chromium">ovos-stt-plugin-chromium</a> released</li>
+<li>Jan 2021 - <a href="https://github.com/OpenVoiceOS/ovos-plugin-manager">ovos-plugin-manager</a> released</li>
+<li>Jan 2021 - <a href="https://github.com/OpenVoiceOS/ovos-personal-backend">personal-backend</a> adopted by OpenVoiceOS, original repo unarchived and ownership transferred</li>
+<li>Jan 2021 - <a href="https://github.com/notmart/mycroft-embedded-shell">Mycroft embedded shell</a> adopted by OpenVoiceOS and renamed to <a href="https://github.com/OpenVoiceOS/ovos-shell">ovos-shell</a></li>
+<li>Jan 2021 - <a href="https://github.com/OpenVoiceOS/skill-ovos-setup">skill-ovos-setup</a> forked from Mycroft to replace pairing</li>
+<li>Jan 2021 - <a href="https://github.com/OpenVoiceOS/ovos_skill_manager">ovos-skill-manager</a> released to support more skill Marketplaces</li>
+<li>Feb 2021 - <a href="https://github.com/OpenVoiceOS/skill-ovos-stop">skill-ovos-stop</a> forked from Mycroft</li>
+<li>Mar 2021 - <a href="https://github.com/OpenVoiceOS/skill-ovos-common-play">skill-ovos-common-play</a> forked from Mycroft</li>
+<li>Mar 2021 - MycroftAI mark 2 dev kits start shipping</li>
+<li>Apr 2021 - OpenVoiceOS adopts <code>mycroft-lib</code> instead of <code>mycroft-core</code></li>
+<li>??? 202? - <code>mycroft-lib</code> renamed to <a href="https://github.com/HelloChatterbox/HolmesIV">HolmesIV</a> to avoid trademark issues</li>
+<li>Apr 2021 - <a href="https://github.com/OpenVoiceOS/ovos-workshop">ovos-workshop</a> released, bringing OVOS features to individual skills</li>
+<li>May 2021 - chatterbox forks <code>lingua-franca</code> as <code>lingua-nostra</code></li>
+<li>May 2021 . OpenVoiceOS deprecates <code>mycroft-lib</code> and adopts <code>HolmesIV</code></li>
+<li>Jun 2021 - <a href="https://github.com/OpenVoiceOS/ovos-tts-plugin-espeakNG">ovos-tts-plugin-espeakNG</a> released</li>
+<li>Jun 2021 - <a href="https://github.com/OpenVoiceOS/ovos-tts-plugin-mimic">ovos-tts-plugin-mimic</a> released</li>
+<li>Jun 2021 - <a href="https://github.com/OpenVoiceOS/ovos-tts-plugin-mimic2">ovos-tts-plugin-mimic2</a> released</li>
+<li>Jun 2021 - <a href="https://github.com/OpenVoiceOS/ovos-tts-plugin-pico">ovos-tts-plugin-pico</a> released</li>
+<li>Aug 2021 - <a href="https://github.com/OpenVoiceOS/ovos-tts-plugin-google-tx">ovos-tts-plugin-google-tx</a> released</li>
+<li>Aug 2021 - <a href="https://github.com/OpenVoiceOS/ovos-ww-plugin-vosk">ovos-ww-plugin-vosk</a> released</li>
+<li>Aug 2021 - <a href="https://github.com/OpenVoiceOS/precise-lite">precise-lite</a> forked from Mycroft, adding tflite support</li>
+<li>Aug 2021 - <a href="https://github.com/OpenVoiceOS/ovos-ww-plugin-precise-lite">ovos-ww-plugin-precise-lite</a> released</li>
+<li>Aug 2021 - <a href="https://github.com/OVOSHatchery/ovos-ww-plugin-nyumaya">ovos-ww-plugin-nyumaya</a> released</li>
+<li>Aug 2021 - <a href="https://github.com/OpenVoiceOS/precise-lite-models">precise-lite-models</a> start being shared</li>
+<li>Aug 2021 - <a href="https://github.com/OpenVoiceOS/skill-ovos-volume">skill-ovos-volume</a> released</li>
+<li>Sep 2021 - <a href="https://github.com/OpenVoiceOS/VocalFusionDriver">VocalFusionDriver</a> released by OVOS to support the mk2</li>
+<li>Sep 2021 - <a href="https://github.com/OpenVoiceOS/ovos-tts-plugin-SAM">ovos-tts-plugin-SAM</a> released</li>
+<li>Sep 2021 - backend made optional in <code>HolmesIV</code></li>
+<li>Sep 2021 - msm made optional in <code>HolmesIV</code></li>
+<li>Oct 2021 - "instant_listen" introduced in <code>HolmesIV</code></li>
+<li>Oct 2021 - <code>HolmesIV</code> abandoned by chatterbox</li>
+<li>Oct 2021 - <code>lingua-nostra</code> abandoned by chatterbox</li>
+<li>Oct 2021 - OpenVoiceOS forks <code>HolmesIV</code> as <code>ovos-core</code></li>
+<li>Oct 2021 - <code>ovos-core</code> becomes XDG compliant</li>
+<li>Oct 2021 - <code>neon-core</code> deprecates <code>HolmesIV</code> and adopts <code>ovos-core</code></li>
+<li>Oct 2021 - <a href="https://github.com/OpenVoiceOS/skill-ovos-common-play">skill-ovos-common-play</a> deprecated in favor of <a href="https://github.com/OpenVoiceOS/ovos-ocp-audio-plugin">OCP</a></li>
+<li>??? 2021 - @Chance leaves <code>lingua-franca</code></li>
+<li>Nov 2021 - <a href="https://github.com/OpenVoiceOS/ovos-plugin-manager">ovos-plugin-manager</a> released</li>
+<li>Nov 2021 - <a href="https://github.com/OpenVoiceOS/skill-ovos-timer">skill-ovos-timer</a> forked from Mycroft</li>
+<li>Nov 2021 - <a href="https://github.com/OpenVoiceOS/skill-ovos-homescreen">skill-ovos-homescreen</a> forked from Mycroft</li>
+<li>Nov 2021 - @JarbasAI leaves chatterbox</li>
+<li>Nov 2021 - <code>ovos-core</code> version <strong>0.0.1</strong> released</li>
+<li>Nov 2021 - <a href="https://github.com/OpenVoiceOS/ovos-utils">ovos-utils</a> adopted in <code>ovos-core</code></li>
+<li>Nov 2021 - <a href="https://github.com/OpenVoiceOS/ovos-plugin-manager">ovos-plugin-manager</a> adopted in <code>ovos-core</code></li>
+<li>Nov 2021 - multiple wake words support added</li>
+<li>Nov 2021 - installable skills (setup.py) support added</li>
+<li>Nov 2021 - <a href="https://github.com/OpenVoiceOS/ovos-PHAL">ovos-PHAL</a> released (mycroft compatible)</li>
+<li>Nov 2021 - <a href="https://github.com/OpenVoiceOS/skill-ovos-hello-world">skill-ovos-hello-world</a> forked from Mycroft</li>
+<li>Nov 2021 - <a href="https://github.com/OpenVoiceOS/skill-ovos-naptime">skill-ovos-naptime</a> forked from Mycroft</li>
+<li>??? - @NeonDaniel joins OpenVoiceOS</li>
+<li>??? 2021 - NeonAI adopts <a href="https://github.com/OpenVoiceOS/ovos-shell">ovos-shell</a></li>
+<li>Dec 2021 - <a href="https://github.com/OpenVoiceOS/ovos-PHAL-plugin-mk1">ovos-PHAL-plugin-mk1</a> released</li>
+<li>Dec 2021 - <a href="https://github.com/OpenVoiceOS/skill-ovos-fallback-unknown">skill-ovos-fallback-unknown</a> forked from Mycroft</li>
+<li>Dec 2021 - <a href="https://github.com/OpenVoiceOS/skill-ovos-weather">skill-ovos-weather</a> forked from Mycroft</li>
+<li>Dec 2021 - <a href="https://github.com/OpenVoiceOS/skill-ovos-common-query">skill-ovos-common-query</a> forked from Mycroft</li>
+<li>Dec 2021 - <a href="https://github.com/OpenVoiceOS/skill-ovos-application-launcher">skill-ovos-application-launcher</a> released</li>
+<li>Jan 2022 - OpenVoiceOS forks <a href="https://github.com/OpenVoiceOS/ovos-lingua-franca">lingua-franca</a></li>
+<li>??? 2022 - OpenVoiceOS starts development in the open via <a href="https://matrix.to/#/!XFpdtmgyCoPDxOMPpH:matrix.org?via=matrix.org">matrix chat</a></li>
+<li>Feb 2022 - <a href="https://github.com/OpenVoiceOS/ovos-ocp-audio-plugin">OCP</a> released as an audio plugin (mycroft compatible)</li>
+<li>Feb 2022 - PHAL replaces <code>mycroft.client.enclosure</code> in <code>ovos-core</code></li>
+<li>Feb 2022 - <a href="https://github.com/OpenVoiceOS/skill-ovos-date-time">skill-ovos-date-time</a> forked from Mycroft</li>
+<li>Mar 2022 - Fallback STT support added</li>
+<li>Mar 2022 - VAD plugins support added</li>
+<li>Mar 2022 - <a href="https://github.com/OpenVoiceOS/ovos-vad-plugin-webrtcvad">ovos-vad-plugin-webrtcvad</a> released</li>
+<li>Mar 2022 - <a href="https://github.com/OpenVoiceOS/ovos-vad-plugin-silero">ovos-vad-plugin-silero</a> released</li>
+<li>Mar 2022 - <a href="https://github.com/OpenVoiceOS/ovos-ocp-audio-plugin/">OCP</a> adopted in <code>ovos-core</code> as default media handler</li>
+<li>Mar 2022 - <a href="https://github.com/OpenVoiceOS/ovos-PHAL-plugin-mk2">ovos-PHAL-plugin-mk2</a> released</li>
+<li>Mar 2022 - <a href="https://github.com/OpenVoiceOS/ovos-PHAL-plugin-respeaker-2mic">ovos-PHAL-plugin-respeaker-2mic</a> released</li>
+<li>Mar 2022 - <a href="https://github.com/OpenVoiceOS/ovos-PHAL-plugin-respeaker-4mic">ovos-PHAL-plugin-respeaker-4mic</a> released</li>
+<li>??? 2022 - OpenVoiceOS starts releasing buildroot images for rpi4 and Mark 2</li>
+<li>??? 2022 - OpenVoiceOS starts releasing manjaro images for rpi4 and Mark 2</li>
+<li>Apr 2022 - <a href="https://github.com/OpenVoiceOS/ovos-stt-http-server">ovos-stt-http-server</a> released</li>
+<li>Apr 2022 - <a href="https://github.com/OpenVoiceOS/ovos-stt-plugin-server">ovos-stt-plugin-server</a> released</li>
+<li>May 2022 - <a href="https://github.com/OpenVoiceOS/ovos-tts-plugin-beepspeak">ovos-tts-plugin-beepspeak</a> forked from chatterbox</li>
+<li>May 2022 - <a href="https://github.com/OpenVoiceOS/ovos-tts-plugin-marytts">ovos-tts-plugin-marytts</a> released</li>
+<li>May 2022 - <a href="https://github.com/OpenVoiceOS/ovos-tts-plugin-polly">ovos-tts-plugin-polly</a> forked from chatterbox</li>
+<li>May 2022 - <a href="https://github.com/OpenVoiceOS/ovos-translate-server">ovos-translate-server</a> released</li>
+<li>May 2022 - <code>ovos-core</code> version <strong>0.0.3</strong> released</li>
+<li>May 2022 - MycroftAI founders resign</li>
+<li>Jun 2022 - <a href="https://github.com/OpenVoiceOS/ovos-config">ovos-config</a> adopted in <code>ovos-core</code></li>
+<li>Jun 2022 - <a href="https://github.com/OpenVoiceOS/skill-ovos-alarm">skill-ovos-alarm</a> forked from Mycroft</li>
+<li>Jun 2022 - <a href="https://github.com/OpenVoiceOS/skill-ovos-qml-camera">skill-ovos-qml-camera</a> forked from Mycroft</li>
+<li>Jun 2022 - Plasma Bigscreen <a href="https://gitlab.manjaro.org/packages/kde-unstable/bigscreen/mycroft-bigscreen/-/commit/4fd27e3ea165c2b1d39ee354a9faaa40fad1435d">drops mycroft-core in favor of ovos-core</a> version <strong>0.0.4</strong> (alpha)</li>
+<li>Jul 2022 - MycroftAI starts work on <a href="https://github.com/MycroftAI/mycroft-dinkum">mycroft-dinkum</a> behind the scenes, a replacement/rewrite of mycroft-core</li>
+<li>Jul 2022 - <a href="https://github.com/OpenVoiceOS/ovos-tts-plugin-mimic3">ovos-tts-plugin-mimic3</a> forked from Mycroft</li>
+<li>Jul 2022 - <a href="https://github.com/OpenVoiceOS/skill-homescreen-lite">skill-homescreen-lite</a> released</li>
+<li>Aug 2022 - <a href="https://github.com/OpenVoiceOS/padacioso">padacioso</a> transfered from @JarbasAi to OVOS</li>
+<li>Aug 2022 - adopt <code>padacioso</code> as a optional <code>padatious</code> alternative to avoid libfann (LGPL)</li>
+<li>Aug 2022 - <code>ovos-core</code> version <strong>0.0.4</strong> released</li>
+<li>Aug 2022 - experimental support for "continuous_listening" and "hybrid_listening" added</li>
+<li>Sep 2022 - MycroftAI <a href="https://github.com/MycroftAI/mimic3">Mimic3</a> TTS released, AGPL licensed</li>
+<li>Sep 2022 . MycroftAI Mark 2 starts shipping</li>
+<li>Sep 2022 - <a href="https://github.com/OpenVoiceOS/skill-ovos-news">skill-ovos-news</a> transferred from @JarbasAl to OVOS</li>
+<li>Oct 2022 - <a href="https://github.com/OpenVoiceOS/ovos-backend-manager">ovos-backend-manager</a> UI  released</li>
+<li>Oct 2022 - <a href="https://github.com/OpenVoiceOS/ovos-stt-plugin-whispercpp">ovos-stt-plugin-whispercpp</a> released</li>
+<li>Oct 2022 - new <code>ask_yesno</code> parser added</li>
+<li>Oct 2022 - <a href="https://github.com/OpenVoiceOS/ovos-backend-client">ovos-backend-client</a> adopted by <code>ovos-core</code>, selectable backend support added (offline, personal, selene)</li>
+<li>Oct 2022 - <a href="https://github.com/OpenVoiceOS/ovos-tts-plugin-mimic3-server">ovos-tts-plugin-mimic3-server</a> released</li>
+<li>Oct 2022 - <a href="http://mycroft.blue-systems.com">mycroft.blue-systems.com</a> mimic 3 public server added</li>
+<li>Oct 2022 - <a href="https://mimic3.ziggyai.online">mimic3.ziggyai.online</a> mimic 3 public server added</li>
+<li>Oct 2022 - @aix talks about <a href="https://www.youtube.com/watch?v=hCwdtZu7WqA">OVOS in KDE Akademy</a></li>
+<li>Oct 2022 - <a href="https://github.com/OpenVoiceOS/skill-ovos-soundcloud">skill-ovos-soundcloud</a> transferred from @JarbasAl to OVOS</li>
+<li>Oct 2022 - <a href="https://github.com/OpenVoiceOS/skill-ovos-youtube">skill-ovos-youtube</a> transferred from @JarbasAl to OVOS</li>
+<li>??? 2022 - <a href="https://github.com/MycroftAI/mycroft-dinkum">mycroft-dinkum</a> source code made public, Apache2 licensed</li>
+<li>??? 2022 - Extremely negative feedback from developer community, several key members annouce no intention to support mycroft-dinkum</li>
+<li>??? 2022 - NeonAI starts release NeonOS images for the Mark 2</li>
+<li>Nov 2022 - <code>ovos-core</code> version <strong>0.0.5</strong> released</li>
+<li>Nov 2022 - MycroftAI staff lay off, only a skeleton crew remaining</li>
+<li>Nov 2022 - <a href="https://github.com/OpenVoiceOS/ovos-bus-client">ovos-bus-client</a> forked from Mycroft</li>
+<li>Nov 2022 - <a href="https://tts.smartgic.io/mimic3">tts.smartgic.io/mimic3</a> public Mimic3 server added</li>
+<li>Dec 2022 - <a href="https://github.com/OpenVoiceOS/ovos-PHAL-plugin-homeassistant">Home Assistant PHAL</a> plugin initial release by @AIX , exposes HA devices to the messagebus</li>
+<li>Dec 2022 - <a href="https://github.com/OpenVoiceOS/skill-ovos-youtube-music">skill-ovos-youtube-music</a> transferred from @JarbasAl to OVOS</li>
+<li>Dec 2022 - <a href="https://github.com/OpenVoiceOS/skill-ovos-bandcamp">skill-ovos-bandcamp</a> transferred from @JarbasAl to OVOS</li>
+<li>Jan 2023 - <code>ovos-core</code> version <strong>0.0.6</strong> released</li>
+<li>Jan 2023 - negative user feedback from the community for Mark 2, lots of bugs and missing features</li>
+<li>Jan 2023 - "fallback" wake word support added to <code>ovos-plugin-manager</code></li>
+<li>Jan 2023 - <a href="https://github.com/OpenVoiceOS/skill-ovos-local-media">skill-ovos-local-media</a> released</li>
+<li>Jan 2023 - <a href="https://github.com/OpenVoiceOS/skill-ovos-fallback-chatgpt/">ChatGPT skill</a> released</li>
+<li>Feb 2023 - <code>ovos-config</code> cli tool by community member @sgee released</li>
+<li>Feb 2023 - <a href="https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml">ovos-solver-plugin-aiml</a> released</li>
+<li>Feb 2023 - <a href="https://github.com/OpenVoiceOS/ovos-solver-plugin-rivescript">ovos-solver-plugin-rivescript</a> released</li>
+<li>Feb 2023 - <a href="https://github.com/OpenVoiceOS/skill-ovos-somafm">skill-ovos-somafm</a> transferred from @JarbasAl to OVOS</li>
+<li>Feb 2023 - MycroftAI partners up with NeonAI to maintain mycroft-core(?)</li>
+<li>Mar 2023 - Mimic3 TTS public servers become default OVOS voice (alan pope)</li>
+<li>Mar 2023 - <code>ovos-core</code> version <strong>0.0.7</strong> released</li>
+<li>Mar 2023 - <a href="https://www.gofundme.com/f/openvoiceos">Fundraiser to form OpenVoiceOS</a> V.z.w. (Dutch: "Vereninging zonder winstoogmerk") completed in a couple days</li>
+<li>Mar 2023 - First stretch goal of <a href="https://www.gofundme.com/f/openvoiceos">fundraiser</a> reached and second stretch goal announced</li>
+<li>Mar 2023 - <a href="https://github.com/OpenVoiceOS/raspbian-ovos">raspbian-ovos</a> images start being released, maintained by community member @builderjer</li>
+<li>Mar 2023 - <a href="https://openvoiceos.github.io/community-docs/">community docs</a> start being maintained by community members</li>
+<li>Mar 2023 - <a href="https://github.com/OpenVoiceOS/ovos-ww-plugin-openWakeWord">ovos-ww-plugin-openWakeWord</a> released, maintained by author @dscripka</li>
+<li>Mar 2023 - <a href="https://github.com/OpenVoiceOS/skill-ovos-icanhazdadjokes">skill-ovos-icanhazdadjokes</a> transferred from @JarbasAl to OVOS</li>
+<li>Mar 2023 - <a href="https://github.com/OpenVoiceOS/ovos-skill-alerts">ovos-skill-alerts</a> forked from Neon, maintained by community member @sgee</li>
+<li>Apr 2023 - <code>ovos-core</code> splits <code>ovos-audio</code>, <code>ovos-listener</code>, <code>ovos-gui</code> and <code>ovos-bus</code> into their own packages</li>
+<li>Apr 2023 - <a href="https://community.mycroft.ai/t/aix-signing-off/13583">@Aix leaves</a> OpenVoiceOS</li>
+<li>Apr 2023 - OpenVoiceOS stops releasing manjaro based images</li>
+<li>Apr 2023 - <a href="https://github.com/OpenVoiceOS/ovos-stt-plugin-fasterwhisper">ovos-stt-plugin-fasterwhisper</a> released</li>
+<li>Apr 2023 - <a href="https://github.com/OpenVoiceOS/ovos-tts-plugin-piper">ovos-tts-plugin-piper</a> released</li>
+<li>Apr 2023 - <a href="https://github.com/OpenVoiceOS/precise-lite-trainer">precise-lite-trainer</a> released</li>
+<li>Apr 2023 - <a href="https://github.com/OpenVoiceOS/ovos-vad-plugin-precise">ovos-vad-plugin-precise</a> released</li>
+<li>Apr 2023 - <a href="https://github.com/OpenVoiceOS/ovos-dinkum-listener">ovos-dinkum-listener</a> released</li>
+<li>Apr 2023 - <a href="https://github.com/OpenVoiceOS/ovos-translate-plugin-deepl">ovos-translate-plugin-deepl</a> released, maintained by community member @sgee</li>
+<li>Apr 2023 - <a href="https://github.com/OpenVoiceOS/mycroft-classic-listener">mycroft-classic-listener</a> released, to preserve original mark 1 listener</li>
+<li>Apr 2023 - <a href="https://github.com/OpenVoiceOS/skill-ovos-tunein">skill-ovos-tunein</a>  transferred from @JarbasAl to OVOS, maintained by community member @sgee</li>
+<li>Apr 2023 - <a href="https://github.com/OpenVoiceOS/jurebes">jurebes</a> intent parser released</li>
+<li>May 2023 - <code>mycroft</code> import deprecated in favor of <code>ovos_core</code> module for skills service</li>
+<li>May 2023 - <a href="https://stt.openvoiceos.org">stt.openvoiceos.org</a> moves to whisper (small, cpu only)</li>
+<li>May 2023 - <a href="https://github.com/openvoiceos/ovos-docker">ovos-docker</a> released, maintained by community member @goldyfruit</li>
+<li>May 2023 - Open Voice OS TTS/STT <a href="http://openvoiceos.github.io/status/">status page</a> released, maintained by community member @goldyfruit</li>
+<li>May 2023 - First successful run of OpenVoiceOS on Mac OS using containers with <a href="https://github.com/openvoiceos/ovos-docker">ovos-docker</a></li>
+<li>May 2023 - <a href="https://github.com/openvoiceos/ovos-docker-stt">ovos-docker-stt</a> STT containers released, maintained by community member @goldyfruit</li>
+<li>May 2023 - <a href="https://github.com/openvoiceos/ovos-microphone-plugin-sounddevice">ovos-microphone-plugin-sounddevice</a> released, which provides native Mac OS suuport, maintained by community member @goldyfruit</li>
+<li>May 2023 - <a href="https://github.com/OpenVoiceOS/ovos-persona">ovos-persona</a> alpha release</li>
+<li>May 2023 - <a href="https://github.com/OpenVoiceOS/ovos-audio-transformer-plugin-speechbrain-langdetect">ovos-audio-transformer-plugin-speechbrain-langdetect</a> released</li>
+<li>May 2023 - <a href="https://github.com/OpenVoiceOS/ovos-skill-easter-eggs">ovos-skill-easter-eggs</a> transferred from @JarbasAl to OVOS, maintained by community member @mikejgray</li>
+<li>May 2023 - <a href="https://github.com/OpenVoiceOS/skill-ovos-dismissal">skill-ovos-dismissal</a> transferred from @ChanceNCounter to OVOS</li>
+<li>May 2023 - <a href="https://github.com/OpenVoiceOS/skill-ovos-dictation">skill-ovos-dictation</a> transferred from @JarbasAl to OVOS</li>
+<li>Jun 2023 - Home Assistant plugin starts being maintained by community member @mikejgray</li>
+<li>Jun 2023 - <a href="https://github.com/OpenVoiceOS/quebra_frases">quebra_frases</a> transferred from @JarbasAl to OVOS</li>
+<li>Jun 2023 - <a href="https://github.com/OpenVoiceOS/ovos-translate-plugin-nllb">ovos-translate-plugin-nllb</a> released</li>
+<li>Jun 2023 - <a href="https://fasterwhisper.ziggyai.online/stt">fasterwhisper.ziggyai.online</a> public STT server added (large, GPU)</li>
+<li>Jun 2023 - <a href="https://blog.graywind.org/posts/ovos-homeassistant-notify-integration/">Home Assistant Notify</a> integration released by community member @mikejgray</li>
+<li>Jun 2023 - First (and second!) successful run of OpenVoiceOS on Windows, using WSL2 and <a href="https://github.com/openvoiceos/ovos-docker">ovos-docker</a></li>
+<li>Jun 2023 - <a href="https://github.com/OpenVoiceOS/ovos-docker-tts">ovos-docker-tts</a> TTS containers released, maintained by community member @goldyfruit</li>
+<li>Jun 2023 - <a href="https://github.com/OpenVoiceOS/ovos-tts-plugin-azure">ovos-tts-plugin-azure</a> released</li>
+<li>Jun 2023 - <a href="https://github.com/OpenVoiceOS/ovos-utterance-corrections-plugin">ovos-utterance-corrections-plugin</a> released</li>
+<li>Jul 2023 - <a href="https://github.com/OpenVoiceOS/mycroft-gui-qt6">mycroft-gui-qt6</a> forked from mycroft-gui at last commit supporting QT6 before license change to GPL (reverted shortly after)</li>
+<li>Jul 2023 - <a href="https://github.com/OpenVoiceOS/mycroft-gui-qt5">mycroft-gui-qt5</a> forked from mycroft-gui at last commit supporting QT5</li>
+<li>Jul 2023 - <a href="https://pipertts.ziggyai.online">pipertts.ziggyai.online</a> public TTS server added</li>
+<li>Jul 2023 - <a href="https://tts.smartgic.io/piper">tts.smartgic.io/piper</a> public TTS server added</li>
+<li>Jul 2023 - piper TTS public servers become default OVOS voice (alan pope)</li>
+<li>Jul 2023 - <a href="https://github.com/OpenVoiceOS/skill-ovos-spotify">skill-ovos-spotify</a> port of the mycroft-spotify skill by community member and original author @forslund</li>
+<li>Aug 2023 - <a href="https://github.com/OpenVoiceOS/ovos-translate-server-plugin">ovos-translate-server-plugin</a> released</li>
+<li>Aug 2023 - <a href="https://github.com/OpenVoiceOS/ovos-docker-tx">ovos-docker-tx</a> translation containers released, maintained by community member @goldyfruit</li>
+<li>Aug 2023 - <a href="https://nllb.openvoiceos.org">nllb.openvoiceos.org</a> public translation server added</li>
+<li>Aug 2023 - <a href="https://translator.smartgic.io/nllb">translator.smartgic.io/nllb</a> public translation server added</li>
+<li>Aug 2023 - adopt NLLB public servers as default translation plugin</li>
+<li>Aug 2023 - <a href="https://github.com/OpenVoiceOS/skill-ovos-wolfie">skill-ovos-wolfie</a> transferred from @JarbasAl to OVOS</li>
+<li>Aug 2023 - <a href="https://github.com/OpenVoiceOS/skill-ovos-ddg">skill-ovos-ddg</a> transferred from @JarbasAl to OVOS</li>
+<li>Aug 2023 - <a href="https://github.com/OpenVoiceOS/skill-ovos-wikipedia">skill-ovos-wikipedia</a> transferred from @JarbasAl to OVOS</li>
+<li>Aug 2023 - <a href="https://github.com/OpenVoiceOS/ovos-stt-azure-plugin">ovos-stt-azure-plugin</a> released</li>
+<li>Sep 2023 - <a href="https://github.com/OpenVoiceOS/skill-ovos-parrot">skill-ovos-parrot</a> transferred from @JarbasAl to OVOS</li>
+<li>Sep 2023 - <a href="https://stt.smartgic.io/fasterwhisper">stt.smartgic.io/fasterwhisper</a> public STT server (large, GPU)</li>
+<li>Sep 2023 - GUI fully functional with <a href="https://github.com/openvoiceos/ovos-docker">ovos-docker</a> containers</li>
+<li>Sep 2023 - <a href="https://github.com/OpenVoiceOS/ovos-persona-server">persona-server</a> alpha version released</li>
+<li>Sep 2023 - <a href="https://github.com/OpenVoiceOS/ovos-audio-transformer-plugin-ggwave">ovos-audio-transformer-plugin-ggwave</a> released</li>
+<li>Oct 2023 - <a href="https://ovosnllb.ziggyai.online">ovosnllb.ziggyai.online</a>  public translation server added</li>
+<li>Oct 2023 - <a href="https://github.com/OpenVoiceOS/ovos-tts-plugin-mimic3-server">ovos-tts-plugin-mimic3-server</a> deprecated</li>
+<li>Oct 2023 - <a href="https://github.com/OpenVoiceOS/ovos-PHAL-sensors">ovos-PHAL-sensors</a> released, exposing OVOS sensors in Home Assistant</li>
+<li>Oct 2023 - <a href="https://github.com/OpenVoiceOS/ovos-bidirectional-translation-plugin">ovos-bidirectional-translation-plugin</a> released</li>
+<li>Nov 2023 - Plasma Bigscreen <a href="https://invent.kde.org/plasma/plasma-bigscreen/-/commit/05441d4b687950b6235ef466cbb9c777631618d8">moves to QT6 and explicitly drops support for OVOS</a></li>
+<li>Dec 2023 - <a href="https://github.com/OpenVoiceOS/ovos-installer">ovos-installer</a> first release! codename <code>Duke Nukem</code>, maintained by community member @goldyfruit</li>
+<li>Dec 2023 - <code>ovos-logs</code> cli tool by community member @sgee added to <code>ovos-utils</code></li>
+<li>Dec 2023 - <a href="https://github.com/OpenVoiceOS/ovos-docs-viewer">ovos-docs-viewer</a> cli tool released</li>
+<li>Dec 2023 - <a href="https://github.com/OpenVoiceOS/skill-ovos-spelling">skill-ovos-spelling</a> forked from Mycroft</li>
+<li>Dec 2023 - <a href="https://github.com/OpenVoiceOS/skill-ovos-ip">skill-ovos-ip</a> forked from Mycroft</li>
+<li>Dec 2023 - <a href="https://github.com/OpenVoiceOS/skill-ovos-wallpapers">skill-ovos-wallpapers</a> transferred to OVOS</li>
+<li>Dec 2023 - <a href="https://github.com/OpenVoiceOS/ovos-i2csound">ovos-i2csound</a> released by community member @builderjer</li>
+<li>??? 202? - <a href="https://github.com/OpenVoiceOS/ovos-tts-plugin-mimic2">ovos-tts-plugin-mimic2</a> deprecated</li>
+<li>Jan 2024 - <a href="https://github.com/OpenVoiceOS/skill-ovos-boot-finished">skill-ovos-boot-finished</a> forked from Neon</li>
+<li>Jan 2024 - <a href="https://github.com/OpenVoiceOS/skill-ovos-audio-recording">skill-ovos-audio-recording</a> forked from Neon</li>
+<li>Jan 2024 - <a href="https://github.com/OpenVoiceOS/ovos-utterance-plugin-cancel">ovos-utterance-plugin-cancel</a> forked from Neon, deprecates dismissal skill</li>
+<li>Jan 2024 - <a href="https://github.com/OpenVoiceOS/ovos-mark1-utils">ovos-mark1-utils</a> released</li>
+<li>Jan 2024 - Mycroft forums move to <a href="https://community.openconversational.ai/">Open Conversational AI</a></li>
+<li>Jan 2024 - <a href="https://github.com/OpenVoiceOS/ovos-vad-plugin-noise">ovos-vad-plugin-noise</a> released to support older platforms</li>
+<li>Feb 2024 - <a href="https://github.com/OpenVoiceOS/ovos-tts-plugin-edge-tts">ovos-tts-plugin-edge-tts</a> released</li>
+<li>Feb 2024 - Selene servers and Mycroft AI website <a href="https://community.openconversational.ai/t/mycroft-servers-down-any-quick-and-dirty-trick/">go down</a></li>
+<li>Feb 2024 - <a href="https://github.com/OpenVoiceOS/skill-ovos-randomness">skill-ovos-randomness</a> released, maintained by community member @mikejgray</li>
+<li>Feb 2024 - <a href="https://github.com/OVOSHatchery">OVOSHatchery</a> created to incubate new projects</li>
+<li>Feb 2024 - @Chance leaves OpenVoiceOS</li>
+<li>Feb 2024 - <a href="https://github.com/OpenVoiceOS/skill-ovos-wordnet">skill-ovos-wordnet</a> released</li>
+<li>Mar 2024 - Community Mycroft <a href="https://github.com/orgs/OVOSHatchery/repositories?type=fork&amp;q=skill">skills updated to OVOS</a> under OVOSHatchery</li>
+<li>Mar 2024 - <a href="https://openvoiceos.github.io/OVOS-skills-store">OVOS Skill Store</a> released!</li>
+<li>Mar 2024 - <a href="https://ovoshatchery.github.io/OVOS-Hatchery-skills">Hatchery Skill Store</a> released!</li>
+<li>Mar 2024 - First successful run of OpenVoiceOS natively on Mac OS with Apple Silicon</li>
+<li>Mar 2024 - <a href="https://github.com/OpenVoiceOS/ovos-installer">ovos-installer</a> second release, codename <code>Doom</code> supports Mark II device, maintained by community member @goldyfruit</li>
+<li>Apr 2024 - <a href="https://community.openconversational.ai/t/open-voice-os-running-on-a-mark-ii-with-its-local-ai-running-mistral/14572">Mark 2 demo</a> running Open Voice OS connected to a local A.I.</li>
+<li>Apr 2024 - First successful run of <a href="https://github.com/JarbasHiveMind/HiveMind-voice-sat">HiveMind Satellite</a> on Mark 1 device</li>
+<li>Jun 2024 - <a href="https://github.com/mikejgray/ovos-windows">First successful run of OpenVoiceOS natively on Windows</a>: https://drive.google.com/file/d/171801mbhbpG79BvlOlUCxVyMPcDGgnbM/view?usp=sharing</li>
+<li>Near Future - <code>ovos-core</code> version <strong>0.0.8</strong> released</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../002-license/" class="btn btn-neutral float-left" title="License"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../002-license/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../javascripts/analytics.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

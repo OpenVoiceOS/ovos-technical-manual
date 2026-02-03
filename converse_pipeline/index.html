@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://openvoiceos.github.io/ovos-technical-manual/converse_pipeline/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Converse - OVOS Technical Manual</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Converse";
+        var mkdocs_page_input_path = "converse_pipeline.md";
+        var mkdocs_page_url = "/ovos-technical-manual/converse_pipeline/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OVOS Technical Manual
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Home</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../50-ovos_installer/">ovos-installer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../001-release_channels/">Manual Install</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">RaspOVOS</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../51-install_raspovos/">Tutorial</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../54-skill-examples/">Default Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../55-raspovos_troubleshooting/">Troubleshooting</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Language Support</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../lang_support/">Translations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gitlocalize_tutorial/">GitLocalize Tutorial</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Architecture</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../99-architecture-overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../100-bus_service/">Bus</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../101-speech_service/">Listener</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../102-core/">Core</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../399-intents/">Skills and Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../103-audio_service/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../104-gui_service/">GUI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../340-PHAL/">Platform/Hardware Abstraction Layer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../300-plugin-manager/">Plugin Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../110-config/">Configuration</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Intent Pipelines</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../pipelines_overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../adapt_pipeline/">Adapt</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../padatious_pipeline/">Padatious</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../m2v_pipeline/">Model2Vec</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Converse</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#purpose">Purpose</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#active-skill-list">Active Skill List</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#pipeline-stages">Pipeline Stages</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-it-works">How It Works</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#skill-integration">Skill Integration</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#converse-modes">Converse Modes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#security-performance">Security &amp; Performance</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#notes">Notes</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../stop_pipeline/">Stop</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../153-persona_pipeline/">Persona</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cq_pipeline/">Common Query</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../631-OCP_pipeline/">OCP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fallback_pipeline/">Fallback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Transformers</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../audio_transformers/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../utterance_transformers/">Utterance</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../intent_transformers/">Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dialog_transformers/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_transformers/">TTS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">AI Agents</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../150-personas/">Personas</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../151-llm-transformers/">AI Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../150-advanced_solvers/">Specialized Solvers</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Self Hosting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../202-persona_server/">Persona Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../152-hivemind-agents/">HiveMind</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../200-stt_server/">STT Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../201-tts_server/">TTS Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../203-translate_server/">Translate Server</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Skill Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../400-skill-design-guidelines/">Design Guidelines</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../401-skill_structure/">Anatomy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../402-statements/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../403-intents/">Intent Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../405-customization/">Customization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../406-messagebus/">Bus Interaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../407-skill_filesystem/">Filesystem</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../408-skill_settings/">Skill Settings</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../409-skill_api/">Skill API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../410-skill_runtime_requirements/">Runtime Requirements</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../411-skill_json/">Skill Json</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../420-ssml/">SSML</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../430-skill_dev_faq/">F.A.Q.</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Continuous Conversation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../500-prompts/">Prompts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../501-context/">Follow up Questions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../502-converse/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../503-layers/">Intent Layers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../504-session/">Session Aware Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Advanced Skill Types</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../600-fallbacks/">Fallback Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../610-common_query/">Common Query Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../630-OCP_skills/">Media Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../620-universal_skills/">Universal Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">GUI</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../701-gui_protocol/">Protocol</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Voice Apps</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../590-voice_apps/">Standalone Apps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">MessageBus</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../900-bus_client/">Messagebus Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../720-skill_gui/">GUI Interface</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../800-mk1_api/">Enclosure Api</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Plugin Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../310-mic_plugins/">Microphone</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../311-vad_plugins/">Voice Activity Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../312-wake_word_plugins/">Wake Word</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../313-stt_plugins/">Speech To Text</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../320-tts_plugins/">Text To Speech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../321-g2p_plugins/">Grapheme to Phoneme</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../330-transformer_plugins/">Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../350-translation_plugins/">Language Detection/Translation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../370-ocp_plugins/">OCP Stream Extractors</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../371-media_plugins/">Media Playback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Misc. Utilities</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../891-number_parser/">Number Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../890-date_parser/">Date Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../893-color_parser/">Color Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../910-quebra_frases/">Quebra Frases</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../920-padacioso/">Padacioso</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../801-mk1_utils/">Mark1 Utils</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Misc. Information</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../002-license/">License</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../003-timeline/">Timeline</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OVOS Technical Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Intent Pipelines</li>
+      <li class="breadcrumb-item active">Converse</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="converse-pipeline">Converse Pipeline</h1>
+<p>The <strong>Converse Pipeline</strong> in <strong>OpenVoiceOS (OVOS)</strong> manages active conversational contexts between the assistant and skills. It allows skills to keep handling user input across multiple turns, enabling more natural, stateful conversations.</p>
+<hr />
+<h2 id="purpose">Purpose</h2>
+<p>The <strong>Converse pipeline</strong> enables <strong>multi-turn conversations</strong> by prioritizing which skills are given the opportunity to handle an utterance through their <code>converse()</code> method before normal intent parsing occurs.</p>
+<p>Key purposes include:</p>
+<ul>
+<li><strong>Preserve conversational context</strong> across multiple turns.</li>
+<li><strong>Prioritize recently used skills</strong> for more natural interactions.</li>
+<li><strong>Enable stateful behavior</strong>, such as follow-up questions or corrections.</li>
+<li><strong>Prevent unnecessary intent parsing</strong> when a skill is already engaged.</li>
+<li><strong>Support skill-defined session control</strong> via manual activation/deactivation.</li>
+</ul>
+<p>This allows OVOS to act more like a true conversational assistant rather than a single-turn command system.</p>
+<hr />
+<h2 id="active-skill-list">Active Skill List</h2>
+<p>A Skill is considered active if it has been called in the last 5 minutes.</p>
+<p>Skills are called in order of when they were last active. For example, if a user spoke the following commands:</p>
+<blockquote>
+<p>Hey Mycroft, set a timer for 10 minutes</p>
+<p>Hey Mycroft, what's the weather</p>
+</blockquote>
+<p>Then the utterance "what's the weather" would first be sent to the Timer Skill's <code>converse()</code> method, then to the intent service for normal handling where the Weather Skill would be called.</p>
+<p>As the Weather Skill was called it has now been added to the front of the Active Skills List. Hence, the next utterance received will be directed to:</p>
+<ol>
+<li><code>WeatherSkill.converse()</code></li>
+<li><code>TimerSkill.converse()</code></li>
+<li>Normal intent parsing service</li>
+</ol>
+<p>When does a skill become active?</p>
+<ol>
+<li><strong>before</strong> an intent is called the skill is <strong>activated</strong></li>
+<li>if a fallback <strong>returns True</strong> (to consume the utterance) the skill is <strong>activated</strong> right <strong>after</strong> the fallback</li>
+<li>if converse <strong>returns True</strong> (to consume the utterance) the skill is <strong>reactivated</strong> right <strong>after</strong> converse</li>
+<li>a skill can activate/deactivate itself at any time</li>
+</ol>
+<hr />
+<h2 id="pipeline-stages">Pipeline Stages</h2>
+<p>This plugin registers a single pipeline:</p>
+<table>
+<thead>
+<tr>
+<th>Pipeline ID</th>
+<th>Description</th>
+<th>Recommended Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>converse</code></td>
+<td>Continuous dialog for skills</td>
+<td>Should always be present, do not remove unless you know what you are doing</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="how-it-works">How It Works</h2>
+<ul>
+<li>When a user speaks, the pipeline checks if any skill is actively conversing.</li>
+<li>Active skills implement a <code>converse()</code> method that determines if they want to handle the utterance.</li>
+<li>If no active skill accepts the input, the regular intent matching process continues.</li>
+<li>Skills can automatically deactivate after a timeout or based on custom logic.</li>
+<li>Only a limited number of skills can be active at any given time (defaults configurable).</li>
+</ul>
+<hr />
+<h2 id="skill-integration">Skill Integration</h2>
+<p>Skills integrate with the converse pipeline by:</p>
+<ul>
+<li>Implementing a <code>converse()</code> method that checks if the skill wants to handle an utterance.</li>
+<li>Returning <code>True</code> if the utterance was handled, <code>False</code> otherwise.</li>
+<li>Managing internal state to determine when to exit conversation mode.</li>
+</ul>
+<p>This enables modular, stateful conversations without hardcoding turn-taking logic into the core assistant.</p>
+<hr />
+<h2 id="configuration">Configuration</h2>
+<p>Customize the pipeline via <code>mycroft.conf</code>:</p>
+<pre><code class="language-json">&quot;skills&quot;: {
+  &quot;converse&quot;: {
+    &quot;cross_activation&quot;: true,
+    &quot;converse_activation&quot;: &quot;accept_all&quot;,
+    &quot;converse_mode&quot;: &quot;accept_all&quot;,
+    &quot;converse_blacklist&quot;: [],
+    &quot;converse_whitelist&quot;: [],
+    &quot;max_activations&quot;: 3,
+    &quot;skill_activations&quot;: {
+      &quot;skill-example&quot;: 5
+    },
+    &quot;timeout&quot;: 300,
+    &quot;skill_timeouts&quot;: {
+      &quot;skill-example&quot;: 600
+    },
+    &quot;max_skill_runtime&quot;: 10
+  }
+}
+</code></pre>
+<p><strong>Key Options</strong></p>
+<table>
+<thead>
+<tr>
+<th>Config Key</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cross_activation</code></td>
+<td>Allow skills to activate/deactivate other skills during a conversation.</td>
+</tr>
+<tr>
+<td><code>converse_mode</code></td>
+<td>Global mode for allowing/disallowing skills from converse participation.</td>
+</tr>
+<tr>
+<td><code>converse_blacklist</code></td>
+<td>Skills that are not allowed to enter converse mode.</td>
+</tr>
+<tr>
+<td><code>converse_whitelist</code></td>
+<td>Skills explicitly allowed to converse.</td>
+</tr>
+<tr>
+<td><code>max_activations</code></td>
+<td>Default number of times a skill can consecutively handle turns.</td>
+</tr>
+<tr>
+<td><code>skill_activations</code></td>
+<td>Per-skill override of <code>max_activations</code>.</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>Time (in seconds) before an idle skill is removed from converse mode.</td>
+</tr>
+<tr>
+<td><code>skill_timeouts</code></td>
+<td>Per-skill override of <code>timeout</code>.</td>
+</tr>
+<tr>
+<td><code>max_skill_runtime</code></td>
+<td>Maximum time (in seconds) to wait for a skill’s <code>converse()</code> response.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="converse-modes">Converse Modes</h2>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>accept_all</code></td>
+<td>All skills are allowed to use converse mode (default).</td>
+</tr>
+<tr>
+<td><code>whitelist</code></td>
+<td>Only skills explicitly listed in <code>converse_whitelist</code> can use converse mode.</td>
+</tr>
+<tr>
+<td><code>blacklist</code></td>
+<td>All skills can use converse mode except those in <code>converse_blacklist</code>.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="security-performance">Security &amp; Performance</h2>
+<p>A malicious or badly designed skill using the converse method can potentially hijack the whole conversation loop and render the skills service unusable</p>
+<p>Because skills can "hijack" the conversation loop indefinitely, misbehaving or malicious skills can degrade UX. Protections include:</p>
+<ul>
+<li>Timeouts for inactivity and maximum runtime.</li>
+<li><code>max_activations</code> limits per skill.</li>
+<li>Blacklist/whitelist enforcement to restrict which skills can enter converse mode.</li>
+<li><code>cross_activation</code> can be disabled to prevent skill-to-skill manipulation.</li>
+</ul>
+<p>The concept of "converse priority" is under active development</p>
+<pre><code class="language-javascript">&quot;skills&quot;: {
+    // converse stage configuration
+    &quot;converse&quot;: {
+        // the default number of seconds a skill remains active,
+        // if the user does not interact with the skill in this timespan it
+        // will be deactivated, default 5 minutes (same as mycroft)
+        &quot;timeout&quot;: 300,
+
+        // override of &quot;skill_timeouts&quot; per skill_id
+        // you can configure specific skills to remain active longer
+        &quot;skill_timeouts&quot;: {},
+
+        // conversational mode has 3 modes of operations:
+        // - &quot;accept_all&quot;  # default mycroft-core behavior
+        // - &quot;whitelist&quot;  # only call converse for skills in &quot;converse_whitelist&quot;
+        // - &quot;blacklist&quot;  # only call converse for skills NOT in &quot;converse_blacklist&quot;
+        &quot;converse_mode&quot;: &quot;accept_all&quot;,
+        &quot;converse_whitelist&quot;: [],
+        &quot;converse_blacklist&quot;: [],
+
+        // converse activation has 4 modes of operations:
+        // - &quot;accept_all&quot;  # default mycroft-core behavior, any skill can
+        //                 # activate itself unconditionally
+        // - &quot;priority&quot;  # skills can only activate themselves if no skill with
+        //               # higher priority is active
+        // - &quot;whitelist&quot;  # only skills in &quot;converse_whitelist&quot; can activate themselves
+        // - &quot;blacklist&quot;  # only skills NOT in converse &quot;converse_blacklist&quot; can activate themselves
+        // NOTE: this does not apply for regular skill activation, only to skill
+        //       initiated activation requests, eg, self.make_active()
+        &quot;converse_activation&quot;: &quot;accept_all&quot;,
+
+        // number of consecutive times a skill is allowed to activate itself
+        // per minute, -1 for no limit (default), 0 to disable self-activation
+        &quot;max_activations&quot;: -1,
+
+        // override of &quot;max_activations&quot; per skill_id
+        // you can configure specific skills to activate more/less often
+        &quot;skill_activations&quot;: {},
+
+        // if false only skills can activate themselves
+        // if true any skill can activate any other skill
+        &quot;cross_activation&quot;: true,
+
+        // if false only skills can deactivate themselves
+        // if true any skill can deactivate any other skill
+        // NOTE: skill deactivation is not yet implemented
+        &quot;cross_deactivation&quot;: true,
+
+
+        // you can add skill_id: priority to override the developer defined
+        // priority of those skills, 
+
+        // converse priority is work in progress and not yet exposed to skills
+        // priority is assumed to be 50
+        // the only current source for converse priorities is this setting
+        &quot;converse_priorities&quot;: {
+           // &quot;skill_id&quot;: 10
+        }
+    }
+
+},
+</code></pre>
+<hr />
+<h2 id="notes">Notes</h2>
+<ul>
+<li>The plugin <strong>does not enforce a fallback behavior</strong> if no skill accepts the input.</li>
+<li>If no skill handles the utterance via converse, the pipeline falls back to normal intent matching or fallback skills.</li>
+<li>This mechanism is ideal for multi-turn conversations like dialogs, games, or assistant flows that require memory of previous input.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../m2v_pipeline/" class="btn btn-neutral float-left" title="Model2Vec"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../stop_pipeline/" class="btn btn-neutral float-right" title="Stop">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../m2v_pipeline/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../stop_pipeline/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../javascripts/analytics.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

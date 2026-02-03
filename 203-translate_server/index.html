@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://openvoiceos.github.io/ovos-technical-manual/203-translate_server/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Translate Server - OVOS Technical Manual</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Translate Server";
+        var mkdocs_page_input_path = "203-translate_server.md";
+        var mkdocs_page_url = "/ovos-technical-manual/203-translate_server/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OVOS Technical Manual
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Home</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../50-ovos_installer/">ovos-installer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../001-release_channels/">Manual Install</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">RaspOVOS</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../51-install_raspovos/">Tutorial</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../54-skill-examples/">Default Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../55-raspovos_troubleshooting/">Troubleshooting</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Language Support</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../lang_support/">Translations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gitlocalize_tutorial/">GitLocalize Tutorial</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Architecture</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../99-architecture-overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../100-bus_service/">Bus</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../101-speech_service/">Listener</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../102-core/">Core</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../399-intents/">Skills and Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../103-audio_service/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../104-gui_service/">GUI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../340-PHAL/">Platform/Hardware Abstraction Layer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../300-plugin-manager/">Plugin Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../110-config/">Configuration</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Intent Pipelines</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../pipelines_overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../adapt_pipeline/">Adapt</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../padatious_pipeline/">Padatious</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../m2v_pipeline/">Model2Vec</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../converse_pipeline/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../stop_pipeline/">Stop</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../153-persona_pipeline/">Persona</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cq_pipeline/">Common Query</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../631-OCP_pipeline/">OCP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fallback_pipeline/">Fallback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Transformers</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../audio_transformers/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../utterance_transformers/">Utterance</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../intent_transformers/">Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dialog_transformers/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_transformers/">TTS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">AI Agents</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../150-personas/">Personas</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../151-llm-transformers/">AI Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../150-advanced_solvers/">Specialized Solvers</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Self Hosting</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../202-persona_server/">Persona Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../152-hivemind-agents/">HiveMind</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../200-stt_server/">STT Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../201-tts_server/">TTS Server</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Translate Server</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#usage-guide">Usage Guide</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#install-the-server">Install the Server</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#run-the-server">Run the Server</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#make-requests">Make Requests</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#command-line-options">Command-Line Options</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#technical-overview">Technical Overview</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#docker-deployment">Docker Deployment</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#use-prebuilt-images">Use Prebuilt Images</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#build-your-own">Build Your Own</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#companion-plugin-integration">Companion Plugin Integration</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tips-caveats">Tips &amp; Caveats</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-projects">Related Projects</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Skill Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../400-skill-design-guidelines/">Design Guidelines</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../401-skill_structure/">Anatomy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../402-statements/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../403-intents/">Intent Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../405-customization/">Customization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../406-messagebus/">Bus Interaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../407-skill_filesystem/">Filesystem</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../408-skill_settings/">Skill Settings</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../409-skill_api/">Skill API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../410-skill_runtime_requirements/">Runtime Requirements</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../411-skill_json/">Skill Json</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../420-ssml/">SSML</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../430-skill_dev_faq/">F.A.Q.</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Continuous Conversation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../500-prompts/">Prompts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../501-context/">Follow up Questions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../502-converse/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../503-layers/">Intent Layers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../504-session/">Session Aware Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Advanced Skill Types</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../600-fallbacks/">Fallback Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../610-common_query/">Common Query Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../630-OCP_skills/">Media Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../620-universal_skills/">Universal Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">GUI</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../701-gui_protocol/">Protocol</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Voice Apps</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../590-voice_apps/">Standalone Apps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">MessageBus</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../900-bus_client/">Messagebus Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../720-skill_gui/">GUI Interface</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../800-mk1_api/">Enclosure Api</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Plugin Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../310-mic_plugins/">Microphone</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../311-vad_plugins/">Voice Activity Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../312-wake_word_plugins/">Wake Word</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../313-stt_plugins/">Speech To Text</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../320-tts_plugins/">Text To Speech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../321-g2p_plugins/">Grapheme to Phoneme</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../330-transformer_plugins/">Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../350-translation_plugins/">Language Detection/Translation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../370-ocp_plugins/">OCP Stream Extractors</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../371-media_plugins/">Media Playback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Misc. Utilities</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../891-number_parser/">Number Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../890-date_parser/">Date Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../893-color_parser/">Color Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../910-quebra_frases/">Quebra Frases</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../920-padacioso/">Padacioso</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../801-mk1_utils/">Mark1 Utils</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Misc. Information</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../002-license/">License</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../003-timeline/">Timeline</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OVOS Technical Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Self Hosting</li>
+      <li class="breadcrumb-item active">Translate Server</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="openvoiceos-translate-server">OpenVoiceOS Translate Server</h1>
+<p><strong>Expose OVOS language detection and translation plugins over HTTP.</strong></p>
+<p>The OVOS Translate Server allows any OpenVoiceOS-compatible translation or language detection plugin to run as a lightweight web service. This makes it easy to integrate translation features into any application or device using simple HTTP requests.</p>
+<p>Great for local or cloud deployments, and ideal for use with the OVOS companion plugin to provide translation capabilities to your voice assistant.</p>
+<hr />
+<h2 id="usage-guide">Usage Guide</h2>
+<h3 id="install-the-server">Install the Server</h3>
+<pre><code class="language-bash">pip install ovos-translate-server
+</code></pre>
+<h3 id="run-the-server">Run the Server</h3>
+<pre><code class="language-bash">ovos-translate-server \
+  --tx-engine ovos-translate-plugin-nllb \
+  --detect-engine ovos-lang-detector-classics-plugin
+</code></pre>
+<h3 id="make-requests">Make Requests</h3>
+<p>Once the server is running (default on <code>http://0.0.0.0:9686</code>), you can access endpoints like:</p>
+<ul>
+<li>
+<p>Auto-detect source language:
+  <code>GET /translate/en/o meu nome é Casimiro
+  → "My name is Casimiro"</code></p>
+</li>
+<li>
+<p>Specify source and target language:
+  <code>GET /translate/pt/en/o meu nome é Casimiro
+  → "My name is Casimiro"</code></p>
+</li>
+<li>
+<p>Language detection:
+  <code>GET /detect/o meu nome é Casimiro
+  → "pt"</code></p>
+</li>
+</ul>
+<hr />
+<h2 id="command-line-options">Command-Line Options</h2>
+<pre><code class="language-bash">$ ovos-translate-server --help
+usage: ovos-translate-server [-h] [--tx-engine TX_ENGINE] [--detect-engine DETECT_ENGINE] [--port PORT] [--host HOST]
+
+options:
+  -h, --help            show this help message and exit
+  --tx-engine TX_ENGINE
+                        translate plugin to be used
+  --detect-engine DETECT_ENGINE
+                        lang detection plugin to be used
+  --port PORT           port number
+  --host HOST           host
+
+</code></pre>
+<hr />
+<h2 id="technical-overview">Technical Overview</h2>
+<ul>
+<li><strong>Plugin-based</strong>: Uses the OVOS Plugin Manager to dynamically load any compatible plugin by name.</li>
+<li><strong>RESTful API</strong>: Simple HTTP endpoints allow you to send and receive translations from any app.</li>
+<li><strong>Language Detection Support</strong>: Works with any OVOS lang-detection plugin.</li>
+<li><strong>Easy Deployment</strong>: Perfect for running locally, inside Docker, or on a small server.</li>
+</ul>
+<hr />
+<h2 id="docker-deployment">Docker Deployment</h2>
+<h3 id="use-prebuilt-images">Use Prebuilt Images</h3>
+<p>Check out <a href="https://github.com/OpenVoiceOS/ovos-docker-tx">ovos-docker-tx</a> for prebuilt containers.</p>
+<h3 id="build-your-own">Build Your Own</h3>
+<p>Create a <code>Dockerfile</code>:</p>
+<pre><code class="language-dockerfile">FROM python:3.7
+
+RUN pip install ovos-utils==0.0.15
+RUN pip install ovos-plugin-manager==0.0.4
+RUN pip install ovos-translate-server==0.0.1
+
+# Install your plugins
+RUN pip install {PLUGIN_HERE}
+
+ENTRYPOINT ovos-translate-server --tx-engine {PLUGIN_HERE} --detect-engine {PLUGIN_HERE}
+</code></pre>
+<p>Build the image:</p>
+<pre><code class="language-bash">docker build . -t my_ovos_translate_plugin
+</code></pre>
+<p>Run the container:</p>
+<pre><code class="language-bash">docker run -p 8080:9686 my_ovos_translate_plugin
+</code></pre>
+<p>Each plugin can provide its own Dockerfile using <code>ovos-translate-server</code> as the entrypoint.</p>
+<hr />
+<h2 id="companion-plugin-integration">Companion Plugin Integration</h2>
+<p>To use this server with an OVOS voice assistant instance, install:</p>
+<pre><code class="language-bash">pip install ovos-translate-server-plugin
+</code></pre>
+<p>Then configure your <code>mycroft.conf</code>:</p>
+<pre><code class="language-json">{
+  &quot;language&quot;: {
+    &quot;detection_module&quot;: &quot;ovos-lang-detector-plugin-server&quot;,
+    &quot;translation_module&quot;: &quot;ovos-translate-plugin-server&quot;,
+    &quot;ovos-translate-plugin-server&quot;: {
+      &quot;host&quot;: &quot;http://localhost:9686&quot;,
+      &quot;verify_ssl&quot;: false
+    },
+    &quot;ovos-lang-detector-plugin-server&quot;: {
+      &quot;host&quot;: &quot;http://localhost:9686&quot;,
+      &quot;verify_ssl&quot;: false
+    }
+  }
+}
+</code></pre>
+<hr />
+<h2 id="tips-caveats">Tips &amp; Caveats</h2>
+<ul>
+<li>Some translation plugins auto-detect language; others require you to specify <code>source_lang</code>.</li>
+<li>Network errors or unresponsive servers will trigger fallback plugins, if configured.</li>
+<li>For production, consider placing the service behind a reverse proxy with HTTPS enabled.</li>
+</ul>
+<hr />
+<h2 id="related-projects">Related Projects</h2>
+<ul>
+<li>
+<p><strong>Translate Server Plugin</strong>:<br />
+<a href="https://github.com/OpenVoiceOS/ovos-translate-server-plugin">ovos-translate-server-plugin</a></p>
+</li>
+<li>
+<p><strong>Translate Server Source</strong>:<br />
+<a href="https://github.com/OpenVoiceOS/ovos-translate-server">ovos-translate-server</a></p>
+</li>
+<li>
+<p><strong>Docker Templates</strong>:<br />
+<a href="https://github.com/OpenVoiceOS/ovos-docker-tx">ovos-docker-tx</a></p>
+</li>
+<li>
+<p><strong>Plugin Manager</strong>:<br />
+<a href="https://github.com/OpenVoiceOS/ovos-plugin-manager">ovos-plugin-manager</a></p>
+</li>
+</ul>
+<hr />
+<p>With the OVOS Translate Server, adding multi-language support to your voice assistant is just an HTTP request away.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../201-tts_server/" class="btn btn-neutral float-left" title="TTS Server"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../400-skill-design-guidelines/" class="btn btn-neutral float-right" title="Design Guidelines">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../201-tts_server/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../400-skill-design-guidelines/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../javascripts/analytics.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

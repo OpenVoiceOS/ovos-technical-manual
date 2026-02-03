@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://openvoiceos.github.io/ovos-technical-manual/50-ovos_installer/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>ovos-installer - OVOS Technical Manual</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "ovos-installer";
+        var mkdocs_page_input_path = "50-ovos_installer.md";
+        var mkdocs_page_url = "/ovos-technical-manual/50-ovos_installer/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OVOS Technical Manual
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Home</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">ovos-installer</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#step-by-step-installation">Step-by-step Installation</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-connect-to-your-device-if-remote">✅ 1. Connect to Your Device (if remote)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-update-package-metadata">🔄 2. Update Package Metadata</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3-install-prerequisites">📦 3. Install Prerequisites</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#4-run-the-ovos-installer">📥 4. Run the OVOS Installer</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#what-happens-next">What Happens Next?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#the-installer-wizard">The Installer Wizard</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#language-selection">🌍 Language Selection</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#environment-summary">🧠 Environment Summary</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#choose-installation-method">🧰 Choose Installation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#choose-channel">🌱 Choose Channel</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#choose-profile">🧪 Choose Profile</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#feature-selection">🛠️ Feature Selection</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#raspberry-pi-tuning-if-applicable">🍓 Raspberry Pi Tuning (if applicable)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#summary">🧾 Summary</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#anonymous-telemetry">📊 Anonymous Telemetry</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sit-back-and-relax">🧙‍♂️ Sit Back and Relax</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#installation-complete">Installation Complete!</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#additional-configuration-and-known-issues">Additional Configuration and Known Issues</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../001-release_channels/">Manual Install</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">RaspOVOS</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../51-install_raspovos/">Tutorial</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../54-skill-examples/">Default Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../55-raspovos_troubleshooting/">Troubleshooting</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Language Support</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../lang_support/">Translations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gitlocalize_tutorial/">GitLocalize Tutorial</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Architecture</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../99-architecture-overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../100-bus_service/">Bus</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../101-speech_service/">Listener</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../102-core/">Core</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../399-intents/">Skills and Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../103-audio_service/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../104-gui_service/">GUI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../340-PHAL/">Platform/Hardware Abstraction Layer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../300-plugin-manager/">Plugin Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../110-config/">Configuration</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Intent Pipelines</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../pipelines_overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../adapt_pipeline/">Adapt</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../padatious_pipeline/">Padatious</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../m2v_pipeline/">Model2Vec</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../converse_pipeline/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../stop_pipeline/">Stop</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../153-persona_pipeline/">Persona</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cq_pipeline/">Common Query</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../631-OCP_pipeline/">OCP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fallback_pipeline/">Fallback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Transformers</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../audio_transformers/">Audio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../utterance_transformers/">Utterance</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../intent_transformers/">Intents</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dialog_transformers/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tts_transformers/">TTS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">AI Agents</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../150-personas/">Personas</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../151-llm-transformers/">AI Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../150-advanced_solvers/">Specialized Solvers</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Self Hosting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../202-persona_server/">Persona Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../152-hivemind-agents/">HiveMind</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../200-stt_server/">STT Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../201-tts_server/">TTS Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../203-translate_server/">Translate Server</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Skill Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../400-skill-design-guidelines/">Design Guidelines</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../401-skill_structure/">Anatomy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../402-statements/">Dialog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../403-intents/">Intent Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../405-customization/">Customization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../406-messagebus/">Bus Interaction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../407-skill_filesystem/">Filesystem</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../408-skill_settings/">Skill Settings</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../409-skill_api/">Skill API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../410-skill_runtime_requirements/">Runtime Requirements</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../411-skill_json/">Skill Json</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../420-ssml/">SSML</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../430-skill_dev_faq/">F.A.Q.</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Continuous Conversation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../500-prompts/">Prompts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../501-context/">Follow up Questions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../502-converse/">Converse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../503-layers/">Intent Layers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../504-session/">Session Aware Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Advanced Skill Types</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../600-fallbacks/">Fallback Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../610-common_query/">Common Query Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../630-OCP_skills/">Media Skills</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../620-universal_skills/">Universal Skills</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">GUI</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../701-gui_protocol/">Protocol</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Voice Apps</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../590-voice_apps/">Standalone Apps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">MessageBus</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../900-bus_client/">Messagebus Client</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../720-skill_gui/">GUI Interface</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../800-mk1_api/">Enclosure Api</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Plugin Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../310-mic_plugins/">Microphone</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../311-vad_plugins/">Voice Activity Detection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../312-wake_word_plugins/">Wake Word</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../313-stt_plugins/">Speech To Text</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../320-tts_plugins/">Text To Speech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../321-g2p_plugins/">Grapheme to Phoneme</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../330-transformer_plugins/">Transformers</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../350-translation_plugins/">Language Detection/Translation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../370-ocp_plugins/">OCP Stream Extractors</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../371-media_plugins/">Media Playback</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Misc. Utilities</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../891-number_parser/">Number Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../890-date_parser/">Date Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../893-color_parser/">Color Parser</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../910-quebra_frases/">Quebra Frases</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../920-padacioso/">Padacioso</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../801-mk1_utils/">Mark1 Utils</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Misc. Information</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../002-license/">License</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../003-timeline/">Timeline</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OVOS Technical Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Getting Started</li>
+      <li class="breadcrumb-item active">ovos-installer</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="how-to-install-open-voice-os-with-the-ovos-installer">How to Install Open Voice OS with the <code>ovos-installer</code></h1>
+<p>Welcome to the quick-start guide for installing Open Voice OS (OVOS) using the official <code>ovos-installer</code>! This guide is suitable for <strong>Raspberry Pi</strong> and <strong>desktop/server</strong> Linux environments. Whether you’re running this on a headless Raspberry Pi or your everyday laptop, the steps are mostly the same—only the way you connect to the device differs.</p>
+<blockquote>
+<p>⚠️ Note: Some “exotic” hardware (like ReSpeaker microphones or certain audio HATs) may require extra configuration. The installer aims for wide compatibility, but specialized setups might need some manual intervention.</p>
+</blockquote>
+<p>Looking for a pre-built raspberry pi image instead? check out <a href="https://github.com/OpenVoiceOS/raspOVOS">raspOVOS</a> and the companion <a href="https://openvoiceos.github.io/ovos-technical-manual/51-install_raspovos/">tutorial</a></p>
+<hr />
+<h2 id="step-by-step-installation">Step-by-step Installation</h2>
+<h3 id="1-connect-to-your-device-if-remote">✅ 1. Connect to Your Device <em>(if remote)</em></h3>
+<p>If you're installing on a headless device (like a Raspberry Pi), connect via SSH:</p>
+<pre><code class="language-bash">ssh -l your-username &lt;your-device-ip&gt;
+</code></pre>
+<hr />
+<h3 id="2-update-package-metadata">🔄 2. Update Package Metadata</h3>
+<p>Make sure your package manager is up to date:</p>
+<pre><code class="language-bash">sudo apt update
+</code></pre>
+<hr />
+<h3 id="3-install-prerequisites">📦 3. Install Prerequisites</h3>
+<p>Install <code>git</code> and <code>curl</code>—these are required to run the installer:</p>
+<pre><code class="language-bash">sudo apt install -y git curl
+</code></pre>
+<hr />
+<h3 id="4-run-the-ovos-installer">📥 4. Run the OVOS Installer</h3>
+<p>Now you're ready to kick off the installation process:</p>
+<pre><code class="language-bash">sudo sh -c &quot;$(curl -fsSL https://raw.githubusercontent.com/OpenVoiceOS/ovos-installer/main/installer.sh)&quot;
+</code></pre>
+<p><img alt="image" src="https://gist.github.com/user-attachments/assets/8a87fd01-2570-419b-8154-159b2d5801cb" /></p>
+<hr />
+<h2 id="what-happens-next">What Happens Next?</h2>
+<p>Once you run the script, the installer will:</p>
+<ul>
+<li>Perform system checks</li>
+<li>Install dependencies (Python, Ansible, etc.)</li>
+<li>Launch a <strong>text-based user interface (TUI)</strong> to guide you through the setup</li>
+</ul>
+<p>This can take anywhere from <strong>5 to 20 minutes</strong>, depending on your hardware, internet speed, and storage performance. Now let’s walk through the installer screens!</p>
+<hr />
+<h2 id="the-installer-wizard">The Installer Wizard</h2>
+<p>Navigation:</p>
+<ul>
+<li>navigation is done via arrow keys</li>
+<li>pressing space selects options in the lists<ul>
+<li>eg. when selecting <code>virtualenv</code> or <code>containers</code></li>
+</ul>
+</li>
+<li>pressing tab will switch between the options and the <code>&lt;next&gt;</code>/<code>&lt;back&gt;</code> buttons</li>
+<li>pressing enter will execute the highligted <code>&lt;next&gt;</code>/<code>&lt;back&gt;</code> option</li>
+</ul>
+<hr />
+<h3 id="language-selection">🌍 Language Selection</h3>
+<p>The first screen lets you select your preferred language. Just follow the on-screen instructions.</p>
+<p><img alt="image" src="https://gist.github.com/user-attachments/assets/61f9e089-1d54-49e9-8d4a-d5e1f6028ee2" /></p>
+<hr />
+<h3 id="environment-summary">🧠 Environment Summary</h3>
+<p>You’ll be shown a summary of the detected environment—no action needed here. It’s just informative.</p>
+<p><img alt="image" src="https://gist.github.com/user-attachments/assets/1268a703-2007-4bc0-b153-36f33b782b20" /></p>
+<hr />
+<h3 id="choose-installation-method">🧰 Choose Installation Method</h3>
+<p>You have two choices:</p>
+<ul>
+<li><strong>Virtualenv</strong>: Recommended for most users. Easier to understand and manage.</li>
+<li><strong>Containers</strong>: For advanced users familiar with Docker or Podman.</li>
+</ul>
+<p><img alt="image" src="https://gist.github.com/user-attachments/assets/e1b881fc-327d-4e1f-839b-396cffcd354c" /></p>
+<hr />
+<h3 id="choose-channel">🌱 Choose Channel</h3>
+<p>Select the <strong>“development”</strong> channel. Once OVOS is production-ready, a “stable” channel will also be available.</p>
+<p><img alt="image" src="https://gist.github.com/user-attachments/assets/f782cebe-c86b-4474-93d7-894b712e8fe7" /></p>
+<hr />
+<h3 id="choose-profile">🧪 Choose Profile</h3>
+<p>Pick the <code>ovos</code> profile. This is the classic, all-in-one Open Voice OS experience with all the necessary components running locally.</p>
+<p><img alt="image" src="https://gist.github.com/user-attachments/assets/0ff4279d-69fa-4ab8-b372-0fef263e6d7c" /></p>
+<hr />
+<h3 id="feature-selection">🛠️ Feature Selection</h3>
+<p>Choose what features you’d like to install.</p>
+<p><img alt="image" src="https://gist.github.com/user-attachments/assets/bdb65ba6-18d6-42fd-aff6-22fab0826870" /></p>
+<blockquote>
+<p>⚠️ Note: Some features (like the GUI) may be unavailable on lower-end hardware like the Raspberry Pi 3B+.</p>
+</blockquote>
+<hr />
+<h3 id="raspberry-pi-tuning-if-applicable">🍓 Raspberry Pi Tuning <em>(if applicable)</em></h3>
+<p>On Raspberry Pi boards, you’ll be offered system tweaks to improve performance. It's highly recommended to enable this!</p>
+<p><img alt="image" src="https://gist.github.com/user-attachments/assets/91bb5f18-9c5a-49ef-a0fe-5b0e52b44ee9" /></p>
+<hr />
+<h3 id="summary">🧾 Summary</h3>
+<p>Before the installation begins, you'll see a summary of your selected options. This is your last chance to cancel the process.</p>
+<p><img alt="image" src="https://gist.github.com/user-attachments/assets/62a565f3-6871-4dfe-a441-c482199feac0" /></p>
+<hr />
+<h3 id="anonymous-telemetry">📊 Anonymous Telemetry</h3>
+<p>You'll be asked whether to share <strong>anonymous usage data</strong> to help improve Open Voice OS. Please consider opting in!</p>
+<p><img alt="image" src="https://gist.github.com/user-attachments/assets/b8015c41-370d-49d3-b783-996887cb421b" /></p>
+<p>The data collection only happens during the installation process, nothing else will be collected once the installation is over.</p>
+<p><strong>The installer will ask you if you want to share or not the data.</strong></p>
+<p>Below is a list of the collected data <em>(please have a look to the <a href="https://github.com/OpenVoiceOS/ovos-installer/blob/main/ansible/roles/ovos_installer/templates/telemetry.json.j2">Ansible tempalte</a> used ti publish the data)</em>.</p>
+<table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>architecture</code></td>
+<td>CPU architecture where OVOS was installed</td>
+</tr>
+<tr>
+<td><code>channel</code></td>
+<td><code>stable</code> or <code>development</code> version of OVOS</td>
+</tr>
+<tr>
+<td><code>container</code></td>
+<td>OVOS installed into containers</td>
+</tr>
+<tr>
+<td><code>country</code></td>
+<td>Country where OVOS has been installed</td>
+</tr>
+<tr>
+<td><code>cpu_capable</code></td>
+<td>Is the CPU supports AVX2 or SIMD instructions</td>
+</tr>
+<tr>
+<td><code>display_server</code></td>
+<td>Is X or Wayland are used as display server</td>
+</tr>
+<tr>
+<td><code>extra_skills_feature</code></td>
+<td>Extra OVOS's skills enabled during the installation</td>
+</tr>
+<tr>
+<td><code>gui_feature</code></td>
+<td>GUI enabled during the installation</td>
+</tr>
+<tr>
+<td><code>hardware</code></td>
+<td>Is the device a Mark 1, Mark II or DevKit</td>
+</tr>
+<tr>
+<td><code>installed_at</code></td>
+<td>Date when OVOS has been installed</td>
+</tr>
+<tr>
+<td><code>os_kernel</code></td>
+<td>Kernel version of the host where OVOS is running</td>
+</tr>
+<tr>
+<td><code>os_name</code></td>
+<td>OS name of the host where OVOS is running</td>
+</tr>
+<tr>
+<td><code>os_type</code></td>
+<td>OS type of the host where OVOS is running</td>
+</tr>
+<tr>
+<td><code>os_version</code></td>
+<td>OS version of the host where OVOS is running</td>
+</tr>
+<tr>
+<td><code>profile</code></td>
+<td>Which profile has been used during the OVOS installation</td>
+</tr>
+<tr>
+<td><code>python_version</code></td>
+<td>What Python version was running on the host</td>
+</tr>
+<tr>
+<td><code>raspberry_pi</code></td>
+<td>Does OVOS has been installed on Raspberry Pi</td>
+</tr>
+<tr>
+<td><code>skills_feature</code></td>
+<td>Default OVOS's skills enabled during the installation</td>
+</tr>
+<tr>
+<td><code>sound_server</code></td>
+<td>What PulseAudio or PipeWire used</td>
+</tr>
+<tr>
+<td><code>tuning_enabled</code></td>
+<td>Did the Rasperry Pi tuning feature wsas used</td>
+</tr>
+<tr>
+<td><code>venv</code></td>
+<td>OVOS installed into a Python virtual environment</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="sit-back-and-relax">🧙‍♂️ Sit Back and Relax</h3>
+<p>The installation begins! This can take some time, so why not grab a coffee (or maybe a cupcake)? ☕🧁</p>
+<p>Here is a demo of how the process should go if everything works as intended</p>
+<p><a href="https://asciinema.org/a/710286"><img alt="asciicast" src="https://asciinema.org/a/710286.svg" /></a></p>
+<hr />
+<h2 id="installation-complete">Installation Complete!</h2>
+<p>You’ve done it! OVOS is now installed and ready to serve you. Try saying things like:</p>
+<ul>
+<li>“What’s the weather?”</li>
+<li>“Tell me a joke.”</li>
+<li>“Set a timer for 5 minutes.”</li>
+</ul>
+<p><img alt="image" src="https://gist.github.com/user-attachments/assets/acbc71ed-46aa-4084-8f4c-82c6a2a19d49" /></p>
+<p>You’re officially part of the Open Voice OS community! 🎤✨</p>
+<hr />
+<h2 id="additional-configuration-and-known-issues">Additional Configuration and Known Issues</h2>
+<p>Depending on your language you probably want to change the default plugins, the ovos-installer is not perfect and might not always select the best defaults</p>
+<p>It is recommend that you run <code>ovos-config autoconfigure --help</code> after the initial install</p>
+<p><a href="https://asciinema.org/a/710295"><img alt="asciicast" src="https://asciinema.org/a/710295.svg" /></a></p>
+<hr />
+<h2 id="troubleshooting">Troubleshooting</h2>
+<blockquote>
+<p>Something went wrong?</p>
+</blockquote>
+<p>Don’t panic! If the installer fails, it will generate a log file and upload it to <a href="https://dpaste.com">https://dpaste.com</a>. Please share that link with the community so we can help you out.</p>
+<p>OVOS is a community-driven project, maintained by passionate volunteers. Your feedback, bug reports, and patience are truly appreciated.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="Introduction"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../001-release_channels/" class="btn btn-neutral float-right" title="Manual Install">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../001-release_channels/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../javascripts/analytics.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
