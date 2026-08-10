@@ -10,6 +10,7 @@ OVOS supports a variety of language detection and translation plugins, each with
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|-----------|---------|-------------------|
 | [ovos-translate-plugin-server](https://github.com/OpenVoiceOS/ovos-translate-server-plugin)                                                                                                                       | ✔️     | ✔️        | ❌       | API (self hosted) |
 | [ovos-translate-plugin-nllb](https://github.com/OpenVoiceOS/ovos-translate-plugin-nllb)                                                                                                                           | ❌     | ✔️        | ✔️      | FOSS              |
+| [ovos-plugin-linguonnx](https://github.com/OpenVoiceOS/ovos-plugin-linguonnx)                                                                                                                                      | ✔️     | ✔️        | ✔️      | FOSS              |
 | [ovos-lang-detector-fasttext-plugin](https://github.com/OpenVoiceOS/ovos-lang-detector-fasttext-plugin)                                                                                                           | ✔️     | ❌        | ✔️      | FOSS              |
 | [ovos-lang-detect-ngram-lm](https://github.com/OpenVoiceOS/ovos-classifiers)                                                                                                                                      | ✔️     | ❌        | ✔️      | FOSS              |
 | [ovos-lang-detector-plugin-lingua-podre](https://github.com/OpenVoiceOS/lingua-podre)                                                                                                                             | ✔️     | ❌        | ✔️      | FOSS              |
@@ -28,6 +29,29 @@ OVOS supports a variety of language detection and translation plugins, each with
 - **Translation**: Plugins like `ovos-translate-plugin-nllb` and `ovos-google-translate-plugin` can translate text from one language to another, enabling multilingual capabilities for OVOS.
 - **Offline Support**: Some plugins, such as `ovos-lang-detector-fasttext-plugin`, offer offline functionality, which is essential in environments where an internet connection may not be available.
 - **API-based Plugins**: Plugins like `ovos-translate-plugin-server` and `neon-lang-plugin-libretranslate` use external APIs and can be self-hosted or accessed with an API key for translation services.
+
+### ovos-plugin-linguonnx
+
+`ovos-plugin-linguonnx` packages both a language detection plugin
+(`ovos-lang-detect-plugin-linguonnx`, entry point `opm.lang.detect`) and a
+translation plugin (`ovos-translate-plugin-linguonnx`, entry point
+`opm.lang.translate`). Both run fully offline on `onnxruntime`, downloading
+models from HuggingFace on first use and caching them locally.
+
+```bash
+pip install ovos-plugin-linguonnx
+```
+
+The translation plugin routes across 586 languages, chaining models through
+pivot languages when no direct model connects a language pair. Configuration
+lives under the `language_translation` and `language_detection` keys in
+`mycroft.conf`; see the plugin's [configuration
+reference](https://github.com/OpenVoiceOS/ovos-plugin-linguonnx/blob/dev/docs/configuration.md)
+for every option, including model size limits and quality filtering.
+
+A community-run instance is available at
+[translate.openvoiceos.pt](https://translate.openvoiceos.pt), offered on a
+best-effort basis with no uptime guarantee.
 
 ## Standalone Usage
 

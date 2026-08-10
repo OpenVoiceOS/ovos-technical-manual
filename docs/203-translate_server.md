@@ -24,6 +24,17 @@ ovos-translate-server \
   --detect-engine ovos-lang-detector-classics-plugin
 ```
 
+Any installed [translation or language detection plugin](./translation_plugins.md)
+works as an engine. `ovos-plugin-linguonnx` provides both roles in a single
+offline, ONNX-based package:
+
+```bash
+pip install ovos-plugin-linguonnx
+ovos-translate-server \
+  --tx-engine ovos-translate-plugin-linguonnx \
+  --detect-engine ovos-lang-detect-plugin-linguonnx
+```
+
 ### Make Requests
 
 Once the server is running (default on `http://0.0.0.0:9686`), you can access endpoints like:
