@@ -24,8 +24,8 @@ The fundamental unit of the framework. An `AgentTool` is a simple data structure
 
 These are base classes for Pydantic models that define the data contract for a tool.
 
-  * **`ToolArguments(BaseModel)`**: Tool consumers (agents) must format their input according to the concrete Pydantic model derived from this base. This ensures rigorous input validation.
-  * **`ToolOutput(BaseModel)`**: The result of a tool call is guaranteed to conform to the concrete Pydantic model derived from this base. This ensures reliable data handling by the consuming agent.
+* **`ToolArguments(BaseModel)`**: Tool consumers (agents) must format their input according to the concrete Pydantic model derived from this base. This ensures rigorous input validation.
+* **`ToolOutput(BaseModel)`**: The result of a tool call is guaranteed to conform to the concrete Pydantic model derived from this base. This ensures reliable data handling by the consuming agent.
 
 #### 3. ToolBox (Abstract Base Class)
 
@@ -33,9 +33,9 @@ A **`ToolBox`** is an abstract base class that acts as a **container and service
 
 The `ToolBox` handles:
 
-  * **Tool Discovery:** Implementing the abstract `discover_tools()` method to define the available tools.
-  * **Bus Integration:** Registering messagebus handlers to support dynamic discovery and remote calling (`ovos.persona.tools.discover`, `ovos.persona.tools.<toolbox_id>.call`).
-  * **Execution and Validation:** Providing the `call_tool(name, tool_kwargs)` method, which is the official interface for executing tools, including mandatory **input and output Pydantic validation**.
+* **Tool Discovery:** Implementing the abstract `discover_tools()` method to define the available tools.
+* **Bus Integration:** Registering messagebus handlers to support dynamic discovery and remote calling (`ovos.persona.tools.discover`, `ovos.persona.tools.<toolbox_id>.call`).
+* **Execution and Validation:** Providing the `call_tool(name, tool_kwargs)` method, which is the official interface for executing tools, including mandatory **input and output Pydantic validation**.
 
 -----
 
@@ -45,31 +45,31 @@ The framework is designed to support two primary methods for consuming tools: **
 
 ### 1. Direct Python Execution
 
-This method is suitable for agents (or solver plugins) running in the **same Python process** as the `ToolBox` plugin. It provides the highest performance and most robust interface, leveraging static typing and Pydantic validation.
+This method is suitable for agents (or solver plugins) running in the **same Python process** as the `ToolBox` plugin. It gives the fastest calls and validates inputs and outputs with Pydantic.
 
-  * **Mechanism:** An agent obtains an instance of a `ToolBox` (or a utility function that wraps the process) and calls the public method `call_tool`.
-  * **Benefits:**
-      * **Direct Access:** No messagebus latency.
-      * **Strong Validation:** Enforces the `argument_schema` and `output_schema` before and after execution, ensuring data integrity.
-  * **Usage Flow (Internal to Agent):**
+* **Mechanism:** An agent obtains an instance of a `ToolBox` (or a utility function that wraps the process) and calls the public method `call_tool`.
+* **Benefits:**
+    * **Direct Access:** No messagebus latency.
+    * **Strong Validation:** Enforces the `argument_schema` and `output_schema` before and after execution, ensuring data integrity.
+* **Usage Flow (Internal to Agent):**
     1.  Get the `ToolBox` instance (e.g., via a plugin loading utility).
     2.  Call: `validated_output = toolbox.call_tool(name="tool_name", tool_kwargs={"arg1": value})`
     3.  The return value is a fully validated **`ToolOutput`** Pydantic object.
 
 ### 2. MessageBus Discovery and Calling
 
-This method is crucial for **cross-process communication** and **runtime discovery**, allowing any component with access to the OVOS MessageBus to find and execute tools.
+This method supports **cross-process communication** and **runtime discovery**: any component that talks to the OVOS MessageBus can find tools and call them.
 
 #### A. Tool Discovery
 
 Agents can broadcast a discovery message to find all available tools across all running ToolBoxes.
 
-  * **Discovery Message:**
+* **Discovery Message:**
     ```json
     {"type": "ovos.persona.tools.discover"}
     ```
-  * **ToolBox Response:** Each registered `ToolBox` responds with its tools, providing a complete description that includes the Pydantic schemas converted to **JSON Schema** (via the `tool_json_list` property). This format is ideal for submitting to LLMs (e.g., for **Function Calling** or **Tool Use**).
-  * **Tool Schema Format (Simplified):**
+* **ToolBox Response:** Each registered `ToolBox` responds with its tools, providing a complete description that includes the Pydantic schemas converted to **JSON Schema** (via the `tool_json_list` property). This format is ideal for submitting to LLMs (e.g., for **Function Calling** or **Tool Use**).
+* **Tool Schema Format (Simplified):**
     ```json
     {
         "name": "web_search",
@@ -89,7 +89,7 @@ Agents can broadcast a discovery message to find all available tools across all 
 
 To execute a tool remotely, an agent sends a message targeted at the specific `ToolBox`.
 
-  * **Tool Call Message:**
+* **Tool Call Message:**
     ```json
     {
         "type": "ovos.persona.tools.<toolbox_id>.call",
@@ -99,8 +99,8 @@ To execute a tool remotely, an agent sends a message targeted at the specific `T
         }
     }
     ```
-  * **ToolBox Execution:** The target `ToolBox` receives the message, runs the **`call_tool`** logic (which includes validation), and emits a response message.
-  * **ToolBox Response Message (Success):**
+* **ToolBox Execution:** The target `ToolBox` receives the message, runs the **`call_tool`** logic (which includes validation), and emits a response message.
+* **ToolBox Response Message (Success):**
     ```json
     {
         "type": "ovos.persona.tools.<toolbox_id>.call.response",
@@ -110,7 +110,7 @@ To execute a tool remotely, an agent sends a message targeted at the specific `T
         }
     }
     ```
-  * **ToolBox Response Message (Error):**
+* **ToolBox Response Message (Error):**
     ```json
     {
         "type": "ovos.persona.tools.<toolbox_id>.call.response",
@@ -222,7 +222,7 @@ Implement the concrete `FileToolBox` inheriting from `ToolBox` and define the `d
 
 ```python
 from ovos_plugin_manager.templates.agent_tools import ToolBox, AgentTool
-from typing import List
+from typing import List, Optional, Union
 from ovos_bus_client import MessageBusClient
 from ovos_utils.fakebus import FakeBus
 
@@ -269,6 +269,7 @@ A consuming Agent, such as a **Solver Plugin**, can use the `call_tool` method d
 
 ```python
 from ovos_utils.fakebus import FakeBus
+import os
 import tempfile
 import atexit
 
