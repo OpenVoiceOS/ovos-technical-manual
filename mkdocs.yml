@@ -56,6 +56,7 @@ nav:
       - Anatomy: 401-skill_structure.md
       - Dialog: 402-statements.md
       - Intent Design: 403-intents.md
+      - File Formats: file_formats.md
       - Customization: 405-customization.md
       - Bus Interaction: 406-messagebus.md
       - Filesystem: 407-skill_filesystem.md
