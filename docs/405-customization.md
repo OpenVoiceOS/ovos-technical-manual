@@ -20,11 +20,12 @@ Here's a step-by-step guide on how to replace the dialog of an existing skill:
 **Identify the Skill and Resource to Replace**:
 
    - Determine the ID of the skill whose dialog you want to replace. In this example, let's assume the skill ID is `skill-ovos-date-time.openvoiceos`.
-   - Identify the specific dialog file you want to replace. For this example, let's say you want to replace the `time.current.dialog` file located in the `locale/en-us/dialog` directory of the skill.
+   - Identify the specific dialog file you want to replace. For this example, let's say you want to replace the `time_current.dialog` file located in the `locale/en-us/dialog` directory of the skill.
+   - An override matches a resource file by its current base name in the skill. Check the skill's own `locale` folder for that name before you create the override, since a rename in the skill leaves an old override file unmatched with no warning.
 
 **Create the Replacement Dialog File**:
 
-   - Create a new dialog file with the same name (`time.current.dialog`) as the original file.
+   - Create a new dialog file with the same name (`time_current.dialog`) as the original file.
    - Customize the content of the dialog file according to your preferences. You can modify the existing dialogues, add new ones, or remove any that you don't want to use.
 
 **Locate the User-Specific Resource Directory**:
@@ -35,9 +36,9 @@ Here's a step-by-step guide on how to replace the dialog of an existing skill:
 
 **Copy the Replacement Dialog File to the User-Specific Directory**:
 
-   - Copy or move the replacement dialog file (`time.current.dialog`) to the appropriate directory within the user-specific resource directory.
+   - Copy or move the replacement dialog file (`time_current.dialog`) to the appropriate directory within the user-specific resource directory.
    - Place the file in the `locale/en-us/dialog` directory within the user-specific resource directory. This mirrors the directory structure of the original skill.
-   - In this example the final path of the file would be `~/.local/share/mycroft/resources/skill-ovos-date-time.openvoiceos/locale/en-us/dialog/time.current.dialog` 
+   - In this example the final path of the file would be `~/.local/share/mycroft/resources/skill-ovos-date-time.openvoiceos/locale/en-us/dialog/time_current.dialog` 
 
 **Verify the Replacement**:
 
